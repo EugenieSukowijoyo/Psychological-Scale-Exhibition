@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<style>
+    /* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    width: 100%;
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    overflow: hidden;
+}
+
+/* =========================
+   HERO / MAIN SCREEN
+========================= */
+
+.hero {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: relative;
+
+    background-image: url("assets/background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: white;
+
+    padding-top: 8vh;
+}
+
+/* =========================
+   SUBTITLE
+========================= */
+
+.subtitle {
+    font-size: clamp(16px, 1.8vw, 28px);
+
+    font-weight: 400;
+    letter-spacing: 0.5px;
+
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+/* =========================
+   MAIN TITLE
+========================= */
+
+.title {
+    font-size: clamp(60px, 8vw, 135px);
+
+    line-height: 0.95;
+
+    font-weight: 800;
+
+    text-align: center;
+
+    letter-spacing: -4px;
+
+    margin: 0;
+
+    color: white;
+}
+
+
+/* Baris kedua "Exhibition" */
+.title span {
+    display: block;
+}
+
+
+/* =========================
+   THEME NAVIGATION
+========================= */
+
+.theme-navigation {
+    position: absolute;
+
+    bottom: 28%;
+
+    width: min(55%, 850px);
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* =========================
+   THEME BUTTON
+========================= */
+
+.theme-button {
+
+    position: relative;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: clamp(18px, 2vw, 30px);
+
+    font-weight: 700;
+
+    letter-spacing: 8px;
+
+    padding: 8px 12px;
+
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
+}
+
+
+/* Garis bawah */
+.theme-button::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 10px;
+    right: 10px;
+
+    bottom: 0;
+
+    height: 2px;
+
+    background: white;
+
+    transform: scaleX(1);
+
+    transform-origin: center;
+
+    transition:
+        transform 0.3s ease,
+        height 0.3s ease;
+}
+
+
+/* =========================
+   HOVER EFFECT
+========================= */
+
+.theme-button:hover {
+
+    transform: translateY(-5px);
+
+    opacity: 0.85;
+}
+
+
+.theme-button:hover::after {
+
+    transform: scaleX(0.65);
+
+    height: 3px;
+}
+
+
+/* =========================
+   CLICK EFFECT
+========================= */
+
+.theme-button:active {
+
+    transform: translateY(-2px) scale(0.97);
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+    .hero {
+        padding-top: 10vh;
+    }
+
+    .title {
+        letter-spacing: -2px;
+    }
+
+    .theme-navigation {
+        width: 75%;
+        bottom: 25%;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    body {
+        overflow: auto;
+    }
+
+    .hero {
+        min-height: 100vh;
+        height: auto;
+
+        padding: 10vh 20px 15vh;
+    }
+
+    .subtitle {
+        font-size: 14px;
+
+        margin-bottom: 35px;
+    }
+
+    .title {
+        font-size: clamp(45px, 14vw, 75px);
+
+        letter-spacing: -2px;
+
+        line-height: 0.95;
+    }
+
+    .theme-navigation {
+
+        position: static;
+
+        width: 100%;
+
+        margin-top: 100px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 35px;
+    }
+
+    .theme-button {
+
+        font-size: 18px;
+
+        letter-spacing: 6px;
+    }
+
+}
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Psychological Scale Exhibition</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="hero">
+
+        <!-- Subtitle -->
+        <p class="subtitle">
+            PENYUSUNAN SKALA PSIKOLOGIS 26/27
+        </p>
+
+        <!-- Main Title -->
+        <h1 class="title">
+            Psychological Scale
+            <span>Exhibition</span>
+        </h1>
+
+        <!-- Theme Navigation -->
+        <nav class="theme-navigation">
+
+            <a href="tema1.html" class="theme-button">
+                TEMA 1
+            </a>
+
+            <a href="tema2.html" class="theme-button">
+                TEMA 2
+            </a>
+
+            <a href="tema3.html" class="theme-button">
+                TEMA 3
+            </a>
+
+        </nav>
+
+    </main>
+</body>
+</html>
+

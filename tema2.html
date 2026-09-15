@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tema 2 - Psychological Scale Exhibition</title>
+
+
+    <!-- ==================================================
+         CSS
+    ================================================== -->
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =========================
+           BODY
+        ========================= */
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            color: white;
+
+            background-image: url("assets/background.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           MAIN PAGE
+        ========================= */
+
+        .tema-page {
+            min-height: 100vh;
+
+            padding: 65px 8% 100px;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            text-align: center;
+
+            margin-bottom: 65px;
+        }
+
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back-button {
+            color: white;
+
+            text-decoration: none;
+
+            font-size: clamp(20px, 2vw, 32px);
+
+            font-weight: 400;
+
+            margin-bottom: 20px;
+
+            position: relative;
+
+            padding: 5px 10px;
+
+            transition:
+                transform 0.3s ease,
+                opacity 0.3s ease;
+        }
+
+
+        /* Garis bawah */
+
+        .back-button::after {
+            content: "";
+
+            position: absolute;
+
+            left: 10px;
+            right: 10px;
+
+            bottom: 0;
+
+            height: 2px;
+
+            background: white;
+
+            transform: scaleX(0);
+
+            transform-origin: center;
+
+            transition: transform 0.3s ease;
+        }
+
+
+        /* Hover */
+
+        .back-button:hover {
+            transform: translateY(-3px);
+
+            opacity: 0.8;
+        }
+
+
+        .back-button:hover::after {
+            transform: scaleX(1);
+        }
+
+
+        /* =========================
+           TEMA 2 TITLE
+        ========================= */
+
+        .header h1 {
+            font-size: clamp(55px, 7vw, 110px);
+
+            font-weight: 800;
+
+            letter-spacing: -3px;
+
+            line-height: 1;
+
+            color: white;
+        }
+
+
+        /* =========================
+           POSTER GRID
+        ========================= */
+
+        .poster-grid {
+
+            width: 100%;
+
+            max-width: 1400px;
+
+            margin: 0 auto;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            column-gap: 12%;
+
+            row-gap: 65px;
+
+            align-items: start;
+        }
+
+
+        /* =========================
+           POSTER ITEM
+        ========================= */
+
+        .poster-item {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            text-align: center;
+        }
+
+
+        /* =========================
+           POSTER BUTTON
+        ========================= */
+
+        .poster-button {
+
+            border: none;
+
+            padding: 0;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            display: block;
+
+            width: 100%;
+
+            max-width: 330px;
+
+            transition:
+                transform 0.35s ease,
+                filter 0.35s ease;
+        }
+
+
+        /* =========================
+           POSTER IMAGE
+        ========================= */
+
+        .poster-button img {
+
+            display: block;
+
+            width: 100%;
+
+            height: auto;
+
+            aspect-ratio: 0.75 / 1;
+
+            object-fit: cover;
+
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.12);
+
+            transition:
+                transform 0.35s ease,
+                box-shadow 0.35s ease,
+                filter 0.35s ease;
+        }
+
+
+        /* =========================
+           POSTER HOVER
+        ========================= */
+
+        .poster-button:hover {
+
+            transform: translateY(-8px);
+        }
+
+
+        .poster-button:hover img {
+
+            transform: scale(1.025);
+
+            box-shadow:
+                0 18px 35px rgba(0, 0, 0, 0.30);
+
+            filter: brightness(1.05);
+        }
+
+
+        /* =========================
+           POSTER TITLE
+        ========================= */
+
+        .poster-title {
+
+            margin-top: 25px;
+
+            color: white;
+
+            font-size: clamp(16px, 1.6vw, 27px);
+
+            font-weight: 700;
+
+            letter-spacing: 7px;
+
+            text-decoration: underline;
+
+            text-underline-offset: 5px;
+        }
+
+
+        /* ==================================================
+           LIGHTBOX / MODAL
+        ================================================== */
+
+        .poster-modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 999;
+
+            display: none;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 40px;
+
+            background: rgba(0, 0, 0, 0.82);
+
+            backdrop-filter: blur(5px);
+        }
+
+
+        /* Modal aktif */
+
+        .poster-modal.active {
+
+            display: flex;
+        }
+
+
+        /* =========================
+           MODAL IMAGE
+        ========================= */
+
+        .modal-image {
+
+            max-width: 90vw;
+
+            max-height: 90vh;
+
+            width: auto;
+
+            height: auto;
+
+            object-fit: contain;
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.5);
+
+            animation: zoomIn 0.3s ease;
+        }
+
+
+        /* =========================
+           ZOOM ANIMATION
+        ========================= */
+
+        @keyframes zoomIn {
+
+            from {
+                opacity: 0;
+                transform: scale(0.85);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+        }
+
+
+        /* =========================
+           CLOSE BUTTON
+        ========================= */
+
+        .close-button {
+
+            position: absolute;
+
+            top: 25px;
+
+            right: 35px;
+
+            width: 50px;
+
+            height: 50px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.15);
+
+            color: white;
+
+            font-size: 38px;
+
+            line-height: 40px;
+
+            cursor: pointer;
+
+            transition:
+                background 0.3s ease,
+                transform 0.3s ease;
+        }
+
+
+        .close-button:hover {
+
+            background: rgba(255, 255, 255, 0.3);
+
+            transform: rotate(90deg);
+        }
+
+
+        /* ==================================================
+           TABLET
+        ================================================== */
+
+        @media (max-width: 1000px) {
+
+            .tema-page {
+
+                padding-left: 5%;
+
+                padding-right: 5%;
+            }
+
+
+            .poster-grid {
+
+                grid-template-columns: repeat(2, 1fr);
+
+                column-gap: 8%;
+            }
+
+        }
+
+
+        /* ==================================================
+           MOBILE
+        ================================================== */
+
+        @media (max-width: 600px) {
+
+            .tema-page {
+
+                padding: 40px 25px 70px;
+            }
+
+
+            .header {
+
+                margin-bottom: 45px;
+            }
+
+
+            .back-button {
+
+                font-size: 18px;
+            }
+
+
+            .header h1 {
+
+                font-size: 55px;
+
+                letter-spacing: -2px;
+            }
+
+
+            .poster-grid {
+
+                grid-template-columns: 1fr;
+
+                row-gap: 55px;
+            }
+
+
+            .poster-button {
+
+                max-width: 300px;
+            }
+
+
+            .poster-title {
+
+                font-size: 17px;
+
+                letter-spacing: 5px;
+            }
+
+
+            .poster-modal {
+
+                padding: 20px;
+            }
+
+
+            .modal-image {
+
+                max-width: 95vw;
+
+                max-height: 85vh;
+            }
+
+
+            .close-button {
+
+                top: 15px;
+
+                right: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================================
+         MAIN PAGE
+    ================================================== -->
+
+    <main class="tema-page">
+
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <header class="header">
+
+
+            <!-- Tombol kembali ke index -->
+
+            <a href="index.html" class="back-button">
+
+                Psychological Scale Exhibition
+
+            </a>
+
+
+            <!-- Judul Tema -->
+
+            <h1>
+
+                TEMA 2
+
+            </h1>
+
+
+        </header>
+
+
+
+        <!-- ==================================================
+             POSTER GRID
+        ================================================== -->
+
+        <section class="poster-grid">
+
+
+            <!-- =========================
+                 POSTER 1
+            ========================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    onclick="openPoster('poster/1.jpg')">
+
+                    <img
+                        src="poster/1.jpg"
+                        alt="Poster 1">
+
+                </button>
+
+
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 POSTER 2
+            ========================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    onclick="openPoster('poster/2.jpg')">
+
+                    <img
+                        src="poster/2.jpg"
+                        alt="Poster 2">
+
+                </button>
+
+
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 POSTER 3
+            ========================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    onclick="openPoster('poster/3.jpg')">
+
+                    <img
+                        src="poster/3.jpg"
+                        alt="Poster 3">
+
+                </button>
+
+
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 POSTER 4
+            ========================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    onclick="openPoster('poster/4.jpg')">
+
+                    <img
+                        src="poster/4.jpg"
+                        alt="Poster 4">
+
+                </button>
+
+
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 POSTER 5
+            ========================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    onclick="openPoster('poster/5.jpg')">
+
+                    <img
+                        src="poster/5.jpg"
+                        alt="Poster 5">
+
+                </button>
+
+
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 POSTER 6
+            ========================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    onclick="openPoster('poster/6.jpg')">
+
+                    <img
+                        src="poster/6.jpg"
+                        alt="Poster 6">
+
+                </button>
+
+
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 POSTER 7
+            ========================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    onclick="openPoster('poster/7.jpg')">
+
+                    <img
+                        src="poster/7.jpg"
+                        alt="Poster 7">
+
+                </button>
+
+
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 POSTER 8
+            ========================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    onclick="openPoster('poster/8.jpg')">
+
+                    <img
+                        src="poster/8.jpg"
+                        alt="Poster 8">
+
+                </button>
+
+
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 POSTER 9
+            ========================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    onclick="openPoster('poster/9.jpg')">
+
+                    <img
+                        src="poster/9.jpg"
+                        alt="Poster 9">
+
+                </button>
+
+
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 POSTER 10
+            ========================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    onclick="openPoster('poster/10.jpg')">
+
+                    <img
+                        src="poster/10.jpg"
+                        alt="Poster 10">
+
+                </button>
+
+
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
+
+            </div>
+
+            <!-- =========================
+                 POSTER 11
+            ========================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    onclick="openPoster('poster/11.jpg')">
+
+                    <img
+                        src="poster/11.jpg"
+                        alt="Poster 11">
+
+                </button>
+
+
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 POSTER 12
+            ========================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    onclick="openPoster('poster/12.jpg')">
+
+                    <img
+                        src="poster/12.jpg"
+                        alt="Poster 12">
+
+                </button>
+
+
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
+
+            </div>
+
+
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ==================================================
+         LIGHTBOX / MODAL
+    ================================================== -->
+
+    <div
+        id="posterModal"
+        class="poster-modal"
+        onclick="closePoster(event)">
+
+
+        <!-- Tombol Close -->
+
+        <button
+            class="close-button"
+            onclick="closePoster()">
+
+            ×
+
+        </button>
+
+
+        <!-- Gambar Poster yang diperbesar -->
+
+        <img
+            id="modalImage"
+            class="modal-image"
+            src=""
+            alt="Poster">
+
+    </div>
+
+
+
+    <!-- ==================================================
+         JAVASCRIPT
+    ================================================== -->
+
+    <script>
+
+        /* =========================
+           OPEN POSTER
+        ========================= */
+
+        function openPoster(imageSource) {
+
+            const modal =
+                document.getElementById("posterModal");
+
+            const modalImage =
+                document.getElementById("modalImage");
+
+
+            // Masukkan gambar yang diklik
+            // ke dalam modal
+
+            modalImage.src = imageSource;
+
+
+            // Tampilkan modal
+
+            modal.classList.add("active");
+
+
+            // Mencegah halaman utama
+            // ikut scroll ketika modal terbuka
+
+            document.body.style.overflow = "hidden";
+
+        }
+
+
+
+        /* =========================
+           CLOSE POSTER
+        ========================= */
+
+        function closePoster(event) {
+
+
+            /*
+             * Jika yang diklik adalah gambar,
+             * jangan tutup modal.
+             */
+
+            if (
+                event &&
+                event.target &&
+                event.target.id === "modalImage"
+            ) {
+
+                return;
+
+            }
+
+
+            const modal =
+                document.getElementById("posterModal");
+
+
+            // Sembunyikan modal
+
+            modal.classList.remove("active");
+
+
+            // Kembalikan kemampuan scroll
+
+            document.body.style.overflow = "";
+
+        }
+
+
+
+        /* =========================
+           CLOSE DENGAN ESC
+        ========================= */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Escape") {
+
+                    const modal =
+                        document.getElementById("posterModal");
+
+
+                    modal.classList.remove("active");
+
+
+                    document.body.style.overflow = "";
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
