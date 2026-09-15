@@ -269,45 +269,24 @@
 
 
         /* =========================
-           LIKE BUTTON
-        ========================= */
-
-        .like-button {
-            appearance: none;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            margin-top: 25px;
-            color: white;
-            font-family: inherit;
-            font-size: clamp(16px, 1.6vw, 27px);
-            font-weight: 700;
-            letter-spacing: 2px;
-            transition:
-                transform 0.2s ease,
-                opacity 0.2s ease;
-        }
-
-        .like-button:hover {
-            transform: translateY(-2px) scale(1.04);
-            opacity: 0.8;
-        }
-
-        .like-button:active {
-            transform: scale(0.94);
-        }
-
-        .like-button.liked {
-            transform: scale(1.04);
-        }
-
-        /* =========================
            POSTER TITLE
         ========================= */
 
         .poster-title {
+
             margin-top: 25px;
+
             color: white;
+
+            font-size: clamp(16px, 1.6vw, 27px);
+
+            font-weight: 700;
+
+            letter-spacing: 7px;
+
+            text-decoration: underline;
+
+            text-underline-offset: 5px;
         }
 
 
@@ -501,9 +480,11 @@
             }
 
 
-            .like-button {
+            .poster-title {
+
                 font-size: 17px;
-                letter-spacing: 2px;
+
+                letter-spacing: 5px;
             }
 
 
@@ -598,14 +579,11 @@
                 </button>
 
 
-                <button
-                    class="poster-title like-button"
-                    data-poster="1"
-                    data-likes="0"
-                    type="button"
-                    onclick="likePoster(1, event)">
-                    <span class="like-count">00</span> 🤍
-                </button>
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
 
             </div>
 
@@ -628,14 +606,11 @@
                 </button>
 
 
-                <button
-                    class="poster-title like-button"
-                    data-poster="2"
-                    data-likes="0"
-                    type="button"
-                    onclick="likePoster(2, event)">
-                    <span class="like-count">00</span> 🤍
-                </button>
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
 
             </div>
 
@@ -658,14 +633,11 @@
                 </button>
 
 
-                <button
-                    class="poster-title like-button"
-                    data-poster="3"
-                    data-likes="0"
-                    type="button"
-                    onclick="likePoster(3, event)">
-                    <span class="like-count">00</span> 🤍
-                </button>
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
 
             </div>
 
@@ -688,14 +660,11 @@
                 </button>
 
 
-                <button
-                    class="poster-title like-button"
-                    data-poster="4"
-                    data-likes="0"
-                    type="button"
-                    onclick="likePoster(4, event)">
-                    <span class="like-count">00</span> 🤍
-                </button>
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
 
             </div>
 
@@ -718,14 +687,11 @@
                 </button>
 
 
-                <button
-                    class="poster-title like-button"
-                    data-poster="5"
-                    data-likes="0"
-                    type="button"
-                    onclick="likePoster(5, event)">
-                    <span class="like-count">00</span> 🤍
-                </button>
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
 
             </div>
 
@@ -748,14 +714,11 @@
                 </button>
 
 
-                <button
-                    class="poster-title like-button"
-                    data-poster="6"
-                    data-likes="0"
-                    type="button"
-                    onclick="likePoster(6, event)">
-                    <span class="like-count">00</span> 🤍
-                </button>
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
 
             </div>
 
@@ -778,14 +741,11 @@
                 </button>
 
 
-                <button
-                    class="poster-title like-button"
-                    data-poster="7"
-                    data-likes="0"
-                    type="button"
-                    onclick="likePoster(7, event)">
-                    <span class="like-count">00</span> 🤍
-                </button>
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
 
             </div>
 
@@ -808,14 +768,11 @@
                 </button>
 
 
-                <button
-                    class="poster-title like-button"
-                    data-poster="8"
-                    data-likes="0"
-                    type="button"
-                    onclick="likePoster(8, event)">
-                    <span class="like-count">00</span> 🤍
-                </button>
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
 
             </div>
 
@@ -838,14 +795,11 @@
                 </button>
 
 
-                <button
-                    class="poster-title like-button"
-                    data-poster="9"
-                    data-likes="0"
-                    type="button"
-                    onclick="likePoster(9, event)">
-                    <span class="like-count">00</span> 🤍
-                </button>
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
 
             </div>
 
@@ -868,14 +822,11 @@
                 </button>
 
 
-                <button
-                    class="poster-title like-button"
-                    data-poster="10"
-                    data-likes="0"
-                    type="button"
-                    onclick="likePoster(10, event)">
-                    <span class="like-count">00</span> 🤍
-                </button>
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
 
             </div>
 
@@ -896,14 +847,11 @@
                 </button>
 
 
-                <button
-                    class="poster-title like-button"
-                    data-poster="11"
-                    data-likes="0"
-                    type="button"
-                    onclick="likePoster(11, event)">
-                    <span class="like-count">00</span> 🤍
-                </button>
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
 
             </div>
 
@@ -926,14 +874,11 @@
                 </button>
 
 
-                <button
-                    class="poster-title like-button"
-                    data-poster="12"
-                    data-likes="0"
-                    type="button"
-                    onclick="likePoster(12, event)">
-                    <span class="like-count">00</span> 🤍
-                </button>
+                <p class="poster-title">
+
+                    LOREM IPSUM
+
+                </p>
 
             </div>
 
@@ -982,236 +927,7 @@
          JAVASCRIPT
     ================================================== -->
 
-    <script type="module">
-
-        /* ==================================================
-           FIREBASE LIKE SYSTEM
-           ==================================================
-           IMPORTANT:
-           1. Create a Firebase project.
-           2. Register this website as a Web App.
-           3. Create a Cloud Firestore database.
-           4. Replace the firebaseConfig values below with
-              the configuration from your Firebase project.
-
-           Database structure:
-           posters / poster1 / likes: 0
-           posters / poster2 / likes: 0
-           ...
-           posters / poster12 / likes: 0
-        ================================================== */
-
-        import { initializeApp }
-            from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-
-        import {
-            getFirestore,
-            doc,
-            getDoc,
-            setDoc,
-            increment
-        } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-
-        // ==================================================
-        // FIREBASE CONFIG
-        // Replace these placeholder values with your own.
-        // ==================================================
-
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-
-        const firebaseApp = initializeApp(firebaseConfig);
-        const db = getFirestore(firebaseApp);
-
-        // Starting likes if the poster document does not exist yet.
-        // You can change these numbers before launching.
-        const initialLikes = {
-            1: 0,
-            2: 0,
-            3: 0,
-            4: 0,
-            5: 0,
-            6: 0,
-            7: 0,
-            8: 0,
-            9: 0,
-            10: 0,
-            11: 0,
-            12: 0
-        };
-
-        function formatLikes(number) {
-            return String(number).padStart(2, "0");
-        }
-
-        function updateLikeDisplay(posterId, likes) {
-            const button = document.querySelector(
-                `.like-button[data-poster="${posterId}"]`
-            );
-
-            if (!button) return;
-
-            button.dataset.likes = likes;
-
-            const count = button.querySelector(".like-count");
-
-            if (count) {
-                count.textContent = formatLikes(likes);
-            }
-        }
-
-        // Load the current shared like count from Firestore.
-        async function loadLikeCounts() {
-            const buttons =
-                document.querySelectorAll(".like-button");
-
-            buttons.forEach(button => {
-                button.disabled = true;
-            });
-
-            try {
-                await Promise.all(
-                    [...buttons].map(async button => {
-                        const posterId = button.dataset.poster;
-                        const posterRef =
-                            doc(db, "posters", `poster${posterId}`);
-
-                        const posterSnapshot =
-                            await getDoc(posterRef);
-
-                        if (posterSnapshot.exists()) {
-                            const data = posterSnapshot.data();
-
-                            updateLikeDisplay(
-                                posterId,
-                                Number(data.likes) || 0
-                            );
-                        } else {
-                            // Create the poster document the first
-                            // time it is accessed.
-                            const startingLikes =
-                                initialLikes[posterId] || 0;
-
-                            await setDoc(posterRef, {
-                                likes: startingLikes
-                            });
-
-                            updateLikeDisplay(
-                                posterId,
-                                startingLikes
-                            );
-                        }
-                    })
-                );
-            } catch (error) {
-                console.error(
-                    "Gagal mengambil data like:",
-                    error
-                );
-
-                // Fall back to the HTML starting value if
-                // Firebase has not been configured yet.
-                buttons.forEach(button => {
-                    const likes =
-                        Number(button.dataset.likes) || 0;
-
-                    updateLikeDisplay(
-                        button.dataset.poster,
-                        likes
-                    );
-                });
-            } finally {
-                buttons.forEach(button => {
-                    button.disabled = false;
-                });
-            }
-        }
-
-        // Add exactly +1 to the shared Firestore counter.
-        // Firestore increment() prevents the classic
-        // "two users overwrite each other's count" problem.
-        async function likePoster(posterId, event) {
-            if (event) {
-                event.stopPropagation();
-            }
-
-            const button = document.querySelector(
-                `.like-button[data-poster="${posterId}"]`
-            );
-
-            if (!button || button.dataset.processing === "true") {
-                return;
-            }
-
-            button.dataset.processing = "true";
-            button.disabled = true;
-
-            try {
-                const posterRef =
-                    doc(db, "posters", `poster${posterId}`);
-
-                // increment(1) is performed by Firestore itself.
-                await setDoc(
-                    posterRef,
-                    {
-                        likes: increment(1)
-                    },
-                    { merge: true }
-                );
-
-                // Read the latest shared value back.
-                const updatedSnapshot =
-                    await getDoc(posterRef);
-
-                const updatedData =
-                    updatedSnapshot.data();
-
-                const newLikes =
-                    Number(updatedData?.likes) || 0;
-
-                updateLikeDisplay(
-                    posterId,
-                    newLikes
-                );
-
-                // Small click feedback.
-                button.classList.add("liked");
-
-                setTimeout(() => {
-                    button.classList.remove("liked");
-                }, 180);
-
-            } catch (error) {
-                console.error(
-                    "Gagal menambahkan like:",
-                    error
-                );
-
-                alert(
-                    "Like belum tersimpan. Pastikan Firebase sudah dikonfigurasi dan Firestore sudah aktif."
-                );
-            } finally {
-                button.dataset.processing = "false";
-                button.disabled = false;
-            }
-        }
-
-        // Inline onclick attributes cannot directly access
-        // functions inside an ES module, so expose the
-        // like function through window.
-        window.likePoster = likePoster;
-
-        // Load the shared counts when the page opens.
-        document.addEventListener(
-            "DOMContentLoaded",
-            loadLikeCounts
-        );
+    <script>
 
         /* =========================
            OPEN POSTER
