@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Tentang | Psychological Scale Exhibition</title>
+
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =====================================================
+           BODY
+        ===================================================== */
+
+        body {
+
+            width: 100%;
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background-image:
+                url("assets/background.png");
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-repeat: no-repeat;
+
+            color: white;
+
+            overflow: hidden;
+        }
+
+
+        /* =====================================================
+           MAIN CONTAINER
+        ===================================================== */
+
+        .about-page {
+
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 4vw;
+
+            padding:
+                5vh
+                5.5vw;
+        }
+
+
+        /* =====================================================
+           VIDEO CONTAINER
+        ===================================================== */
+
+        .video-container {
+
+            height: 86vh;
+
+            aspect-ratio: 9 / 16;
+
+            flex-shrink: 0;
+
+            overflow: hidden;
+
+            background: #00ff00;
+
+            position: relative;
+        }
+
+
+        /* =====================================================
+           VIDEO
+        ===================================================== */
+
+        .video-container video {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+        }
+
+
+        /* =====================================================
+           INFORMATION PANEL
+        ===================================================== */
+
+        .info-panel {
+
+            height: 86vh;
+
+            flex: 1;
+
+            max-width: 980px;
+
+            background:
+                rgba(0, 79, 133, 0.88);
+
+            padding:
+                6vh
+                3vw;
+
+            position: relative;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: flex-start;
+        }
+
+
+        /* =====================================================
+           TITLE
+        ===================================================== */
+
+        .info-title {
+
+            font-size:
+                clamp(
+                    38px,
+                    4vw,
+                    72px
+                );
+
+            line-height: 0.95;
+
+            font-weight: 800;
+
+            letter-spacing: -3px;
+
+            margin-bottom: 5vh;
+        }
+
+
+        /* =====================================================
+           DESCRIPTION
+        ===================================================== */
+
+        .info-description {
+
+            max-width: 900px;
+
+            font-size:
+                clamp(
+                    18px,
+                    1.7vw,
+                    31px
+                );
+
+            line-height: 1.45;
+
+            font-weight: 400;
+
+            letter-spacing: 0.3px;
+
+            text-align: justify;
+        }
+
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-button {
+
+            position: absolute;
+
+            right: 3vw;
+
+            bottom: 5vh;
+
+            color: white;
+
+            font-size:
+                clamp(
+                    18px,
+                    1.7vw,
+                    30px
+                );
+
+            font-weight: 400;
+
+            text-decoration: underline;
+
+            text-underline-offset: 5px;
+
+            transition:
+                transform 0.3s ease,
+                opacity 0.3s ease,
+                letter-spacing 0.3s ease;
+        }
+
+
+        /* =====================================================
+           BACK BUTTON HOVER
+        ===================================================== */
+
+        .back-button:hover {
+
+            transform:
+                translateX(-8px);
+
+            opacity: 0.7;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .about-page {
+
+                gap: 3vw;
+
+                padding:
+                    4vh
+                    4vw;
+            }
+
+
+            .video-container {
+
+                height: 82vh;
+            }
+
+
+            .info-panel {
+
+                height: 82vh;
+
+                padding:
+                    5vh
+                    3vw;
+            }
+
+
+            .info-title {
+
+                font-size: 4.5vw;
+
+                margin-bottom: 4vh;
+            }
+
+
+            .info-description {
+
+                font-size: 1.8vw;
+            }
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            body {
+
+                overflow: auto;
+            }
+
+
+            .about-page {
+
+                height: auto;
+
+                min-height: 100vh;
+
+                flex-direction: column;
+
+                justify-content: flex-start;
+
+                gap: 30px;
+
+                padding:
+                    30px
+                    20px
+                    40px;
+            }
+
+
+            /* =========================
+               VIDEO MOBILE
+            ========================= */
+
+            .video-container {
+
+                width: min(
+                    75vw,
+                    360px
+                );
+
+                height: auto;
+
+                aspect-ratio: 9 / 16;
+            }
+
+
+            /* =========================
+               INFO MOBILE
+            ========================= */
+
+            .info-panel {
+
+                width: 100%;
+
+                height: auto;
+
+                min-height: 500px;
+
+                padding:
+                    40px
+                    30px
+                    100px;
+            }
+
+
+            .info-title {
+
+                font-size:
+                    clamp(
+                        35px,
+                        10vw,
+                        55px
+                    );
+
+                letter-spacing: -2px;
+
+                margin-bottom: 30px;
+            }
+
+
+            .info-description {
+
+                font-size: 17px;
+
+                line-height: 1.6;
+
+                text-align: left;
+            }
+
+
+            /* =========================
+               BACK BUTTON
+            ========================= */
+
+            .back-button {
+
+                right: 30px;
+
+                bottom: 30px;
+
+                font-size: 18px;
+            }
+
+        }
+
+
+        /* =====================================================
+           SMALL MOBILE
+        ===================================================== */
+
+        @media (max-width: 400px) {
+
+            .about-page {
+
+                padding:
+                    25px
+                    15px
+                    35px;
+            }
+
+
+            .video-container {
+
+                width: 80vw;
+            }
+
+
+            .info-panel {
+
+                padding:
+                    30px
+                    25px
+                    90px;
+            }
+
+
+            .info-title {
+
+                font-size: 34px;
+            }
+
+
+            .info-description {
+
+                font-size: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         ABOUT PAGE
+    ====================================================== -->
+
+    <main class="about-page">
+
+
+        <!-- =================================================
+             VIDEO
+        ================================================== -->
+
+        <div class="video-container">
+
+            <video
+                controls
+                playsinline
+                preload="metadata"
+            >
+
+                <source
+                    src="assets/tentang.mp4"
+                    type="video/mp4"
+                >
+
+                Browser Anda tidak mendukung
+                pemutaran video.
+
+            </video>
+
+        </div>
+
+
+        <!-- =================================================
+             INFORMATION
+        ================================================== -->
+
+        <section class="info-panel">
+
+
+            <!-- TITLE -->
+
+            <h1 class="info-title">
+
+                Psychological Scale
+                <br>
+                Exhibition
+
+            </h1>
+
+
+            <!-- DESCRIPTION -->
+
+            <p class="info-description">
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing 
+                elit, sed do eiusmod tempor incididunt ut labore et 
+                dolore magna aliqua. Ut enim ad minim veniam, quis 
+                nostrud exercitation ullamco laboris nisi ut aliquip 
+                ex ea commodo consequat. Duis aute irure dolor in 
+                reprehenderit in voluptate velit esse cillum dolore 
+                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+                non proident, sunt in culpa qui officia deserunt 
+                mollit anim id est laborum.
+
+            </p>
+
+
+            <!-- =================================================
+                 BACK BUTTON
+            ================================================== -->
+
+            <a
+                href="index.html"
+                class="back-button"
+            >
+                Kembali
+            </a>
+
+
+        </section>
+
+
+    </main>
+
+
+</body>
+
+</html>
