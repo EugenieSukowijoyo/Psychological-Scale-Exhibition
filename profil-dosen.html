@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Profil Dosen | Psychological Scale Exhibition</title>
+
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =====================================================
+           BODY
+        ===================================================== */
+
+        body {
+
+            width: 100%;
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background-image:
+                url("assets/background.png");
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-repeat: no-repeat;
+
+            color: white;
+
+            overflow: hidden;
+        }
+
+
+        /* =====================================================
+           MAIN PAGE
+        ===================================================== */
+
+        .lecturer-page {
+
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            position: relative;
+
+            padding:
+                5vh
+                5.5vw;
+        }
+
+
+        /* =====================================================
+           LECTURER CONTAINER
+        ===================================================== */
+
+        .lecturer-container {
+
+            width: 100%;
+
+            max-width: 1460px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 3vw;
+        }
+
+
+        /* =====================================================
+           CARD
+        ===================================================== */
+
+        .lecturer-card {
+
+            width: 30%;
+
+            height: 74vh;
+
+            min-height: 500px;
+
+            perspective: 1200px;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.35s ease,
+                filter 0.35s ease;
+        }
+
+
+        /* =====================================================
+           HOVER EFFECT
+        ===================================================== */
+
+        .lecturer-card:hover {
+
+            transform:
+                translateY(-10px);
+
+        }
+
+
+        /* Efek sedikit membesar */
+
+        .lecturer-card:hover
+        .card-inner {
+
+            box-shadow:
+                0 20px 40px
+                rgba(0, 0, 0, 0.28);
+        }
+
+
+        /* =====================================================
+           CARD INNER
+        ===================================================== */
+
+        .card-inner {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 100%;
+
+            transform-style: preserve-3d;
+
+            transition:
+                transform 0.75s
+                cubic-bezier(
+                    0.4,
+                    0.2,
+                    0.2,
+                    1
+                );
+
+            box-shadow:
+                0 10px 25px
+                rgba(0, 0, 0, 0.15);
+        }
+
+
+        /* =====================================================
+           FLIP
+        ===================================================== */
+
+        .lecturer-card.flipped
+        .card-inner {
+
+            transform:
+                rotateY(180deg);
+        }
+
+
+        /* =====================================================
+           CARD FRONT & BACK
+        ===================================================== */
+
+        .card-front,
+        .card-back {
+
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            backface-visibility: hidden;
+
+            -webkit-backface-visibility: hidden;
+
+            overflow: hidden;
+        }
+
+
+        /* =====================================================
+           FRONT
+        ===================================================== */
+
+        .card-front {
+
+            background: #ffffff;
+        }
+
+
+        .card-front img {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            object-position: center;
+        }
+
+
+        /* =====================================================
+           BACK
+        ===================================================== */
+
+        .card-back {
+
+            transform:
+                rotateY(180deg);
+
+            background:
+                #07578d;
+
+            position: absolute;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        /* =====================================================
+           BACKGROUND IMAGE ON BACK
+        ===================================================== */
+
+        .card-back::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background-image:
+                var(--lecturer-image);
+
+            background-size: cover;
+
+            background-position: center;
+
+            z-index: 0;
+        }
+
+
+        /* =====================================================
+           BLUE OVERLAY
+        ===================================================== */
+
+        .card-back::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                rgba(
+                    7,
+                    87,
+                    141,
+                    0.78
+                );
+
+            z-index: 1;
+        }
+
+
+        /* =====================================================
+           CARD INFORMATION
+        ===================================================== */
+
+        .lecturer-info {
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 100%;
+
+            height: 100%;
+
+            padding:
+                45px
+                25px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: flex-start;
+
+            color: white;
+
+            text-align: left;
+        }
+
+
+        /* =====================================================
+           LECTURER NAME
+        ===================================================== */
+
+        .lecturer-name {
+
+            width: 100%;
+
+            font-size:
+                clamp(
+                    25px,
+                    2.5vw,
+                    42px
+                );
+
+            line-height: 1.05;
+
+            font-weight: 800;
+
+            text-align: center;
+
+            margin-bottom: 25px;
+
+            letter-spacing: -1.5px;
+        }
+
+
+        /* =====================================================
+           LECTURER DESCRIPTION
+        ===================================================== */
+
+        .lecturer-description {
+
+            width: 100%;
+
+            font-size:
+                clamp(
+                    15px,
+                    1.25vw,
+                    21px
+                );
+
+            line-height: 1.5;
+
+            text-align: justify;
+
+            font-weight: 400;
+
+            letter-spacing: 0.2px;
+        }
+
+
+        /* =====================================================
+           CLICK INDICATOR
+        ===================================================== */
+
+        .click-indicator {
+
+            position: absolute;
+
+            bottom: 20px;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            z-index: 3;
+
+            padding:
+                7px
+                15px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.7
+                );
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            opacity: 0;
+
+            transition:
+                opacity 0.3s ease;
+        }
+
+
+        .lecturer-card:hover
+        .click-indicator {
+
+            opacity: 1;
+        }
+
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-button {
+
+            position: fixed;
+
+            right: 4vw;
+
+            bottom: 4vh;
+
+            color: white;
+
+            font-size:
+                clamp(
+                    18px,
+                    1.7vw,
+                    30px
+                );
+
+            font-weight: 400;
+
+            text-decoration: underline;
+
+            text-underline-offset: 5px;
+
+            z-index: 10;
+
+            transition:
+                transform 0.3s ease,
+                opacity 0.3s ease,
+                letter-spacing 0.3s ease;
+        }
+
+
+        /* =====================================================
+           BACK BUTTON HOVER
+        ===================================================== */
+
+        .back-button:hover {
+
+            transform:
+                translateX(-8px);
+
+            opacity: 0.7;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .lecturer-page {
+
+                padding:
+                    5vh
+                    4vw;
+            }
+
+
+            .lecturer-container {
+
+                gap: 2vw;
+            }
+
+
+            .lecturer-card {
+
+                height: 70vh;
+
+                min-height: 450px;
+            }
+
+
+            .lecturer-info {
+
+                padding:
+                    35px
+                    20px;
+            }
+
+
+            .lecturer-description {
+
+                font-size: 15px;
+
+                line-height: 1.45;
+            }
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            body {
+
+                overflow: auto;
+            }
+
+
+            .lecturer-page {
+
+                min-height: 100vh;
+
+                height: auto;
+
+                padding:
+                    35px
+                    20px
+                    100px;
+            }
+
+
+            .lecturer-container {
+
+                flex-direction: column;
+
+                width: 100%;
+
+                gap: 30px;
+            }
+
+
+            .lecturer-card {
+
+                width: min(
+                    85vw,
+                    360px
+                );
+
+                height: 500px;
+
+                min-height: 0;
+            }
+
+
+            .lecturer-info {
+
+                padding:
+                    35px
+                    25px;
+            }
+
+
+            .lecturer-name {
+
+                font-size: 28px;
+
+                margin-bottom: 20px;
+            }
+
+
+            .lecturer-description {
+
+                font-size: 15px;
+
+                line-height: 1.5;
+            }
+
+
+            .back-button {
+
+                right: 25px;
+
+                bottom: 25px;
+
+                font-size: 18px;
+            }
+
+        }
+
+
+        /* =====================================================
+           SMALL MOBILE
+        ===================================================== */
+
+        @media (max-width: 400px) {
+
+            .lecturer-card {
+
+                width: 85vw;
+
+                height: 480px;
+            }
+
+
+            .lecturer-info {
+
+                padding:
+                    30px
+                    20px;
+            }
+
+
+            .lecturer-name {
+
+                font-size: 25px;
+            }
+
+
+            .lecturer-description {
+
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         MAIN PAGE
+    ====================================================== -->
+
+    <main class="lecturer-page">
+
+
+        <section class="lecturer-container">
+
+
+            <!-- =================================================
+                 DOSEN 1
+            ================================================== -->
+
+            <div
+                class="lecturer-card"
+                style="
+                    --lecturer-image:
+                    url('assets/dosen1.jpeg');
+                "
+            >
+
+                <div class="card-inner">
+
+
+                    <!-- FRONT -->
+
+                    <div class="card-front">
+
+                        <img
+                            src="assets/dosen1.jpeg"
+                            alt="Foto Dosen 1"
+                        >
+
+                        <div class="click-indicator">
+                            KLIK UNTUK INFO
+                        </div>
+
+                    </div>
+
+
+                    <!-- BACK -->
+
+                    <div class="card-back">
+
+                        <div class="lecturer-info">
+
+                            <h2 class="lecturer-name">
+                                Nama Dosen
+                            </h2>
+
+                            <p class="lecturer-description">
+
+                                Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit,
+                                sed do eiusmod tempor
+                                incididunt ut labore et
+                                dolore magna aliqua.
+
+                                Ut enim ad minim veniam,
+                                quis nostrud exercitation
+                                ullamco laboris nisi ut
+                                aliquip ex ea commodo
+                                consequat.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 DOSEN 2
+            ================================================== -->
+
+            <div
+                class="lecturer-card"
+                style="
+                    --lecturer-image:
+                    url('assets/dosen2.jpg');
+                "
+            >
+
+                <div class="card-inner">
+
+
+                    <!-- FRONT -->
+
+                    <div class="card-front">
+
+                        <img
+                            src="assets/dosen2.jpg"
+                            alt="Foto Dosen 2"
+                        >
+
+                        <div class="click-indicator">
+                            KLIK UNTUK INFO
+                        </div>
+
+                    </div>
+
+
+                    <!-- BACK -->
+
+                    <div class="card-back">
+
+                        <div class="lecturer-info">
+
+                            <h2 class="lecturer-name">
+                                Nama Dosen
+                            </h2>
+
+                            <p class="lecturer-description">
+
+                                Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit,
+                                sed do eiusmod tempor
+                                incididunt ut labore et
+                                dolore magna aliqua.
+
+                                Ut enim ad minim veniam,
+                                quis nostrud exercitation
+                                ullamco laboris nisi ut
+                                aliquip ex ea commodo
+                                consequat.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 DOSEN 3
+            ================================================== -->
+
+            <div
+                class="lecturer-card"
+                style="
+                    --lecturer-image:
+                    url('assets/dosen3.jpeg');
+                "
+            >
+
+                <div class="card-inner">
+
+
+                    <!-- FRONT -->
+
+                    <div class="card-front">
+
+                        <img
+                            src="assets/dosen3.jpeg"
+                            alt="Foto Dosen 3"
+                        >
+
+                        <div class="click-indicator">
+                            KLIK UNTUK INFO
+                        </div>
+
+                    </div>
+
+
+                    <!-- BACK -->
+
+                    <div class="card-back">
+
+                        <div class="lecturer-info">
+
+                            <h2 class="lecturer-name">
+                                Nama Dosen
+                            </h2>
+
+                            <p class="lecturer-description">
+
+                                Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit,
+                                sed do eiusmod tempor
+                                incididunt ut labore et
+                                dolore magna aliqua.
+
+                                Ut enim ad minim veniam,
+                                quis nostrud exercitation
+                                ullamco laboris nisi ut
+                                aliquip ex ea commodo
+                                consequat.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         BACK BUTTON
+    ====================================================== -->
+
+    <a
+        href="index.html"
+        class="back-button"
+    >
+        Kembali
+    </a>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+
+        /* =================================================
+           FLIP CARD
+        ================================================== */
+
+        const lecturerCards =
+            document.querySelectorAll(
+                ".lecturer-card"
+            );
+
+
+        lecturerCards.forEach(
+            function (card) {
+
+                card.addEventListener(
+                    "click",
+                    function () {
+
+                        card.classList.toggle(
+                            "flipped"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
