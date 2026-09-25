@@ -831,6 +831,20 @@
             "https://script.google.com/macros/s/AKfycbxkpP_TcGH6S9BXASxFXbsPWcan3657cds34asX4VampavBsTxBeDGsIcLeCp8B-t3G/exec";
 
 
+        /*
+         * Google Apps Script harus menerima:
+         *
+         * e.parameter.name
+         * e.parameter.pilihan1
+         * e.parameter.pilihan2
+         * e.parameter.pilihan3
+         *
+         * Data dikirim menggunakan form POST,
+         * bukan fetch(), untuk menghindari masalah CORS
+         * saat halaman dijalankan dari GitHub Pages.
+         */
+
+
         /* =========================
            VOTING STATE
         ========================= */
@@ -965,7 +979,7 @@
            SUBMIT VOTE
         ========================= */
 
-        async function submitVote() {
+        function submitVote() {
 
             const nameInput =
                 document.getElementById("voterName");
@@ -977,7 +991,9 @@
                 nameInput.value.trim();
 
 
-            /* Validasi nama */
+            /* =========================
+               VALIDASI NAMA
+            ========================= */
 
             if (!name) {
 
@@ -992,7 +1008,9 @@
             }
 
 
-            /* Validasi jumlah pilihan */
+            /* =========================
+               VALIDASI PILIHAN
+            ========================= */
 
             if (selectedPosters.length !== 3) {
 
@@ -1005,11 +1023,16 @@
             }
 
 
-            /* Validasi URL */
+            /* =========================
+               VALIDASI URL
+            ========================= */
 
             if (
-                GOOGLE_SCRIPT_URL ===
-                "MASUKKAN_URL_GOOGLE_APPS_SCRIPT_DI_SINI"
+                !GOOGLE_SCRIPT_URL ||
+                GOOGLE_SCRIPT_URL === "URL" ||
+                GOOGLE_SCRIPT_URL.includes(
+                    "MASUKKAN_URL_GOOGLE_APPS_SCRIPT"
+                )
             ) {
 
                 showMessage(
@@ -1021,35 +1044,12 @@
             }
 
 
-            /*
-             * Simpan urutan pilihan.
-             *
-             * selectedPosters[0] = Pilihan 1
-             * selectedPosters[1] = Pilihan 2
-             * selectedPosters[2] = Pilihan 3
-             */
-
-            const voteData = {
-
-                name: name,
-
-                pilihan1:
-                    selectedPosters[0],
-
-                pilihan2:
-                    selectedPosters[1],
-
-                pilihan3:
-                    selectedPosters[2]
-
-            };
-
-
-            /* Ubah tombol menjadi loading */
+            /* =========================
+               DISABLE BUTTON
+            ========================= */
 
             submitButton.disabled = true;
             submitButton.textContent = "MENGIRIM...";
-
 
             showMessage(
                 "Mengirim pilihan...",
@@ -1057,82 +1057,146 @@
             );
 
 
-            try {
-
-                /*
-                 * Mengirim data ke Google Apps Script.
-                 */
-
-                const response =
-                    await fetch(
-                        GOOGLE_SCRIPT_URL,
-                        {
-                            method: "POST",
-
-                            mode: "cors",
-
-                            headers: {
-                                "Content-Type":
-                                    "text/plain;charset=utf-8"
-                            },
-
-                            body:
-                                JSON.stringify(voteData)
-                        }
-                    );
+            /*
+             * ==================================================
+             * KIRIM DATA MENGGUNAKAN FORM + IFRAME
+             *
+             * Tidak menggunakan fetch(), sehingga tidak
+             * terkena masalah CORS dari GitHub Pages.
+             * ==================================================
+             */
 
 
-                const result =
-                    await response.json();
+            /* Buat iframe tersembunyi */
+
+            const iframe =
+                document.createElement("iframe");
+
+            iframe.name =
+                "googleSheetFrame";
+
+            iframe.style.display = "none";
+
+            document.body.appendChild(iframe);
 
 
-                if (result.success) {
+            /* Buat form */
 
-                    showMessage(
-                        "Voting berhasil dikirim. Terima kasih!",
-                        "success"
-                    );
+            const form =
+                document.createElement("form");
+
+            form.method = "POST";
+
+            form.action =
+                GOOGLE_SCRIPT_URL;
+
+            form.target =
+                "googleSheetFrame";
 
 
-                    /*
-                     * Reset form setelah berhasil.
-                     */
+            /*
+             * Fungsi pembantu untuk membuat
+             * hidden input.
+             */
 
-                    nameInput.value = "";
+            function addField(name, value) {
 
-                    selectedPosters = [];
+                const input =
+                    document.createElement("input");
 
-                    updatePosterDisplay();
-                    updateVotingStatus();
+                input.type = "hidden";
 
-                }
+                input.name = name;
 
-                else {
+                input.value = value;
 
-                    throw new Error(
-                        result.message ||
-                        "Data tidak berhasil disimpan."
-                    );
-
-                }
+                form.appendChild(input);
 
             }
 
-            catch (error) {
 
-                console.error(error);
+            /* =========================
+               DATA YANG DIKIRIM
+            ========================= */
+
+            addField(
+                "name",
+                name
+            );
+
+            addField(
+                "pilihan1",
+                selectedPosters[0]
+            );
+
+            addField(
+                "pilihan2",
+                selectedPosters[1]
+            );
+
+            addField(
+                "pilihan3",
+                selectedPosters[2]
+            );
+
+
+            /* Masukkan form ke halaman */
+
+            document.body.appendChild(form);
+
+
+            /*
+             * Submit form ke Google Apps Script.
+             *
+             * Karena target-nya iframe,
+             * halaman voting tidak berpindah.
+             */
+
+            form.submit();
+
+
+            /*
+             * Tidak membaca response dari Apps Script.
+             * Ini penting agar browser tidak terkena CORS.
+             *
+             * Kita beri waktu agar Apps Script selesai
+             * menulis data ke Google Sheets.
+             */
+
+            setTimeout(function() {
 
                 showMessage(
-                    "Voting gagal dikirim. Silakan coba lagi.",
-                    "error"
+                    "Voting berhasil dikirim. Terima kasih!",
+                    "success"
                 );
+
+
+                /* Reset form */
+
+                nameInput.value = "";
+
+                selectedPosters = [];
+
+                updatePosterDisplay();
 
                 updateVotingStatus();
 
-            }
+
+                submitButton.textContent =
+                    "KIRIM";
 
 
-            submitButton.textContent = "KIRIM";
+                submitButton.disabled =
+                    true;
+
+
+                /* Hapus form dan iframe sementara */
+
+                form.remove();
+
+                iframe.remove();
+
+            }, 1500);
 
         }
 
