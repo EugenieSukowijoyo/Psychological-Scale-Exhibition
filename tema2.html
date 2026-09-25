@@ -276,7 +276,15 @@
 
             margin-top: 25px;
 
+            border: none;
+
+            padding: 5px 10px;
+
+            background: transparent;
+
             color: white;
+
+            font-family: inherit;
 
             font-size: clamp(16px, 1.6vw, 27px);
 
@@ -287,6 +295,73 @@
             text-decoration: underline;
 
             text-underline-offset: 5px;
+
+            cursor: pointer;
+
+            position: relative;
+
+            transition:
+                transform 0.3s ease,
+                opacity 0.3s ease,
+                letter-spacing 0.3s ease;
+        }
+
+        .poster-title:hover {
+            transform: translateY(-3px);
+            opacity: 0.8;
+            letter-spacing: 9px;
+        }
+
+
+        /* =========================
+           SLIDE DOWN DESCRIPTION
+        ========================= */
+
+        .poster-description {
+            display: grid;
+
+            grid-template-rows: 0fr;
+
+            width: 100%;
+
+            max-width: 330px;
+
+            margin-top: 0;
+
+            opacity: 0;
+
+            overflow: hidden;
+
+            transition:
+                grid-template-rows 0.45s ease,
+                opacity 0.35s ease,
+                margin-top 0.45s ease;
+        }
+
+        .poster-description p {
+            min-height: 0;
+
+            overflow: hidden;
+
+            color: rgba(255, 255, 255, 0.85);
+
+            font-size: clamp(13px, 1.1vw, 17px);
+
+            font-weight: 400;
+
+            line-height: 1.6;
+
+            letter-spacing: 0;
+
+            text-align: center;
+        }
+
+        .poster-description.active {
+            grid-template-rows: 1fr;
+
+            margin-top: 14px;
+
+            opacity: 1;
         }
 
 
@@ -325,20 +400,22 @@
 
 
         /* =========================
-           MODAL IMAGE
+           MODAL VIDEO
         ========================= */
 
-        .modal-image {
+        .modal-video {
 
             max-width: 90vw;
 
-            max-height: 90vh;
+            max-height: 85vh;
 
             width: auto;
 
             height: auto;
 
             object-fit: contain;
+
+            background: black;
 
             box-shadow:
                 0 20px 60px rgba(0, 0, 0, 0.5);
@@ -407,6 +484,56 @@
             background: rgba(255, 255, 255, 0.3);
 
             transform: rotate(90deg);
+        }
+
+
+
+        /* =========================
+           POSTER DESCRIPTION
+        ========================= */
+
+        .poster-description {
+            width: 100%;
+            max-width: 330px;
+            margin-top: 14px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: clamp(13px, 1.1vw, 17px);
+            font-weight: 400;
+            line-height: 1.6;
+            letter-spacing: 0;
+            text-align: center;
+        }
+
+
+        /* =========================
+           BOTTOM BACK BUTTON
+        ========================= */
+
+        .bottom-back {
+            display: flex;
+            justify-content: center;
+            margin-top: 85px;
+        }
+
+        .bottom-back a {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            font-size: clamp(18px, 1.5vw, 24px);
+            font-weight: 600;
+            letter-spacing: 3px;
+            padding: 12px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            transition:
+                background 0.3s ease,
+                color 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .bottom-back a:hover {
+            background: white;
+            color: black;
+            transform: translateY(-3px);
         }
 
 
@@ -487,6 +614,18 @@
                 letter-spacing: 5px;
             }
 
+            .poster-title:hover {
+                letter-spacing: 7px;
+            }
+
+            .poster-description {
+                max-width: 300px;
+            }
+
+            .poster-description p {
+                font-size: 14px;
+            }
+
 
             .poster-modal {
 
@@ -494,11 +633,28 @@
             }
 
 
-            .modal-image {
+            .poster-description {
+                max-width: 300px;
+                font-size: 14px;
+            }
+
+            .bottom-back {
+                margin-top: 65px;
+            }
+
+            .bottom-back a {
+                font-size: 17px;
+                padding: 10px 25px;
+            }
+
+
+
+
+            .modal-video {
 
                 max-width: 95vw;
 
-                max-height: 85vh;
+                max-height: 80vh;
             }
 
 
@@ -570,7 +726,7 @@
 
                 <button
                     class="poster-button"
-                    onclick="openPoster('poster/1.jpg')">
+                    onclick="openPoster('video/1.mp4')">
 
                     <img
                         src="poster/1.jpg"
@@ -579,11 +735,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -597,7 +758,7 @@
 
                 <button
                     class="poster-button"
-                    onclick="openPoster('poster/2.jpg')">
+                    onclick="openPoster('video/1.mp4')">
 
                     <img
                         src="poster/2.jpg"
@@ -606,11 +767,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -624,7 +790,7 @@
 
                 <button
                     class="poster-button"
-                    onclick="openPoster('poster/3.jpg')">
+                    onclick="openPoster('video/1.mp4')">
 
                     <img
                         src="poster/3.jpg"
@@ -633,11 +799,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -651,7 +822,7 @@
 
                 <button
                     class="poster-button"
-                    onclick="openPoster('poster/4.jpg')">
+                    onclick="openPoster('video/1.mp4')">
 
                     <img
                         src="poster/4.jpg"
@@ -660,11 +831,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -678,7 +854,7 @@
 
                 <button
                     class="poster-button"
-                    onclick="openPoster('poster/5.jpg')">
+                    onclick="openPoster('video/1.mp4')">
 
                     <img
                         src="poster/5.jpg"
@@ -687,11 +863,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -705,7 +886,7 @@
 
                 <button
                     class="poster-button"
-                    onclick="openPoster('poster/6.jpg')">
+                    onclick="openPoster('video/1.mp4')">
 
                     <img
                         src="poster/6.jpg"
@@ -714,11 +895,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -732,7 +918,7 @@
 
                 <button
                     class="poster-button"
-                    onclick="openPoster('poster/7.jpg')">
+                    onclick="openPoster('video/1.mp4')">
 
                     <img
                         src="poster/7.jpg"
@@ -741,11 +927,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -759,7 +950,7 @@
 
                 <button
                     class="poster-button"
-                    onclick="openPoster('poster/8.jpg')">
+                    onclick="openPoster('video/1.mp4')">
 
                     <img
                         src="poster/8.jpg"
@@ -768,11 +959,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -786,7 +982,7 @@
 
                 <button
                     class="poster-button"
-                    onclick="openPoster('poster/9.jpg')">
+                    onclick="openPoster('video/1.mp4')">
 
                     <img
                         src="poster/9.jpg"
@@ -795,11 +991,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -813,7 +1014,7 @@
 
                 <button
                     class="poster-button"
-                    onclick="openPoster('poster/10.jpg')">
+                    onclick="openPoster('video/1.mp4')">
 
                     <img
                         src="poster/10.jpg"
@@ -822,11 +1023,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -838,7 +1044,7 @@
 
                 <button
                     class="poster-button"
-                    onclick="openPoster('poster/11.jpg')">
+                    onclick="openPoster('video/1.mp4')">
 
                     <img
                         src="poster/11.jpg"
@@ -847,11 +1053,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -865,7 +1076,7 @@
 
                 <button
                     class="poster-button"
-                    onclick="openPoster('poster/12.jpg')">
+                    onclick="openPoster('video/1.mp4')">
 
                     <img
                         src="poster/12.jpg"
@@ -874,11 +1085,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -886,7 +1102,16 @@
 
         </section>
 
-    </main>
+    
+        <!-- =========================
+             BOTTOM BACK BUTTON
+        ========================== -->
+
+        <div class="bottom-back">
+            <a href="index.html">KEMBALI</a>
+        </div>
+
+</main>
 
 
 
@@ -911,13 +1136,16 @@
         </button>
 
 
-        <!-- Gambar Poster yang diperbesar -->
+        <!-- Video Penjelasan Poster -->
 
-        <img
-            id="modalImage"
-            class="modal-image"
-            src=""
-            alt="Poster">
+        <video
+            id="modalVideo"
+            class="modal-video"
+            controls
+            playsinline
+            preload="metadata">
+            Browser Anda tidak mendukung pemutaran video.
+        </video>
 
     </div>
 
@@ -930,22 +1158,25 @@
     <script>
 
         /* =========================
-           OPEN POSTER
+           OPEN VIDEO
         ========================= */
 
-        function openPoster(imageSource) {
+        function openPoster(videoSource) {
 
             const modal =
                 document.getElementById("posterModal");
 
-            const modalImage =
-                document.getElementById("modalImage");
+            const modalVideo =
+                document.getElementById("modalVideo");
 
 
-            // Masukkan gambar yang diklik
-            // ke dalam modal
+            // Masukkan video sesuai poster
+            // yang diklik ke dalam modal
 
-            modalImage.src = imageSource;
+            modalVideo.src = videoSource;
+
+            // Mulai dari awal setiap kali poster dibuka
+            modalVideo.currentTime = 0;
 
 
             // Tampilkan modal
@@ -958,8 +1189,46 @@
 
             document.body.style.overflow = "hidden";
 
+
+            // Putar video setelah modal terbuka
+            modalVideo.play().catch(function() {
+                // Browser dapat memblokir autoplay.
+                // Pengguna tetap dapat menekan tombol Play.
+            });
+
         }
 
+
+
+        /* =========================
+           TOGGLE DESCRIPTION
+        ========================= */
+
+        function toggleDescription(title) {
+
+            const description =
+                title.nextElementSibling;
+
+            const isActive =
+                description.classList.contains("active");
+
+            // Close all other descriptions
+            document.querySelectorAll(".poster-description.active")
+                .forEach(function(item) {
+                    item.classList.remove("active");
+                });
+
+            document.querySelectorAll(".poster-title.active")
+                .forEach(function(item) {
+                    item.classList.remove("active");
+                });
+
+            // Open the clicked one if it was previously closed
+            if (!isActive) {
+                description.classList.add("active");
+                title.classList.add("active");
+            }
+        }
 
 
         /* =========================
@@ -970,14 +1239,14 @@
 
 
             /*
-             * Jika yang diklik adalah gambar,
+             * Jika yang diklik adalah video,
              * jangan tutup modal.
              */
 
             if (
                 event &&
                 event.target &&
-                event.target.id === "modalImage"
+                event.target.id === "modalVideo"
             ) {
 
                 return;
@@ -992,6 +1261,17 @@
             // Sembunyikan modal
 
             modal.classList.remove("active");
+
+
+            // Hentikan video dan kembalikan ke awal
+
+            const modalVideo =
+                document.getElementById("modalVideo");
+
+            modalVideo.pause();
+            modalVideo.currentTime = 0;
+            modalVideo.removeAttribute("src");
+            modalVideo.load();
 
 
             // Kembalikan kemampuan scroll
@@ -1012,14 +1292,7 @@
 
                 if (event.key === "Escape") {
 
-                    const modal =
-                        document.getElementById("posterModal");
-
-
-                    modal.classList.remove("active");
-
-
-                    document.body.style.overflow = "";
+                    closePoster();
 
                 }
 
