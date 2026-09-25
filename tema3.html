@@ -276,7 +276,15 @@
 
             margin-top: 25px;
 
+            border: none;
+
+            padding: 5px 10px;
+
+            background: transparent;
+
             color: white;
+
+            font-family: inherit;
 
             font-size: clamp(16px, 1.6vw, 27px);
 
@@ -287,126 +295,174 @@
             text-decoration: underline;
 
             text-underline-offset: 5px;
+
+            cursor: pointer;
+
+            position: relative;
+
+            transition:
+                transform 0.3s ease,
+                opacity 0.3s ease,
+                letter-spacing 0.3s ease;
+        }
+
+        .poster-title:hover {
+            transform: translateY(-3px);
+            opacity: 0.8;
+            letter-spacing: 9px;
         }
 
 
-        /* ==================================================
-           LIGHTBOX / MODAL
-        ================================================== */
+        /* =========================
+           SLIDE DOWN DESCRIPTION
+        ========================= */
 
-        .poster-modal {
+        .poster-description {
+            display: grid;
 
-            position: fixed;
+            grid-template-rows: 0fr;
 
-            inset: 0;
+            width: 100%;
 
-            z-index: 999;
+            max-width: 330px;
 
-            display: none;
+            margin-top: 0;
 
-            justify-content: center;
+            opacity: 0;
+
+            overflow: hidden;
+
+            transition:
+                grid-template-rows 0.45s ease,
+                opacity 0.35s ease,
+                margin-top 0.45s ease;
+        }
+
+        .poster-description p {
+            min-height: 0;
+
+            overflow: hidden;
+
+            color: rgba(255, 255, 255, 0.85);
+
+            font-size: clamp(13px, 1.1vw, 17px);
+
+            font-weight: 400;
+
+            line-height: 1.6;
+
+            letter-spacing: 0;
+
+            text-align: center;
+        }
+
+        .poster-description.active {
+            grid-template-rows: 1fr;
+
+            margin-top: 14px;
+
+            opacity: 1;
+        }
+
+        /* =========================
+           AUDIO BUTTON
+        ========================= */
+
+        .audio-button {
+
+            margin-top: 18px;
+
+            display: inline-flex;
 
             align-items: center;
 
-            padding: 40px;
+            justify-content: center;
 
-            background: rgba(0, 0, 0, 0.82);
+            gap: 10px;
 
-            backdrop-filter: blur(5px);
-        }
+            padding: 10px 20px;
 
+            border: 1px solid rgba(255, 255, 255, 0.7);
 
-        /* Modal aktif */
-
-        .poster-modal.active {
-
-            display: flex;
-        }
-
-
-        /* =========================
-           MODAL IMAGE
-        ========================= */
-
-        .modal-image {
-
-            max-width: 90vw;
-
-            max-height: 90vh;
-
-            width: auto;
-
-            height: auto;
-
-            object-fit: contain;
-
-            box-shadow:
-                0 20px 60px rgba(0, 0, 0, 0.5);
-
-            animation: zoomIn 0.3s ease;
-        }
-
-
-        /* =========================
-           ZOOM ANIMATION
-        ========================= */
-
-        @keyframes zoomIn {
-
-            from {
-                opacity: 0;
-                transform: scale(0.85);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-        }
-
-
-        /* =========================
-           CLOSE BUTTON
-        ========================= */
-
-        .close-button {
-
-            position: absolute;
-
-            top: 25px;
-
-            right: 35px;
-
-            width: 50px;
-
-            height: 50px;
-
-            border: none;
-
-            border-radius: 50%;
-
-            background: rgba(255, 255, 255, 0.15);
+            background: transparent;
 
             color: white;
 
-            font-size: 38px;
+            font-family: inherit;
 
-            line-height: 40px;
+            font-size: 13px;
+
+            font-weight: 600;
+
+            letter-spacing: 2px;
 
             cursor: pointer;
 
             transition:
                 background 0.3s ease,
-                transform 0.3s ease;
+                color 0.3s ease,
+                transform 0.3s ease,
+                opacity 0.3s ease;
+        }
+
+        .audio-button:hover {
+
+            background: white;
+
+            color: black;
+
+            transform: translateY(-3px);
+        }
+
+        .audio-button.playing {
+
+            background: white;
+
+            color: black;
+        }
+
+        .audio-icon {
+
+            font-size: 12px;
+
+            line-height: 1;
+        }
+
+        .poster-audio {
+
+            display: none;
         }
 
 
-        .close-button:hover {
+        /* =========================
+           BOTTOM BACK BUTTON
+        ========================= */
 
-            background: rgba(255, 255, 255, 0.3);
+        .bottom-back {
+            display: flex;
+            justify-content: center;
+            margin-top: 85px;
+        }
 
-            transform: rotate(90deg);
+        .bottom-back a {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            font-size: clamp(18px, 1.5vw, 24px);
+            font-weight: 600;
+            letter-spacing: 3px;
+            padding: 12px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            transition:
+                background 0.3s ease,
+                color 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .bottom-back a:hover {
+            background: white;
+            color: black;
+            transform: translateY(-3px);
         }
 
 
@@ -487,26 +543,43 @@
                 letter-spacing: 5px;
             }
 
+            .poster-title:hover {
+                letter-spacing: 7px;
+            }
 
-            .poster-modal {
+            .poster-description {
+                max-width: 300px;
+            }
 
-                padding: 20px;
+            .poster-description p {
+                font-size: 14px;
             }
 
 
-            .modal-image {
+            .audio-button {
 
-                max-width: 95vw;
+                margin-top: 16px;
 
-                max-height: 85vh;
+                padding: 9px 16px;
+
+                font-size: 12px;
+
+                letter-spacing: 1.5px;
             }
 
 
-            .close-button {
+            .poster-description {
+                max-width: 300px;
+                font-size: 14px;
+            }
 
-                top: 15px;
+            .bottom-back {
+                margin-top: 65px;
+            }
 
-                right: 15px;
+            .bottom-back a {
+                font-size: 17px;
+                padding: 10px 25px;
             }
 
         }
@@ -579,11 +652,25 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+
+                    <button
+                        class="audio-button"
+                        onclick="toggleAudio(this, 'audio/1.mp3')">
+                        <span class="audio-icon">▶</span>
+                        <span class="audio-text">PLAY AUDIO</span>
+                    </button>
+
+                    <audio class="poster-audio" preload="metadata"></audio>
+                </div>
+
 
             </div>
 
@@ -606,11 +693,25 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+
+                    <button
+                        class="audio-button"
+                        onclick="toggleAudio(this, 'audio/1.mp3')">
+                        <span class="audio-icon">▶</span>
+                        <span class="audio-text">PLAY AUDIO</span>
+                    </button>
+
+                    <audio class="poster-audio" preload="metadata"></audio>
+                </div>
+
 
             </div>
 
@@ -633,11 +734,25 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+
+                    <button
+                        class="audio-button"
+                        onclick="toggleAudio(this, 'audio/1.mp3')">
+                        <span class="audio-icon">▶</span>
+                        <span class="audio-text">PLAY AUDIO</span>
+                    </button>
+
+                    <audio class="poster-audio" preload="metadata"></audio>
+                </div>
+
 
             </div>
 
@@ -660,11 +775,25 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+
+                    <button
+                        class="audio-button"
+                        onclick="toggleAudio(this, 'audio/1.mp3')">
+                        <span class="audio-icon">▶</span>
+                        <span class="audio-text">PLAY AUDIO</span>
+                    </button>
+
+                    <audio class="poster-audio" preload="metadata"></audio>
+                </div>
+
 
             </div>
 
@@ -687,11 +816,25 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+
+                    <button
+                        class="audio-button"
+                        onclick="toggleAudio(this, 'audio/1.mp3')">
+                        <span class="audio-icon">▶</span>
+                        <span class="audio-text">PLAY AUDIO</span>
+                    </button>
+
+                    <audio class="poster-audio" preload="metadata"></audio>
+                </div>
+
 
             </div>
 
@@ -714,11 +857,25 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+
+                    <button
+                        class="audio-button"
+                        onclick="toggleAudio(this, 'audio/1.mp3')">
+                        <span class="audio-icon">▶</span>
+                        <span class="audio-text">PLAY AUDIO</span>
+                    </button>
+
+                    <audio class="poster-audio" preload="metadata"></audio>
+                </div>
+
 
             </div>
 
@@ -741,11 +898,25 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+
+                    <button
+                        class="audio-button"
+                        onclick="toggleAudio(this, 'audio/1.mp3')">
+                        <span class="audio-icon">▶</span>
+                        <span class="audio-text">PLAY AUDIO</span>
+                    </button>
+
+                    <audio class="poster-audio" preload="metadata"></audio>
+                </div>
+
 
             </div>
 
@@ -768,11 +939,25 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+
+                    <button
+                        class="audio-button"
+                        onclick="toggleAudio(this, 'audio/1.mp3')">
+                        <span class="audio-icon">▶</span>
+                        <span class="audio-text">PLAY AUDIO</span>
+                    </button>
+
+                    <audio class="poster-audio" preload="metadata"></audio>
+                </div>
+
 
             </div>
 
@@ -795,11 +980,25 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+
+                    <button
+                        class="audio-button"
+                        onclick="toggleAudio(this, 'audio/1.mp3')">
+                        <span class="audio-icon">▶</span>
+                        <span class="audio-text">PLAY AUDIO</span>
+                    </button>
+
+                    <audio class="poster-audio" preload="metadata"></audio>
+                </div>
+
 
             </div>
 
@@ -822,11 +1021,25 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+
+                    <button
+                        class="audio-button"
+                        onclick="toggleAudio(this, 'audio/1.mp3')">
+                        <span class="audio-icon">▶</span>
+                        <span class="audio-text">PLAY AUDIO</span>
+                    </button>
+
+                    <audio class="poster-audio" preload="metadata"></audio>
+                </div>
+
 
             </div>
 
@@ -847,11 +1060,25 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+
+                    <button
+                        class="audio-button"
+                        onclick="toggleAudio(this, 'audio/1.mp3')">
+                        <span class="audio-icon">▶</span>
+                        <span class="audio-text">PLAY AUDIO</span>
+                    </button>
+
+                    <audio class="poster-audio" preload="metadata"></audio>
+                </div>
+
 
             </div>
 
@@ -874,11 +1101,25 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+
+                    <button
+                        class="audio-button"
+                        onclick="toggleAudio(this, 'audio/1.mp3')">
+                        <span class="audio-icon">▶</span>
+                        <span class="audio-text">PLAY AUDIO</span>
+                    </button>
+
+                    <audio class="poster-audio" preload="metadata"></audio>
+                </div>
+
 
             </div>
 
@@ -886,42 +1127,16 @@
 
         </section>
 
-    </main>
+    
+        <!-- =========================
+             BOTTOM BACK BUTTON
+        ========================== -->
 
+        <div class="bottom-back">
+            <a href="index.html">KEMBALI</a>
+        </div>
 
-
-    <!-- ==================================================
-         LIGHTBOX / MODAL
-    ================================================== -->
-
-    <div
-        id="posterModal"
-        class="poster-modal"
-        onclick="closePoster(event)">
-
-
-        <!-- Tombol Close -->
-
-        <button
-            class="close-button"
-            onclick="closePoster()">
-
-            ×
-
-        </button>
-
-
-        <!-- Gambar Poster yang diperbesar -->
-
-        <img
-            id="modalImage"
-            class="modal-image"
-            src=""
-            alt="Poster">
-
-    </div>
-
-
+</main>
 
     <!-- ==================================================
          JAVASCRIPT
@@ -930,101 +1145,135 @@
     <script>
 
         /* =========================
-           OPEN POSTER
+           PLAY / PAUSE AUDIO
         ========================= */
 
-        function openPoster(imageSource) {
+        function toggleAudio(button, audioSource) {
 
-            const modal =
-                document.getElementById("posterModal");
+            const audio =
+                button.nextElementSibling;
 
-            const modalImage =
-                document.getElementById("modalImage");
+            const icon =
+                button.querySelector(".audio-icon");
 
-
-            // Masukkan gambar yang diklik
-            // ke dalam modal
-
-            modalImage.src = imageSource;
+            const text =
+                button.querySelector(".audio-text");
 
 
-            // Tampilkan modal
+            // Hentikan audio lain yang sedang diputar
 
-            modal.classList.add("active");
+            document.querySelectorAll(".poster-audio").forEach(function(item) {
 
+                if (item !== audio) {
 
-            // Mencegah halaman utama
-            // ikut scroll ketika modal terbuka
+                    item.pause();
+                    item.currentTime = 0;
 
-            document.body.style.overflow = "hidden";
+                    const otherButton =
+                        item.previousElementSibling;
 
-        }
+                    if (otherButton) {
 
+                        otherButton.classList.remove("playing");
 
+                        otherButton.querySelector(".audio-icon").textContent = "▶";
 
-        /* =========================
-           CLOSE POSTER
-        ========================= */
-
-        function closePoster(event) {
-
-
-            /*
-             * Jika yang diklik adalah gambar,
-             * jangan tutup modal.
-             */
-
-            if (
-                event &&
-                event.target &&
-                event.target.id === "modalImage"
-            ) {
-
-                return;
-
-            }
-
-
-            const modal =
-                document.getElementById("posterModal");
-
-
-            // Sembunyikan modal
-
-            modal.classList.remove("active");
-
-
-            // Kembalikan kemampuan scroll
-
-            document.body.style.overflow = "";
-
-        }
-
-
-
-        /* =========================
-           CLOSE DENGAN ESC
-        ========================= */
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (event.key === "Escape") {
-
-                    const modal =
-                        document.getElementById("posterModal");
-
-
-                    modal.classList.remove("active");
-
-
-                    document.body.style.overflow = "";
-
+                        otherButton.querySelector(".audio-text").textContent = "PLAY AUDIO";
+                    }
                 }
 
+            });
+
+
+            // Jika audio sedang berjalan, pause
+
+            if (!audio.paused) {
+
+                audio.pause();
+
+                button.classList.remove("playing");
+
+                icon.textContent = "▶";
+
+                text.textContent = "PLAY AUDIO";
+
+                return;
             }
-        );
+
+
+            // Masukkan file audio sesuai poster
+
+            if (!audio.src || !audio.src.endsWith(audioSource)) {
+
+                audio.src = audioSource;
+
+            }
+
+
+            // Putar audio
+
+            audio.play().then(function() {
+
+                button.classList.add("playing");
+
+                icon.textContent = "Ⅱ";
+
+                text.textContent = "PAUSE AUDIO";
+
+            }).catch(function(error) {
+
+                console.error("Audio tidak dapat diputar:", error);
+
+            });
+
+
+            // Kembalikan tombol ketika audio selesai
+
+            audio.onended = function() {
+
+                button.classList.remove("playing");
+
+                icon.textContent = "▶";
+
+                text.textContent = "PLAY AUDIO";
+
+                audio.currentTime = 0;
+
+            };
+
+        }
+
+
+        /* =========================
+           TOGGLE DESCRIPTION
+        ========================= */
+
+        function toggleDescription(title) {
+
+            const description =
+                title.nextElementSibling;
+
+            const isActive =
+                description.classList.contains("active");
+
+            // Close all other descriptions
+            document.querySelectorAll(".poster-description.active")
+                .forEach(function(item) {
+                    item.classList.remove("active");
+                });
+
+            document.querySelectorAll(".poster-title.active")
+                .forEach(function(item) {
+                    item.classList.remove("active");
+                });
+
+            // Open the clicked one if it was previously closed
+            if (!isActive) {
+                description.classList.add("active");
+                title.classList.add("active");
+            }
+        }
+
 
     </script>
 
