@@ -276,7 +276,15 @@
 
             margin-top: 25px;
 
+            border: none;
+
+            padding: 5px 10px;
+
+            background: transparent;
+
             color: white;
+
+            font-family: inherit;
 
             font-size: clamp(16px, 1.6vw, 27px);
 
@@ -287,6 +295,73 @@
             text-decoration: underline;
 
             text-underline-offset: 5px;
+
+            cursor: pointer;
+
+            position: relative;
+
+            transition:
+                transform 0.3s ease,
+                opacity 0.3s ease,
+                letter-spacing 0.3s ease;
+        }
+
+        .poster-title:hover {
+            transform: translateY(-3px);
+            opacity: 0.8;
+            letter-spacing: 9px;
+        }
+
+
+        /* =========================
+           SLIDE DOWN DESCRIPTION
+        ========================= */
+
+        .poster-description {
+            display: grid;
+
+            grid-template-rows: 0fr;
+
+            width: 100%;
+
+            max-width: 330px;
+
+            margin-top: 0;
+
+            opacity: 0;
+
+            overflow: hidden;
+
+            transition:
+                grid-template-rows 0.45s ease,
+                opacity 0.35s ease,
+                margin-top 0.45s ease;
+        }
+
+        .poster-description p {
+            min-height: 0;
+
+            overflow: hidden;
+
+            color: rgba(255, 255, 255, 0.85);
+
+            font-size: clamp(13px, 1.1vw, 17px);
+
+            font-weight: 400;
+
+            line-height: 1.6;
+
+            letter-spacing: 0;
+
+            text-align: center;
+        }
+
+        .poster-description.active {
+            grid-template-rows: 1fr;
+
+            margin-top: 14px;
+
+            opacity: 1;
         }
 
 
@@ -410,6 +485,56 @@
         }
 
 
+
+        /* =========================
+           POSTER DESCRIPTION
+        ========================= */
+
+        .poster-description {
+            width: 100%;
+            max-width: 330px;
+            margin-top: 14px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: clamp(13px, 1.1vw, 17px);
+            font-weight: 400;
+            line-height: 1.6;
+            letter-spacing: 0;
+            text-align: center;
+        }
+
+
+        /* =========================
+           BOTTOM BACK BUTTON
+        ========================= */
+
+        .bottom-back {
+            display: flex;
+            justify-content: center;
+            margin-top: 85px;
+        }
+
+        .bottom-back a {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            font-size: clamp(18px, 1.5vw, 24px);
+            font-weight: 600;
+            letter-spacing: 3px;
+            padding: 12px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            transition:
+                background 0.3s ease,
+                color 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .bottom-back a:hover {
+            background: white;
+            color: black;
+            transform: translateY(-3px);
+        }
+
+
         /* ==================================================
            TABLET
         ================================================== */
@@ -487,11 +612,40 @@
                 letter-spacing: 5px;
             }
 
+            .poster-title:hover {
+                letter-spacing: 7px;
+            }
+
+            .poster-description {
+                max-width: 300px;
+            }
+
+            .poster-description p {
+                font-size: 14px;
+            }
+
 
             .poster-modal {
 
                 padding: 20px;
             }
+
+
+            .poster-description {
+                max-width: 300px;
+                font-size: 14px;
+            }
+
+            .bottom-back {
+                margin-top: 65px;
+            }
+
+            .bottom-back a {
+                font-size: 17px;
+                padding: 10px 25px;
+            }
+
+
 
 
             .modal-image {
@@ -579,11 +733,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -606,11 +765,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -633,11 +797,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -660,11 +829,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -687,11 +861,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -714,11 +893,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -741,11 +925,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -768,11 +957,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -795,11 +989,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -822,11 +1021,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -847,11 +1051,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -874,11 +1083,16 @@
                 </button>
 
 
-                <p class="poster-title">
-
+                <button class="poster-title" onclick="toggleDescription(this)">
                     LOREM IPSUM
+                </button>
 
-                </p>
+                <div class="poster-description">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
+                    </p>
+                </div>
+
 
             </div>
 
@@ -886,7 +1100,16 @@
 
         </section>
 
-    </main>
+    
+        <!-- =========================
+             BOTTOM BACK BUTTON
+        ========================== -->
+
+        <div class="bottom-back">
+            <a href="index.html">KEMBALI</a>
+        </div>
+
+</main>
 
 
 
@@ -960,6 +1183,37 @@
 
         }
 
+
+
+        /* =========================
+           TOGGLE DESCRIPTION
+        ========================= */
+
+        function toggleDescription(title) {
+
+            const description =
+                title.nextElementSibling;
+
+            const isActive =
+                description.classList.contains("active");
+
+            // Close all other descriptions
+            document.querySelectorAll(".poster-description.active")
+                .forEach(function(item) {
+                    item.classList.remove("active");
+                });
+
+            document.querySelectorAll(".poster-title.active")
+                .forEach(function(item) {
+                    item.classList.remove("active");
+                });
+
+            // Open the clicked one if it was previously closed
+            if (!isActive) {
+                description.classList.add("active");
+                title.classList.add("active");
+            }
+        }
 
 
         /* =========================
