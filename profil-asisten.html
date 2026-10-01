@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Profil Asisten | Psychological Scale Exhibition</title>
+
+<style>
+
+/* =====================================================
+   RESET
+   ===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   BODY
+   ===================================================== */
+
+body {
+    width: 100%;
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-image: url("assets/background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: white;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   MAIN PAGE
+   ===================================================== */
+
+.assistant-page {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 5vh 7vw;
+}
+
+
+/* =====================================================
+   BLUE CONTENT BOX
+   ===================================================== */
+
+.assistant-container {
+    width: 100%;
+    max-width: 1400px;
+    height: 80vh;
+    min-height: 550px;
+
+    background: rgba(5, 79, 132, 0.94);
+
+    padding: 7vh 5vw 5vh;
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =====================================================
+   TITLE
+   ===================================================== */
+
+.page-title {
+    font-size: clamp(42px, 4.5vw, 72px);
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    color: white;
+
+    margin-bottom: 7vh;
+
+    letter-spacing: -2px;
+}
+
+
+/* =====================================================
+   DESCRIPTION
+   ===================================================== */
+
+.assistant-description {
+    width: 100%;
+
+    font-size: clamp(20px, 2vw, 34px);
+
+    line-height: 1.4;
+
+    font-weight: 400;
+
+    color: white;
+
+    text-align: left;
+
+    max-width: 1250px;
+}
+
+
+/* =====================================================
+   BACK BUTTON
+   ===================================================== */
+
+.back-button {
+    position: absolute;
+
+    right: 3vw;
+    bottom: 5vh;
+
+    color: white;
+
+    font-size: clamp(20px, 2vw, 32px);
+
+    font-weight: 400;
+
+    text-decoration: underline;
+
+    text-underline-offset: 6px;
+
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease,
+        letter-spacing 0.3s ease;
+}
+
+.back-button:hover {
+    transform: translateX(-8px);
+
+    opacity: 0.75;
+
+    letter-spacing: 1px;
+}
+
+
+/* =====================================================
+   TABLET
+   ===================================================== */
+
+@media (max-width: 1100px) {
+
+    .assistant-page {
+        padding: 5vh 5vw;
+    }
+
+    .assistant-container {
+        height: 80vh;
+
+        padding: 6vh 5vw 5vh;
+    }
+
+    .page-title {
+        margin-bottom: 5vh;
+    }
+
+    .assistant-description {
+        font-size: clamp(18px, 2.2vw, 28px);
+        line-height: 1.45;
+    }
+
+    .back-button {
+        right: 4vw;
+        bottom: 4vh;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 700px) {
+
+    body {
+        overflow: auto;
+    }
+
+    .assistant-page {
+        width: 100%;
+        min-height: 100vh;
+        height: auto;
+
+        padding: 30px 20px;
+    }
+
+    .assistant-container {
+        width: 100%;
+        height: auto;
+        min-height: calc(100vh - 60px);
+
+        padding: 45px 30px 100px;
+
+        justify-content: flex-start;
+    }
+
+    .page-title {
+        font-size: 42px;
+
+        margin-bottom: 40px;
+
+        letter-spacing: -1.5px;
+    }
+
+    .assistant-description {
+        font-size: 18px;
+
+        line-height: 1.5;
+
+        text-align: left;
+    }
+
+    .back-button {
+        right: 30px;
+        bottom: 35px;
+
+        font-size: 20px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE KECIL
+   ===================================================== */
+
+@media (max-width: 400px) {
+
+    .assistant-page {
+        padding: 20px 15px;
+    }
+
+    .assistant-container {
+        min-height: calc(100vh - 40px);
+
+        padding: 35px 25px 90px;
+    }
+
+    .page-title {
+        font-size: 36px;
+
+        margin-bottom: 30px;
+    }
+
+    .assistant-description {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    .back-button {
+        right: 25px;
+        bottom: 30px;
+
+        font-size: 19px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<main class="assistant-page">
+
+    <section class="assistant-container">
+
+        <!-- JUDUL -->
+        <h1 class="page-title">
+            Profil Asisten
+        </h1>
+
+
+        <!-- DESKRIPSI -->
+        <p class="assistant-description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+            laborum.
+        </p>
+
+
+        <!-- TOMBOL KEMBALI -->
+        <a href="index.html" class="back-button">
+            Kembali
+        </a>
+
+    </section>
+
+</main>
+
+</body>
+</html>
