@@ -20,15 +20,18 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     color: white;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .lecturer-page {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     position: relative;
-    padding: 5vh 5vw 4vh;
+    padding: 5vh 5vw 5vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,7 +39,7 @@ body {
 
 .page-title {
     margin-top: 2vh;
-    margin-bottom: 6vh;
+    margin-bottom: 4vh;
     font-size: clamp(42px, 5vw, 82px);
     line-height: 1;
     font-weight: 900;
@@ -55,8 +58,8 @@ body {
 
 .lecturer-card {
     width: 31.5%;
-    height: 60vh;
-    min-height: 450px;
+    height: clamp(430px, 55vh, 570px);
+    min-height: 430px;
     max-height: 570px;
     perspective: 1200px;
     cursor: pointer;
@@ -109,7 +112,7 @@ body {
     object-position: center;
 }
 
-/* Bagian belakang kartu tetap memakai mekanisme flip yang sama */
+/* Bagian belakang kartu */
 .card-back {
     transform: rotateY(180deg);
     position: absolute;
@@ -167,33 +170,91 @@ body {
     text-align: justify;
 }
 
-/* Hover tetap ada, tetapi indikator tidak ditampilkan agar tampilan depan
-   sama bersihnya dengan desain referensi. */
+/* Indikator klik disembunyikan */
 .click-indicator {
     display: none;
 }
 
-.back-button {
-    position: fixed;
-    right: 6vw;
-    bottom: 5vh;
+
+/* =====================================================
+   DESKRIPSI TIM DOSEN
+   ===================================================== */
+
+.team-description {
+    width: min(100%, 1115px);
+    margin: 0 auto 5vh;
+    padding: clamp(28px, 3vw, 48px) clamp(30px, 5vw, 72px);
+    background: #07578d;
     color: white;
-    font-size: clamp(20px, 2vw, 34px);
-    font-weight: 400;
-    text-decoration: underline;
-    text-underline-offset: 7px;
-    z-index: 10;
-    transition: transform .3s ease, opacity .3s ease, letter-spacing .3s ease;
+    text-align: center;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .12);
 }
 
-.back-button:hover {
-    transform: translateX(-8px);
-    opacity: .75;
-    letter-spacing: 1px;
+.team-description h2 {
+    margin-bottom: 18px;
+    font-size: clamp(28px, 3vw, 46px);
+    line-height: 1.1;
+    font-weight: 900;
+    text-transform: uppercase;
 }
 
-/* Tablet */
+.team-description p {
+    margin: 0 auto;
+    max-width: 1000px;
+    font-size: clamp(15px, 1.35vw, 21px);
+    line-height: 1.65;
+    text-align: justify;
+}
+
+/* =====================================================
+   TOMBOL KEMBALI
+   Tidak lagi menggunakan position: fixed,
+   sehingga tidak akan menimpa kartu profil.
+   ===================================================== */
+
+ .back-button {
+     align-self: center;
+     margin: 48px auto 18px;
+
+     min-width: 235px;
+     padding: 17px 38px;
+
+     color: white;
+     font-size: clamp(18px, 1.6vw, 26px);
+     font-weight: 700;
+     letter-spacing: 1px;
+     text-align: center;
+
+     text-decoration: none;
+     text-transform: uppercase;
+
+     border: 1px solid rgba(255, 255, 255, .8);
+     background: rgba(7, 87, 141, .18);
+     backdrop-filter: blur(3px);
+
+     z-index: 10;
+
+     transition:
+         transform .3s ease,
+         background .3s ease,
+         letter-spacing .3s ease,
+         opacity .3s ease;
+}
+
+ .back-button:hover {
+     transform: translateY(-4px);
+     background: rgba(7, 87, 141, .75);
+     opacity: .95;
+     letter-spacing: 2px;
+}
+
+
+/* =====================================================
+   TABLET
+   ===================================================== */
+
 @media (max-width: 1100px) {
+
     .page-title {
         margin-bottom: 5vh;
     }
@@ -214,14 +275,23 @@ body {
         border-radius: 34px;
     }
 
+    .team-description {
+        width: 90%;
+        margin-bottom: 5vh;
+    }
+
     .back-button {
-        right: 4vw;
-        bottom: 3vh;
+        margin: 40px auto 15px;
     }
 }
 
-/* Mobile */
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
 @media (max-width: 700px) {
+
     body {
         overflow: auto;
     }
@@ -237,6 +307,22 @@ body {
         margin-bottom: 35px;
         font-size: 42px;
         letter-spacing: -2px;
+    }
+
+    .team-description {
+        width: 100%;
+        margin-bottom: 35px;
+        padding: 28px 24px;
+    }
+
+    .team-description h2 {
+        font-size: 28px;
+    }
+
+    .team-description p {
+        font-size: 15px;
+        line-height: 1.6;
+        text-align: left;
     }
 
     .lecturer-container {
@@ -258,14 +344,23 @@ body {
         border-radius: 32px;
     }
 
+    /* Tombol tetap berada di tengah setelah seluruh kartu */
     .back-button {
-        right: 25px;
-        bottom: 22px;
-        font-size: 20px;
+        align-self: center;
+        margin: 35px auto 10px;
+        min-width: 190px;
+        padding: 14px 28px;
+        font-size: 18px;
     }
 }
 
+
+/* =====================================================
+   MOBILE KECIL
+   ===================================================== */
+
 @media (max-width: 400px) {
+
     .page-title {
         font-size: 36px;
     }
@@ -274,9 +369,18 @@ body {
         width: 85vw;
         height: 480px;
     }
+
+    .back-button {
+        min-width: 175px;
+        padding: 13px 24px;
+        font-size: 17px;
+        margin-top: 28px;
+    }
 }
+
 </style>
 </head>
+
 
 <body>
 
@@ -284,100 +388,198 @@ body {
 
     <h1 class="page-title">PROFIL DOSEN</h1>
 
+    <!-- ==========================================
+         DESKRIPSI SINGKAT TIM DOSEN
+         ========================================== -->
+    <section class="team-description">
+        <h2>TIM DOSEN</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+    </section>
+
     <section class="lecturer-container">
 
-        <!-- DOSEN 1 -->
+        <!-- ==========================================
+             DOSEN 1
+             ========================================== -->
+
         <div class="lecturer-card"
              style="--lecturer-image: url('assets/dosen1.jpeg');">
 
             <div class="card-inner">
 
+                <!-- DEPAN -->
                 <div class="card-front">
-                    <img src="assets/dosen1.jpeg" alt="Foto Dosen 1">
-                    <div class="click-indicator">KLIK UNTUK INFO</div>
+
+                    <img
+                        src="assets/dosen1.jpeg"
+                        alt="Foto Dosen 1"
+                    >
+
+                    <div class="click-indicator">
+                        KLIK UNTUK INFO
+                    </div>
+
                 </div>
 
+
+                <!-- BELAKANG -->
                 <div class="card-back">
+
                     <div class="lecturer-info">
-                        <h2 class="lecturer-name">Nama Dosen</h2>
+
+                        <h2 class="lecturer-name">
+                            Nama Dosen
+                        </h2>
+
                         <p class="lecturer-description">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
                             nisi ut aliquip ex ea commodo consequat.
                         </p>
+
                     </div>
+
                 </div>
 
             </div>
+
         </div>
 
-        <!-- DOSEN 2 -->
+
+
+        <!-- ==========================================
+             DOSEN 2
+             ========================================== -->
+
         <div class="lecturer-card"
              style="--lecturer-image: url('assets/dosen2.jpg');">
 
             <div class="card-inner">
 
+                <!-- DEPAN -->
                 <div class="card-front">
-                    <img src="assets/dosen2.jpg" alt="Foto Dosen 2">
-                    <div class="click-indicator">KLIK UNTUK INFO</div>
+
+                    <img
+                        src="assets/dosen2.jpg"
+                        alt="Foto Dosen 2"
+                    >
+
+                    <div class="click-indicator">
+                        KLIK UNTUK INFO
+                    </div>
+
                 </div>
 
+
+                <!-- BELAKANG -->
                 <div class="card-back">
+
                     <div class="lecturer-info">
-                        <h2 class="lecturer-name">Nama Dosen</h2>
+
+                        <h2 class="lecturer-name">
+                            Nama Dosen
+                        </h2>
+
                         <p class="lecturer-description">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
                             nisi ut aliquip ex ea commodo consequat.
                         </p>
+
                     </div>
+
                 </div>
 
             </div>
+
         </div>
 
-        <!-- DOSEN 3 -->
+
+
+        <!-- ==========================================
+             DOSEN 3
+             ========================================== -->
+
         <div class="lecturer-card"
              style="--lecturer-image: url('assets/dosen3.jpeg');">
 
             <div class="card-inner">
 
+                <!-- DEPAN -->
                 <div class="card-front">
-                    <img src="assets/dosen3.jpeg" alt="Foto Dosen 3">
-                    <div class="click-indicator">KLIK UNTUK INFO</div>
+
+                    <img
+                        src="assets/dosen3.jpeg"
+                        alt="Foto Dosen 3"
+                    >
+
+                    <div class="click-indicator">
+                        KLIK UNTUK INFO
+                    </div>
+
                 </div>
 
+
+                <!-- BELAKANG -->
                 <div class="card-back">
+
                     <div class="lecturer-info">
-                        <h2 class="lecturer-name">Nama Dosen</h2>
+
+                        <h2 class="lecturer-name">
+                            Nama Dosen
+                        </h2>
+
                         <p class="lecturer-description">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
                             nisi ut aliquip ex ea commodo consequat.
                         </p>
+
                     </div>
+
                 </div>
 
             </div>
+
         </div>
 
     </section>
 
+
+    <!-- ==========================================
+         TOMBOL KEMBALI
+         Sekarang berada di luar lecturer-container,
+         sehingga tidak menimpa kartu.
+         ========================================== -->
+
+    <a href="index.html" class="back-button">
+        Kembali
+    </a>
+
 </main>
 
-<a href="index.html" class="back-button">Kembali</a>
 
 <script>
-const lecturerCards = document.querySelectorAll(".lecturer-card");
+
+const lecturerCards =
+    document.querySelectorAll(".lecturer-card");
+
 
 lecturerCards.forEach(function(card) {
+
     card.addEventListener("click", function() {
+
         card.classList.toggle("flipped");
+
     });
+
 });
+
 </script>
 
 </body>
