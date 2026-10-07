@@ -3,588 +3,1981 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
 
-    <title>Tema 3 - Psychological Scale Exhibition</title>
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
+<title>Tema 3 | Psychological Scale Exhibition</title>
 
-    <!-- ==================================================
-         CSS
-    ================================================== -->
 
-    <style>
+<!-- =====================================================
+     GOOGLE FONTS
+====================================================== -->
 
-        /* =========================
-           RESET
-        ========================= */
+<link
+    href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
+<style>
 
-        /* =========================
-           BODY
-        ========================= */
+/* =====================================================
+   ROOT
+===================================================== */
 
-        body {
-            width: 100%;
-            min-height: 100vh;
+:root {
 
-            font-family: Arial, Helvetica, sans-serif;
+    --blue: #1464c4;
+    --blue-dark: #07578d;
+    --blue-deep: #075487;
 
-            color: white;
+    --ink: #111111;
 
-            background-image: url("assets/background.png");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+    --white: #ffffff;
 
-            overflow-x: hidden;
-        }
+    --bg: #eef6fc;
 
+}
 
-        /* =========================
-           MAIN PAGE
-        ========================= */
 
-        .tema-page {
-            min-height: 100vh;
+/* =====================================================
+   RESET
+===================================================== */
 
-            padding: 65px 8% 100px;
-        }
+* {
 
+    margin: 0;
+    padding: 0;
 
-        /* =========================
-           HEADER
-        ========================= */
+    box-sizing: border-box;
 
-        .header {
-            display: flex;
+}
 
-            flex-direction: column;
 
-            align-items: center;
+html {
 
-            text-align: center;
+    width: 100%;
 
-            margin-bottom: 65px;
-        }
+    scroll-behavior: smooth;
 
+}
 
-        /* =========================
-           BACK BUTTON
-        ========================= */
 
-        .back-button {
-            color: white;
+body {
 
-            text-decoration: none;
+    width: 100%;
+    min-height: 100vh;
 
-            font-size: clamp(20px, 2vw, 32px);
+    font-family:
+        'Montserrat',
+        sans-serif;
 
-            font-weight: 400;
+    color:
+        var(--ink);
 
-            margin-bottom: 20px;
+    background:
+        var(--bg);
 
-            position: relative;
+    background-image:
+        linear-gradient(
+            rgba(244, 249, 253, 0.48),
+            rgba(244, 249, 253, 0.48)
+        ),
+        url("assets/background.png");
 
-            padding: 5px 10px;
+    background-size:
+        cover;
 
-            transition:
-                transform 0.3s ease,
-                opacity 0.3s ease;
-        }
+    background-position:
+        center;
 
+    background-attachment:
+        fixed;
 
-        /* Garis bawah */
+    overflow-x:
+        hidden;
 
-        .back-button::after {
-            content: "";
+}
 
-            position: absolute;
 
-            left: 10px;
-            right: 10px;
+body.menu-open,
+body.modal-open {
 
-            bottom: 0;
+    overflow:
+        hidden;
 
-            height: 2px;
+}
 
-            background: white;
 
-            transform: scaleX(0);
+button,
+a {
 
-            transform-origin: center;
+    font-family:
+        inherit;
 
-            transition: transform 0.3s ease;
-        }
+}
 
 
-        /* Hover */
+/* =====================================================
+   MAIN PAGE
+===================================================== */
 
-        .back-button:hover {
-            transform: translateY(-3px);
+.tema-page {
 
-            opacity: 0.8;
-        }
+    width:
+        100%;
 
+    min-height:
+        100vh;
 
-        .back-button:hover::after {
-            transform: scaleX(1);
-        }
+    padding:
+        70px 8% 100px;
 
+    position:
+        relative;
 
-        /* =========================
-           TEMA 3 TITLE
-        ========================= */
+}
 
-        .header h1 {
-            font-size: clamp(55px, 7vw, 110px);
 
-            font-weight: 800;
+/* =====================================================
+   HAMBURGER
+===================================================== */
 
-            letter-spacing: -3px;
+.menu-button {
 
-            line-height: 1;
+    position:
+        fixed;
 
-            color: white;
-        }
+    top:
+        38px;
 
+    left:
+        30px;
 
-        /* =========================
-           POSTER GRID
-        ========================= */
+    width:
+        64px;
 
-        .poster-grid {
+    height:
+        48px;
 
-            width: 100%;
+    padding:
+        4px 0;
 
-            max-width: 1400px;
+    border:
+        none;
 
-            margin: 0 auto;
+    background:
+        transparent;
 
-            display: grid;
+    cursor:
+        pointer;
 
-            grid-template-columns: repeat(3, 1fr);
+    z-index:
+        1200;
 
-            column-gap: 12%;
+    display:
+        flex;
 
-            row-gap: 65px;
+    flex-direction:
+        column;
 
-            align-items: start;
-        }
+    justify-content:
+        space-between;
 
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
 
-        /* =========================
-           POSTER ITEM
-        ========================= */
+}
 
-        .poster-item {
 
-            display: flex;
+/* =====================================================
+   FULL WIDTH PROTECTION
+===================================================== */
 
-            flex-direction: column;
+.menu-button::before {
 
-            align-items: center;
+    content:
+        "";
 
-            text-align: center;
-        }
+    position:
+        fixed;
 
+    top:
+        0;
 
-        /* =========================
-           POSTER BUTTON
-        ========================= */
+    left:
+        0;
 
-        .poster-button {
+    width:
+        100vw;
 
-            border: none;
+    height:
+        105px;
 
-            padding: 0;
+    background:
+        rgba(
+            238,
+            246,
+            252,
+            0.98
+        );
 
-            background: transparent;
+    opacity:
+        0;
 
-            cursor: pointer;
+    visibility:
+        hidden;
 
-            display: block;
+    backdrop-filter:
+        blur(10px);
 
-            width: 100%;
+    -webkit-backdrop-filter:
+        blur(10px);
 
-            max-width: 330px;
+    z-index:
+        -1;
 
-            transition:
-                transform 0.35s ease,
-                filter 0.35s ease;
-        }
+    pointer-events:
+        none;
 
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
 
-        /* =========================
-           POSTER IMAGE
-        ========================= */
+}
 
-        .poster-button img {
 
-            display: block;
+.menu-button::after {
 
-            width: 100%;
+    content:
+        "";
 
-            height: auto;
+    position:
+        fixed;
 
-            aspect-ratio: 0.75 / 1;
+    top:
+        105px;
 
-            object-fit: cover;
+    left:
+        0;
 
-            box-shadow:
-                0 8px 20px rgba(0, 0, 0, 0.12);
+    width:
+        100vw;
 
-            transition:
-                transform 0.35s ease,
-                box-shadow 0.35s ease,
-                filter 0.35s ease;
-        }
+    height:
+        35px;
 
+    background:
+        linear-gradient(
+            to bottom,
+            #eef6fc,
+            rgba(
+                238,
+                246,
+                252,
+                0
+            )
+        );
 
-        /* =========================
-           POSTER HOVER
-        ========================= */
+    opacity:
+        0;
 
-        .poster-button:hover {
+    visibility:
+        hidden;
 
-            transform: translateY(-8px);
-        }
+    z-index:
+        -1;
 
+    pointer-events:
+        none;
 
-        .poster-button:hover img {
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
 
-            transform: scale(1.025);
+}
 
-            box-shadow:
-                0 18px 35px rgba(0, 0, 0, 0.30);
 
-            filter: brightness(1.05);
-        }
+.menu-button.is-obscured::before {
 
+    opacity:
+        1;
 
-        /* =========================
-           POSTER TITLE
-        ========================= */
+    visibility:
+        visible;
 
-        .poster-title {
+}
 
-            margin-top: 25px;
 
-            border: none;
+.menu-button.is-obscured::after {
 
-            padding: 5px 10px;
+    opacity:
+        0.95;
 
-            background: transparent;
+    visibility:
+        visible;
 
-            color: white;
+}
 
-            font-family: inherit;
 
-            font-size: clamp(16px, 1.6vw, 27px);
+/* =====================================================
+   HAMBURGER LINES
+===================================================== */
 
-            font-weight: 700;
+.menu-button span {
 
-            letter-spacing: 7px;
+    width:
+        64px;
 
-            text-decoration: underline;
+    height:
+        5px;
 
-            text-underline-offset: 5px;
+    background:
+        var(--blue-deep);
 
-            cursor: pointer;
+    border-radius:
+        0;
 
-            position: relative;
+    display:
+        block;
 
-            transition:
-                transform 0.3s ease,
-                opacity 0.3s ease,
-                letter-spacing 0.3s ease;
-        }
+    transition:
+        transform 0.35s ease,
+        opacity 0.25s ease,
+        background 0.25s ease;
 
-        .poster-title:hover {
-            transform: translateY(-3px);
-            opacity: 0.8;
-            letter-spacing: 9px;
-        }
+}
 
 
-        /* =========================
-           SLIDE DOWN DESCRIPTION
-        ========================= */
+/* =====================================================
+   HAMBURGER → X
+===================================================== */
 
-        .poster-description {
-            display: grid;
+.menu-button.active span:nth-child(1) {
 
-            grid-template-rows: 0fr;
+    transform:
+        translateY(17px)
+        rotate(45deg);
 
-            width: 100%;
+    background:
+        white;
 
-            max-width: 330px;
+}
 
-            margin-top: 0;
 
-            opacity: 0;
+.menu-button.active span:nth-child(2) {
 
-            overflow: hidden;
+    opacity:
+        0;
 
-            transition:
-                grid-template-rows 0.45s ease,
-                opacity 0.35s ease,
-                margin-top 0.45s ease;
-        }
+}
 
-        .poster-description p {
-            min-height: 0;
 
-            overflow: hidden;
+.menu-button.active span:nth-child(3) {
 
-            color: rgba(255, 255, 255, 0.85);
+    transform:
+        translateY(-17px)
+        rotate(-45deg);
 
-            font-size: clamp(13px, 1.1vw, 17px);
+    background:
+        white;
 
-            font-weight: 400;
+}
 
-            line-height: 1.6;
 
-            letter-spacing: 0;
+/* =====================================================
+   HAMBURGER DISABLED WHEN POSTER OPEN
+===================================================== */
 
-            text-align: center;
-        }
+body.modal-open .menu-button {
 
-        .poster-description.active {
-            grid-template-rows: 1fr;
+    opacity:
+        0;
 
-            margin-top: 14px;
+    visibility:
+        hidden;
 
-            opacity: 1;
-        }
+    pointer-events:
+        none;
 
-        /* =========================
-           AUDIO BUTTON
-        ========================= */
+}
 
-        .audio-button {
 
-            margin-top: 18px;
+body.modal-open .menu-button::before,
+body.modal-open .menu-button::after {
 
-            display: inline-flex;
+    opacity:
+        0 !important;
 
-            align-items: center;
+    visibility:
+        hidden !important;
 
-            justify-content: center;
+}
 
-            gap: 10px;
 
-            padding: 10px 20px;
+/* =====================================================
+   HEADER
+===================================================== */
 
-            border: 1px solid rgba(255, 255, 255, 0.7);
+.header {
 
-            background: transparent;
+    display:
+        flex;
 
-            color: white;
+    flex-direction:
+        column;
 
-            font-family: inherit;
+    align-items:
+        center;
 
-            font-size: 13px;
+    text-align:
+        center;
 
-            font-weight: 600;
+    margin-bottom:
+        65px;
 
-            letter-spacing: 2px;
+}
 
-            cursor: pointer;
 
-            transition:
-                background 0.3s ease,
-                color 0.3s ease,
-                transform 0.3s ease,
-                opacity 0.3s ease;
-        }
+/* =====================================================
+   BACK BUTTON
+===================================================== */
 
-        .audio-button:hover {
+.back-button {
 
-            background: white;
+    color:
+        var(--ink);
 
-            color: black;
+    text-decoration:
+        none;
 
-            transform: translateY(-3px);
-        }
+    font-size:
+        clamp(
+            15px,
+            1.3vw,
+            20px
+        );
 
-        .audio-button.playing {
+    font-weight:
+        600;
 
-            background: white;
+    margin-bottom:
+        20px;
 
-            color: black;
-        }
+    position:
+        relative;
 
-        .audio-icon {
+    padding:
+        5px 10px;
 
-            font-size: 12px;
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
 
-            line-height: 1;
-        }
+}
 
-        .poster-audio {
 
-            display: none;
-        }
+.back-button::after {
 
+    content:
+        "";
 
-        /* =========================
-           BOTTOM BACK BUTTON
-        ========================= */
+    position:
+        absolute;
 
-        .bottom-back {
-            display: flex;
-            justify-content: center;
-            margin-top: 85px;
-        }
+    left:
+        10px;
 
-        .bottom-back a {
-            display: inline-block;
-            color: white;
-            text-decoration: none;
-            font-size: clamp(18px, 1.5vw, 24px);
-            font-weight: 600;
-            letter-spacing: 3px;
-            padding: 12px 30px;
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            transition:
-                background 0.3s ease,
-                color 0.3s ease,
-                transform 0.3s ease;
-        }
+    right:
+        10px;
 
-        .bottom-back a:hover {
-            background: white;
-            color: black;
-            transform: translateY(-3px);
-        }
+    bottom:
+        0;
 
+    height:
+        2px;
 
-        /* ==================================================
-           TABLET
-        ================================================== */
+    background:
+        var(--ink);
 
-        @media (max-width: 1000px) {
+    transform:
+        scaleX(0);
 
-            .tema-page {
+    transform-origin:
+        center;
 
-                padding-left: 5%;
+    transition:
+        transform 0.3s ease;
 
-                padding-right: 5%;
-            }
+}
 
 
-            .poster-grid {
+.back-button:hover {
 
-                grid-template-columns: repeat(2, 1fr);
+    transform:
+        translateY(-3px);
 
-                column-gap: 8%;
-            }
+    opacity:
+        0.75;
 
-        }
+}
 
 
-        /* ==================================================
-           MOBILE
-        ================================================== */
+.back-button:hover::after {
 
-        @media (max-width: 600px) {
+    transform:
+        scaleX(1);
 
-            .tema-page {
+}
 
-                padding: 40px 25px 70px;
-            }
 
+/* =====================================================
+   TEMA 3 TITLE
+===================================================== */
 
-            .header {
+.header h1 {
 
-                margin-bottom: 45px;
-            }
+    font-family:
+        'League Spartan',
+        sans-serif;
 
+    font-size:
+        clamp(
+            65px,
+            7vw,
+            110px
+        );
 
-            .back-button {
+    font-weight:
+        800;
 
-                font-size: 18px;
-            }
+    letter-spacing:
+        -4px;
 
+    line-height:
+        0.9;
 
-            .header h1 {
+    color:
+        var(--blue);
 
-                font-size: 55px;
+}
 
-                letter-spacing: -2px;
-            }
 
+/* =====================================================
+   POSTER GRID
+===================================================== */
 
-            .poster-grid {
+.poster-grid {
 
-                grid-template-columns: 1fr;
+    width:
+        100%;
 
-                row-gap: 55px;
-            }
+    max-width:
+        1400px;
 
+    margin:
+        0 auto;
 
-            .poster-button {
+    display:
+        grid;
 
-                max-width: 300px;
-            }
+    grid-template-columns:
+        repeat(3, 1fr);
 
+    column-gap:
+        12%;
 
-            .poster-title {
+    row-gap:
+        70px;
 
-                font-size: 17px;
+    align-items:
+        start;
 
-                letter-spacing: 5px;
-            }
+}
 
-            .poster-title:hover {
-                letter-spacing: 7px;
-            }
 
-            .poster-description {
-                max-width: 300px;
-            }
+/* =====================================================
+   POSTER ITEM
+===================================================== */
 
-            .poster-description p {
-                font-size: 14px;
-            }
+.poster-item {
 
+    display:
+        flex;
 
-            .audio-button {
+    flex-direction:
+        column;
 
-                margin-top: 16px;
+    align-items:
+        center;
 
-                padding: 9px 16px;
+    text-align:
+        center;
 
-                font-size: 12px;
+}
 
-                letter-spacing: 1.5px;
-            }
 
+/* =====================================================
+   POSTER BUTTON
+===================================================== */
 
-            .poster-description {
-                max-width: 300px;
-                font-size: 14px;
-            }
+.poster-button {
 
-            .bottom-back {
-                margin-top: 65px;
-            }
+    border:
+        none;
 
-            .bottom-back a {
-                font-size: 17px;
-                padding: 10px 25px;
-            }
+    padding:
+        0;
 
-        }
+    background:
+        transparent;
 
-    </style>
+    cursor:
+        pointer;
+
+    display:
+        block;
+
+    width:
+        100%;
+
+    max-width:
+        330px;
+
+    transition:
+        transform 0.35s ease;
+
+}
+
+
+/* =====================================================
+   POSTER IMAGE
+===================================================== */
+
+.poster-button img {
+
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        auto;
+
+    aspect-ratio:
+        0.75 / 1;
+
+    object-fit:
+        cover;
+
+    box-shadow:
+        0 8px 20px
+        rgba(
+            0,
+            0,
+            0,
+            0.12
+        );
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        filter 0.35s ease;
+
+}
+
+
+.poster-button:hover {
+
+    transform:
+        translateY(-8px);
+
+}
+
+
+.poster-button:hover img {
+
+    transform:
+        scale(1.025);
+
+    box-shadow:
+        0 18px 35px
+        rgba(
+            0,
+            0,
+            0,
+            0.30
+        );
+
+    filter:
+        brightness(1.05);
+
+}
+
+
+/* =====================================================
+   POSTER TITLE
+===================================================== */
+
+.poster-title {
+
+    margin-top:
+        25px;
+
+    border:
+        none;
+
+    padding:
+        5px 10px;
+
+    background:
+        transparent;
+
+    color:
+        var(--ink);
+
+    font-family:
+        'Montserrat',
+        sans-serif;
+
+    font-size:
+        clamp(
+            16px,
+            1.6vw,
+            27px
+        );
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        7px;
+
+    text-decoration:
+        underline;
+
+    text-underline-offset:
+        5px;
+
+    cursor:
+        pointer;
+
+    position:
+        relative;
+
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease,
+        letter-spacing 0.3s ease;
+
+}
+
+
+.poster-title:hover {
+
+    transform:
+        translateY(-3px);
+
+    opacity:
+        0.8;
+
+    letter-spacing:
+        9px;
+
+}
+
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.poster-description {
+
+    display:
+        grid;
+
+    grid-template-rows:
+        0fr;
+
+    width:
+        100%;
+
+    max-width:
+        330px;
+
+    margin-top:
+        0;
+
+    opacity:
+        0;
+
+    overflow:
+        hidden;
+
+    transition:
+        grid-template-rows 0.45s ease,
+        opacity 0.35s ease,
+        margin-top 0.45s ease;
+
+}
+
+
+.poster-description p {
+
+    min-height:
+        0;
+
+    overflow:
+        hidden;
+
+    color:
+        rgba(
+            17,
+            17,
+            17,
+            0.72
+        );
+
+    font-size:
+        clamp(
+            13px,
+            1.1vw,
+            17px
+        );
+
+    font-weight:
+        400;
+
+    line-height:
+        1.6;
+
+    letter-spacing:
+        0;
+
+    text-align:
+        center;
+
+}
+
+
+.poster-description.active {
+
+    grid-template-rows:
+        1fr;
+
+    margin-top:
+        14px;
+
+    opacity:
+        1;
+
+}
+
+
+/* =====================================================
+   AUDIO BUTTON
+===================================================== */
+
+.audio-button {
+
+    margin-top:
+        18px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        10px;
+
+    padding:
+        10px 20px;
+
+    border:
+        1px solid
+        var(--ink);
+
+    background:
+        transparent;
+
+    color:
+        var(--ink);
+
+    font-family:
+        'Montserrat',
+        sans-serif;
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        2px;
+
+    cursor:
+        pointer;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease,
+        opacity 0.3s ease;
+
+}
+
+
+.audio-button:hover {
+
+    background:
+        var(--ink);
+
+    color:
+        white;
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+.audio-button.playing {
+
+    background:
+        var(--ink);
+
+    color:
+        white;
+
+}
+
+
+.audio-icon {
+
+    font-size:
+        12px;
+
+    line-height:
+        1;
+
+}
+
+
+.poster-audio {
+
+    display:
+        none;
+
+}
+
+
+/* =====================================================
+   POSTER LIGHTBOX
+===================================================== */
+
+.poster-modal {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        2000;
+
+    display:
+        none;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    padding:
+        40px;
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            0.88
+        );
+
+    backdrop-filter:
+        blur(7px);
+
+    -webkit-backdrop-filter:
+        blur(7px);
+
+}
+
+
+.poster-modal.active {
+
+    display:
+        flex;
+
+}
+
+
+/* =====================================================
+   FULL POSTER
+===================================================== */
+
+.modal-poster {
+
+    max-width:
+        90vw;
+
+    max-height:
+        88vh;
+
+    width:
+        auto;
+
+    height:
+        auto;
+
+    object-fit:
+        contain;
+
+    background:
+        white;
+
+    box-shadow:
+        0 20px 60px
+        rgba(
+            0,
+            0,
+            0,
+            0.55
+        );
+
+    animation:
+        zoomIn 0.3s ease;
+
+}
+
+
+@keyframes zoomIn {
+
+    from {
+
+        opacity:
+            0;
+
+        transform:
+            scale(0.85);
+
+    }
+
+    to {
+
+        opacity:
+            1;
+
+        transform:
+            scale(1);
+
+    }
+
+}
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+.close-button {
+
+    position:
+        absolute;
+
+    top:
+        25px;
+
+    right:
+        35px;
+
+    width:
+        50px;
+
+    height:
+        50px;
+
+    border:
+        none;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.15
+        );
+
+    color:
+        white;
+
+    font-size:
+        38px;
+
+    line-height:
+        40px;
+
+    cursor:
+        pointer;
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease;
+
+}
+
+
+.close-button:hover {
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.30
+        );
+
+    transform:
+        rotate(90deg);
+
+}
+
+
+/* =====================================================
+   BOTTOM BACK BUTTON
+===================================================== */
+
+.bottom-back {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    margin-top:
+        85px;
+
+}
+
+
+.bottom-back a {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-width:
+        280px;
+
+    min-height:
+        72px;
+
+    padding:
+        13px 45px;
+
+    color:
+        var(--blue-deep);
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.18
+        );
+
+    border:
+        3px solid
+        var(--blue-deep);
+
+    border-radius:
+        42px;
+
+    text-decoration:
+        none;
+
+    font-size:
+        18px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        7px;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+}
+
+
+.bottom-back a:hover {
+
+    background:
+        var(--blue-deep);
+
+    color:
+        white;
+
+    transform:
+        translateY(-4px);
+
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.overlay {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    background:
+        rgba(
+            0,
+            38,
+            66,
+            0.35
+        );
+
+    opacity:
+        0;
+
+    visibility:
+        hidden;
+
+    transition:
+        opacity 0.4s ease,
+        visibility 0.4s ease;
+
+    z-index:
+        900;
+
+}
+
+
+.overlay.active {
+
+    opacity:
+        1;
+
+    visibility:
+        visible;
+
+}
+
+
+/* =====================================================
+   SIDE MENU
+===================================================== */
+
+.side-menu {
+
+    position:
+        fixed;
+
+    top:
+        0;
+
+    left:
+        0;
+
+    width:
+        365px;
+
+    max-width:
+        40vw;
+
+    height:
+        100vh;
+
+    background:
+        var(--blue-deep);
+
+    z-index:
+        1000;
+
+    transform:
+        translateX(-100%);
+
+    transition:
+        transform 0.4s ease;
+
+    box-shadow:
+        8px 0 28px
+        rgba(
+            0,
+            0,
+            0,
+            0.10
+        );
+
+    overflow:
+        hidden;
+
+}
+
+
+.side-menu.active {
+
+    transform:
+        translateX(0);
+
+}
+
+
+/* =====================================================
+   MENU TOP PROTECTION
+===================================================== */
+
+.side-menu::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        0;
+
+    right:
+        0;
+
+    height:
+        125px;
+
+    background:
+        var(--blue-deep);
+
+    box-shadow:
+        0 8px 18px
+        rgba(
+            0,
+            0,
+            0,
+            0.08
+        );
+
+    z-index:
+        2;
+
+}
+
+
+.side-menu::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        100px;
+
+    left:
+        0;
+
+    right:
+        0;
+
+    height:
+        45px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            var(--blue-deep),
+            rgba(
+                7,
+                84,
+                135,
+                0
+            )
+        );
+
+    z-index:
+        2;
+
+}
+
+
+/* =====================================================
+   SIDE MENU CONTENT
+===================================================== */
+
+.side-menu-content {
+
+    position:
+        relative;
+
+    z-index:
+        3;
+
+    width:
+        78%;
+
+    height:
+        100%;
+
+    overflow-y:
+        auto;
+
+    padding-top:
+        135px;
+
+    padding-bottom:
+        50px;
+
+    margin-left:
+        43px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        18px;
+
+}
+
+
+.menu-section-title {
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.55
+        );
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        3px;
+
+    margin-top:
+        20px;
+
+    margin-bottom:
+        -5px;
+
+}
+
+
+.side-menu-content a {
+
+    color:
+        white;
+
+    text-decoration:
+        none;
+
+    font-size:
+        20px;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        1px;
+
+    padding:
+        13px 0;
+
+    border-bottom:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.25
+        );
+
+    transition:
+        padding-left 0.3s ease,
+        opacity 0.3s ease;
+
+}
+
+
+.side-menu-content a:hover {
+
+    padding-left:
+        10px;
+
+    opacity:
+        0.75;
+
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .tema-page {
+
+        padding-left:
+            5%;
+
+        padding-right:
+            5%;
+
+    }
+
+
+    .poster-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        column-gap:
+            8%;
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    body {
+
+        background-attachment:
+            scroll;
+
+    }
+
+
+    .tema-page {
+
+        padding:
+            95px 25px 70px;
+
+    }
+
+
+    /* HAMBURGER */
+
+    .menu-button {
+
+        top:
+            28px;
+
+        left:
+            22px;
+
+        width:
+            52px;
+
+        height:
+            40px;
+
+    }
+
+
+    .menu-button span {
+
+        width:
+            52px;
+
+        height:
+            4px;
+
+    }
+
+
+    .menu-button::before {
+
+        height:
+            82px;
+
+    }
+
+
+    .menu-button::after {
+
+        top:
+            82px;
+
+        height:
+            30px;
+
+    }
+
+
+    .menu-button.active span:nth-child(1) {
+
+        transform:
+            translateY(13px)
+            rotate(45deg);
+
+    }
+
+
+    .menu-button.active span:nth-child(3) {
+
+        transform:
+            translateY(-13px)
+            rotate(-45deg);
+
+    }
+
+
+    /* HEADER */
+
+    .header {
+
+        margin-bottom:
+            45px;
+
+    }
+
+
+    .back-button {
+
+        font-size:
+            15px;
+
+    }
+
+
+    .header h1 {
+
+        font-size:
+            58px;
+
+        letter-spacing:
+            -3px;
+
+    }
+
+
+    /* GRID */
+
+    .poster-grid {
+
+        grid-template-columns:
+            1fr;
+
+        row-gap:
+            55px;
+
+    }
+
+
+    .poster-button {
+
+        max-width:
+            300px;
+
+    }
+
+
+    .poster-title {
+
+        font-size:
+            17px;
+
+        letter-spacing:
+            5px;
+
+    }
+
+
+    .poster-title:hover {
+
+        letter-spacing:
+            7px;
+
+    }
+
+
+    .poster-description {
+
+        max-width:
+            300px;
+
+    }
+
+
+    .poster-description p {
+
+        font-size:
+            14px;
+
+    }
+
+
+    /* AUDIO */
+
+    .audio-button {
+
+        margin-top:
+            16px;
+
+        padding:
+            9px 16px;
+
+        font-size:
+            12px;
+
+        letter-spacing:
+            1.5px;
+
+    }
+
+
+    /* MODAL */
+
+    .poster-modal {
+
+        padding:
+            20px;
+
+    }
+
+
+    .modal-poster {
+
+        max-width:
+            95vw;
+
+        max-height:
+            82vh;
+
+    }
+
+
+    .close-button {
+
+        top:
+            15px;
+
+        right:
+            15px;
+
+        width:
+            44px;
+
+        height:
+            44px;
+
+        font-size:
+            32px;
+
+    }
+
+
+    /* BACK */
+
+    .bottom-back {
+
+        margin-top:
+            65px;
+
+    }
+
+
+    .bottom-back a {
+
+        min-width:
+            220px;
+
+        min-height:
+            60px;
+
+        padding:
+            10px 25px;
+
+        font-size:
+            16px;
+
+        letter-spacing:
+            5px;
+
+    }
+
+
+    /* SIDE MENU */
+
+    .side-menu {
+
+        width:
+            310px;
+
+        max-width:
+            82vw;
+
+    }
+
+
+    .side-menu::before {
+
+        height:
+            110px;
+
+    }
+
+
+    .side-menu::after {
+
+        top:
+            88px;
+
+        height:
+            40px;
+
+    }
+
+
+    .side-menu-content {
+
+        width:
+            78%;
+
+        padding-top:
+            120px;
+
+        margin-left:
+            38px;
+
+    }
+
+
+    .side-menu-content a {
+
+        font-size:
+            17px;
+
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+    .tema-page {
+
+        padding:
+            90px 20px 60px;
+
+    }
+
+
+    .header h1 {
+
+        font-size:
+            52px;
+
+    }
+
+
+    .poster-button {
+
+        max-width:
+            280px;
+
+    }
+
+
+    .poster-title {
+
+        font-size:
+            16px;
+
+        letter-spacing:
+            4px;
+
+    }
+
+
+    .side-menu {
+
+        width:
+            85vw;
+
+    }
+
+
+    .side-menu-content {
+
+        width:
+            82%;
+
+        padding-top:
+            110px;
+
+        margin-left:
+            30px;
+
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -592,690 +1985,1789 @@
 <body>
 
 
-    <!-- ==================================================
-         MAIN PAGE
-    ================================================== -->
+<!-- =====================================================
+     HAMBURGER
+====================================================== -->
 
-    <main class="tema-page">
+<button
+    class="menu-button"
+    id="menuButton"
+    type="button"
+    aria-label="Buka menu"
+    aria-expanded="false"
+>
 
+    <span></span>
+    <span></span>
+    <span></span>
 
-        <!-- =========================
-             HEADER
-        ========================== -->
+</button>
 
-        <header class="header">
 
+<!-- =====================================================
+     MAIN PAGE
+====================================================== -->
 
-            <!-- Tombol kembali ke index -->
+<main class="tema-page">
 
-            <a href="index.html" class="back-button">
 
-                Psychological Scale Exhibition
+<header class="header">
 
-            </a>
+    <a
+        href="index.html"
+        class="back-button"
+    >
+        Psychological Scale Exhibition
+    </a>
 
 
-            <!-- Judul Tema -->
+    <h1>
+        TEMA 3
+    </h1>
 
-            <h1>
+</header>
 
-                TEMA 3
 
-            </h1>
+<!-- =====================================================
+     POSTER GRID
+====================================================== -->
 
+<section class="poster-grid">
 
-        </header>
 
+<!-- =====================================================
+     POSTER 1
+====================================================== -->
 
+<div class="poster-item">
 
-        <!-- ==================================================
-             POSTER GRID
-        ================================================== -->
+    <button
+        class="poster-button"
+        type="button"
+        onclick="openPoster('poster/1.jpg')"
+    >
 
-        <section class="poster-grid">
+        <img
+            src="poster/1.jpg"
+            alt="Poster 1"
+        >
 
+    </button>
 
-            <!-- =========================
-                 POSTER 1
-            ========================== -->
 
-            <div class="poster-item">
+    <button
+        class="poster-title"
+        type="button"
+        onclick="toggleDescription(this)"
+    >
+        LOREM IPSUM
+    </button>
 
-                <button
-                    class="poster-button"
-                    onclick="openPoster('poster/1.jpg')">
 
-                    <img
-                        src="poster/1.jpg"
-                        alt="Poster 1">
+    <div class="poster-description">
 
-                </button>
+        <p>
+            Lorem ipsum dolor sit amet consectetur
+            adipiscing elit sed do eiusmod tempor
+            incididunt ut labore et.
+        </p>
 
 
-                <button class="poster-title" onclick="toggleDescription(this)">
-                    LOREM IPSUM
-                </button>
+        <button
+            class="audio-button"
+            type="button"
+            onclick="toggleAudio(this, 'audio/1.mp3')"
+        >
 
-                <div class="poster-description">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
-                    </p>
+            <span class="audio-icon">▶</span>
 
-                    <button
-                        class="audio-button"
-                        onclick="toggleAudio(this, 'audio/1.mp3')">
-                        <span class="audio-icon">▶</span>
-                        <span class="audio-text">PLAY AUDIO</span>
-                    </button>
+            <span class="audio-text">
+                PLAY AUDIO
+            </span>
 
-                    <audio class="poster-audio" preload="metadata"></audio>
-                </div>
+        </button>
 
 
-            </div>
+        <audio
+            class="poster-audio"
+            preload="metadata"
+        ></audio>
 
+    </div>
 
+</div>
 
-            <!-- =========================
-                 POSTER 2
-            ========================== -->
 
-            <div class="poster-item">
+<!-- =====================================================
+     POSTER 2
+====================================================== -->
 
-                <button
-                    class="poster-button"
-                    onclick="openPoster('poster/2.jpg')">
+<div class="poster-item">
 
-                    <img
-                        src="poster/2.jpg"
-                        alt="Poster 2">
+    <button
+        class="poster-button"
+        type="button"
+        onclick="openPoster('poster/2.jpg')"
+    >
 
-                </button>
+        <img
+            src="poster/2.jpg"
+            alt="Poster 2"
+        >
 
+    </button>
 
-                <button class="poster-title" onclick="toggleDescription(this)">
-                    LOREM IPSUM
-                </button>
 
-                <div class="poster-description">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
-                    </p>
+    <button
+        class="poster-title"
+        type="button"
+        onclick="toggleDescription(this)"
+    >
+        LOREM IPSUM
+    </button>
 
-                    <button
-                        class="audio-button"
-                        onclick="toggleAudio(this, 'audio/1.mp3')">
-                        <span class="audio-icon">▶</span>
-                        <span class="audio-text">PLAY AUDIO</span>
-                    </button>
 
-                    <audio class="poster-audio" preload="metadata"></audio>
-                </div>
+    <div class="poster-description">
 
+        <p>
+            Lorem ipsum dolor sit amet consectetur
+            adipiscing elit sed do eiusmod tempor
+            incididunt ut labore et.
+        </p>
 
-            </div>
 
+        <button
+            class="audio-button"
+            type="button"
+            onclick="toggleAudio(this, 'audio/1.mp3')"
+        >
 
+            <span class="audio-icon">▶</span>
 
-            <!-- =========================
-                 POSTER 3
-            ========================== -->
+            <span class="audio-text">
+                PLAY AUDIO
+            </span>
 
-            <div class="poster-item">
+        </button>
 
-                <button
-                    class="poster-button"
-                    onclick="openPoster('poster/3.jpg')">
 
-                    <img
-                        src="poster/3.jpg"
-                        alt="Poster 3">
+        <audio
+            class="poster-audio"
+            preload="metadata"
+        ></audio>
 
-                </button>
+    </div>
 
+</div>
 
-                <button class="poster-title" onclick="toggleDescription(this)">
-                    LOREM IPSUM
-                </button>
 
-                <div class="poster-description">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
-                    </p>
+<!-- =====================================================
+     POSTER 3
+====================================================== -->
 
-                    <button
-                        class="audio-button"
-                        onclick="toggleAudio(this, 'audio/1.mp3')">
-                        <span class="audio-icon">▶</span>
-                        <span class="audio-text">PLAY AUDIO</span>
-                    </button>
+<div class="poster-item">
 
-                    <audio class="poster-audio" preload="metadata"></audio>
-                </div>
+    <button
+        class="poster-button"
+        type="button"
+        onclick="openPoster('poster/3.jpg')"
+    >
 
+        <img
+            src="poster/3.jpg"
+            alt="Poster 3"
+        >
 
-            </div>
+    </button>
 
 
+    <button
+        class="poster-title"
+        type="button"
+        onclick="toggleDescription(this)"
+    >
+        LOREM IPSUM
+    </button>
 
-            <!-- =========================
-                 POSTER 4
-            ========================== -->
 
-            <div class="poster-item">
+    <div class="poster-description">
 
-                <button
-                    class="poster-button"
-                    onclick="openPoster('poster/4.jpg')">
+        <p>
+            Lorem ipsum dolor sit amet consectetur
+            adipiscing elit sed do eiusmod tempor
+            incididunt ut labore et.
+        </p>
 
-                    <img
-                        src="poster/4.jpg"
-                        alt="Poster 4">
 
-                </button>
+        <button
+            class="audio-button"
+            type="button"
+            onclick="toggleAudio(this, 'audio/1.mp3')"
+        >
 
+            <span class="audio-icon">▶</span>
 
-                <button class="poster-title" onclick="toggleDescription(this)">
-                    LOREM IPSUM
-                </button>
+            <span class="audio-text">
+                PLAY AUDIO
+            </span>
 
-                <div class="poster-description">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
-                    </p>
+        </button>
 
-                    <button
-                        class="audio-button"
-                        onclick="toggleAudio(this, 'audio/1.mp3')">
-                        <span class="audio-icon">▶</span>
-                        <span class="audio-text">PLAY AUDIO</span>
-                    </button>
 
-                    <audio class="poster-audio" preload="metadata"></audio>
-                </div>
+        <audio
+            class="poster-audio"
+            preload="metadata"
+        ></audio>
 
+    </div>
 
-            </div>
+</div>
 
 
+<!-- =====================================================
+     POSTER 4
+====================================================== -->
 
-            <!-- =========================
-                 POSTER 5
-            ========================== -->
+<div class="poster-item">
 
-            <div class="poster-item">
+    <button
+        class="poster-button"
+        type="button"
+        onclick="openPoster('poster/4.jpg')"
+    >
 
-                <button
-                    class="poster-button"
-                    onclick="openPoster('poster/5.jpg')">
+        <img
+            src="poster/4.jpg"
+            alt="Poster 4"
+        >
 
-                    <img
-                        src="poster/5.jpg"
-                        alt="Poster 5">
+    </button>
 
-                </button>
 
+    <button
+        class="poster-title"
+        type="button"
+        onclick="toggleDescription(this)"
+    >
+        LOREM IPSUM
+    </button>
 
-                <button class="poster-title" onclick="toggleDescription(this)">
-                    LOREM IPSUM
-                </button>
 
-                <div class="poster-description">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
-                    </p>
+    <div class="poster-description">
 
-                    <button
-                        class="audio-button"
-                        onclick="toggleAudio(this, 'audio/1.mp3')">
-                        <span class="audio-icon">▶</span>
-                        <span class="audio-text">PLAY AUDIO</span>
-                    </button>
+        <p>
+            Lorem ipsum dolor sit amet consectetur
+            adipiscing elit sed do eiusmod tempor
+            incididunt ut labore et.
+        </p>
 
-                    <audio class="poster-audio" preload="metadata"></audio>
-                </div>
 
+        <button
+            class="audio-button"
+            type="button"
+            onclick="toggleAudio(this, 'audio/1.mp3')"
+        >
 
-            </div>
+            <span class="audio-icon">▶</span>
 
+            <span class="audio-text">
+                PLAY AUDIO
+            </span>
 
+        </button>
 
-            <!-- =========================
-                 POSTER 6
-            ========================== -->
 
-            <div class="poster-item">
+        <audio
+            class="poster-audio"
+            preload="metadata"
+        ></audio>
 
-                <button
-                    class="poster-button"
-                    onclick="openPoster('poster/6.jpg')">
+    </div>
 
-                    <img
-                        src="poster/6.jpg"
-                        alt="Poster 6">
+</div>
 
-                </button>
 
+<!-- =====================================================
+     POSTER 5
+====================================================== -->
 
-                <button class="poster-title" onclick="toggleDescription(this)">
-                    LOREM IPSUM
-                </button>
+<div class="poster-item">
 
-                <div class="poster-description">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
-                    </p>
+    <button
+        class="poster-button"
+        type="button"
+        onclick="openPoster('poster/5.jpg')"
+    >
 
-                    <button
-                        class="audio-button"
-                        onclick="toggleAudio(this, 'audio/1.mp3')">
-                        <span class="audio-icon">▶</span>
-                        <span class="audio-text">PLAY AUDIO</span>
-                    </button>
+        <img
+            src="poster/5.jpg"
+            alt="Poster 5"
+        >
 
-                    <audio class="poster-audio" preload="metadata"></audio>
-                </div>
+    </button>
 
 
-            </div>
+    <button
+        class="poster-title"
+        type="button"
+        onclick="toggleDescription(this)"
+    >
+        LOREM IPSUM
+    </button>
 
 
+    <div class="poster-description">
 
-            <!-- =========================
-                 POSTER 7
-            ========================== -->
+        <p>
+            Lorem ipsum dolor sit amet consectetur
+            adipiscing elit sed do eiusmod tempor
+            incididunt ut labore et.
+        </p>
 
-            <div class="poster-item">
 
-                <button
-                    class="poster-button"
-                    onclick="openPoster('poster/7.jpg')">
+        <button
+            class="audio-button"
+            type="button"
+            onclick="toggleAudio(this, 'audio/1.mp3')"
+        >
 
-                    <img
-                        src="poster/7.jpg"
-                        alt="Poster 7">
+            <span class="audio-icon">▶</span>
 
-                </button>
+            <span class="audio-text">
+                PLAY AUDIO
+            </span>
 
+        </button>
 
-                <button class="poster-title" onclick="toggleDescription(this)">
-                    LOREM IPSUM
-                </button>
 
-                <div class="poster-description">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
-                    </p>
+        <audio
+            class="poster-audio"
+            preload="metadata"
+        ></audio>
 
-                    <button
-                        class="audio-button"
-                        onclick="toggleAudio(this, 'audio/1.mp3')">
-                        <span class="audio-icon">▶</span>
-                        <span class="audio-text">PLAY AUDIO</span>
-                    </button>
+    </div>
 
-                    <audio class="poster-audio" preload="metadata"></audio>
-                </div>
+</div>
 
 
-            </div>
+<!-- =====================================================
+     POSTER 6
+====================================================== -->
 
+<div class="poster-item">
 
+    <button
+        class="poster-button"
+        type="button"
+        onclick="openPoster('poster/6.jpg')"
+    >
 
-            <!-- =========================
-                 POSTER 8
-            ========================== -->
+        <img
+            src="poster/6.jpg"
+            alt="Poster 6"
+        >
 
-            <div class="poster-item">
+    </button>
 
-                <button
-                    class="poster-button"
-                    onclick="openPoster('poster/8.jpg')">
 
-                    <img
-                        src="poster/8.jpg"
-                        alt="Poster 8">
+    <button
+        class="poster-title"
+        type="button"
+        onclick="toggleDescription(this)"
+    >
+        LOREM IPSUM
+    </button>
 
-                </button>
 
+    <div class="poster-description">
 
-                <button class="poster-title" onclick="toggleDescription(this)">
-                    LOREM IPSUM
-                </button>
+        <p>
+            Lorem ipsum dolor sit amet consectetur
+            adipiscing elit sed do eiusmod tempor
+            incididunt ut labore et.
+        </p>
 
-                <div class="poster-description">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
-                    </p>
 
-                    <button
-                        class="audio-button"
-                        onclick="toggleAudio(this, 'audio/1.mp3')">
-                        <span class="audio-icon">▶</span>
-                        <span class="audio-text">PLAY AUDIO</span>
-                    </button>
+        <button
+            class="audio-button"
+            type="button"
+            onclick="toggleAudio(this, 'audio/1.mp3')"
+        >
 
-                    <audio class="poster-audio" preload="metadata"></audio>
-                </div>
+            <span class="audio-icon">▶</span>
 
+            <span class="audio-text">
+                PLAY AUDIO
+            </span>
 
-            </div>
+        </button>
 
 
+        <audio
+            class="poster-audio"
+            preload="metadata"
+        ></audio>
 
-            <!-- =========================
-                 POSTER 9
-            ========================== -->
+    </div>
 
-            <div class="poster-item">
+</div>
 
-                <button
-                    class="poster-button"
-                    onclick="openPoster('poster/9.jpg')">
 
-                    <img
-                        src="poster/9.jpg"
-                        alt="Poster 9">
+<!-- =====================================================
+     POSTER 7
+====================================================== -->
 
-                </button>
+<div class="poster-item">
 
+    <button
+        class="poster-button"
+        type="button"
+        onclick="openPoster('poster/7.jpg')"
+    >
 
-                <button class="poster-title" onclick="toggleDescription(this)">
-                    LOREM IPSUM
-                </button>
+        <img
+            src="poster/7.jpg"
+            alt="Poster 7"
+        >
 
-                <div class="poster-description">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
-                    </p>
+    </button>
 
-                    <button
-                        class="audio-button"
-                        onclick="toggleAudio(this, 'audio/1.mp3')">
-                        <span class="audio-icon">▶</span>
-                        <span class="audio-text">PLAY AUDIO</span>
-                    </button>
 
-                    <audio class="poster-audio" preload="metadata"></audio>
-                </div>
+    <button
+        class="poster-title"
+        type="button"
+        onclick="toggleDescription(this)"
+    >
+        LOREM IPSUM
+    </button>
 
 
-            </div>
+    <div class="poster-description">
 
+        <p>
+            Lorem ipsum dolor sit amet consectetur
+            adipiscing elit sed do eiusmod tempor
+            incididunt ut labore et.
+        </p>
 
 
-            <!-- =========================
-                 POSTER 10
-            ========================== -->
+        <button
+            class="audio-button"
+            type="button"
+            onclick="toggleAudio(this, 'audio/1.mp3')"
+        >
 
-            <div class="poster-item">
+            <span class="audio-icon">▶</span>
 
-                <button
-                    class="poster-button"
-                    onclick="openPoster('poster/10.jpg')">
+            <span class="audio-text">
+                PLAY AUDIO
+            </span>
 
-                    <img
-                        src="poster/10.jpg"
-                        alt="Poster 10">
+        </button>
 
-                </button>
 
+        <audio
+            class="poster-audio"
+            preload="metadata"
+        ></audio>
 
-                <button class="poster-title" onclick="toggleDescription(this)">
-                    LOREM IPSUM
-                </button>
+    </div>
 
-                <div class="poster-description">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
-                    </p>
+</div>
 
-                    <button
-                        class="audio-button"
-                        onclick="toggleAudio(this, 'audio/1.mp3')">
-                        <span class="audio-icon">▶</span>
-                        <span class="audio-text">PLAY AUDIO</span>
-                    </button>
 
-                    <audio class="poster-audio" preload="metadata"></audio>
-                </div>
+<!-- =====================================================
+     POSTER 8
+====================================================== -->
 
+<div class="poster-item">
 
-            </div>
+    <button
+        class="poster-button"
+        type="button"
+        onclick="openPoster('poster/8.jpg')"
+    >
 
-            <!-- =========================
-                 POSTER 11
-            ========================== -->
+        <img
+            src="poster/8.jpg"
+            alt="Poster 8"
+        >
 
-            <div class="poster-item">
+    </button>
 
-                <button
-                    class="poster-button"
-                    onclick="openPoster('poster/11.jpg')">
 
-                    <img
-                        src="poster/11.jpg"
-                        alt="Poster 11">
+    <button
+        class="poster-title"
+        type="button"
+        onclick="toggleDescription(this)"
+    >
+        LOREM IPSUM
+    </button>
 
-                </button>
 
+    <div class="poster-description">
 
-                <button class="poster-title" onclick="toggleDescription(this)">
-                    LOREM IPSUM
-                </button>
+        <p>
+            Lorem ipsum dolor sit amet consectetur
+            adipiscing elit sed do eiusmod tempor
+            incididunt ut labore et.
+        </p>
 
-                <div class="poster-description">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
-                    </p>
 
-                    <button
-                        class="audio-button"
-                        onclick="toggleAudio(this, 'audio/1.mp3')">
-                        <span class="audio-icon">▶</span>
-                        <span class="audio-text">PLAY AUDIO</span>
-                    </button>
+        <button
+            class="audio-button"
+            type="button"
+            onclick="toggleAudio(this, 'audio/1.mp3')"
+        >
 
-                    <audio class="poster-audio" preload="metadata"></audio>
-                </div>
+            <span class="audio-icon">▶</span>
 
+            <span class="audio-text">
+                PLAY AUDIO
+            </span>
 
-            </div>
+        </button>
 
 
+        <audio
+            class="poster-audio"
+            preload="metadata"
+        ></audio>
 
-            <!-- =========================
-                 POSTER 12
-            ========================== -->
+    </div>
 
-            <div class="poster-item">
+</div>
 
-                <button
-                    class="poster-button"
-                    onclick="openPoster('poster/12.jpg')">
 
-                    <img
-                        src="poster/12.jpg"
-                        alt="Poster 12">
+<!-- =====================================================
+     POSTER 9
+====================================================== -->
 
-                </button>
+<div class="poster-item">
 
+    <button
+        class="poster-button"
+        type="button"
+        onclick="openPoster('poster/9.jpg')"
+    >
 
-                <button class="poster-title" onclick="toggleDescription(this)">
-                    LOREM IPSUM
-                </button>
+        <img
+            src="poster/9.jpg"
+            alt="Poster 9"
+        >
 
-                <div class="poster-description">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et.
-                    </p>
+    </button>
 
-                    <button
-                        class="audio-button"
-                        onclick="toggleAudio(this, 'audio/1.mp3')">
-                        <span class="audio-icon">▶</span>
-                        <span class="audio-text">PLAY AUDIO</span>
-                    </button>
 
-                    <audio class="poster-audio" preload="metadata"></audio>
-                </div>
+    <button
+        class="poster-title"
+        type="button"
+        onclick="toggleDescription(this)"
+    >
+        LOREM IPSUM
+    </button>
 
 
-            </div>
+    <div class="poster-description">
 
+        <p>
+            Lorem ipsum dolor sit amet consectetur
+            adipiscing elit sed do eiusmod tempor
+            incididunt ut labore et.
+        </p>
 
 
-        </section>
+        <button
+            class="audio-button"
+            type="button"
+            onclick="toggleAudio(this, 'audio/1.mp3')"
+        >
 
-    
-        <!-- =========================
-             BOTTOM BACK BUTTON
-        ========================== -->
+            <span class="audio-icon">▶</span>
 
-        <div class="bottom-back">
-            <a href="index.html">KEMBALI</a>
-        </div>
+            <span class="audio-text">
+                PLAY AUDIO
+            </span>
+
+        </button>
+
+
+        <audio
+            class="poster-audio"
+            preload="metadata"
+        ></audio>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     POSTER 10
+====================================================== -->
+
+<div class="poster-item">
+
+    <button
+        class="poster-button"
+        type="button"
+        onclick="openPoster('poster/10.jpg')"
+    >
+
+        <img
+            src="poster/10.jpg"
+            alt="Poster 10"
+        >
+
+    </button>
+
+
+    <button
+        class="poster-title"
+        type="button"
+        onclick="toggleDescription(this)"
+    >
+        LOREM IPSUM
+    </button>
+
+
+    <div class="poster-description">
+
+        <p>
+            Lorem ipsum dolor sit amet consectetur
+            adipiscing elit sed do eiusmod tempor
+            incididunt ut labore et.
+        </p>
+
+
+        <button
+            class="audio-button"
+            type="button"
+            onclick="toggleAudio(this, 'audio/1.mp3')"
+        >
+
+            <span class="audio-icon">▶</span>
+
+            <span class="audio-text">
+                PLAY AUDIO
+            </span>
+
+        </button>
+
+
+        <audio
+            class="poster-audio"
+            preload="metadata"
+        ></audio>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     POSTER 11
+====================================================== -->
+
+<div class="poster-item">
+
+    <button
+        class="poster-button"
+        type="button"
+        onclick="openPoster('poster/11.jpg')"
+    >
+
+        <img
+            src="poster/11.jpg"
+            alt="Poster 11"
+        >
+
+    </button>
+
+
+    <button
+        class="poster-title"
+        type="button"
+        onclick="toggleDescription(this)"
+    >
+        LOREM IPSUM
+    </button>
+
+
+    <div class="poster-description">
+
+        <p>
+            Lorem ipsum dolor sit amet consectetur
+            adipiscing elit sed do eiusmod tempor
+            incididunt ut labore et.
+        </p>
+
+
+        <button
+            class="audio-button"
+            type="button"
+            onclick="toggleAudio(this, 'audio/1.mp3')"
+        >
+
+            <span class="audio-icon">▶</span>
+
+            <span class="audio-text">
+                PLAY AUDIO
+            </span>
+
+        </button>
+
+
+        <audio
+            class="poster-audio"
+            preload="metadata"
+        ></audio>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     POSTER 12
+====================================================== -->
+
+<div class="poster-item">
+
+    <button
+        class="poster-button"
+        type="button"
+        onclick="openPoster('poster/12.jpg')"
+    >
+
+        <img
+            src="poster/12.jpg"
+            alt="Poster 12"
+        >
+
+    </button>
+
+
+    <button
+        class="poster-title"
+        type="button"
+        onclick="toggleDescription(this)"
+    >
+        LOREM IPSUM
+    </button>
+
+
+    <div class="poster-description">
+
+        <p>
+            Lorem ipsum dolor sit amet consectetur
+            adipiscing elit sed do eiusmod tempor
+            incididunt ut labore et.
+        </p>
+
+
+        <button
+            class="audio-button"
+            type="button"
+            onclick="toggleAudio(this, 'audio/1.mp3')"
+        >
+
+            <span class="audio-icon">▶</span>
+
+            <span class="audio-text">
+                PLAY AUDIO
+            </span>
+
+        </button>
+
+
+        <audio
+            class="poster-audio"
+            preload="metadata"
+        ></audio>
+
+    </div>
+
+</div>
+
+
+</section>
+
+
+<!-- =====================================================
+     BACK
+====================================================== -->
+
+<div class="bottom-back">
+
+    <a href="index.html">
+        KEMBALI
+    </a>
+
+</div>
+
 
 </main>
 
-    <!-- ==================================================
-         JAVASCRIPT
-    ================================================== -->
 
-    <script>
+<!-- =====================================================
+     POSTER MODAL
+====================================================== -->
 
-        /* =========================
-           PLAY / PAUSE AUDIO
-        ========================= */
-
-        function toggleAudio(button, audioSource) {
-
-            const audio =
-                button.nextElementSibling;
-
-            const icon =
-                button.querySelector(".audio-icon");
-
-            const text =
-                button.querySelector(".audio-text");
+<div
+    class="poster-modal"
+    id="posterModal"
+    onclick="closePoster(event)"
+>
 
 
-            // Hentikan audio lain yang sedang diputar
+    <button
+        class="close-button"
+        type="button"
+        onclick="closePoster()"
+        aria-label="Tutup poster"
+    >
+        ×
+    </button>
 
-            document.querySelectorAll(".poster-audio").forEach(function(item) {
 
-                if (item !== audio) {
+    <img
+        id="modalPoster"
+        class="modal-poster"
+        src=""
+        alt="Poster diperbesar"
+    >
+
+</div>
+
+
+<!-- =====================================================
+     OVERLAY
+====================================================== -->
+
+<div
+    class="overlay"
+    id="overlay"
+></div>
+
+
+<!-- =====================================================
+     SIDE MENU
+====================================================== -->
+
+<aside
+    class="side-menu"
+    id="sideMenu"
+    aria-hidden="true"
+>
+
+    <nav class="side-menu-content">
+
+
+        <div class="menu-section-title">
+            EXPLORE
+        </div>
+
+
+        <a href="index.html">
+            Home
+        </a>
+
+
+        <a href="tentang.html">
+            Tentang Exhibition
+        </a>
+
+
+        <a href="profil-dosen.html">
+            Profil Dosen
+        </a>
+
+
+        <a href="profil-asisten.html">
+            Profil Asisten
+        </a>
+
+
+        <div class="menu-section-title">
+            TEMA
+        </div>
+
+
+        <a href="tema1.html">
+            Tema 1
+        </a>
+
+
+        <a href="tema2.html">
+            Tema 2
+        </a>
+
+
+        <a href="tema3.html">
+            Tema 3
+        </a>
+
+
+        <div class="menu-section-title">
+            PARTICIPATE
+        </div>
+
+
+        <a href="voting.html">
+            Vote
+        </a>
+
+
+    </nav>
+
+</aside>
+
+
+<script>
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+const sideMenu =
+    document.getElementById(
+        "sideMenu"
+    );
+
+const overlay =
+    document.getElementById(
+        "overlay"
+    );
+
+const posterModal =
+    document.getElementById(
+        "posterModal"
+    );
+
+const modalPoster =
+    document.getElementById(
+        "modalPoster"
+    );
+
+
+/* =====================================================
+   OPEN POSTER
+===================================================== */
+
+function openPoster(imageSource) {
+
+    /*
+     * Tampilkan poster yang diklik
+     * dalam fullscreen modal.
+     */
+
+    modalPoster.src =
+        imageSource;
+
+
+    /*
+     * Tampilkan modal.
+     */
+
+    posterModal.classList.add(
+        "active"
+    );
+
+
+    /*
+     * Matikan hamburger sepenuhnya.
+     */
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+
+    menuButton.classList.remove(
+        "is-obscured"
+    );
+
+
+    /*
+     * Tutup menu apabila somehow
+     * masih terbuka.
+     */
+
+    closeMenu();
+
+
+    /*
+     * Cegah halaman utama scrolling.
+     */
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+/* =====================================================
+   CLOSE POSTER
+===================================================== */
+
+function closePoster(event) {
+
+    /*
+     * Jika yang diklik adalah gambar,
+     * jangan tutup modal.
+     */
+
+    if (
+        event &&
+        event.target &&
+        event.target.id ===
+        "modalPoster"
+    ) {
+
+        return;
+
+    }
+
+
+    posterModal.classList.remove(
+        "active"
+    );
+
+
+    modalPoster.src =
+        "";
+
+
+    /*
+     * Kembalikan halaman.
+     */
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+
+    document.body.style.overflow =
+        "";
+
+
+    /*
+     * Periksa kembali apakah
+     * protection diperlukan.
+     */
+
+    setTimeout(
+        checkHamburgerCollision,
+        50
+    );
+
+}
+
+
+/* =====================================================
+   TOGGLE DESCRIPTION
+===================================================== */
+
+function toggleDescription(title) {
+
+    const description =
+        title.nextElementSibling;
+
+
+    const isActive =
+        description.classList.contains(
+            "active"
+        );
+
+
+    /*
+     * Close all descriptions.
+     */
+
+    document
+        .querySelectorAll(
+            ".poster-description.active"
+        )
+        .forEach(
+            function(item) {
+
+                item.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+    document
+        .querySelectorAll(
+            ".poster-title.active"
+        )
+        .forEach(
+            function(item) {
+
+                item.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+    /*
+     * Open selected description.
+     */
+
+    if (!isActive) {
+
+        description.classList.add(
+            "active"
+        );
+
+        title.classList.add(
+            "active"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+function toggleAudio(
+    button,
+    audioSource
+) {
+
+    const audio =
+        button.nextElementSibling;
+
+
+    const icon =
+        button.querySelector(
+            ".audio-icon"
+        );
+
+
+    const text =
+        button.querySelector(
+            ".audio-text"
+        );
+
+
+    /*
+     * Hentikan audio lainnya.
+     */
+
+    document
+        .querySelectorAll(
+            ".poster-audio"
+        )
+        .forEach(
+            function(item) {
+
+                if (
+                    item !== audio
+                ) {
 
                     item.pause();
-                    item.currentTime = 0;
+
+                    item.currentTime =
+                        0;
+
 
                     const otherButton =
                         item.previousElementSibling;
 
-                    if (otherButton) {
 
-                        otherButton.classList.remove("playing");
+                    if (
+                        otherButton
+                    ) {
 
-                        otherButton.querySelector(".audio-icon").textContent = "▶";
+                        otherButton
+                            .classList
+                            .remove(
+                                "playing"
+                            );
 
-                        otherButton.querySelector(".audio-text").textContent = "PLAY AUDIO";
+
+                        const otherIcon =
+                            otherButton
+                                .querySelector(
+                                    ".audio-icon"
+                                );
+
+
+                        const otherText =
+                            otherButton
+                                .querySelector(
+                                    ".audio-text"
+                                );
+
+
+                        if (
+                            otherIcon
+                        ) {
+
+                            otherIcon.textContent =
+                                "▶";
+
+                        }
+
+
+                        if (
+                            otherText
+                        ) {
+
+                            otherText.textContent =
+                                "PLAY AUDIO";
+
+                        }
+
                     }
+
                 }
 
-            });
-
-
-            // Jika audio sedang berjalan, pause
-
-            if (!audio.paused) {
-
-                audio.pause();
-
-                button.classList.remove("playing");
-
-                icon.textContent = "▶";
-
-                text.textContent = "PLAY AUDIO";
-
-                return;
             }
+        );
 
 
-            // Masukkan file audio sesuai poster
+    /*
+     * Jika audio sedang berjalan,
+     * pause.
+     */
 
-            if (!audio.src || !audio.src.endsWith(audioSource)) {
+    if (
+        !audio.paused
+    ) {
 
-                audio.src = audioSource;
+        audio.pause();
+
+
+        button.classList.remove(
+            "playing"
+        );
+
+
+        icon.textContent =
+            "▶";
+
+
+        text.textContent =
+            "PLAY AUDIO";
+
+
+        return;
+
+    }
+
+
+    /*
+     * Masukkan file audio.
+     */
+
+    if (
+        !audio.src ||
+        !audio.src.endsWith(
+            audioSource
+        )
+    ) {
+
+        audio.src =
+            audioSource;
+
+    }
+
+
+    /*
+     * Putar audio.
+     */
+
+    audio.play()
+        .then(
+            function() {
+
+                button.classList.add(
+                    "playing"
+                );
+
+
+                icon.textContent =
+                    "Ⅱ";
+
+
+                text.textContent =
+                    "PAUSE AUDIO";
 
             }
+        )
+        .catch(
+            function(error) {
+
+                console.error(
+                    "Audio tidak dapat diputar:",
+                    error
+                );
+
+            }
+        );
 
 
-            // Putar audio
+    /*
+     * Reset ketika selesai.
+     */
 
-            audio.play().then(function() {
+    audio.onended =
+        function() {
 
-                button.classList.add("playing");
-
-                icon.textContent = "Ⅱ";
-
-                text.textContent = "PAUSE AUDIO";
-
-            }).catch(function(error) {
-
-                console.error("Audio tidak dapat diputar:", error);
-
-            });
+            button.classList.remove(
+                "playing"
+            );
 
 
-            // Kembalikan tombol ketika audio selesai
+            icon.textContent =
+                "▶";
 
-            audio.onended = function() {
 
-                button.classList.remove("playing");
+            text.textContent =
+                "PLAY AUDIO";
 
-                icon.textContent = "▶";
 
-                text.textContent = "PLAY AUDIO";
+            audio.currentTime =
+                0;
 
-                audio.currentTime = 0;
+        };
 
-            };
+}
+
+
+/* =====================================================
+   OPEN MENU
+===================================================== */
+
+function openMenu() {
+
+    /*
+     * Jangan buka ketika poster
+     * sedang terbuka.
+     */
+
+    if (
+        document.body.classList.contains(
+            "modal-open"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    menuButton.classList.add(
+        "active"
+    );
+
+
+    sideMenu.classList.add(
+        "active"
+    );
+
+
+    overlay.classList.add(
+        "active"
+    );
+
+
+    sideMenu.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    menuButton.setAttribute(
+        "aria-expanded",
+        "true"
+    );
+
+
+    menuButton.setAttribute(
+        "aria-label",
+        "Tutup menu"
+    );
+
+
+    document.body.classList.add(
+        "menu-open"
+    );
+
+
+    /*
+     * Protection tidak diperlukan
+     * saat menu sedang terbuka.
+     */
+
+    menuButton.classList.remove(
+        "is-obscured"
+    );
+
+}
+
+
+/* =====================================================
+   CLOSE MENU
+===================================================== */
+
+function closeMenu() {
+
+    menuButton.classList.remove(
+        "active"
+    );
+
+
+    sideMenu.classList.remove(
+        "active"
+    );
+
+
+    overlay.classList.remove(
+        "active"
+    );
+
+
+    sideMenu.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    menuButton.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+
+
+    menuButton.setAttribute(
+        "aria-label",
+        "Buka menu"
+    );
+
+
+    document.body.classList.remove(
+        "menu-open"
+    );
+
+
+    setTimeout(
+        checkHamburgerCollision,
+        50
+    );
+
+}
+
+
+/* =====================================================
+   HAMBURGER CLICK
+===================================================== */
+
+menuButton.addEventListener(
+    "click",
+    function() {
+
+        if (
+            document.body.classList.contains(
+                "modal-open"
+            )
+        ) {
+
+            return;
 
         }
 
 
-        /* =========================
-           TOGGLE DESCRIPTION
-        ========================= */
+        if (
+            sideMenu.classList.contains(
+                "active"
+            )
+        ) {
 
-        function toggleDescription(title) {
+            closeMenu();
 
-            const description =
-                title.nextElementSibling;
+        } else {
 
-            const isActive =
-                description.classList.contains("active");
+            openMenu();
 
-            // Close all other descriptions
-            document.querySelectorAll(".poster-description.active")
-                .forEach(function(item) {
-                    item.classList.remove("active");
-                });
+        }
 
-            document.querySelectorAll(".poster-title.active")
-                .forEach(function(item) {
-                    item.classList.remove("active");
-                });
+    }
+);
 
-            // Open the clicked one if it was previously closed
-            if (!isActive) {
-                description.classList.add("active");
-                title.classList.add("active");
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+overlay.addEventListener(
+    "click",
+    function() {
+
+        closeMenu();
+
+    }
+);
+
+
+/* =====================================================
+   MENU LINKS
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".side-menu a"
+    )
+    .forEach(
+        function(link) {
+
+            link.addEventListener(
+                "click",
+                function() {
+
+                    closeMenu();
+
+                }
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   COLLISION DETECTION
+===================================================== */
+
+function checkHamburgerCollision() {
+
+    /*
+     * Modal terbuka:
+     * protection mati.
+     */
+
+    if (
+        document.body.classList.contains(
+            "modal-open"
+        )
+    ) {
+
+        menuButton.classList.remove(
+            "is-obscured"
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Menu terbuka:
+     * protection tidak diperlukan.
+     */
+
+    if (
+        sideMenu.classList.contains(
+            "active"
+        )
+    ) {
+
+        menuButton.classList.remove(
+            "is-obscured"
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Di paling atas:
+     * tidak perlu protection.
+     */
+
+    if (
+        window.scrollY <= 5
+    ) {
+
+        menuButton.classList.remove(
+            "is-obscured"
+        );
+
+        return;
+
+    }
+
+
+    const protectedTop =
+        0;
+
+
+    const protectedBottom =
+        window.innerWidth <= 700
+            ? 82
+            : 105;
+
+
+    /*
+     * Content yang diperiksa.
+     */
+
+    const contentElements =
+        document.querySelectorAll(
+            ".header, .poster-grid"
+        );
+
+
+    let collision =
+        false;
+
+
+    contentElements.forEach(
+        function(element) {
+
+            const rect =
+                element.getBoundingClientRect();
+
+
+            if (
+                rect.top <
+                protectedBottom
+                &&
+                rect.bottom >
+                protectedTop
+            ) {
+
+                collision =
+                    true;
+
             }
+
+        }
+    );
+
+
+    /*
+     * Aktifkan protection.
+     */
+
+    if (collision) {
+
+        menuButton.classList.add(
+            "is-obscured"
+        );
+
+    } else {
+
+        menuButton.classList.remove(
+            "is-obscured"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   ESC KEY
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key !==
+            "Escape"
+        ) {
+
+            return;
+
         }
 
 
-    </script>
+        /*
+         * Prioritas pertama:
+         * tutup poster.
+         */
+
+        if (
+            posterModal.classList.contains(
+                "active"
+            )
+        ) {
+
+            closePoster();
+
+            return;
+
+        }
+
+
+        /*
+         * Kalau menu terbuka,
+         * tutup menu.
+         */
+
+        if (
+            sideMenu.classList.contains(
+                "active"
+            )
+        ) {
+
+            closeMenu();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   SCROLL
+===================================================== */
+
+window.addEventListener(
+    "scroll",
+    checkHamburgerCollision,
+    {
+        passive: true
+    }
+);
+
+
+/* =====================================================
+   RESIZE
+===================================================== */
+
+window.addEventListener(
+    "resize",
+    checkHamburgerCollision
+);
+
+
+/* =====================================================
+   INITIAL CHECK
+===================================================== */
+
+checkHamburgerCollision();
+
+
+</script>
 
 
 </body>
