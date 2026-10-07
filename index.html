@@ -2,843 +2,2052 @@
 <html lang="id">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Psychological Scale Exhibition</title>
+
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet"
+    >
+
 
     <style>
 
         /* =====================================================
+           ROOT
+        ====================================================== */
+
+        :root {
+
+            --blue: #1464c4;
+            --blue-dark: #07578d;
+            --blue-deep: #075487;
+            --blue-soft: #dfeefa;
+
+            --ink: #111111;
+            --white: #ffffff;
+
+        }
+
+
+        /* =====================================================
            RESET
-        ===================================================== */
+        ====================================================== */
 
         * {
+
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+
         }
 
 
-        /* =====================================================
-           BODY
-        ===================================================== */
+        html,
+        body {
+
+            width: 100%;
+            height: 100%;
+
+        }
+
 
         body {
-            width: 100%;
-            min-height: 100vh;
 
-            font-family: Arial, Helvetica, sans-serif;
+            font-family:
+                'Montserrat',
+                sans-serif;
 
             overflow: hidden;
+
+            background:
+                #eef6fc;
+
+            color:
+                var(--ink);
+
+        }
+
+
+        button,
+        a {
+
+            font-family:
+                inherit;
+
         }
 
 
         /* =====================================================
-           HERO / MAIN PAGE
-        ===================================================== */
+           HERO
+        ====================================================== */
 
         .hero {
+
             width: 100%;
             height: 100vh;
 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            min-height: 620px;
 
             position: relative;
 
-            background-image: url("assets/background.png");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            display: flex;
 
-            color: white;
+            flex-direction: column;
 
-            padding-top: 8vh;
+            align-items: center;
 
-            transition: filter 0.4s ease;
+            padding:
+                0 40px;
+
+            overflow: hidden;
+
+            background:
+
+                linear-gradient(
+                    rgba(244, 249, 253, 0.42),
+                    rgba(244, 249, 253, 0.42)
+                ),
+
+                url("assets/background.png");
+
+            background-size:
+                cover;
+
+            background-position:
+                center;
+
+            background-repeat:
+                no-repeat;
+
+            color:
+                var(--ink);
+
+            transition:
+                filter 0.4s ease;
+
         }
 
 
         /* =====================================================
-           SUBTITLE
-        ===================================================== */
+           LOGO
+        ====================================================== */
 
-        .subtitle {
-            font-size: clamp(16px, 1.8vw, 28px);
+        .brand-logo {
 
-            font-weight: 400;
+            position: absolute;
 
-            letter-spacing: 0.5px;
+            top: 30px;
 
-            text-align: center;
+            left: 50%;
 
-            margin-bottom: 30px;
+            transform:
+                translateX(-50%);
+
+            width:
+                min(390px, 32vw);
+
+            max-height:
+                100px;
+
+            object-fit:
+                contain;
+
+            object-position:
+                center;
+
+            z-index:
+                850;
+
+            transition:
+                opacity 0.3s ease;
+
         }
 
 
         /* =====================================================
            MAIN TITLE
-        ===================================================== */
+        ====================================================== */
 
         .title {
-            font-size: clamp(60px, 8vw, 135px);
 
-            line-height: 0.95;
+            position: absolute;
 
-            font-weight: 800;
+            top: 21%;
 
-            text-align: center;
+            left: 50%;
 
-            letter-spacing: -4px;
+            transform:
+                translateX(-50%);
 
-            color: white;
+            width:
+                98%;
+
+            text-align:
+                center;
+
+            color:
+                var(--blue);
+
+            font-family:
+                'League Spartan',
+                sans-serif;
+
+            font-size:
+                clamp(
+                    70px,
+                    8.6vw,
+                    145px
+                );
+
+            line-height:
+                0.88;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                -5px;
+
+            white-space:
+                nowrap;
+
         }
 
+
+        /* =====================================================
+           TAGLINE
+        ====================================================== */
+
         .title span {
-            display: block;
+
+            display:
+                block;
+
+            margin-top:
+                10px;
+
+            font-family:
+                'Oswald',
+                sans-serif;
+
+            font-size:
+                0.50em;
+
+            line-height:
+                0.95;
+
+            font-weight:
+                700;
+
+            font-style:
+                italic;
+
+            letter-spacing:
+                -1.5px;
+
+            text-transform:
+                uppercase;
+
+        }
+
+
+        /* =====================================================
+           SUBTITLE
+        ====================================================== */
+
+        .subtitle {
+
+            position:
+                absolute;
+
+            top:
+                50.5%;
+
+            left:
+                50%;
+
+            transform:
+                translateX(-50%);
+
+            width:
+                max-content;
+
+            max-width:
+                90%;
+
+            margin:
+                0;
+
+            font-family:
+                'Montserrat',
+                sans-serif;
+
+            font-size:
+                clamp(
+                    18px,
+                    2vw,
+                    31px
+                );
+
+            font-weight:
+                400;
+
+            line-height:
+                1.2;
+
+            letter-spacing:
+                0.2px;
+
+            text-align:
+                center;
+
+            color:
+                var(--ink);
+
         }
 
 
         /* =====================================================
            HAMBURGER BUTTON
-        ===================================================== */
+        ====================================================== */
 
         .menu-button {
-            position: fixed;
 
-            top: 28px;
-            left: 30px;
+            position:
+                fixed;
 
-            width: 48px;
-            height: 42px;
+            top:
+                38px;
 
-            padding: 4px 0;
+            left:
+                30px;
 
-            border: none;
+            width:
+                64px;
 
-            background: transparent;
+            height:
+                48px;
 
-            cursor: pointer;
+            padding:
+                4px 0;
 
-            z-index: 1100;
+            border:
+                none;
 
-            display: flex;
-            flex-direction: column;
+            background:
+                transparent;
 
-            justify-content: space-between;
+            cursor:
+                pointer;
 
-            transition: opacity 0.3s ease;
+            z-index:
+                1200;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            justify-content:
+                space-between;
+
+            transition:
+                opacity 0.3s ease;
+
         }
 
 
-        /* Garis hamburger */
+        /* =====================================================
+           HAMBURGER LINES
+        ====================================================== */
 
         .menu-button span {
-            width: 48px;
-            height: 4px;
 
-            background: white;
+            width:
+                64px;
 
-            border-radius: 2px;
+            height:
+                5px;
 
-            display: block;
+            background:
+                var(--blue-deep);
+
+            border-radius:
+                0;
+
+            display:
+                block;
 
             transition:
-                transform 0.35s ease,
-                opacity 0.25s ease;
+
+                transform
+                0.35s ease,
+
+                opacity
+                0.25s ease,
+
+                background
+                0.25s ease;
+
         }
 
 
         /* =====================================================
            HAMBURGER → X
-        ===================================================== */
+        ====================================================== */
 
-        .menu-button.active span:nth-child(1) {
-            transform: translateY(15px) rotate(45deg);
+        .menu-button.active
+        span:nth-child(1) {
+
+            transform:
+                translateY(17px)
+                rotate(45deg);
+
+            background:
+                var(--white);
+
         }
 
-        .menu-button.active span:nth-child(2) {
-            opacity: 0;
+
+        .menu-button.active
+        span:nth-child(2) {
+
+            opacity:
+                0;
+
         }
 
-        .menu-button.active span:nth-child(3) {
-            transform: translateY(-15px) rotate(-45deg);
+
+        .menu-button.active
+        span:nth-child(3) {
+
+            transform:
+                translateY(-17px)
+                rotate(-45deg);
+
+            background:
+                var(--white);
+
         }
 
 
         /* =====================================================
            THEME NAVIGATION
-        ===================================================== */
+        ====================================================== */
 
         .theme-navigation {
-            position: absolute;
 
-            bottom: 27%;
+            position:
+                absolute;
 
-            width: min(60%, 900px);
+            bottom:
+                27%;
 
-            display: flex;
+            left:
+                50%;
 
-            justify-content: space-between;
+            transform:
+                translateX(-50%);
 
-            align-items: flex-start;
-        }
+            width:
+                min(52%, 820px);
 
+            display:
+                flex;
 
-        /* =====================================================
-           THEME ITEM
-        ===================================================== */
+            justify-content:
+                space-between;
 
-        .theme-item {
-            display: flex;
+            align-items:
+                flex-start;
 
-            flex-direction: column;
-
-            align-items: center;
-
-            text-align: center;
         }
 
 
         /* =====================================================
            THEME BUTTON
-        ===================================================== */
+        ====================================================== */
 
         .theme-button {
-            position: relative;
 
-            color: white;
+            position:
+                relative;
 
-            text-decoration: none;
+            color:
+                var(--ink);
 
-            font-size: clamp(18px, 2vw, 30px);
+            text-decoration:
+                none;
 
-            font-weight: 700;
+            font-family:
+                'Montserrat',
+                sans-serif;
 
-            letter-spacing: 8px;
+            font-size:
+                clamp(
+                    17px,
+                    1.55vw,
+                    26px
+                );
 
-            padding: 8px 12px;
+            font-weight:
+                700;
+
+            letter-spacing:
+                7px;
+
+            padding:
+                8px 12px 9px;
 
             transition:
-                transform 0.3s ease,
-                opacity 0.3s ease;
+
+                transform
+                0.3s ease,
+
+                opacity
+                0.3s ease;
+
         }
 
-
-        /* Garis bawah tema */
 
         .theme-button::after {
-            content: "";
 
-            position: absolute;
+            content:
+                "";
 
-            left: 10px;
-            right: 10px;
+            position:
+                absolute;
 
-            bottom: 0;
+            left:
+                10px;
 
-            height: 2px;
+            right:
+                10px;
 
-            background: white;
+            bottom:
+                0;
 
-            transform: scaleX(1);
+            height:
+                2px;
+
+            background:
+                var(--ink);
+
+            transform:
+                scaleX(1);
 
             transition:
-                transform 0.3s ease,
-                height 0.3s ease;
+
+                transform
+                0.3s ease,
+
+                height
+                0.3s ease;
+
         }
 
-
-        /* Hover tema */
 
         .theme-button:hover {
-            transform: translateY(-5px);
 
-            opacity: 0.85;
+            transform:
+                translateY(-4px);
+
         }
 
-        .theme-button:hover::after {
-            transform: scaleX(0.65);
 
-            height: 3px;
+        .theme-button:hover::after {
+
+            height:
+                3px;
+
         }
 
 
         /* =====================================================
            VOTING AREA
-        ===================================================== */
+        ====================================================== */
 
         .voting-area {
-            position: absolute;
 
-            bottom: 14%;
+            position:
+                absolute;
 
-            left: 50%;
+            bottom:
+                10.5%;
 
-            transform: translateX(-50%);
+            left:
+                50%;
 
-            display: flex;
+            transform:
+                translateX(-50%);
 
-            justify-content: center;
+            display:
+                flex;
 
-            align-items: center;
+            justify-content:
+                center;
+
+            align-items:
+                center;
+
         }
 
 
         /* =====================================================
-           VOTING BUTTON
-        ===================================================== */
+           VOTE BUTTON
+        ====================================================== */
 
         .vote-button {
-            display: flex;
 
-            align-items: center;
+            min-width:
+                280px;
 
-            justify-content: center;
+            min-height:
+                72px;
 
-            min-width: 180px;
+            padding:
+                13px 45px;
 
-            padding: 12px 35px;
+            color:
+                var(--blue-deep);
 
-            color: white;
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.18
+                );
 
-            background: rgba(255, 255, 255, 0.10);
+            border:
+                3px solid
+                var(--blue-deep);
 
-            border: 2px solid white;
+            border-radius:
+                42px;
 
-            border-radius: 30px;
+            text-decoration:
+                none;
 
-            text-decoration: none;
+            font-family:
+                'Montserrat',
+                sans-serif;
 
-            font-size: 15px;
+            font-size:
+                18px;
 
-            font-weight: 700;
+            font-weight:
+                800;
 
-            letter-spacing: 4px;
+            letter-spacing:
+                7px;
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            align-items:
+                center;
 
             transition:
-                background 0.3s ease,
-                color 0.3s ease,
-                transform 0.3s ease;
+
+                background
+                0.3s ease,
+
+                color
+                0.3s ease,
+
+                transform
+                0.3s ease,
+
+                box-shadow
+                0.3s ease;
+
         }
 
 
-        /* Hover voting */
-
         .vote-button:hover {
-            background: white;
 
-            color: #07578d;
+            background:
+                var(--blue-deep);
 
-            transform: translateY(-3px);
+            color:
+                var(--white);
+
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(
+                    7,
+                    84,
+                    135,
+                    0.20
+                );
+
         }
 
 
         /* =====================================================
            OVERLAY
-        ===================================================== */
+        ====================================================== */
 
         .overlay {
-            position: fixed;
 
-            inset: 0;
+            position:
+                fixed;
 
-            background: rgba(0, 0, 0, 0.42);
+            inset:
+                0;
 
-            opacity: 0;
+            background:
+                rgba(
+                    0,
+                    38,
+                    66,
+                    0.35
+                );
 
-            visibility: hidden;
+            opacity:
+                0;
+
+            visibility:
+                hidden;
 
             transition:
-                opacity 0.4s ease,
-                visibility 0.4s ease;
 
-            z-index: 900;
+                opacity
+                0.4s ease,
+
+                visibility
+                0.4s ease;
+
+            z-index:
+                900;
+
         }
 
-        .overlay.active {
-            opacity: 1;
 
-            visibility: visible;
+        .overlay.active {
+
+            opacity:
+                1;
+
+            visibility:
+                visible;
+
         }
 
 
         /* =====================================================
            SIDE MENU
-        ===================================================== */
+        ====================================================== */
 
         .side-menu {
-            position: fixed;
 
-            top: 0;
-            left: 0;
+            position:
+                fixed;
 
-            width: 370px;
+            top:
+                0;
 
-            max-width: 38vw;
+            left:
+                0;
 
-            height: 100vh;
+            width:
+                365px;
 
-            background: #07578d;
+            max-width:
+                40vw;
 
-            z-index: 1000;
+            height:
+                100vh;
 
-            transform: translateX(-100%);
+            background:
+                var(--blue-deep);
 
-            transition: transform 0.4s ease;
+            z-index:
+                1000;
 
-            display: flex;
+            transform:
+                translateX(-100%);
 
-            justify-content: center;
+            transition:
+                transform 0.4s ease;
 
-            align-items: center;
+            display:
+                flex;
+
+            justify-content:
+                flex-start;
+
+            align-items:
+                stretch;
 
             box-shadow:
-                8px 0 25px rgba(0, 0, 0, 0.08);
+                8px 0 28px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.10
+                );
+
+            overflow:
+                hidden;
+
         }
 
 
-        /* Menu terbuka */
-
         .side-menu.active {
-            transform: translateX(0);
+
+            transform:
+                translateX(0);
+
+        }
+
+
+        /* =====================================================
+           PROTECTED HEADER / AREA BELAKANG X
+        ====================================================== */
+
+        .side-menu::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            top:
+                0;
+
+            left:
+                0;
+
+            right:
+                0;
+
+            height:
+                125px;
+
+            background:
+                rgba(
+                    7,
+                    84,
+                    135,
+                    0.96
+                );
+
+            backdrop-filter:
+                blur(12px);
+
+            -webkit-backdrop-filter:
+                blur(12px);
+
+            box-shadow:
+                0 8px 18px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.08
+                );
+
+            z-index:
+                2;
+
+            pointer-events:
+                none;
+
+        }
+
+
+        /* =====================================================
+           BLUR / FADE TRANSITION
+        ====================================================== */
+
+        .side-menu::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            top:
+                100px;
+
+            left:
+                0;
+
+            right:
+                0;
+
+            height:
+                45px;
+
+            background:
+                linear-gradient(
+                    to bottom,
+
+                    rgba(
+                        7,
+                        84,
+                        135,
+                        0.95
+                    ),
+
+                    rgba(
+                        7,
+                        84,
+                        135,
+                        0
+                    )
+                );
+
+            z-index:
+                2;
+
+            pointer-events:
+                none;
+
         }
 
 
         /* =====================================================
            SIDE MENU CONTENT
-        ===================================================== */
+           
+           POSISI DIKEMBALIKAN SEPERTI DESAIN AWAL
+        ====================================================== */
 
         .side-menu-content {
-            width: 100%;
 
-            display: flex;
+            position:
+                relative;
 
-            flex-direction: column;
+            z-index:
+                1;
 
-            align-items: center;
+            width:
+                78%;
 
-            justify-content: center;
+            height:
+                100%;
 
-            gap: 58px;
+            max-height:
+                100vh;
 
-            padding: 0 30px;
+            overflow-y:
+                auto;
+
+            /*
+             * Bagian penting:
+             * konten diberi jarak dari kiri
+             * supaya tidak menempel ke pinggir.
+             */
+
+            padding-top:
+                135px;
+
+            padding-left:
+                0;
+
+            padding-right:
+                0;
+
+            padding-bottom:
+                50px;
+
+            margin-left:
+                43px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                18px;
+
+            scrollbar-width:
+                thin;
+
+            scrollbar-color:
+
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.35
+                )
+
+                transparent;
+
         }
 
 
         /* =====================================================
-           SIDE MENU LINK
-        ===================================================== */
+           SCROLLBAR
+        ====================================================== */
 
-        .side-menu a {
-            position: relative;
+        .side-menu-content::-webkit-scrollbar {
 
-            display: inline-block;
+            width:
+                5px;
 
-            color: white;
+        }
 
-            text-decoration: none;
 
-            font-size: clamp(16px, 1.7vw, 25px);
+        .side-menu-content::-webkit-scrollbar-track {
 
-            font-weight: 700;
+            background:
+                transparent;
 
-            letter-spacing: 6px;
+        }
 
-            text-align: center;
 
-            padding: 0 5px 8px;
+        .side-menu-content::-webkit-scrollbar-thumb {
 
-            white-space: nowrap;
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.35
+                );
+
+            border-radius:
+                10px;
+
+        }
+
+
+        .side-menu-content::-webkit-scrollbar-thumb:hover {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.55
+                );
+
+        }
+
+
+        /* =====================================================
+           MENU SECTION TITLE
+        ====================================================== */
+
+        .menu-section-title {
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.55
+                );
+
+            font-family:
+                'Montserrat',
+                sans-serif;
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+
+            letter-spacing:
+                3px;
+
+            margin-top:
+                20px;
+
+            margin-bottom:
+                -5px;
+
+        }
+
+
+        /* =====================================================
+           SIDE MENU LINKS
+        ====================================================== */
+
+        .side-menu-content a {
+
+            color:
+                var(--white);
+
+            text-decoration:
+                none;
+
+            font-family:
+                'Montserrat',
+                sans-serif;
+
+            font-size:
+                20px;
+
+            font-weight:
+                600;
+
+            letter-spacing:
+                1px;
+
+            padding:
+                13px 0;
+
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
 
             transition:
-                opacity 0.3s ease,
-                transform 0.3s ease;
+
+                padding-left
+                0.3s ease,
+
+                opacity
+                0.3s ease;
+
         }
 
 
-        /* Garis bawah menu */
+        .side-menu-content a:hover {
 
-        .side-menu a::after {
-            content: "";
+            padding-left:
+                10px;
 
-            position: absolute;
+            opacity:
+                0.75;
 
-            left: 0;
-            right: 0;
-
-            bottom: 0;
-
-            height: 2px;
-
-            background: white;
-
-            transition: transform 0.3s ease;
-        }
-
-
-        /* Hover menu */
-
-        .side-menu a:hover {
-            opacity: 0.75;
-
-            transform: translateY(-3px);
-        }
-
-        .side-menu a:hover::after {
-            transform: scaleX(0.7);
         }
 
 
         /* =====================================================
-           SAAT MENU TERBUKA
-        ===================================================== */
+           VIDEO POPUP
+        ====================================================== */
 
-        body.menu-open .hero {
-            filter: brightness(0.62);
+        .video-popup {
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            align-items:
+                center;
+
+            padding:
+                30px;
+
+            background:
+                rgba(
+                    0,
+                    25,
+                    45,
+                    0.78
+                );
+
+            opacity:
+                0;
+
+            visibility:
+                hidden;
+
+            transition:
+
+                opacity
+                0.35s ease,
+
+                visibility
+                0.35s ease;
+
+            z-index:
+                2000;
+
+        }
+
+
+        .video-popup.active {
+
+            opacity:
+                1;
+
+            visibility:
+                visible;
+
+        }
+
+
+        /* =====================================================
+           VIDEO POPUP CONTENT
+        ====================================================== */
+
+        .video-popup-content {
+
+            position:
+                relative;
+
+            width:
+                min(
+                    1000px,
+                    90vw
+                );
+
+            background:
+                var(--white);
+
+            border-radius:
+                18px;
+
+            overflow:
+                hidden;
+
+            box-shadow:
+                0 25px 70px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.35
+                );
+
+            transform:
+                scale(0.92);
+
+            transition:
+                transform
+                0.35s ease;
+
+        }
+
+
+        .video-popup.active
+        .video-popup-content {
+
+            transform:
+                scale(1);
+
+        }
+
+
+        /* =====================================================
+           VIDEO
+        ====================================================== */
+
+        .video-popup video {
+
+            display:
+                block;
+
+            width:
+                100%;
+
+            max-height:
+                80vh;
+
+            background:
+                #000;
+
+        }
+
+
+        /* =====================================================
+           VIDEO CLOSE
+        ====================================================== */
+
+        .video-close {
+
+            position:
+                absolute;
+
+            top:
+                15px;
+
+            right:
+                15px;
+
+            width:
+                44px;
+
+            height:
+                44px;
+
+            border:
+                none;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.65
+                );
+
+            color:
+                var(--white);
+
+            font-size:
+                28px;
+
+            line-height:
+                1;
+
+            cursor:
+                pointer;
+
+            z-index:
+                10;
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            align-items:
+                center;
+
+            transition:
+
+                background
+                0.25s ease,
+
+                transform
+                0.25s ease;
+
+        }
+
+
+        .video-close:hover {
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.85
+                );
+
+            transform:
+                rotate(90deg);
+
         }
 
 
         /* =====================================================
            TABLET
-        ===================================================== */
+        ====================================================== */
 
-        @media (max-width: 900px) {
-
-            .hero {
-                padding-top: 10vh;
-            }
+        @media (max-width: 1100px) {
 
             .title {
-                letter-spacing: -2px;
+
+                font-size:
+                    clamp(
+                        60px,
+                        9vw,
+                        115px
+                    );
+
             }
+
 
             .theme-navigation {
-                width: 75%;
 
-                bottom: 28%;
+                width:
+                    65%;
+
             }
+
+
+            .brand-logo {
+
+                width:
+                    min(
+                        320px,
+                        34vw
+                    );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           TABLET / SMALL DESKTOP
+        ====================================================== */
+
+        @media (max-width: 768px) {
+
+            .hero {
+
+                min-height:
+                    600px;
+
+                padding:
+                    0 20px;
+
+            }
+
+
+            /* ---------------------------------------------
+               LOGO
+            ---------------------------------------------- */
+
+            .brand-logo {
+
+                top:
+                    28px;
+
+                width:
+                    min(
+                        260px,
+                        48vw
+                    );
+
+                max-height:
+                    80px;
+
+            }
+
+
+            /* ---------------------------------------------
+               HAMBURGER
+            ---------------------------------------------- */
+
+            .menu-button {
+
+                top:
+                    28px;
+
+                left:
+                    22px;
+
+                width:
+                    52px;
+
+                height:
+                    40px;
+
+            }
+
+
+            .menu-button span {
+
+                width:
+                    52px;
+
+                height:
+                    4px;
+
+            }
+
+
+            /* ---------------------------------------------
+               X
+            ---------------------------------------------- */
+
+            .menu-button.active
+            span:nth-child(1) {
+
+                transform:
+                    translateY(13px)
+                    rotate(45deg);
+
+            }
+
+
+            .menu-button.active
+            span:nth-child(3) {
+
+                transform:
+                    translateY(-13px)
+                    rotate(-45deg);
+
+            }
+
+
+            /* ---------------------------------------------
+               TITLE
+            ---------------------------------------------- */
+
+            .title {
+
+                top:
+                    24%;
+
+                width:
+                    100%;
+
+                font-size:
+                    clamp(
+                        52px,
+                        12vw,
+                        82px
+                    );
+
+                letter-spacing:
+                    -3px;
+
+            }
+
+
+            .title span {
+
+                margin-top:
+                    8px;
+
+                font-size:
+                    0.52em;
+
+                letter-spacing:
+                    -1px;
+
+            }
+
+
+            /* ---------------------------------------------
+               SUBTITLE
+            ---------------------------------------------- */
+
+            .subtitle {
+
+                top:
+                    51%;
+
+                width:
+                    90%;
+
+                font-size:
+                    clamp(
+                        15px,
+                        3vw,
+                        22px
+                    );
+
+            }
+
+
+            /* ---------------------------------------------
+               THEMES
+            ---------------------------------------------- */
+
+            .theme-navigation {
+
+                bottom:
+                    25%;
+
+                width:
+                    80%;
+
+            }
+
+
+            .theme-button {
+
+                font-size:
+                    15px;
+
+                letter-spacing:
+                    4px;
+
+                padding:
+                    6px;
+
+            }
+
+
+            .theme-button::after {
+
+                left:
+                    6px;
+
+                right:
+                    6px;
+
+            }
+
+
+            /* ---------------------------------------------
+               VOTE
+            ---------------------------------------------- */
+
+            .voting-area {
+
+                bottom:
+                    10%;
+
+            }
+
+
+            .vote-button {
+
+                min-width:
+                    230px;
+
+                min-height:
+                    62px;
+
+                padding:
+                    11px 30px;
+
+                font-size:
+                    15px;
+
+                letter-spacing:
+                    5px;
+
+            }
+
+
+            /* ---------------------------------------------
+               SIDE MENU
+            ---------------------------------------------- */
 
             .side-menu {
-                width: 360px;
 
-                max-width: 50vw;
+                width:
+                    310px;
+
+                max-width:
+                    82vw;
+
             }
+
+
+            /* ---------------------------------------------
+               PROTECTED HEADER
+            ---------------------------------------------- */
+
+            .side-menu::before {
+
+                height:
+                    110px;
+
+            }
+
+
+            .side-menu::after {
+
+                top:
+                    88px;
+
+                height:
+                    40px;
+
+            }
+
+
+            /* ---------------------------------------------
+               MENU CONTENT
+               POSISI KEMBALI DIBERI JARAK
+            ---------------------------------------------- */
+
+            .side-menu-content {
+
+                width:
+                    78%;
+
+                height:
+                    100%;
+
+                max-height:
+                    100vh;
+
+                padding-top:
+                    120px;
+
+                padding-left:
+                    0;
+
+                padding-right:
+                    0;
+
+                padding-bottom:
+                    40px;
+
+                margin-left:
+                    38px;
+
+            }
+
+
+            .side-menu-content a {
+
+                font-size:
+                    17px;
+
+            }
+
         }
 
 
         /* =====================================================
            MOBILE
-        ===================================================== */
+        ====================================================== */
 
-        @media (max-width: 600px) {
-
-            body {
-                overflow: auto;
-            }
-
-
-            /* Hero */
+        @media (max-width: 480px) {
 
             .hero {
-                min-height: 100vh;
 
-                height: auto;
+                min-height:
+                    560px;
 
-                padding:
-                    10vh
-                    20px
-                    18vh;
             }
 
 
-            /* Hamburger */
+            /* ---------------------------------------------
+               LOGO
+            ---------------------------------------------- */
+
+            .brand-logo {
+
+                top:
+                    24px;
+
+                width:
+                    200px;
+
+                max-height:
+                    65px;
+
+            }
+
+
+            /* ---------------------------------------------
+               HAMBURGER
+            ---------------------------------------------- */
 
             .menu-button {
-                top: 20px;
 
-                left: 20px;
+                top:
+                    25px;
 
-                width: 42px;
+                left:
+                    18px;
 
-                height: 38px;
+                width:
+                    46px;
+
+                height:
+                    36px;
+
             }
+
 
             .menu-button span {
-                width: 42px;
 
-                height: 4px;
-            }
+                width:
+                    46px;
 
-            .menu-button.active span:nth-child(1) {
-                transform: translateY(13px) rotate(45deg);
-            }
+                height:
+                    4px;
 
-            .menu-button.active span:nth-child(3) {
-                transform: translateY(-13px) rotate(-45deg);
             }
 
 
-            /* Subtitle */
+            /* ---------------------------------------------
+               X
+            ---------------------------------------------- */
 
-            .subtitle {
-                font-size: 14px;
+            .menu-button.active
+            span:nth-child(1) {
 
-                margin-bottom: 35px;
+                transform:
+                    translateY(11px)
+                    rotate(45deg);
+
             }
 
 
-            /* Title */
+            .menu-button.active
+            span:nth-child(3) {
+
+                transform:
+                    translateY(-11px)
+                    rotate(-45deg);
+
+            }
+
+
+            /* ---------------------------------------------
+               TITLE
+            ---------------------------------------------- */
 
             .title {
-                font-size: clamp(45px, 14vw, 75px);
 
-                letter-spacing: -2px;
+                top:
+                    26%;
 
-                line-height: 0.95;
+                font-size:
+                    clamp(
+                        42px,
+                        14vw,
+                        64px
+                    );
+
+                letter-spacing:
+                    -2px;
+
             }
 
 
-            /* Theme */
+            .title span {
+
+                margin-top:
+                    7px;
+
+                font-size:
+                    0.53em;
+
+                letter-spacing:
+                    -0.5px;
+
+            }
+
+
+            /* ---------------------------------------------
+               SUBTITLE
+            ---------------------------------------------- */
+
+            .subtitle {
+
+                top:
+                    51.5%;
+
+                font-size:
+                    14px;
+
+                line-height:
+                    1.3;
+
+            }
+
+
+            /* ---------------------------------------------
+               THEMES
+            ---------------------------------------------- */
 
             .theme-navigation {
-                position: static;
 
-                width: 100%;
+                bottom:
+                    25%;
 
-                margin-top: 80px;
+                width:
+                    92%;
 
-                display: flex;
-
-                flex-direction: row;
-
-                justify-content: space-around;
-
-                align-items: flex-start;
             }
+
 
             .theme-button {
-                font-size: 15px;
 
-                letter-spacing: 4px;
+                font-size:
+                    12px;
+
+                letter-spacing:
+                    2px;
+
+                padding:
+                    5px 4px 7px;
+
             }
 
 
-            /* Voting */
+            .theme-button::after {
+
+                left:
+                    4px;
+
+                right:
+                    4px;
+
+                height:
+                    1.5px;
+
+            }
+
+
+            /* ---------------------------------------------
+               VOTE
+            ---------------------------------------------- */
 
             .voting-area {
-                position: static;
 
-                transform: none;
+                bottom:
+                    9%;
 
-                margin-top: 70px;
             }
+
 
             .vote-button {
-                min-width: 160px;
 
-                padding: 11px 25px;
+                min-width:
+                    190px;
 
-                font-size: 13px;
+                min-height:
+                    54px;
 
-                letter-spacing: 3px;
+                padding:
+                    9px 22px;
+
+                font-size:
+                    13px;
+
+                letter-spacing:
+                    4px;
+
+                border-width:
+                    2px;
+
             }
 
 
-            /* Sidebar */
+            /* ---------------------------------------------
+               SIDE MENU
+            ---------------------------------------------- */
 
             .side-menu {
-                width: 78vw;
 
-                max-width: none;
+                width:
+                    85vw;
+
             }
+
+
+            /* ---------------------------------------------
+               PROTECTED HEADER
+            ---------------------------------------------- */
+
+            .side-menu::before {
+
+                height:
+                    100px;
+
+            }
+
+
+            .side-menu::after {
+
+                top:
+                    80px;
+
+                height:
+                    35px;
+
+            }
+
+
+            /* ---------------------------------------------
+               MENU CONTENT
+               POSISI TETAP TIDAK MEPET
+            ---------------------------------------------- */
 
             .side-menu-content {
-                gap: 50px;
 
-                padding: 0 20px;
+                width:
+                    82%;
+
+                height:
+                    100%;
+
+                max-height:
+                    100vh;
+
+                padding-top:
+                    110px;
+
+                padding-left:
+                    0;
+
+                padding-right:
+                    0;
+
+                padding-bottom:
+                    35px;
+
+                margin-left:
+                    30px;
+
             }
 
-            .side-menu a {
-                font-size: 15px;
 
-                letter-spacing: 5px;
+            /* ---------------------------------------------
+               VIDEO POPUP
+            ---------------------------------------------- */
+
+            .video-popup {
+
+                padding:
+                    15px;
+
             }
-        }
 
-        /* =====================================================
-        INTRO VIDEO POPUP
-        ===================================================== */
-
-        .video-popup {
-            position: fixed;
-
-            inset: 0;
-
-            width: 100%;
-            height: 100vh;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            background: rgba(0, 0, 0, 0.72);
-
-            z-index: 2000;
-
-            opacity: 0;
-            visibility: hidden;
-
-            transition:
-                opacity 0.4s ease,
-                visibility 0.4s ease;
-        }
-
-
-        /* Popup aktif */
-
-        .video-popup.active {
-            opacity: 1;
-
-            visibility: visible;
-        }
-
-
-        /* =====================================================
-        VIDEO WRAPPER
-        ===================================================== */
-
-        .video-popup-content {
-            position: relative;
-
-            height: min(82vh, 800px);
-
-            aspect-ratio: 9 / 16;
-
-            background: #000;
-
-            overflow: visible;
-
-            box-shadow:
-                0 20px 60px rgba(0, 0, 0, 0.45);
-
-            transform: scale(0.92);
-
-            transition:
-                transform 0.4s ease;
-        }
-
-
-        /* Animasi saat popup muncul */
-
-        .video-popup.active .video-popup-content {
-            transform: scale(1);
-        }
-
-
-        /* =====================================================
-        VIDEO
-        ===================================================== */
-
-        .video-popup-content video {
-            width: 100%;
-            height: 100%;
-
-            display: block;
-
-            object-fit: cover;
-
-            background: #000;
-        }
-
-
-        /* =====================================================
-        CLOSE BUTTON
-        ===================================================== */
-
-        .video-close {
-            position: absolute;
-
-            top: -18px;
-            right: -18px;
-
-            width: 42px;
-            height: 42px;
-
-            border: none;
-
-            border-radius: 50%;
-
-            background: white;
-
-            color: #07578d;
-
-            font-size: 28px;
-
-            font-weight: 300;
-
-            line-height: 1;
-
-            cursor: pointer;
-
-            z-index: 10;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            padding: 0;
-
-            transition:
-                transform 0.3s ease,
-                background 0.3s ease,
-                color 0.3s ease;
-        }
-
-
-        /* Hover X */
-
-        .video-close:hover {
-
-            transform:
-                rotate(90deg)
-                scale(1.08);
-
-            background: #07578d;
-
-            color: white;
-        }
-
-
-        /* =====================================================
-        MOBILE POPUP
-        ===================================================== */
-
-        @media (max-width: 600px) {
 
             .video-popup-content {
 
-                width: 82vw;
+                width:
+                    95vw;
 
-                height: auto;
+                border-radius:
+                    12px;
 
-                aspect-ratio: 9 / 16;
             }
 
 
             .video-close {
 
-                width: 38px;
-                height: 38px;
+                width:
+                    38px;
 
-                top: -15px;
-                right: -15px;
+                height:
+                    38px;
 
-                font-size: 25px;
+                top:
+                    10px;
+
+                right:
+                    10px;
+
+                font-size:
+                    24px;
+
             }
 
         }
@@ -850,135 +2059,47 @@
 
 <body>
 
+
     <!-- =====================================================
-        INTRO VIDEO POPUP
+         MAIN HERO
     ====================================================== -->
 
-    <div
-        class="video-popup"
-        id="videoPopup"
+    <main
+        class="hero"
+        id="hero"
     >
 
 
         <!-- =================================================
-            VIDEO CONTENT
+             LOGO
         ================================================== -->
 
-        <div
-            class="video-popup-content"
-            id="videoPopupContent"
+        <img
+            src="assets/logo.png"
+            alt="Psychological Scale Exhibition Logo"
+            class="brand-logo"
         >
 
 
-            <!-- =================================================
-                CLOSE BUTTON
-            ================================================== -->
-
-            <button
-                class="video-close"
-                id="videoClose"
-                aria-label="Tutup video"
-            >
-                ×
-            </button>
-
-
-            <!-- =================================================
-                VIDEO
-            ================================================== -->
-
-            <video
-                id="introVideo"
-                controls
-                playsinline
-                preload="auto"
-            >
-
-                <source
-                    src="assets/tentang.mp4"
-                    type="video/mp4"
-                >
-
-                Browser Anda tidak mendukung
-                pemutaran video.
-
-            </video>
-
-
-        </div>
-
-    </div>
-
-    <!-- =====================================================
-         HAMBURGER BUTTON
-    ====================================================== -->
-
-    <button
-        class="menu-button"
-        id="menuButton"
-        aria-label="Buka menu"
-        aria-expanded="false"
-    >
-
-        <span></span>
-        <span></span>
-        <span></span>
-
-    </button>
-
-
-    <!-- =====================================================
-         SIDE MENU
-    ====================================================== -->
-
-    <aside
-        class="side-menu"
-        id="sideMenu"
-    >
-
-        <nav class="side-menu-content">
-
-            <a href="tentang.html">
-                TENTANG
-            </a>
-
-            <a href="profil-dosen.html">
-                PROFIL DOSEN
-            </a>
-
-            <a href="profil-asisten.html">
-                PROFIL ASISTEN
-            </a>
-
-        </nav>
-
-    </aside>
-
-
-    <!-- =====================================================
-         OVERLAY
-    ====================================================== -->
-
-    <div
-        class="overlay"
-        id="overlay"
-    ></div>
-
-
-    <!-- =====================================================
-         MAIN PAGE
-    ====================================================== -->
-
-    <main class="hero">
-
-
         <!-- =================================================
-             SUBTITLE
+             HAMBURGER
         ================================================== -->
 
-        <p class="subtitle">
-            PENYUSUNAN SKALA PSIKOLOGIS 26/27
-        </p>
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Buka menu"
+            aria-expanded="false"
+            type="button"
+        >
+
+            <span></span>
+
+            <span></span>
+
+            <span></span>
+
+        </button>
 
 
         <!-- =================================================
@@ -987,69 +2108,63 @@
 
         <h1 class="title">
 
-            Psychological Scale
+            CTRL + MEASURE
 
             <span>
-                Exhibition
+                MEASURING WHAT MAKES US, US.
             </span>
 
         </h1>
 
 
         <!-- =================================================
+             SUBTITLE
+        ================================================== -->
+
+        <p class="subtitle">
+
+            Penyusunan Skala Psikologis 26/27
+
+        </p>
+
+
+        <!-- =================================================
              THEME NAVIGATION
         ================================================== -->
 
-        <nav class="theme-navigation">
+        <nav
+            class="theme-navigation"
+            aria-label="Tema"
+        >
+
+            <a
+                href="tema1.html"
+                class="theme-button"
+            >
+                TEMA 1
+            </a>
 
 
-            <!-- TEMA 1 -->
-
-            <div class="theme-item">
-
-                <a
-                    href="tema1.html"
-                    class="theme-button"
-                >
-                    TEMA 1
-                </a>
-
-            </div>
+            <a
+                href="tema2.html"
+                class="theme-button"
+            >
+                TEMA 2
+            </a>
 
 
-            <!-- TEMA 2 -->
-
-            <div class="theme-item">
-
-                <a
-                    href="tema2.html"
-                    class="theme-button"
-                >
-                    TEMA 2
-                </a>
-
-            </div>
-
-
-            <!-- TEMA 3 -->
-
-            <div class="theme-item">
-
-                <a
-                    href="tema3.html"
-                    class="theme-button"
-                >
-                    TEMA 3
-                </a>
-
-            </div>
-
+            <a
+                href="tema3.html"
+                class="theme-button"
+            >
+                TEMA 3
+            </a>
 
         </nav>
 
 
         <!-- =================================================
-             SINGLE VOTING BUTTON
+             VOTE
         ================================================== -->
 
         <div class="voting-area">
@@ -1068,74 +2183,236 @@
 
 
     <!-- =====================================================
+         OVERLAY
+    ====================================================== -->
+
+    <div
+        class="overlay"
+        id="overlay"
+    ></div>
+
+
+    <!-- =====================================================
+         SIDE MENU
+    ====================================================== -->
+
+    <aside
+        class="side-menu"
+        id="sideMenu"
+        aria-hidden="true"
+    >
+
+        <nav
+            class="side-menu-content"
+        >
+
+
+            <!-- =============================================
+                 EXPLORE
+            ============================================== -->
+
+            <div class="menu-section-title">
+                EXPLORE
+            </div>
+
+
+            <a href="index.html">
+                Home
+            </a>
+
+
+            <a href="tentang.html">
+                Tentang Exhibition
+            </a>
+
+
+            <a href="profil-dosen.html">
+                Profil Dosen
+            </a>
+
+
+            <a href="profil-asisten.html">
+                Profil Asisten
+            </a>
+
+
+            <!-- =============================================
+                 TEMA
+            ============================================== -->
+
+            <div class="menu-section-title">
+                TEMA
+            </div>
+
+
+            <a href="tema1.html">
+                Tema 1
+            </a>
+
+
+            <a href="tema2.html">
+                Tema 2
+            </a>
+
+
+            <a href="tema3.html">
+                Tema 3
+            </a>
+
+
+            <!-- =============================================
+                 PARTICIPATE
+            ============================================== -->
+
+            <div class="menu-section-title">
+                PARTICIPATE
+            </div>
+
+
+            <a href="voting.html">
+                Vote
+            </a>
+
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =====================================================
+         INTRO VIDEO POPUP
+    ====================================================== -->
+
+    <div
+        class="video-popup"
+        id="videoPopup"
+        aria-hidden="true"
+    >
+
+        <div
+            class="video-popup-content"
+            id="videoPopupContent"
+        >
+
+
+            <button
+                class="video-close"
+                id="videoClose"
+                type="button"
+                aria-label="Tutup video"
+            >
+                ×
+            </button>
+
+
+            <video
+                id="introVideo"
+                controls
+                playsinline
+                preload="metadata"
+            >
+
+                <source
+                    src="assets/tentang.mp4"
+                    type="video/mp4"
+                >
+
+                Browser Anda tidak mendukung
+                pemutaran video.
+
+            </video>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
          JAVASCRIPT
     ====================================================== -->
 
     <script>
 
+
         /* =====================================================
-        INTRO VIDEO POPUP
-        ===================================================== */
+           VIDEO POPUP
+        ====================================================== */
 
         const videoPopup =
-            document.getElementById("videoPopup");
-
-        const videoClose =
-            document.getElementById("videoClose");
-
-        const introVideo =
-            document.getElementById("introVideo");
-
-        const videoPopupContent =
-            document.getElementById("videoPopupContent");
-
-
-        /* =====================================================
-        CHECK FIRST VISIT
-        ===================================================== */
-
-        const hasSeenIntro =
-            localStorage.getItem(
-                "psychologicalScaleIntroSeen"
+            document.getElementById(
+                "videoPopup"
             );
 
 
+        const videoClose =
+            document.getElementById(
+                "videoClose"
+            );
+
+
+        const introVideo =
+            document.getElementById(
+                "introVideo"
+            );
+
+
+        const INTRO_STORAGE_KEY =
+            "psychologicalScaleIntroSeen";
+
+
         /* =====================================================
-        SHOW POPUP
-        ===================================================== */
+           SHOW VIDEO
+        ====================================================== */
 
         function showVideoPopup() {
 
-            videoPopup.classList.add("active");
+            videoPopup.classList.add(
+                "active"
+            );
 
-            document.body.style.overflow = "hidden";
+            videoPopup.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+            document.body.style.overflow =
+                "hidden";
 
         }
 
 
         /* =====================================================
-        CLOSE POPUP
-        ===================================================== */
+           CLOSE VIDEO
+        ====================================================== */
 
         function closeVideoPopup() {
 
-            videoPopup.classList.remove("active");
+            videoPopup.classList.remove(
+                "active"
+            );
 
-            document.body.style.overflow = "";
+            videoPopup.setAttribute(
+                "aria-hidden",
+                "true"
+            );
 
-            /*
-            Hentikan video ketika popup ditutup
-            */
+            document.body.style.overflow =
+                "hidden";
 
-            introVideo.pause();
 
-            /*
-            Simpan bahwa pengunjung
-            sudah melihat popup
-            */
+            if (introVideo) {
+
+                introVideo.pause();
+
+                introVideo.currentTime =
+                    0;
+
+            }
+
 
             localStorage.setItem(
-                "psychologicalScaleIntroSeen",
+                INTRO_STORAGE_KEY,
                 "true"
             );
 
@@ -1143,19 +2420,68 @@
 
 
         /* =====================================================
-        FIRST VISIT
-        ===================================================== */
+           FIRST VISIT
+        ====================================================== */
 
-        if (!hasSeenIntro) {
+        window.addEventListener(
+            "load",
+            function () {
 
-            window.addEventListener(
-                "load",
-                function () {
+                const hasSeenIntro =
+                    localStorage.getItem(
+                        INTRO_STORAGE_KEY
+                    );
+
+
+                if (!hasSeenIntro) {
 
                     setTimeout(
-                        showVideoPopup,
+                        function () {
+
+                            showVideoPopup();
+
+                        },
                         300
                     );
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           VIDEO CLOSE BUTTON
+        ====================================================== */
+
+        if (videoClose) {
+
+            videoClose.addEventListener(
+                "click",
+                closeVideoPopup
+            );
+
+        }
+
+
+        /* =====================================================
+           CLICK OUTSIDE VIDEO
+        ====================================================== */
+
+        if (videoPopup) {
+
+            videoPopup.addEventListener(
+                "click",
+                function (event) {
+
+                    if (
+                        event.target ===
+                        videoPopup
+                    ) {
+
+                        closeVideoPopup();
+
+                    }
 
                 }
             );
@@ -1164,183 +2490,229 @@
 
 
         /* =====================================================
-        CLOSE BUTTON
-        ===================================================== */
-
-        videoClose.addEventListener(
-            "click",
-            closeVideoPopup
-        );
-
-
-        /* =====================================================
-        CLICK OUTSIDE VIDEO
-        ===================================================== */
-
-        videoPopup.addEventListener(
-            "click",
-            function (event) {
-
-                if (
-                    event.target === videoPopup
-                ) {
-
-                    closeVideoPopup();
-
-                }
-
-            }
-        );
-
-
-        /* =====================================================
-        ESCAPE KEY
-        ===================================================== */
-
-        document.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (
-                    event.key === "Escape" &&
-                    videoPopup.classList.contains("active")
-                ) {
-
-                    closeVideoPopup();
-
-                }
-
-            }
-        );
-
-        /* =================================================
-           ELEMENT
-        ================================================== */
+           MENU ELEMENTS
+        ====================================================== */
 
         const menuButton =
-            document.getElementById("menuButton");
+            document.getElementById(
+                "menuButton"
+            );
+
 
         const sideMenu =
-            document.getElementById("sideMenu");
+            document.getElementById(
+                "sideMenu"
+            );
+
 
         const overlay =
-            document.getElementById("overlay");
+            document.getElementById(
+                "overlay"
+            );
 
 
-        /* =================================================
+        /* =====================================================
            OPEN MENU
-        ================================================== */
+        ====================================================== */
 
         function openMenu() {
 
-            sideMenu.classList.add("active");
+            menuButton.classList.add(
+                "active"
+            );
 
-            overlay.classList.add("active");
 
-            menuButton.classList.add("active");
+            sideMenu.classList.add(
+                "active"
+            );
+
+
+            overlay.classList.add(
+                "active"
+            );
+
+
+            sideMenu.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
 
             menuButton.setAttribute(
                 "aria-expanded",
                 "true"
             );
 
+
+            menuButton.setAttribute(
+                "aria-label",
+                "Tutup menu"
+            );
+
+
             document.body.classList.add(
                 "menu-open"
             );
+
         }
 
 
-        /* =================================================
+        /* =====================================================
            CLOSE MENU
-        ================================================== */
+        ====================================================== */
 
         function closeMenu() {
 
-            sideMenu.classList.remove("active");
+            menuButton.classList.remove(
+                "active"
+            );
 
-            overlay.classList.remove("active");
 
-            menuButton.classList.remove("active");
+            sideMenu.classList.remove(
+                "active"
+            );
+
+
+            overlay.classList.remove(
+                "active"
+            );
+
+
+            sideMenu.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
 
             menuButton.setAttribute(
                 "aria-expanded",
                 "false"
             );
 
+
+            menuButton.setAttribute(
+                "aria-label",
+                "Buka menu"
+            );
+
+
             document.body.classList.remove(
                 "menu-open"
             );
+
         }
 
 
-        /* =================================================
+        /* =====================================================
            TOGGLE MENU
-        ================================================== */
+        ====================================================== */
 
-        menuButton.addEventListener(
-            "click",
-            function () {
+        if (menuButton) {
 
-                if (
-                    sideMenu.classList.contains(
-                        "active"
-                    )
-                ) {
+            menuButton.addEventListener(
+                "click",
+                function () {
 
-                    closeMenu();
+                    if (
+                        sideMenu.classList.contains(
+                            "active"
+                        )
+                    ) {
 
-                } else {
+                        closeMenu();
 
-                    openMenu();
+                    } else {
+
+                        openMenu();
+
+                    }
 
                 }
+            );
+
+        }
+
+
+        /* =====================================================
+           OVERLAY CLICK
+        ====================================================== */
+
+        if (overlay) {
+
+            overlay.addEventListener(
+                "click",
+                closeMenu
+            );
+
+        }
+
+
+        /* =====================================================
+           MENU LINKS
+        ====================================================== */
+
+        const menuLinks =
+            document.querySelectorAll(
+                ".side-menu a"
+            );
+
+
+        menuLinks.forEach(
+            function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+
+                        closeMenu();
+
+                    }
+                );
 
             }
         );
 
 
-        /* =================================================
-           CLICK OUTSIDE
-        ================================================== */
-
-        overlay.addEventListener(
-            "click",
-            closeMenu
-        );
-
-
-        /* =================================================
+        /* =====================================================
            ESCAPE KEY
-        ================================================== */
+        ====================================================== */
 
         document.addEventListener(
             "keydown",
             function (event) {
 
-                if (event.key === "Escape") {
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
 
-                    closeMenu();
+
+                    if (
+                        sideMenu.classList.contains(
+                            "active"
+                        )
+                    ) {
+
+                        closeMenu();
+
+                    }
+
+
+                    if (
+                        videoPopup.classList.contains(
+                            "active"
+                        )
+                    ) {
+
+                        closeVideoPopup();
+
+                    }
 
                 }
 
             }
         );
 
-
-        /* =================================================
-           CLOSE AFTER MENU LINK CLICK
-        ================================================== */
-
-        document
-            .querySelectorAll(".side-menu a")
-            .forEach(function (link) {
-
-                link.addEventListener(
-                    "click",
-                    closeMenu
-                );
-
-            });
 
     </script>
 
