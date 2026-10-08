@@ -2,2721 +2,2320 @@
 <html lang="id">
 
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
+<title>Psychological Scale Exhibition</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<link
+href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+rel="stylesheet"
+>
 
-    <title>Psychological Scale Exhibition</title>
+<style>
 
+/* =====================================================
+   ROOT
+===================================================== */
 
-    <!-- =====================================================
-         GOOGLE FONTS
-    ====================================================== -->
+:root {
+    --blue: #1464c4;
+    --blue-dark: #07578d;
+    --blue-deep: #075487;
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet"
-    >
+    --ink: #111111;
+    --white: #ffffff;
+}
 
 
-    <style>
+/* =====================================================
+   RESET
+===================================================== */
 
-        /* =====================================================
-           ROOT
-        ====================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        :root {
 
-            --blue: #1464c4;
-            --blue-dark: #07578d;
-            --blue-deep: #075487;
-            --blue-soft: #dfeefa;
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
 
-            --ink: #111111;
-            --white: #ffffff;
 
-        }
+body {
+    font-family: 'Montserrat', sans-serif;
 
+    overflow: hidden;
 
-        /* =====================================================
-           RESET
-        ====================================================== */
+    background: #eef6fc;
 
-        * {
+    color: var(--ink);
+}
 
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
 
-        }
+button,
+a {
+    font-family: inherit;
+}
 
 
-        html,
-        body {
+/* =====================================================
+   HERO
+===================================================== */
 
-            width: 100%;
-            height: 100%;
+.hero {
+    position: relative;
 
-        }
+    width: 100%;
+    height: 100vh;
 
+    min-height: 620px;
 
-        body {
+    padding: 0 40px;
 
-            font-family:
-                'Montserrat',
-                sans-serif;
+    overflow: hidden;
 
-            overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-            background:
-                #eef6fc;
+    background:
+        linear-gradient(
+            rgba(244, 249, 253, 0.42),
+            rgba(244, 249, 253, 0.42)
+        ),
+        url("assets/background.png");
 
-            color:
-                var(--ink);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
-        }
 
+/* =====================================================
+   LOGO
+===================================================== */
 
-        button,
-        a {
+.brand-logo {
+    position: absolute;
 
-            font-family:
-                inherit;
+    top: 30px;
+    left: 50%;
 
-        }
+    transform: translateX(-50%);
 
+    width: min(390px, 32vw);
 
-        /* =====================================================
-           HERO
-        ====================================================== */
+    max-height: 100px;
 
-        .hero {
+    object-fit: contain;
 
-            width: 100%;
-            height: 100vh;
+    z-index: 850;
 
-            min-height: 620px;
+    transition: opacity 0.3s ease;
+}
 
-            position: relative;
 
-            display: flex;
+/* =====================================================
+   MAIN TITLE
+===================================================== */
 
-            flex-direction: column;
+.title {
+    position: absolute;
 
-            align-items: center;
+    top: 21%;
+    left: 50%;
 
-            padding:
-                0 40px;
+    transform: translateX(-50%);
 
-            overflow: hidden;
+    width: 98%;
 
-            background:
+    text-align: center;
 
-                linear-gradient(
-                    rgba(244, 249, 253, 0.42),
-                    rgba(244, 249, 253, 0.42)
-                ),
+    color: var(--blue);
 
-                url("assets/background.png");
+    font-family: 'League Spartan', sans-serif;
 
-            background-size:
-                cover;
+    font-size: clamp(
+        70px,
+        8.6vw,
+        145px
+    );
 
-            background-position:
-                center;
+    line-height: 0.88;
 
-            background-repeat:
-                no-repeat;
+    font-weight: 800;
 
-            color:
-                var(--ink);
+    letter-spacing: -5px;
 
-            transition:
-                filter 0.4s ease;
+    white-space: nowrap;
+}
 
-        }
 
+/* =====================================================
+   TAGLINE
+===================================================== */
 
-        /* =====================================================
-           LOGO
-        ====================================================== */
+.title span {
+    display: block;
 
-        .brand-logo {
+    margin-top: 10px;
 
-            position: absolute;
+    font-family: 'Oswald', sans-serif;
 
-            top: 30px;
+    font-size: 0.50em;
 
-            left: 50%;
+    line-height: 0.95;
 
-            transform:
-                translateX(-50%);
+    font-weight: 700;
 
-            width:
-                min(390px, 32vw);
+    font-style: italic;
 
-            max-height:
-                100px;
+    letter-spacing: -1.5px;
 
-            object-fit:
-                contain;
+    text-transform: uppercase;
+}
 
-            object-position:
-                center;
 
-            z-index:
-                850;
+/* =====================================================
+   SUBTITLE
+===================================================== */
 
-            transition:
-                opacity 0.3s ease;
+.subtitle {
+    position: absolute;
 
-        }
+    top: 50.5%;
+    left: 50%;
 
+    transform: translateX(-50%);
 
-        /* =====================================================
-           MAIN TITLE
-        ====================================================== */
+    width: max-content;
 
-        .title {
+    max-width: 90%;
 
-            position: absolute;
+    font-family: 'Montserrat', sans-serif;
 
-            top: 21%;
+    font-size: clamp(
+        18px,
+        2vw,
+        31px
+    );
 
-            left: 50%;
+    font-weight: 400;
 
-            transform:
-                translateX(-50%);
+    line-height: 1.2;
 
-            width:
-                98%;
+    text-align: center;
 
-            text-align:
-                center;
+    color: var(--ink);
+}
 
-            color:
-                var(--blue);
 
-            font-family:
-                'League Spartan',
-                sans-serif;
+/* =====================================================
+   HAMBURGER
+===================================================== */
 
-            font-size:
-                clamp(
-                    70px,
-                    8.6vw,
-                    145px
-                );
+.menu-button {
+    position: fixed;
 
-            line-height:
-                0.88;
+    top: 38px;
+    left: 30px;
 
-            font-weight:
-                800;
+    width: 64px;
+    height: 48px;
 
-            letter-spacing:
-                -5px;
+    padding: 4px 0;
 
-            white-space:
-                nowrap;
+    border: none;
 
-        }
+    background: transparent;
 
+    cursor: pointer;
 
-        /* =====================================================
-           TAGLINE
-        ====================================================== */
+    z-index: 1200;
 
-        .title span {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
-            display:
-                block;
 
-            margin-top:
-                10px;
+.menu-button span {
+    display: block;
 
-            font-family:
-                'Oswald',
-                sans-serif;
+    width: 64px;
+    height: 5px;
 
-            font-size:
-                0.50em;
+    background: var(--blue-deep);
 
-            line-height:
-                0.95;
+    border-radius: 0;
 
-            font-weight:
-                700;
+    transition:
+        transform 0.35s ease,
+        opacity 0.25s ease,
+        background 0.25s ease;
+}
 
-            font-style:
-                italic;
 
-            letter-spacing:
-                -1.5px;
+/* =====================================================
+   HAMBURGER → X
+===================================================== */
 
-            text-transform:
-                uppercase;
+.menu-button.active span:nth-child(1) {
+    transform:
+        translateY(17px)
+        rotate(45deg);
 
-        }
+    background: var(--white);
+}
 
 
-        /* =====================================================
-           SUBTITLE
-        ====================================================== */
+.menu-button.active span:nth-child(2) {
+    opacity: 0;
+}
 
-        .subtitle {
 
-            position:
-                absolute;
+.menu-button.active span:nth-child(3) {
+    transform:
+        translateY(-17px)
+        rotate(-45deg);
 
-            top:
-                50.5%;
+    background: var(--white);
+}
 
-            left:
-                50%;
 
-            transform:
-                translateX(-50%);
+/* =====================================================
+   THEME NAVIGATION
+===================================================== */
 
-            width:
-                max-content;
+.theme-navigation {
+    position: absolute;
 
-            max-width:
-                90%;
+    bottom: 27%;
 
-            margin:
-                0;
+    left: 50%;
 
-            font-family:
-                'Montserrat',
-                sans-serif;
+    transform: translateX(-50%);
 
-            font-size:
-                clamp(
-                    18px,
-                    2vw,
-                    31px
-                );
+    width: min(52%, 820px);
 
-            font-weight:
-                400;
+    display: flex;
 
-            line-height:
-                1.2;
+    justify-content: space-between;
 
-            letter-spacing:
-                0.2px;
+    align-items: flex-start;
+}
 
-            text-align:
-                center;
 
-            color:
-                var(--ink);
+/* =====================================================
+   THEME BUTTON
+===================================================== */
 
-        }
+.theme-button {
+    position: relative;
 
+    color: var(--ink);
 
-        /* =====================================================
-           HAMBURGER BUTTON
-        ====================================================== */
+    text-decoration: none;
 
-        .menu-button {
+    font-family: 'Montserrat', sans-serif;
 
-            position:
-                fixed;
+    font-size: clamp(
+        17px,
+        1.55vw,
+        26px
+    );
 
-            top:
-                38px;
+    font-weight: 700;
 
-            left:
-                30px;
+    letter-spacing: 7px;
 
-            width:
-                64px;
+    padding:
+        8px
+        12px
+        9px;
 
-            height:
-                48px;
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
+}
 
-            padding:
-                4px 0;
 
-            border:
-                none;
+.theme-button::after {
+    content: "";
 
-            background:
-                transparent;
+    position: absolute;
 
-            cursor:
-                pointer;
+    left: 10px;
+    right: 10px;
 
-            z-index:
-                1200;
+    bottom: 0;
 
-            display:
-                flex;
+    height: 2px;
 
-            flex-direction:
-                column;
+    background: var(--ink);
 
-            justify-content:
-                space-between;
+    transition:
+        height 0.3s ease;
+}
 
-            transition:
-                opacity 0.3s ease;
 
-        }
+.theme-button:hover {
+    transform:
+        translateY(-4px);
+}
 
 
-        /* =====================================================
-           HAMBURGER LINES
-        ====================================================== */
+.theme-button:hover::after {
+    height: 3px;
+}
 
-        .menu-button span {
 
-            width:
-                64px;
+/* =====================================================
+   VOTE
+===================================================== */
 
-            height:
-                5px;
+.voting-area {
+    position: absolute;
 
-            background:
-                var(--blue-deep);
+    bottom: 10.5%;
 
-            border-radius:
-                0;
+    left: 50%;
 
-            display:
-                block;
+    transform: translateX(-50%);
 
-            transition:
+    display: flex;
 
-                transform
-                0.35s ease,
+    justify-content: center;
+    align-items: center;
+}
 
-                opacity
-                0.25s ease,
 
-                background
-                0.25s ease;
+.vote-button {
+    min-width: 280px;
 
-        }
+    min-height: 72px;
 
+    padding:
+        13px
+        45px;
 
-        /* =====================================================
-           HAMBURGER → X
-        ====================================================== */
+    color: var(--blue-deep);
 
-        .menu-button.active
-        span:nth-child(1) {
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.18
+        );
 
-            transform:
-                translateY(17px)
-                rotate(45deg);
+    border:
+        3px solid
+        var(--blue-deep);
 
-            background:
-                var(--white);
+    border-radius: 42px;
 
-        }
+    text-decoration: none;
 
+    font-family:
+        'Montserrat',
+        sans-serif;
 
-        .menu-button.active
-        span:nth-child(2) {
+    font-size: 18px;
 
-            opacity:
-                0;
+    font-weight: 800;
 
-        }
+    letter-spacing: 7px;
 
+    display: flex;
 
-        .menu-button.active
-        span:nth-child(3) {
+    justify-content: center;
+    align-items: center;
 
-            transform:
-                translateY(-17px)
-                rotate(-45deg);
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+}
 
-            background:
-                var(--white);
 
-        }
+.vote-button:hover {
+    background:
+        var(--blue-deep);
 
+    color:
+        var(--white);
 
-        /* =====================================================
-           THEME NAVIGATION
-        ====================================================== */
+    transform:
+        translateY(-4px);
+}
 
-        .theme-navigation {
 
-            position:
-                absolute;
+/* =====================================================
+   OVERLAY
+===================================================== */
 
-            bottom:
-                27%;
+.overlay {
+    position: fixed;
 
-            left:
-                50%;
+    inset: 0;
 
-            transform:
-                translateX(-50%);
+    background:
+        rgba(
+            0,
+            38,
+            66,
+            0.35
+        );
 
-            width:
-                min(52%, 820px);
+    opacity: 0;
 
-            display:
-                flex;
+    visibility: hidden;
 
-            justify-content:
-                space-between;
+    transition:
+        opacity 0.4s ease,
+        visibility 0.4s ease;
 
-            align-items:
-                flex-start;
+    z-index: 900;
+}
 
-        }
 
+.overlay.active {
+    opacity: 1;
 
-        /* =====================================================
-           THEME BUTTON
-        ====================================================== */
+    visibility: visible;
+}
 
-        .theme-button {
 
-            position:
-                relative;
+/* =====================================================
+   SIDE MENU
+===================================================== */
 
-            color:
-                var(--ink);
+.side-menu {
+    position: fixed;
 
-            text-decoration:
-                none;
+    top: 0;
+    left: 0;
 
-            font-family:
-                'Montserrat',
-                sans-serif;
+    width: 365px;
 
-            font-size:
-                clamp(
-                    17px,
-                    1.55vw,
-                    26px
-                );
+    max-width: 40vw;
 
-            font-weight:
-                700;
+    height: 100vh;
 
-            letter-spacing:
-                7px;
+    background:
+        var(--blue-deep);
 
-            padding:
-                8px 12px 9px;
+    z-index: 1000;
 
-            transition:
+    transform:
+        translateX(-100%);
 
-                transform
-                0.3s ease,
+    transition:
+        transform 0.4s ease;
 
-                opacity
-                0.3s ease;
+    display: flex;
 
-        }
+    justify-content: center;
+    align-items: center;
 
+    box-shadow:
+        8px 0 28px
+        rgba(
+            0,
+            0,
+            0,
+            0.10
+        );
+}
 
-        .theme-button::after {
 
-            content:
-                "";
+.side-menu.active {
+    transform:
+        translateX(0);
+}
 
-            position:
-                absolute;
 
-            left:
-                10px;
+/* =====================================================
+   SIDE MENU CONTENT
+===================================================== */
 
-            right:
-                10px;
+.side-menu-content {
+    width: 78%;
 
-            bottom:
-                0;
+    max-height: 100vh;
 
-            height:
-                2px;
+    overflow-y: auto;
 
-            background:
-                var(--ink);
+    padding-top: 125px;
 
-            transform:
-                scaleX(1);
+    padding-bottom: 50px;
 
-            transition:
+    display: flex;
 
-                transform
-                0.3s ease,
+    flex-direction: column;
 
-                height
-                0.3s ease;
+    gap: 18px;
 
-        }
+    scrollbar-width: thin;
 
+    scrollbar-color:
+        rgba(
+            255,
+            255,
+            255,
+            0.35
+        )
+        transparent;
+}
 
-        .theme-button:hover {
 
-            transform:
-                translateY(-4px);
+.side-menu-content::-webkit-scrollbar {
+    width: 5px;
+}
 
-        }
 
+.side-menu-content::-webkit-scrollbar-track {
+    background: transparent;
+}
 
-        .theme-button:hover::after {
 
-            height:
-                3px;
+.side-menu-content::-webkit-scrollbar-thumb {
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.35
+        );
 
-        }
+    border-radius: 10px;
+}
 
 
-        /* =====================================================
-           VOTING AREA
-        ====================================================== */
+/* =====================================================
+   MENU SECTION TITLE
+===================================================== */
 
-        .voting-area {
+.menu-section-title {
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.55
+        );
 
-            position:
-                absolute;
+    font-family:
+        'Montserrat',
+        sans-serif;
 
-            bottom:
-                10.5%;
+    font-size: 12px;
 
-            left:
-                50%;
+    font-weight: 700;
 
-            transform:
-                translateX(-50%);
+    letter-spacing: 3px;
 
-            display:
-                flex;
+    margin-top: 20px;
 
-            justify-content:
-                center;
+    margin-bottom: -5px;
+}
 
-            align-items:
-                center;
 
-        }
+/* =====================================================
+   SIDE MENU LINKS
+===================================================== */
 
+.side-menu-content a {
+    color:
+        var(--white);
 
-        /* =====================================================
-           VOTE BUTTON
-        ====================================================== */
+    text-decoration: none;
 
-        .vote-button {
+    font-family:
+        'Montserrat',
+        sans-serif;
 
-            min-width:
-                280px;
+    font-size: 20px;
 
-            min-height:
-                72px;
+    font-weight: 600;
 
-            padding:
-                13px 45px;
+    letter-spacing: 1px;
 
-            color:
-                var(--blue-deep);
+    padding:
+        13px 0;
 
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.18
-                );
+    border-bottom:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.25
+        );
 
-            border:
-                3px solid
-                var(--blue-deep);
+    transition:
+        padding-left 0.3s ease,
+        opacity 0.3s ease;
+}
 
-            border-radius:
-                42px;
 
-            text-decoration:
-                none;
+.side-menu-content a:hover {
+    padding-left: 10px;
 
-            font-family:
-                'Montserrat',
-                sans-serif;
+    opacity: 0.75;
+}
 
-            font-size:
-                18px;
 
-            font-weight:
-                800;
+/* =====================================================
+   VIDEO POPUP
+===================================================== */
 
-            letter-spacing:
-                7px;
+.video-popup {
+    position: fixed;
 
-            display:
-                flex;
+    inset: 0;
 
-            justify-content:
-                center;
+    display: flex;
 
-            align-items:
-                center;
+    justify-content: center;
+    align-items: center;
 
-            transition:
+    padding: 30px;
 
-                background
-                0.3s ease,
+    background:
+        rgba(
+            0,
+            25,
+            45,
+            0.78
+        );
 
-                color
-                0.3s ease,
+    opacity: 0;
 
-                transform
-                0.3s ease,
+    visibility: hidden;
 
-                box-shadow
-                0.3s ease;
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
 
-        }
+    z-index: 2000;
+}
 
 
-        .vote-button:hover {
+.video-popup.active {
+    opacity: 1;
 
-            background:
-                var(--blue-deep);
+    visibility: visible;
+}
 
-            color:
-                var(--white);
 
-            transform:
-                translateY(-4px);
+.video-popup-content {
+    position: relative;
 
-            box-shadow:
-                0 10px 25px
-                rgba(
-                    7,
-                    84,
-                    135,
-                    0.20
-                );
+    width:
+        min(
+            1000px,
+            90vw
+        );
 
-        }
+    background:
+        var(--white);
 
+    border-radius:
+        18px;
 
-        /* =====================================================
-           OVERLAY
-        ====================================================== */
+    overflow: hidden;
 
-        .overlay {
+    box-shadow:
+        0 25px 70px
+        rgba(
+            0,
+            0,
+            0,
+            0.35
+        );
 
-            position:
-                fixed;
+    transform:
+        scale(0.92);
 
-            inset:
-                0;
+    transition:
+        transform 0.35s ease;
+}
 
-            background:
-                rgba(
-                    0,
-                    38,
-                    66,
-                    0.35
-                );
 
-            opacity:
-                0;
+.video-popup.active
+.video-popup-content {
+    transform:
+        scale(1);
+}
 
-            visibility:
-                hidden;
 
-            transition:
+.video-popup video {
+    display: block;
 
-                opacity
-                0.4s ease,
+    width: 100%;
 
-                visibility
-                0.4s ease;
+    max-height: 80vh;
 
-            z-index:
-                900;
+    background: #000;
+}
 
-        }
 
+/* =====================================================
+   VIDEO CLOSE
+===================================================== */
 
-        .overlay.active {
+.video-close {
+    position: absolute;
 
-            opacity:
-                1;
+    top: 15px;
+    right: 15px;
 
-            visibility:
-                visible;
+    width: 44px;
+    height: 44px;
 
-        }
+    border: none;
 
+    border-radius: 50%;
 
-        /* =====================================================
-           SIDE MENU
-        ====================================================== */
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            0.65
+        );
 
-        .side-menu {
+    color:
+        var(--white);
 
-            position:
-                fixed;
+    font-size: 28px;
 
-            top:
-                0;
+    cursor: pointer;
 
-            left:
-                0;
+    z-index: 10;
 
-            width:
-                365px;
+    display: flex;
 
-            max-width:
-                40vw;
+    justify-content: center;
+    align-items: center;
 
-            height:
-                100vh;
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
 
-            background:
-                var(--blue-deep);
 
-            z-index:
-                1000;
+.video-close:hover {
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            0.85
+        );
 
-            transform:
-                translateX(-100%);
+    transform:
+        rotate(90deg);
+}
 
-            transition:
-                transform 0.4s ease;
 
-            display:
-                flex;
+/* =====================================================
+   TABLET
+===================================================== */
 
-            justify-content:
-                flex-start;
+@media (max-width: 1100px) {
 
-            align-items:
-                stretch;
+    .title {
+        font-size:
+            clamp(
+                60px,
+                9vw,
+                115px
+            );
+    }
 
-            box-shadow:
-                8px 0 28px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.10
-                );
 
-            overflow:
-                hidden;
+    .theme-navigation {
+        width: 65%;
+    }
 
-        }
 
+    .brand-logo {
+        width:
+            min(
+                320px,
+                34vw
+            );
+    }
+}
 
-        .side-menu.active {
 
-            transform:
-                translateX(0);
+/* =====================================================
+   MOBILE
+   COMPACT + CENTERED
+===================================================== */
 
-        }
+@media (max-width: 768px) {
 
+    body {
+        overflow-x: hidden;
 
-        /* =====================================================
-           PROTECTED HEADER / AREA BELAKANG X
-        ====================================================== */
+        overflow-y: auto;
+    }
 
-        .side-menu::before {
 
-            content:
-                "";
+    /* =================================================
+       HERO MOBILE
+    ================================================= */
 
-            position:
-                absolute;
+    .hero {
+        width: 100%;
 
-            top:
-                0;
+        min-height:
+            100svh;
 
-            left:
-                0;
+        height:
+            auto;
 
-            right:
-                0;
+        padding:
+            0
+            clamp(
+                16px,
+                4vw,
+                24px
+            )
+            35px;
 
-            height:
-                125px;
+        display:
+            flex;
 
-            background:
-                rgba(
-                    7,
-                    84,
-                    135,
-                    0.96
-                );
+        flex-direction:
+            column;
 
-            backdrop-filter:
-                blur(12px);
+        align-items:
+            center;
 
-            -webkit-backdrop-filter:
-                blur(12px);
+        justify-content:
+            flex-start;
 
-            box-shadow:
-                0 8px 18px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.08
-                );
+        overflow:
+            hidden;
+    }
 
-            z-index:
-                2;
 
-            pointer-events:
-                none;
+    /* =================================================
+       LOGO
+    ================================================= */
 
-        }
+    .brand-logo {
 
+        position:
+            relative;
 
-        /* =====================================================
-           BLUR / FADE TRANSITION
-        ====================================================== */
+        top:
+            auto;
 
-        .side-menu::after {
+        left:
+            auto;
 
-            content:
-                "";
+        transform:
+            none;
 
-            position:
-                absolute;
+        order:
+            1;
 
-            top:
-                100px;
+        width:
+            clamp(
+                190px,
+                52vw,
+                230px
+            );
 
-            left:
-                0;
+        max-height:
+            70px;
 
-            right:
-                0;
+        margin-top:
+            clamp(
+                48px,
+                7vh,
+                72px
+            );
 
-            height:
-                45px;
+        margin-bottom:
+            clamp(
+                26px,
+                4vh,
+                38px
+            );
+    }
 
-            background:
-                linear-gradient(
-                    to bottom,
 
-                    rgba(
-                        7,
-                        84,
-                        135,
-                        0.95
-                    ),
+    /* =================================================
+       HAMBURGER
+    ================================================= */
 
-                    rgba(
-                        7,
-                        84,
-                        135,
-                        0
-                    )
-                );
+    .menu-button {
 
-            z-index:
-                2;
+        position:
+            fixed;
 
-            pointer-events:
-                none;
+        top:
+            clamp(
+                24px,
+                4vh,
+                38px
+            );
 
-        }
+        left:
+            clamp(
+                20px,
+                5vw,
+                30px
+            );
 
+        width:
+            48px;
 
-        /* =====================================================
-           SIDE MENU CONTENT
-           
-           POSISI DIKEMBALIKAN SEPERTI DESAIN AWAL
-        ====================================================== */
+        height:
+            37px;
 
-        .side-menu-content {
+        padding:
+            3px 0;
 
-            position:
-                relative;
+        z-index:
+            1200;
+    }
 
-            z-index:
-                1;
 
-            width:
-                78%;
+    .menu-button span {
 
-            height:
-                100%;
+        width:
+            48px;
 
-            max-height:
-                100vh;
+        height:
+            4px;
+    }
 
-            overflow-y:
-                auto;
 
-            /*
-             * Bagian penting:
-             * konten diberi jarak dari kiri
-             * supaya tidak menempel ke pinggir.
-             */
+    .menu-button.active span:nth-child(1) {
 
-            padding-top:
-                135px;
+        transform:
+            translateY(13px)
+            rotate(45deg);
+    }
 
-            padding-left:
-                0;
 
-            padding-right:
-                0;
+    .menu-button.active span:nth-child(3) {
 
-            padding-bottom:
-                50px;
+        transform:
+            translateY(-13px)
+            rotate(-45deg);
+    }
 
-            margin-left:
-                43px;
 
-            display:
-                flex;
+    /* =================================================
+       TITLE
+    ================================================= */
 
-            flex-direction:
-                column;
+    .title {
 
-            gap:
-                18px;
+        position:
+            relative;
 
-            scrollbar-width:
-                thin;
+        top:
+            auto;
 
-            scrollbar-color:
+        left:
+            auto;
 
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.35
-                )
+        transform:
+            none;
 
-                transparent;
+        order:
+            2;
 
-        }
+        width:
+            100%;
 
+        max-width:
+            410px;
 
-        /* =====================================================
-           SCROLLBAR
-        ====================================================== */
+        margin:
+            0 auto;
 
-        .side-menu-content::-webkit-scrollbar {
+        padding:
+            0
+            clamp(
+                3px,
+                1vw,
+                8px
+            );
 
-            width:
-                5px;
+        text-align:
+            center;
 
-        }
+        font-size:
+            clamp(
+                42px,
+                11vw,
+                62px
+            );
 
+        line-height:
+            0.91;
 
-        .side-menu-content::-webkit-scrollbar-track {
+        letter-spacing:
+            clamp(
+                -2.8px,
+                -0.65vw,
+                -2px
+            );
+    }
 
-            background:
-                transparent;
 
-        }
+    /* =================================================
+       TAGLINE
+    ================================================= */
 
+    .title span {
 
-        .side-menu-content::-webkit-scrollbar-thumb {
+        margin-top:
+            clamp(
+                7px,
+                1.5vw,
+                11px
+            );
 
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.35
-                );
+        font-size:
+            clamp(
+                19px,
+                5.1vw,
+                28px
+            );
 
-            border-radius:
-                10px;
+        line-height:
+            0.98;
 
-        }
+        letter-spacing:
+            clamp(
+                -0.7px,
+                -0.1vw,
+                -0.2px
+            );
+    }
 
 
-        .side-menu-content::-webkit-scrollbar-thumb:hover {
+    /* =================================================
+       SUBTITLE
+    ================================================= */
 
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.55
-                );
+    .subtitle {
 
-        }
+        position:
+            relative;
 
+        top:
+            auto;
 
-        /* =====================================================
-           MENU SECTION TITLE
-        ====================================================== */
+        left:
+            auto;
 
-        .menu-section-title {
+        transform:
+            none;
 
-            color:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.55
-                );
+        order:
+            3;
 
-            font-family:
-                'Montserrat',
-                sans-serif;
+        width:
+            100%;
 
-            font-size:
-                12px;
+        max-width:
+            360px;
 
-            font-weight:
-                700;
+        margin:
+            clamp(
+                27px,
+                4vh,
+                38px
+            )
+            auto
+            0;
 
-            letter-spacing:
-                3px;
+        padding:
+            0 8px;
 
-            margin-top:
-                20px;
+        text-align:
+            center;
 
-            margin-bottom:
-                -5px;
+        font-size:
+            clamp(
+                15px,
+                4vw,
+                20px
+            );
 
-        }
+        line-height:
+            1.25;
 
+        white-space:
+            normal;
+    }
 
-        /* =====================================================
-           SIDE MENU LINKS
-        ====================================================== */
 
-        .side-menu-content a {
+    /* =================================================
+       THEMES
+    ================================================= */
 
-            color:
-                var(--white);
+    .theme-navigation {
 
-            text-decoration:
-                none;
+        position:
+            relative;
 
-            font-family:
-                'Montserrat',
-                sans-serif;
+        top:
+            auto;
 
-            font-size:
-                20px;
+        bottom:
+            auto;
 
-            font-weight:
-                600;
+        left:
+            auto;
 
-            letter-spacing:
-                1px;
+        transform:
+            none;
 
-            padding:
-                13px 0;
+        order:
+            4;
 
-            border-bottom:
-                1px solid
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.25
-                );
+        width:
+            100%;
 
-            transition:
+        max-width:
+            370px;
 
-                padding-left
-                0.3s ease,
+        margin:
+            clamp(
+                36px,
+                5vh,
+                48px
+            )
+            auto
+            0;
 
-                opacity
-                0.3s ease;
+        padding:
+            0 3px;
 
-        }
+        display:
+            grid;
 
+        grid-template-columns:
+            repeat(3, 1fr);
 
-        .side-menu-content a:hover {
+        gap:
+            clamp(
+                4px,
+                2vw,
+                12px
+            );
+    }
 
-            padding-left:
-                10px;
 
-            opacity:
-                0.75;
+    .theme-button {
 
-        }
+        width:
+            100%;
 
+        min-width:
+            0;
 
-        /* =====================================================
-           VIDEO POPUP
-        ====================================================== */
+        padding:
+            6px
+            2px
+            10px;
 
-        .video-popup {
+        text-align:
+            center;
 
-            position:
-                fixed;
+        font-size:
+            clamp(
+                10.5px,
+                3.1vw,
+                15px
+            );
 
-            inset:
-                0;
+        letter-spacing:
+            clamp(
+                1.4px,
+                0.5vw,
+                2.5px
+            );
 
-            display:
-                flex;
+        white-space:
+            nowrap;
+    }
 
-            justify-content:
-                center;
 
-            align-items:
-                center;
+    .theme-button::after {
 
-            padding:
-                30px;
+        left:
+            6px;
 
-            background:
-                rgba(
-                    0,
-                    25,
-                    45,
-                    0.78
-                );
+        right:
+            6px;
 
-            opacity:
-                0;
+        bottom:
+            0;
 
-            visibility:
-                hidden;
+        height:
+            2px;
+    }
 
-            transition:
 
-                opacity
-                0.35s ease,
+    /* =================================================
+       VOTE
+    ================================================= */
 
-                visibility
-                0.35s ease;
+    .voting-area {
 
-            z-index:
-                2000;
+        position:
+            relative;
 
-        }
+        top:
+            auto;
 
+        bottom:
+            auto;
 
-        .video-popup.active {
+        left:
+            auto;
 
-            opacity:
-                1;
+        transform:
+            none;
 
-            visibility:
-                visible;
+        order:
+            5;
 
-        }
+        width:
+            100%;
 
+        margin:
+            clamp(
+                34px,
+                5vh,
+                45px
+            )
+            auto
+            0;
 
-        /* =====================================================
-           VIDEO POPUP CONTENT
-        ====================================================== */
+        display:
+            flex;
 
-        .video-popup-content {
+        justify-content:
+            center;
 
-            position:
-                relative;
+        align-items:
+            center;
+    }
 
-            width:
-                min(
-                    1000px,
-                    90vw
-                );
 
-            background:
-                var(--white);
+    .vote-button {
 
-            border-radius:
-                18px;
+        width:
+            clamp(
+                205px,
+                58vw,
+                250px
+            );
 
-            overflow:
-                hidden;
+        min-width:
+            0;
 
-            box-shadow:
-                0 25px 70px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.35
-                );
+        min-height:
+            clamp(
+                55px,
+                7vh,
+                65px
+            );
 
-            transform:
-                scale(0.92);
+        padding:
+            10px
+            25px;
 
-            transition:
-                transform
-                0.35s ease;
+        font-size:
+            clamp(
+                12.5px,
+                3.3vw,
+                16px
+            );
 
-        }
+        letter-spacing:
+            clamp(
+                3px,
+                0.8vw,
+                5px
+            );
 
+        border-width:
+            2.5px;
+    }
 
-        .video-popup.active
-        .video-popup-content {
 
-            transform:
-                scale(1);
+    /* =================================================
+       SIDE MENU
+    ================================================= */
 
-        }
+    .side-menu {
 
+        width:
+            min(
+                320px,
+                82vw
+            );
 
-        /* =====================================================
-           VIDEO
-        ====================================================== */
+        max-width:
+            82vw;
+    }
 
-        .video-popup video {
 
-            display:
-                block;
+    .side-menu-content {
 
-            width:
-                100%;
+        width:
+            78%;
 
-            max-height:
-                80vh;
+        max-height:
+            100vh;
 
-            background:
-                #000;
+        padding-top:
+            105px;
 
-        }
+        padding-bottom:
+            35px;
+    }
 
 
-        /* =====================================================
-           VIDEO CLOSE
-        ====================================================== */
+    .side-menu-content a {
 
-        .video-close {
+        font-size:
+            16px;
 
-            position:
-                absolute;
+        padding:
+            11px 0 12px;
+    }
 
-            top:
-                15px;
 
-            right:
-                15px;
+    .menu-section-title {
 
-            width:
-                44px;
+        font-size:
+            10px;
 
-            height:
-                44px;
+        letter-spacing:
+            2.5px;
 
-            border:
-                none;
+        margin-top:
+            15px;
+    }
 
-            border-radius:
-                50%;
 
-            background:
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.65
-                );
+    /* =================================================
+       VIDEO
+    ================================================= */
 
-            color:
-                var(--white);
+    .video-popup {
 
-            font-size:
-                28px;
+        padding:
+            15px;
+    }
 
-            line-height:
-                1;
 
-            cursor:
-                pointer;
+    .video-popup-content {
 
-            z-index:
-                10;
+        width:
+            92vw;
 
-            display:
-                flex;
+        max-width:
+            390px;
 
-            justify-content:
-                center;
+        border-radius:
+            12px;
+    }
 
-            align-items:
-                center;
 
-            transition:
+    .video-close {
 
-                background
-                0.25s ease,
+        width:
+            38px;
 
-                transform
-                0.25s ease;
+        height:
+            38px;
 
-        }
+        top:
+            10px;
 
+        right:
+            10px;
 
-        .video-close:hover {
+        font-size:
+            24px;
+    }
+}
 
-            background:
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.85
-                );
 
-            transform:
-                rotate(90deg);
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
 
-        }
+@media (max-width: 380px) {
 
+    .hero {
 
-        /* =====================================================
-           TABLET
-        ====================================================== */
+        padding-left:
+            14px;
 
-        @media (max-width: 1100px) {
+        padding-right:
+            14px;
+    }
 
-            .title {
 
-                font-size:
-                    clamp(
-                        60px,
-                        9vw,
-                        115px
-                    );
+    .brand-logo {
 
-            }
+        width:
+            195px;
 
+        max-width:
+            60vw;
 
-            .theme-navigation {
+        margin-top:
+            45px;
 
-                width:
-                    65%;
+        margin-bottom:
+            27px;
+    }
 
-            }
 
+    .menu-button {
 
-            .brand-logo {
+        top:
+            23px;
 
-                width:
-                    min(
-                        320px,
-                        34vw
-                    );
+        left:
+            18px;
 
-            }
+        width:
+            44px;
 
-        }
+        height:
+            34px;
+    }
 
 
-        /* =====================================================
-           TABLET / SMALL DESKTOP
-        ====================================================== */
+    .menu-button span {
 
-        @media (max-width: 768px) {
+        width:
+            44px;
 
-            .hero {
+        height:
+            4px;
+    }
 
-                min-height:
-                    600px;
 
-                padding:
-                    0 20px;
+    .menu-button.active span:nth-child(1) {
 
-            }
+        transform:
+            translateY(11px)
+            rotate(45deg);
+    }
 
 
-            /* ---------------------------------------------
-               LOGO
-            ---------------------------------------------- */
+    .menu-button.active span:nth-child(3) {
 
-            .brand-logo {
+        transform:
+            translateY(-11px)
+            rotate(-45deg);
+    }
 
-                top:
-                    28px;
 
-                width:
-                    min(
-                        260px,
-                        48vw
-                    );
+    .title {
 
-                max-height:
-                    80px;
+        max-width:
+            350px;
 
-            }
+        font-size:
+            38px;
 
+        letter-spacing:
+            -2px;
+    }
 
-            /* ---------------------------------------------
-               HAMBURGER
-            ---------------------------------------------- */
 
-            .menu-button {
+    .title span {
 
-                top:
-                    28px;
+        margin-top:
+            7px;
 
-                left:
-                    22px;
+        font-size:
+            17px;
+    }
 
-                width:
-                    52px;
 
-                height:
-                    40px;
+    .subtitle {
 
-            }
+        max-width:
+            325px;
 
+        margin-top:
+            29px;
 
-            .menu-button span {
+        font-size:
+            14.5px;
+    }
 
-                width:
-                    52px;
 
-                height:
-                    4px;
+    .theme-navigation {
 
-            }
+        max-width:
+            325px;
 
+        margin-top:
+            37px;
 
-            /* ---------------------------------------------
-               X
-            ---------------------------------------------- */
+        gap:
+            4px;
+    }
 
-            .menu-button.active
-            span:nth-child(1) {
 
-                transform:
-                    translateY(13px)
-                    rotate(45deg);
+    .theme-button {
 
-            }
+        font-size:
+            9.8px;
 
+        letter-spacing:
+            1.3px;
 
-            .menu-button.active
-            span:nth-child(3) {
+        padding:
+            6px
+            1px
+            8px;
+    }
 
-                transform:
-                    translateY(-13px)
-                    rotate(-45deg);
 
-            }
+    .theme-button::after {
 
+        left:
+            5px;
 
-            /* ---------------------------------------------
-               TITLE
-            ---------------------------------------------- */
+        right:
+            5px;
 
-            .title {
+        height:
+            1.5px;
+    }
 
-                top:
-                    24%;
 
-                width:
-                    100%;
+    .voting-area {
 
-                font-size:
-                    clamp(
-                        52px,
-                        12vw,
-                        82px
-                    );
+        margin-top:
+            34px;
+    }
 
-                letter-spacing:
-                    -3px;
 
-            }
+    .vote-button {
 
+        width:
+            200px;
 
-            .title span {
+        min-height:
+            54px;
 
-                margin-top:
-                    8px;
+        font-size:
+            12px;
 
-                font-size:
-                    0.52em;
+        letter-spacing:
+            3px;
+    }
+}
 
-                letter-spacing:
-                    -1px;
 
-            }
+/* =====================================================
+   LANDSCAPE MOBILE
+===================================================== */
 
+@media
+(max-width: 768px)
+and (orientation: landscape) {
 
-            /* ---------------------------------------------
-               SUBTITLE
-            ---------------------------------------------- */
+    .hero {
 
-            .subtitle {
+        min-height:
+            100vh;
 
-                top:
-                    51%;
+        padding-bottom:
+            25px;
+    }
 
-                width:
-                    90%;
 
-                font-size:
-                    clamp(
-                        15px,
-                        3vw,
-                        22px
-                    );
+    .brand-logo {
 
-            }
+        margin-top:
+            20px;
 
+        margin-bottom:
+            15px;
 
-            /* ---------------------------------------------
-               THEMES
-            ---------------------------------------------- */
+        width:
+            170px;
 
-            .theme-navigation {
+        max-height:
+            55px;
+    }
 
-                bottom:
-                    25%;
 
-                width:
-                    80%;
+    .title {
 
-            }
+        font-size:
+            clamp(
+                32px,
+                7vw,
+                48px
+            );
+    }
 
 
-            .theme-button {
+    .title span {
 
-                font-size:
-                    15px;
+        font-size:
+            clamp(
+                15px,
+                3.4vw,
+                22px
+            );
+    }
 
-                letter-spacing:
-                    4px;
 
-                padding:
-                    6px;
+    .subtitle {
 
-            }
+        margin-top:
+            17px;
 
+        font-size:
+            13px;
+    }
 
-            .theme-button::after {
 
-                left:
-                    6px;
+    .theme-navigation {
 
-                right:
-                    6px;
+        margin-top:
+            22px;
+    }
 
-            }
 
+    .voting-area {
 
-            /* ---------------------------------------------
-               VOTE
-            ---------------------------------------------- */
+        margin-top:
+            20px;
+    }
 
-            .voting-area {
 
-                bottom:
-                    10%;
+    .vote-button {
 
-            }
+        min-height:
+            48px;
 
+        width:
+            180px;
+    }
+}
 
-            .vote-button {
-
-                min-width:
-                    230px;
-
-                min-height:
-                    62px;
-
-                padding:
-                    11px 30px;
-
-                font-size:
-                    15px;
-
-                letter-spacing:
-                    5px;
-
-            }
-
-
-            /* ---------------------------------------------
-               SIDE MENU
-            ---------------------------------------------- */
-
-            .side-menu {
-
-                width:
-                    310px;
-
-                max-width:
-                    82vw;
-
-            }
-
-
-            /* ---------------------------------------------
-               PROTECTED HEADER
-            ---------------------------------------------- */
-
-            .side-menu::before {
-
-                height:
-                    110px;
-
-            }
-
-
-            .side-menu::after {
-
-                top:
-                    88px;
-
-                height:
-                    40px;
-
-            }
-
-
-            /* ---------------------------------------------
-               MENU CONTENT
-               POSISI KEMBALI DIBERI JARAK
-            ---------------------------------------------- */
-
-            .side-menu-content {
-
-                width:
-                    78%;
-
-                height:
-                    100%;
-
-                max-height:
-                    100vh;
-
-                padding-top:
-                    120px;
-
-                padding-left:
-                    0;
-
-                padding-right:
-                    0;
-
-                padding-bottom:
-                    40px;
-
-                margin-left:
-                    38px;
-
-            }
-
-
-            .side-menu-content a {
-
-                font-size:
-                    17px;
-
-            }
-
-        }
-
-
-        /* =====================================================
-           MOBILE
-        ====================================================== */
-
-        @media (max-width: 480px) {
-
-            .hero {
-
-                min-height:
-                    560px;
-
-            }
-
-
-            /* ---------------------------------------------
-               LOGO
-            ---------------------------------------------- */
-
-            .brand-logo {
-
-                top:
-                    24px;
-
-                width:
-                    200px;
-
-                max-height:
-                    65px;
-
-            }
-
-
-            /* ---------------------------------------------
-               HAMBURGER
-            ---------------------------------------------- */
-
-            .menu-button {
-
-                top:
-                    25px;
-
-                left:
-                    18px;
-
-                width:
-                    46px;
-
-                height:
-                    36px;
-
-            }
-
-
-            .menu-button span {
-
-                width:
-                    46px;
-
-                height:
-                    4px;
-
-            }
-
-
-            /* ---------------------------------------------
-               X
-            ---------------------------------------------- */
-
-            .menu-button.active
-            span:nth-child(1) {
-
-                transform:
-                    translateY(11px)
-                    rotate(45deg);
-
-            }
-
-
-            .menu-button.active
-            span:nth-child(3) {
-
-                transform:
-                    translateY(-11px)
-                    rotate(-45deg);
-
-            }
-
-
-            /* ---------------------------------------------
-               TITLE
-            ---------------------------------------------- */
-
-            .title {
-
-                top:
-                    26%;
-
-                font-size:
-                    clamp(
-                        42px,
-                        14vw,
-                        64px
-                    );
-
-                letter-spacing:
-                    -2px;
-
-            }
-
-
-            .title span {
-
-                margin-top:
-                    7px;
-
-                font-size:
-                    0.53em;
-
-                letter-spacing:
-                    -0.5px;
-
-            }
-
-
-            /* ---------------------------------------------
-               SUBTITLE
-            ---------------------------------------------- */
-
-            .subtitle {
-
-                top:
-                    51.5%;
-
-                font-size:
-                    14px;
-
-                line-height:
-                    1.3;
-
-            }
-
-
-            /* ---------------------------------------------
-               THEMES
-            ---------------------------------------------- */
-
-            .theme-navigation {
-
-                bottom:
-                    25%;
-
-                width:
-                    92%;
-
-            }
-
-
-            .theme-button {
-
-                font-size:
-                    12px;
-
-                letter-spacing:
-                    2px;
-
-                padding:
-                    5px 4px 7px;
-
-            }
-
-
-            .theme-button::after {
-
-                left:
-                    4px;
-
-                right:
-                    4px;
-
-                height:
-                    1.5px;
-
-            }
-
-
-            /* ---------------------------------------------
-               VOTE
-            ---------------------------------------------- */
-
-            .voting-area {
-
-                bottom:
-                    9%;
-
-            }
-
-
-            .vote-button {
-
-                min-width:
-                    190px;
-
-                min-height:
-                    54px;
-
-                padding:
-                    9px 22px;
-
-                font-size:
-                    13px;
-
-                letter-spacing:
-                    4px;
-
-                border-width:
-                    2px;
-
-            }
-
-
-            /* ---------------------------------------------
-               SIDE MENU
-            ---------------------------------------------- */
-
-            .side-menu {
-
-                width:
-                    85vw;
-
-            }
-
-
-            /* ---------------------------------------------
-               PROTECTED HEADER
-            ---------------------------------------------- */
-
-            .side-menu::before {
-
-                height:
-                    100px;
-
-            }
-
-
-            .side-menu::after {
-
-                top:
-                    80px;
-
-                height:
-                    35px;
-
-            }
-
-
-            /* ---------------------------------------------
-               MENU CONTENT
-               POSISI TETAP TIDAK MEPET
-            ---------------------------------------------- */
-
-            .side-menu-content {
-
-                width:
-                    82%;
-
-                height:
-                    100%;
-
-                max-height:
-                    100vh;
-
-                padding-top:
-                    110px;
-
-                padding-left:
-                    0;
-
-                padding-right:
-                    0;
-
-                padding-bottom:
-                    35px;
-
-                margin-left:
-                    30px;
-
-            }
-
-
-            /* ---------------------------------------------
-               VIDEO POPUP
-            ---------------------------------------------- */
-
-            .video-popup {
-
-                padding:
-                    15px;
-
-            }
-
-
-            .video-popup-content {
-
-                width:
-                    95vw;
-
-                border-radius:
-                    12px;
-
-            }
-
-
-            .video-close {
-
-                width:
-                    38px;
-
-                height:
-                    38px;
-
-                top:
-                    10px;
-
-                right:
-                    10px;
-
-                font-size:
-                    24px;
-
-            }
-
-        }
-
-    </style>
-
+</style>
 </head>
 
 
 <body>
 
 
-    <!-- =====================================================
-         MAIN HERO
-    ====================================================== -->
+<!-- =====================================================
+     HERO
+===================================================== -->
 
-    <main
-        class="hero"
-        id="hero"
+<main
+    class="hero"
+    id="hero"
+>
+
+
+    <!-- =================================================
+         LOGO
+    ================================================== -->
+
+    <img
+        src="assets/logo.png"
+        alt="Psychological Scale Exhibition Logo"
+        class="brand-logo"
     >
 
 
-        <!-- =================================================
-             LOGO
-        ================================================== -->
+    <!-- =================================================
+         HAMBURGER
+    ================================================== -->
 
-        <img
-            src="assets/logo.png"
-            alt="Psychological Scale Exhibition Logo"
-            class="brand-logo"
-        >
-
-
-        <!-- =================================================
-             HAMBURGER
-        ================================================== -->
-
-        <button
-            class="menu-button"
-            id="menuButton"
-            aria-label="Buka menu"
-            aria-expanded="false"
-            type="button"
-        >
-
-            <span></span>
-
-            <span></span>
-
-            <span></span>
-
-        </button>
-
-
-        <!-- =================================================
-             TITLE
-        ================================================== -->
-
-        <h1 class="title">
-
-            CTRL + MEASURE
-
-            <span>
-                MEASURING WHAT MAKES US, US.
-            </span>
-
-        </h1>
-
-
-        <!-- =================================================
-             SUBTITLE
-        ================================================== -->
-
-        <p class="subtitle">
-
-            Penyusunan Skala Psikologis 26/27
-
-        </p>
-
-
-        <!-- =================================================
-             THEME NAVIGATION
-        ================================================== -->
-
-        <nav
-            class="theme-navigation"
-            aria-label="Tema"
-        >
-
-            <a
-                href="tema1.html"
-                class="theme-button"
-            >
-                TEMA 1
-            </a>
-
-
-            <a
-                href="tema2.html"
-                class="theme-button"
-            >
-                TEMA 2
-            </a>
-
-
-            <a
-                href="tema3.html"
-                class="theme-button"
-            >
-                TEMA 3
-            </a>
-
-        </nav>
-
-
-        <!-- =================================================
-             VOTE
-        ================================================== -->
-
-        <div class="voting-area">
-
-            <a
-                href="voting.html"
-                class="vote-button"
-            >
-                VOTE
-            </a>
-
-        </div>
-
-
-    </main>
-
-
-    <!-- =====================================================
-         OVERLAY
-    ====================================================== -->
-
-    <div
-        class="overlay"
-        id="overlay"
-    ></div>
-
-
-    <!-- =====================================================
-         SIDE MENU
-    ====================================================== -->
-
-    <aside
-        class="side-menu"
-        id="sideMenu"
-        aria-hidden="true"
+    <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="Buka menu"
+        aria-expanded="false"
+        type="button"
     >
 
-        <nav
-            class="side-menu-content"
-        >
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
 
 
-            <!-- =============================================
-                 EXPLORE
-            ============================================== -->
+    <!-- =================================================
+         TITLE
+    ================================================== -->
 
-            <div class="menu-section-title">
-                EXPLORE
-            </div>
+    <h1 class="title">
 
+        CTRL + MEASURE
 
-            <a href="index.html">
-                Home
-            </a>
+        <span>
+            MEASURING WHAT MAKES US, US.
+        </span>
 
-
-            <a href="tentang.html">
-                Tentang Exhibition
-            </a>
+    </h1>
 
 
-            <a href="profil-dosen.html">
-                Profil Dosen
-            </a>
+    <!-- =================================================
+         SUBTITLE
+    ================================================== -->
+
+    <p class="subtitle">
+        Penyusunan Skala Psikologis 26/27
+    </p>
 
 
-            <a href="profil-asisten.html">
-                Profil Asisten
-            </a>
+    <!-- =================================================
+         THEMES
+    ================================================== -->
 
-
-            <!-- =============================================
-                 TEMA
-            ============================================== -->
-
-            <div class="menu-section-title">
-                TEMA
-            </div>
-
-
-            <a href="tema1.html">
-                Tema 1
-            </a>
-
-
-            <a href="tema2.html">
-                Tema 2
-            </a>
-
-
-            <a href="tema3.html">
-                Tema 3
-            </a>
-
-
-            <!-- =============================================
-                 PARTICIPATE
-            ============================================== -->
-
-            <div class="menu-section-title">
-                PARTICIPATE
-            </div>
-
-
-            <a href="voting.html">
-                Vote
-            </a>
-
-
-        </nav>
-
-    </aside>
-
-
-    <!-- =====================================================
-         INTRO VIDEO POPUP
-    ====================================================== -->
-
-    <div
-        class="video-popup"
-        id="videoPopup"
-        aria-hidden="true"
+    <nav
+        class="theme-navigation"
+        aria-label="Tema"
     >
 
-        <div
-            class="video-popup-content"
-            id="videoPopupContent"
+        <a
+            href="tema1.html"
+            class="theme-button"
         >
+            TEMA 1
+        </a>
 
 
-            <button
-                class="video-close"
-                id="videoClose"
-                type="button"
-                aria-label="Tutup video"
-            >
-                ×
-            </button>
+        <a
+            href="tema2.html"
+            class="theme-button"
+        >
+            TEMA 2
+        </a>
 
 
-            <video
-                id="introVideo"
-                controls
-                playsinline
-                preload="metadata"
-            >
+        <a
+            href="tema3.html"
+            class="theme-button"
+        >
+            TEMA 3
+        </a>
 
-                <source
-                    src="assets/tentang.mp4"
-                    type="video/mp4"
-                >
-
-                Browser Anda tidak mendukung
-                pemutaran video.
-
-            </video>
+    </nav>
 
 
-        </div>
+    <!-- =================================================
+         VOTE
+    ================================================== -->
+
+    <div class="voting-area">
+
+        <a
+            href="voting.html"
+            class="vote-button"
+        >
+            VOTE
+        </a>
 
     </div>
 
-
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
-
-    <script>
+</main>
 
 
-        /* =====================================================
-           VIDEO POPUP
-        ====================================================== */
+<!-- =====================================================
+     OVERLAY
+===================================================== -->
 
-        const videoPopup =
-            document.getElementById(
-                "videoPopup"
+<div
+    class="overlay"
+    id="overlay"
+></div>
+
+
+<!-- =====================================================
+     SIDE MENU
+===================================================== -->
+
+<aside
+    class="side-menu"
+    id="sideMenu"
+    aria-hidden="true"
+>
+
+    <nav class="side-menu-content">
+
+
+        <div class="menu-section-title">
+            EXPLORE
+        </div>
+
+
+        <a href="index.html">
+            Home
+        </a>
+
+
+        <a href="tentang.html">
+            Tentang Exhibition
+        </a>
+
+
+        <a href="profil-dosen.html">
+            Profil Dosen
+        </a>
+
+
+        <a href="profil-asisten.html">
+            Profil Asisten
+        </a>
+
+
+        <div class="menu-section-title">
+            TEMA
+        </div>
+
+
+        <a href="tema1.html">
+            Tema 1
+        </a>
+
+
+        <a href="tema2.html">
+            Tema 2
+        </a>
+
+
+        <a href="tema3.html">
+            Tema 3
+        </a>
+
+
+        <div class="menu-section-title">
+            PARTICIPATE
+        </div>
+
+
+        <a href="voting.html">
+            Vote
+        </a>
+
+
+    </nav>
+
+</aside>
+
+
+<!-- =====================================================
+     VIDEO POPUP
+===================================================== -->
+
+<div
+    class="video-popup"
+    id="videoPopup"
+    aria-hidden="true"
+>
+
+    <div
+        class="video-popup-content"
+        id="videoPopupContent"
+    >
+
+        <button
+            class="video-close"
+            id="videoClose"
+            type="button"
+            aria-label="Tutup video"
+        >
+            ×
+        </button>
+
+
+        <video
+            id="introVideo"
+            controls
+            playsinline
+            preload="metadata"
+        >
+
+            <source
+                src="assets/tentang.mp4"
+                type="video/mp4"
+            >
+
+            Browser Anda tidak mendukung
+            pemutaran video.
+
+        </video>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   VIDEO POPUP
+===================================================== */
+
+const videoPopup =
+    document.getElementById(
+        "videoPopup"
+    );
+
+
+const videoClose =
+    document.getElementById(
+        "videoClose"
+    );
+
+
+const introVideo =
+    document.getElementById(
+        "introVideo"
+    );
+
+
+const INTRO_STORAGE_KEY =
+    "psychologicalScaleIntroSeen";
+
+
+function showVideoPopup() {
+
+    videoPopup.classList.add(
+        "active"
+    );
+
+    videoPopup.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+    document.body.style.overflow =
+        "hidden";
+}
+
+
+function closeVideoPopup() {
+
+    videoPopup.classList.remove(
+        "active"
+    );
+
+    videoPopup.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    document.body.style.overflow =
+        "hidden";
+
+    if (introVideo) {
+
+        introVideo.pause();
+
+        introVideo.currentTime = 0;
+    }
+
+    localStorage.setItem(
+        INTRO_STORAGE_KEY,
+        "true"
+    );
+}
+
+
+/* =====================================================
+   FIRST VISIT VIDEO
+===================================================== */
+
+window.addEventListener(
+    "load",
+    function () {
+
+        const hasSeenIntro =
+            localStorage.getItem(
+                INTRO_STORAGE_KEY
             );
 
 
-        const videoClose =
-            document.getElementById(
-                "videoClose"
-            );
+        if (!hasSeenIntro) {
 
-
-        const introVideo =
-            document.getElementById(
-                "introVideo"
-            );
-
-
-        const INTRO_STORAGE_KEY =
-            "psychologicalScaleIntroSeen";
-
-
-        /* =====================================================
-           SHOW VIDEO
-        ====================================================== */
-
-        function showVideoPopup() {
-
-            videoPopup.classList.add(
-                "active"
-            );
-
-            videoPopup.setAttribute(
-                "aria-hidden",
-                "false"
-            );
-
-            document.body.style.overflow =
-                "hidden";
-
-        }
-
-
-        /* =====================================================
-           CLOSE VIDEO
-        ====================================================== */
-
-        function closeVideoPopup() {
-
-            videoPopup.classList.remove(
-                "active"
-            );
-
-            videoPopup.setAttribute(
-                "aria-hidden",
-                "true"
-            );
-
-            document.body.style.overflow =
-                "hidden";
-
-
-            if (introVideo) {
-
-                introVideo.pause();
-
-                introVideo.currentTime =
-                    0;
-
-            }
-
-
-            localStorage.setItem(
-                INTRO_STORAGE_KEY,
-                "true"
-            );
-
-        }
-
-
-        /* =====================================================
-           FIRST VISIT
-        ====================================================== */
-
-        window.addEventListener(
-            "load",
-            function () {
-
-                const hasSeenIntro =
-                    localStorage.getItem(
-                        INTRO_STORAGE_KEY
-                    );
-
-
-                if (!hasSeenIntro) {
-
-                    setTimeout(
-                        function () {
-
-                            showVideoPopup();
-
-                        },
-                        300
-                    );
-
-                }
-
-            }
-        );
-
-
-        /* =====================================================
-           VIDEO CLOSE BUTTON
-        ====================================================== */
-
-        if (videoClose) {
-
-            videoClose.addEventListener(
-                "click",
-                closeVideoPopup
-            );
-
-        }
-
-
-        /* =====================================================
-           CLICK OUTSIDE VIDEO
-        ====================================================== */
-
-        if (videoPopup) {
-
-            videoPopup.addEventListener(
-                "click",
-                function (event) {
-
-                    if (
-                        event.target ===
-                        videoPopup
-                    ) {
-
-                        closeVideoPopup();
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        /* =====================================================
-           MENU ELEMENTS
-        ====================================================== */
-
-        const menuButton =
-            document.getElementById(
-                "menuButton"
-            );
-
-
-        const sideMenu =
-            document.getElementById(
-                "sideMenu"
-            );
-
-
-        const overlay =
-            document.getElementById(
-                "overlay"
-            );
-
-
-        /* =====================================================
-           OPEN MENU
-        ====================================================== */
-
-        function openMenu() {
-
-            menuButton.classList.add(
-                "active"
-            );
-
-
-            sideMenu.classList.add(
-                "active"
-            );
-
-
-            overlay.classList.add(
-                "active"
-            );
-
-
-            sideMenu.setAttribute(
-                "aria-hidden",
-                "false"
-            );
-
-
-            menuButton.setAttribute(
-                "aria-expanded",
-                "true"
-            );
-
-
-            menuButton.setAttribute(
-                "aria-label",
-                "Tutup menu"
-            );
-
-
-            document.body.classList.add(
-                "menu-open"
-            );
-
-        }
-
-
-        /* =====================================================
-           CLOSE MENU
-        ====================================================== */
-
-        function closeMenu() {
-
-            menuButton.classList.remove(
-                "active"
-            );
-
-
-            sideMenu.classList.remove(
-                "active"
-            );
-
-
-            overlay.classList.remove(
-                "active"
-            );
-
-
-            sideMenu.setAttribute(
-                "aria-hidden",
-                "true"
-            );
-
-
-            menuButton.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-
-            menuButton.setAttribute(
-                "aria-label",
-                "Buka menu"
-            );
-
-
-            document.body.classList.remove(
-                "menu-open"
-            );
-
-        }
-
-
-        /* =====================================================
-           TOGGLE MENU
-        ====================================================== */
-
-        if (menuButton) {
-
-            menuButton.addEventListener(
-                "click",
+            setTimeout(
                 function () {
 
-                    if (
-                        sideMenu.classList.contains(
-                            "active"
-                        )
-                    ) {
+                    showVideoPopup();
 
-                        closeMenu();
-
-                    } else {
-
-                        openMenu();
-
-                    }
-
-                }
+                },
+                300
             );
-
         }
 
+    }
+);
 
-        /* =====================================================
-           OVERLAY CLICK
-        ====================================================== */
 
-        if (overlay) {
+/* =====================================================
+   CLOSE VIDEO
+===================================================== */
 
-            overlay.addEventListener(
-                "click",
-                closeMenu
-            );
+if (videoClose) {
+
+    videoClose.addEventListener(
+        "click",
+        closeVideoPopup
+    );
+}
+
+
+if (videoPopup) {
+
+    videoPopup.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                event.target ===
+                videoPopup
+            ) {
+
+                closeVideoPopup();
+            }
 
         }
+    );
+}
 
 
-        /* =====================================================
-           MENU LINKS
-        ====================================================== */
+/* =====================================================
+   MENU
+===================================================== */
 
-        const menuLinks =
-            document.querySelectorAll(
-                ".side-menu a"
-            );
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
 
 
-        menuLinks.forEach(
-            function (link) {
+const sideMenu =
+    document.getElementById(
+        "sideMenu"
+    );
 
-                link.addEventListener(
-                    "click",
-                    function () {
 
-                        closeMenu();
+const overlay =
+    document.getElementById(
+        "overlay"
+    );
 
-                    }
-                );
+
+function openMenu() {
+
+    menuButton.classList.add(
+        "active"
+    );
+
+    sideMenu.classList.add(
+        "active"
+    );
+
+    overlay.classList.add(
+        "active"
+    );
+
+    sideMenu.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+    menuButton.setAttribute(
+        "aria-expanded",
+        "true"
+    );
+
+    menuButton.setAttribute(
+        "aria-label",
+        "Tutup menu"
+    );
+
+    document.body.classList.add(
+        "menu-open"
+    );
+}
+
+
+function closeMenu() {
+
+    menuButton.classList.remove(
+        "active"
+    );
+
+    sideMenu.classList.remove(
+        "active"
+    );
+
+    overlay.classList.remove(
+        "active"
+    );
+
+    sideMenu.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    menuButton.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+
+    menuButton.setAttribute(
+        "aria-label",
+        "Buka menu"
+    );
+
+    document.body.classList.remove(
+        "menu-open"
+    );
+}
+
+
+/* =====================================================
+   TOGGLE MENU
+===================================================== */
+
+if (menuButton) {
+
+    menuButton.addEventListener(
+        "click",
+        function () {
+
+            if (
+                sideMenu.classList.contains(
+                    "active"
+                )
+            ) {
+
+                closeMenu();
+
+            } else {
+
+                openMenu();
+
+            }
+
+        }
+    );
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+if (overlay) {
+
+    overlay.addEventListener(
+        "click",
+        closeMenu
+    );
+}
+
+
+/* =====================================================
+   MENU LINKS
+===================================================== */
+
+const menuLinks =
+    document.querySelectorAll(
+        ".side-menu a"
+    );
+
+
+menuLinks.forEach(
+    function (link) {
+
+        link.addEventListener(
+            "click",
+            function () {
+
+                closeMenu();
 
             }
         );
 
-
-        /* =====================================================
-           ESCAPE KEY
-        ====================================================== */
-
-        document.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (
-                    event.key ===
-                    "Escape"
-                ) {
+    }
+);
 
 
-                    if (
-                        sideMenu.classList.contains(
-                            "active"
-                        )
-                    ) {
+/* =====================================================
+   ESCAPE
+===================================================== */
 
-                        closeMenu();
+document.addEventListener(
+    "keydown",
+    function (event) {
 
-                    }
+        if (
+            event.key === "Escape"
+        ) {
 
+            if (
+                sideMenu.classList.contains(
+                    "active"
+                )
+            ) {
 
-                    if (
-                        videoPopup.classList.contains(
-                            "active"
-                        )
-                    ) {
-
-                        closeVideoPopup();
-
-                    }
-
-                }
-
+                closeMenu();
             }
-        );
 
 
-    </script>
+            if (
+                videoPopup.classList.contains(
+                    "active"
+                )
+            ) {
 
+                closeVideoPopup();
+            }
+
+        }
+
+    }
+);
+
+</script>
 
 </body>
-
 </html>
