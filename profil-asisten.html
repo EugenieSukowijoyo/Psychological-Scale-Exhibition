@@ -1,315 +1,2125 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>Profil Asisten | Psychological Scale Exhibition</title>
+
+
+<!-- =====================================================
+     GOOGLE FONTS
+===================================================== -->
+
+<link
+    href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet"
+>
+
 
 <style>
 
 /* =====================================================
    RESET
-   ===================================================== */
+===================================================== */
 
 * {
+
     margin: 0;
     padding: 0;
+
     box-sizing: border-box;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+body {
+
+    width: 100%;
+    min-height: 100vh;
+
+    font-family:
+        'Montserrat',
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: #111111;
+
+    background:
+        url("assets/background.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    overflow-x: hidden;
+
+    overflow-y: auto;
+
 }
 
 
 /* =====================================================
-   BODY
-   ===================================================== */
+   COLOR VARIABLES
+===================================================== */
 
-body {
+:root {
+
+    --blue:
+        #1464c4;
+
+    --blue-dark:
+        #07578d;
+
+    --blue-deep:
+        #075487;
+
+    --light-blue:
+        #b9d3ef;
+
+    --very-light-blue:
+        #eef6fc;
+
+    --white:
+        #ffffff;
+
+    --black:
+        #111111;
+
+}
+
+
+/* =====================================================
+   TOP SCROLL PROTECTION
+   SOLID → TRANSPARENT
+===================================================== */
+
+.top-scroll-protection {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
     width: 100%;
-    min-height: 100vh;
 
-    font-family: Arial, Helvetica, sans-serif;
+    height: 115px;
 
-    background-image: url("assets/background.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background:
+        linear-gradient(
+            to bottom,
 
-    color: white;
+            rgba(238, 246, 252, 1) 0%,
 
-    overflow: hidden;
+            rgba(238, 246, 252, 1) 42%,
+
+            rgba(238, 246, 252, 0.96) 52%,
+
+            rgba(238, 246, 252, 0.78) 65%,
+
+            rgba(238, 246, 252, 0.45) 80%,
+
+            rgba(238, 246, 252, 0.18) 91%,
+
+            rgba(238, 246, 252, 0) 100%
+        );
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    z-index: 1100;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+
+}
+
+
+.top-scroll-protection.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+
+body.menu-open
+.top-scroll-protection {
+
+    opacity: 0;
+
+    visibility: hidden;
+
+}
+
+
+/* =====================================================
+   HAMBURGER BUTTON
+===================================================== */
+
+.menu-button {
+
+    position: fixed;
+
+    top: 38px;
+
+    left: 30px;
+
+    width: 64px;
+
+    height: 48px;
+
+    padding: 4px 0;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    z-index: 1300;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+}
+
+
+.menu-button span {
+
+    display: block;
+
+    width: 64px;
+
+    height: 5px;
+
+    background:
+        var(--blue-deep);
+
+    border-radius: 0;
+
+    transition:
+        transform 0.35s ease,
+        opacity 0.25s ease,
+        background 0.25s ease;
+
+}
+
+
+/* =====================================================
+   HAMBURGER → X
+===================================================== */
+
+.menu-button.active
+span:nth-child(1) {
+
+    transform:
+        translateY(17px)
+        rotate(45deg);
+
+    background:
+        white;
+
+}
+
+
+.menu-button.active
+span:nth-child(2) {
+
+    opacity:
+        0;
+
+}
+
+
+.menu-button.active
+span:nth-child(3) {
+
+    transform:
+        translateY(-17px)
+        rotate(-45deg);
+
+    background:
+        white;
+
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(
+            0,
+            38,
+            66,
+            0.38
+        );
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+
+    z-index: 1150;
+
+}
+
+
+.overlay.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+
+/* =====================================================
+   SIDE MENU
+===================================================== */
+
+.side-menu {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 365px;
+
+    max-width: 40vw;
+
+    height: 100vh;
+
+    background:
+        var(--blue-deep);
+
+    z-index: 1200;
+
+    transform:
+        translateX(-100%);
+
+    transition:
+        transform 0.4s ease;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    box-shadow:
+        8px 0 30px
+        rgba(
+            0,
+            0,
+            0,
+            0.12
+        );
+
+}
+
+
+.side-menu.active {
+
+    transform:
+        translateX(0);
+
+}
+
+
+.side-menu-inner {
+
+    width: 100%;
+
+    min-height: 100%;
+
+    padding:
+        118px 43px 55px;
+
+}
+
+
+/* =====================================================
+   MENU LABEL
+===================================================== */
+
+.menu-label {
+
+    margin-bottom:
+        22px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.55
+        );
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        3px;
+
+}
+
+
+/* =====================================================
+   MENU LINKS
+===================================================== */
+
+.menu-link {
+
+    display: block;
+
+    width: 100%;
+
+    padding:
+        16px 0;
+
+    border-bottom:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.20
+        );
+
+    color:
+        white;
+
+    text-decoration:
+        none;
+
+    font-size:
+        20px;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.2;
+
+    transition:
+        color 0.25s ease,
+        padding-left 0.25s ease;
+
+}
+
+
+.menu-link:hover {
+
+    color:
+        #dcecff;
+
+    padding-left:
+        7px;
+
+}
+
+
+/* =====================================================
+   MENU SECTION
+===================================================== */
+
+.menu-section {
+
+    margin-top:
+        34px;
+
+}
+
+
+.menu-section-title {
+
+    margin-bottom:
+        3px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.55
+        );
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        3px;
+
 }
 
 
 /* =====================================================
    MAIN PAGE
-   ===================================================== */
+===================================================== */
 
 .assistant-page {
+
     width: 100%;
-    height: 100vh;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    min-height: 100vh;
 
-    padding: 5vh 7vw;
+    padding:
+        35px 3.8vw 65px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
 }
 
 
 /* =====================================================
-   BLUE CONTENT BOX
-   ===================================================== */
-
-.assistant-container {
-    width: 100%;
-    max-width: 1400px;
-    height: 80vh;
-    min-height: 550px;
-
-    background: rgba(5, 79, 132, 0.94);
-
-    padding: 7vh 5vw 5vh;
-
-    display: flex;
-    flex-direction: column;
-
-    position: relative;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-}
-
-
-/* =====================================================
-   TITLE
-   ===================================================== */
+   PAGE TITLE
+===================================================== */
 
 .page-title {
-    font-size: clamp(42px, 4.5vw, 72px);
 
-    line-height: 1;
+    margin-top:
+        0;
 
-    font-weight: 800;
+    margin-bottom:
+        28px;
 
-    color: white;
+    font-family:
+        'League Spartan',
+        sans-serif;
 
-    margin-bottom: 7vh;
+    font-size:
+        clamp(
+            58px,
+            6.2vw,
+            104px
+        );
 
-    letter-spacing: -2px;
+    line-height:
+        0.92;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        -3px;
+
+    text-align:
+        center;
+
+    color:
+        var(--blue);
+
+    text-transform:
+        uppercase;
+
 }
 
 
 /* =====================================================
-   DESCRIPTION
-   ===================================================== */
+   DESCRIPTION BOX
+===================================================== */
 
 .assistant-description {
-    width: 100%;
 
-    font-size: clamp(20px, 2vw, 34px);
+    width:
+        100%;
 
-    line-height: 1.4;
+    max-width:
+        1520px;
 
-    font-weight: 400;
+    margin:
+        0 auto;
 
-    color: white;
+    padding:
+        42px 75px;
 
-    text-align: left;
+    background:
+        var(--blue-deep);
 
-    max-width: 1250px;
+    color:
+        white;
+
+    font-size:
+        clamp(
+            15px,
+            1.45vw,
+            24px
+        );
+
+    line-height:
+        1.55;
+
+    font-weight:
+        400;
+
+    text-align:
+        left;
+
+}
+
+
+/* =====================================================
+   ASSISTANT GRID
+===================================================== */
+
+.assistant-grid {
+
+    width:
+        min(
+            100%,
+            1450px
+        );
+
+    margin:
+        55px auto 0;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    column-gap:
+        55px;
+
+    row-gap:
+        45px;
+
+    align-items:
+        start;
+
+}
+
+
+/* =====================================================
+   ASSISTANT CARD
+===================================================== */
+
+.assistant-card {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        flex-start;
+
+    text-align:
+        center;
+
+    min-width:
+        0;
+
+}
+
+
+/* =====================================================
+   ASSISTANT IMAGE FRAME
+===================================================== */
+
+.assistant-image-wrapper {
+
+    position:
+        relative;
+
+    width:
+        clamp(
+            190px,
+            15.5vw,
+            290px
+        );
+
+    height:
+        clamp(
+            190px,
+            15.5vw,
+            290px
+        );
+
+    border:
+        7px solid
+        var(--blue-deep);
+
+    border-radius:
+        50%;
+
+    overflow:
+        hidden;
+
+    background:
+        #dcecf7;
+
+    flex-shrink:
+        0;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+
+}
+
+
+/* =====================================================
+   ASSISTANT IMAGE
+===================================================== */
+
+.assistant-image {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    display:
+        block;
+
+    object-fit:
+        cover;
+
+    object-position:
+        center;
+
+}
+
+
+/* =====================================================
+   HOVER
+===================================================== */
+
+.assistant-card:hover
+.assistant-image-wrapper {
+
+    transform:
+        translateY(-7px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(
+            7,
+            84,
+            135,
+            0.15
+        );
+
+}
+
+
+/* =====================================================
+   ASSISTANT NAME
+===================================================== */
+
+.assistant-name {
+
+    margin-top:
+        22px;
+
+    color:
+        var(--black);
+
+    font-family:
+        'Montserrat',
+        sans-serif;
+
+    font-size:
+        clamp(
+            17px,
+            1.45vw,
+            25px
+        );
+
+    line-height:
+        1.2;
+
+    font-weight:
+        800;
+
+    text-align:
+        center;
+
 }
 
 
 /* =====================================================
    BACK BUTTON
-   ===================================================== */
+===================================================== */
 
 .back-button {
-    position: absolute;
 
-    right: 3vw;
-    bottom: 5vh;
+    display:
+        inline-flex;
 
-    color: white;
+    align-items:
+        center;
 
-    font-size: clamp(20px, 2vw, 32px);
+    justify-content:
+        center;
 
-    font-weight: 400;
+    min-width:
+        280px;
 
-    text-decoration: underline;
+    margin:
+        65px auto 0;
 
-    text-underline-offset: 6px;
+    padding:
+        15px 42px;
+
+    border:
+        3px solid
+        var(--blue-deep);
+
+    border-radius:
+        50px;
+
+    background:
+        transparent;
+
+    color:
+        var(--blue-deep);
+
+    font-family:
+        'Montserrat',
+        sans-serif;
+
+    font-size:
+        clamp(
+            18px,
+            1.5vw,
+            25px
+        );
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        6px;
+
+    text-align:
+        center;
+
+    text-decoration:
+        none;
+
+    text-transform:
+        uppercase;
 
     transition:
-        transform 0.3s ease,
-        opacity 0.3s ease,
-        letter-spacing 0.3s ease;
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+
 }
 
+
 .back-button:hover {
-    transform: translateX(-8px);
 
-    opacity: 0.75;
+    background:
+        var(--blue-deep);
 
-    letter-spacing: 1px;
+    color:
+        white;
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+/* =====================================================
+   LARGE TABLET
+===================================================== */
+
+@media (max-width: 1200px) {
+
+    .assistant-page {
+
+        padding:
+            35px 4vw 60px;
+
+    }
+
+
+    .assistant-description {
+
+        padding:
+            38px 55px;
+
+    }
+
+
+    .assistant-grid {
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+        column-gap:
+            25px;
+
+        row-gap:
+            40px;
+
+    }
+
+
+    .assistant-image-wrapper {
+
+        width:
+            190px;
+
+        height:
+            190px;
+
+    }
+
+
+    .assistant-name {
+
+        font-size:
+            18px;
+
+    }
+
 }
 
 
 /* =====================================================
    TABLET
-   ===================================================== */
+===================================================== */
 
-@media (max-width: 1100px) {
+@media (max-width: 900px) {
 
-    .assistant-page {
-        padding: 5vh 5vw;
+    .assistant-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        column-gap:
+            45px;
+
+        row-gap:
+            50px;
+
     }
 
-    .assistant-container {
-        height: 80vh;
 
-        padding: 6vh 5vw 5vh;
+    .assistant-image-wrapper {
+
+        width:
+            230px;
+
+        height:
+            230px;
+
     }
 
-    .page-title {
-        margin-bottom: 5vh;
+
+    .assistant-name {
+
+        font-size:
+            20px;
+
     }
 
-    .assistant-description {
-        font-size: clamp(18px, 2.2vw, 28px);
-        line-height: 1.45;
-    }
-
-    .back-button {
-        right: 4vw;
-        bottom: 4vh;
-    }
 }
 
 
 /* =====================================================
    MOBILE
-   ===================================================== */
+===================================================== */
 
 @media (max-width: 700px) {
 
-    body {
-        overflow: auto;
+
+    /* -------------------------------------------------
+       TOP PROTECTION
+    ------------------------------------------------- */
+
+    .top-scroll-protection {
+
+        height:
+            105px;
+
+        background:
+            linear-gradient(
+                to bottom,
+
+                rgba(238, 246, 252, 1) 0%,
+
+                rgba(238, 246, 252, 1) 45%,
+
+                rgba(238, 246, 252, 0.96) 55%,
+
+                rgba(238, 246, 252, 0.76) 68%,
+
+                rgba(238, 246, 252, 0.40) 83%,
+
+                rgba(238, 246, 252, 0.14) 93%,
+
+                rgba(238, 246, 252, 0) 100%
+            );
+
     }
+
+
+    /* -------------------------------------------------
+       HAMBURGER
+    ------------------------------------------------- */
+
+    .menu-button {
+
+        top:
+            28px;
+
+        left:
+            24px;
+
+        width:
+            54px;
+
+        height:
+            42px;
+
+    }
+
+
+    .menu-button span {
+
+        width:
+            54px;
+
+        height:
+            4px;
+
+    }
+
+
+    .menu-button.active
+    span:nth-child(1) {
+
+        transform:
+            translateY(15px)
+            rotate(45deg);
+
+    }
+
+
+    .menu-button.active
+    span:nth-child(3) {
+
+        transform:
+            translateY(-15px)
+            rotate(-45deg);
+
+    }
+
+
+    /* -------------------------------------------------
+       SIDE MENU
+    ------------------------------------------------- */
+
+    .side-menu {
+
+        width:
+            min(
+                350px,
+                88vw
+            );
+
+        max-width:
+            88vw;
+
+    }
+
+
+    .side-menu-inner {
+
+        padding:
+            105px 35px 50px;
+
+    }
+
+
+    .menu-link {
+
+        font-size:
+            18px;
+
+    }
+
+
+    /* -------------------------------------------------
+       MAIN
+    ------------------------------------------------- */
 
     .assistant-page {
-        width: 100%;
-        min-height: 100vh;
-        height: auto;
 
-        padding: 30px 20px;
+        padding:
+            105px 20px 50px;
+
     }
 
-    .assistant-container {
-        width: 100%;
-        height: auto;
-        min-height: calc(100vh - 60px);
 
-        padding: 45px 30px 100px;
-
-        justify-content: flex-start;
-    }
+    /* -------------------------------------------------
+       TITLE
+    ------------------------------------------------- */
 
     .page-title {
-        font-size: 42px;
 
-        margin-bottom: 40px;
+        margin-bottom:
+            28px;
 
-        letter-spacing: -1.5px;
+        font-size:
+            48px;
+
+        letter-spacing:
+            -2px;
+
     }
+
+
+    /* -------------------------------------------------
+       DESCRIPTION
+    ------------------------------------------------- */
 
     .assistant-description {
-        font-size: 18px;
 
-        line-height: 1.5;
+        padding:
+            28px 25px;
 
-        text-align: left;
+        font-size:
+            14px;
+
+        line-height:
+            1.6;
+
+        text-align:
+            left;
+
     }
+
+
+    /* -------------------------------------------------
+       GRID
+    ------------------------------------------------- */
+
+    .assistant-grid {
+
+        width:
+            100%;
+
+        margin-top:
+            40px;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        column-gap:
+            18px;
+
+        row-gap:
+            38px;
+
+    }
+
+
+    /* -------------------------------------------------
+       IMAGE
+    ------------------------------------------------- */
+
+    .assistant-image-wrapper {
+
+        width:
+            min(
+                38vw,
+                175px
+            );
+
+        height:
+            min(
+                38vw,
+                175px
+            );
+
+        border-width:
+            6px;
+
+    }
+
+
+    /* -------------------------------------------------
+       NAME
+    ------------------------------------------------- */
+
+    .assistant-name {
+
+        margin-top:
+            15px;
+
+        font-size:
+            15px;
+
+        line-height:
+            1.25;
+
+    }
+
+
+    /* -------------------------------------------------
+       BACK
+    ------------------------------------------------- */
 
     .back-button {
-        right: 30px;
-        bottom: 35px;
 
-        font-size: 20px;
+        min-width:
+            210px;
+
+        margin-top:
+            50px;
+
+        padding:
+            13px 28px;
+
+        font-size:
+            17px;
+
+        letter-spacing:
+            5px;
+
     }
+
 }
 
 
 /* =====================================================
-   MOBILE KECIL
-   ===================================================== */
+   SMALL MOBILE
+===================================================== */
 
 @media (max-width: 400px) {
 
+
     .assistant-page {
-        padding: 20px 15px;
+
+        padding:
+            100px 15px 45px;
+
     }
 
-    .assistant-container {
-        min-height: calc(100vh - 40px);
-
-        padding: 35px 25px 90px;
-    }
 
     .page-title {
-        font-size: 36px;
 
-        margin-bottom: 30px;
+        font-size:
+            42px;
+
+        letter-spacing:
+            -1.5px;
+
     }
+
 
     .assistant-description {
-        font-size: 16px;
-        line-height: 1.5;
+
+        padding:
+            25px 20px;
+
+        font-size:
+            13px;
+
     }
+
+
+    .assistant-grid {
+
+        column-gap:
+            12px;
+
+        row-gap:
+            32px;
+
+        margin-top:
+            32px;
+
+    }
+
+
+    .assistant-image-wrapper {
+
+        width:
+            38vw;
+
+        height:
+            38vw;
+
+        max-width:
+            150px;
+
+        max-height:
+            150px;
+
+        border-width:
+            5px;
+
+    }
+
+
+    .assistant-name {
+
+        margin-top:
+            12px;
+
+        font-size:
+            13px;
+
+    }
+
 
     .back-button {
-        right: 25px;
-        bottom: 30px;
 
-        font-size: 19px;
+        min-width:
+            190px;
+
+        margin-top:
+            42px;
+
+        padding:
+            12px 24px;
+
+        font-size:
+            16px;
+
     }
+
 }
 
 </style>
+
 </head>
 
 
 <body>
 
+
+<!-- =====================================================
+     TOP GRADIENT PROTECTION
+===================================================== -->
+
+<div
+    class="top-scroll-protection"
+    id="scrollProtection"
+></div>
+
+
+<!-- =====================================================
+     OVERLAY
+===================================================== -->
+
+<div
+    class="overlay"
+    id="overlay"
+></div>
+
+
+<!-- =====================================================
+     HAMBURGER
+===================================================== -->
+
+<button
+    class="menu-button"
+    id="menuButton"
+    type="button"
+    aria-label="Buka menu"
+    aria-expanded="false"
+>
+
+    <span></span>
+    <span></span>
+    <span></span>
+
+</button>
+
+
+<!-- =====================================================
+     SIDE MENU
+===================================================== -->
+
+<aside
+    class="side-menu"
+    id="sideMenu"
+>
+
+    <div class="side-menu-inner">
+
+
+        <!-- =============================================
+             EXPLORE
+        ============================================== -->
+
+        <div class="menu-label">
+            EXPLORE
+        </div>
+
+        <a
+            href="index.html"
+            class="menu-link"
+        >
+            Home
+        </a>
+
+        <a
+            href="tentang.html"
+            class="menu-link"
+        >
+            Tentang Exhibition
+        </a>
+
+
+        <a
+            href="profil-dosen.html"
+            class="menu-link"
+        >
+            Profil Dosen
+        </a>
+
+
+        <a
+            href="profil-asisten.html"
+            class="menu-link"
+        >
+            Profil Asisten
+        </a>
+
+
+        <!-- =============================================
+             TEMA
+        ============================================== -->
+
+        <div class="menu-section">
+
+            <div class="menu-section-title">
+                TEMA
+            </div>
+
+
+            <a
+                href="tema1.html"
+                class="menu-link"
+            >
+                Tema 1
+            </a>
+
+
+            <a
+                href="tema2.html"
+                class="menu-link"
+            >
+                Tema 2
+            </a>
+
+
+            <a
+                href="tema3.html"
+                class="menu-link"
+            >
+                Tema 3
+            </a>
+
+        </div>
+
+
+        <!-- =============================================
+             PARTICIPATE
+        ============================================== -->
+
+        <div class="menu-section">
+
+            <div class="menu-section-title">
+                PARTICIPATE
+            </div>
+
+
+            <a
+                href="voting.html"
+                class="menu-link"
+            >
+                Vote
+            </a>
+
+        </div>
+
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
 <main class="assistant-page">
 
-    <section class="assistant-container">
 
-        <!-- JUDUL -->
-        <h1 class="page-title">
-            Profil Asisten
-        </h1>
+    <!-- =================================================
+         TITLE
+    ================================================== -->
 
-
-        <!-- DESKRIPSI -->
-        <p class="assistant-description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-            laborum.
-        </p>
+    <h1 class="page-title">
+        PROFIL ASISTEN
+    </h1>
 
 
-        <!-- TOMBOL KEMBALI -->
-        <a href="index.html" class="back-button">
-            Kembali
-        </a>
+    <!-- =================================================
+         DESCRIPTION
+    ================================================== -->
+
+    <p class="assistant-description">
+
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud
+        exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit
+        in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident,
+        sunt in culpa qui officia deserunt mollit anim id est
+        laborum.
+
+    </p>
+
+
+    <!-- =================================================
+         ASSISTANT GRID
+    ================================================== -->
+
+    <section
+        class="assistant-grid"
+        aria-label="Profil asisten"
+    >
+
+
+        <!-- =================================================
+             ASSISTANT 1
+        ================================================== -->
+
+        <article class="assistant-card">
+
+            <div class="assistant-image-wrapper">
+
+                <img
+                    class="assistant-image"
+                    src="assets/asisten1.jpg"
+                    alt="Foto Asisten 1"
+                >
+
+            </div>
+
+
+            <h2 class="assistant-name">
+                Nama Asdos
+            </h2>
+
+        </article>
+
+
+        <!-- =================================================
+             ASSISTANT 2
+        ================================================== -->
+
+        <article class="assistant-card">
+
+            <div class="assistant-image-wrapper">
+
+                <img
+                    class="assistant-image"
+                    src="assets/asisten2.jpg"
+                    alt="Foto Asisten 2"
+                >
+
+            </div>
+
+
+            <h2 class="assistant-name">
+                Nama Asdos
+            </h2>
+
+        </article>
+
+
+        <!-- =================================================
+             ASSISTANT 3
+        ================================================== -->
+
+        <article class="assistant-card">
+
+            <div class="assistant-image-wrapper">
+
+                <img
+                    class="assistant-image"
+                    src="assets/asisten3.jpg"
+                    alt="Foto Asisten 3"
+                >
+
+            </div>
+
+
+            <h2 class="assistant-name">
+                Nama Asdos
+            </h2>
+
+        </article>
+
+
+        <!-- =================================================
+             ASSISTANT 4
+        ================================================== -->
+
+        <article class="assistant-card">
+
+            <div class="assistant-image-wrapper">
+
+                <img
+                    class="assistant-image"
+                    src="assets/asisten4.jpg"
+                    alt="Foto Asisten 4"
+                >
+
+            </div>
+
+
+            <h2 class="assistant-name">
+                Nama Asdos
+            </h2>
+
+        </article>
+
+
+        <!-- =================================================
+             ASSISTANT 5
+        ================================================== -->
+
+        <article class="assistant-card">
+
+            <div class="assistant-image-wrapper">
+
+                <img
+                    class="assistant-image"
+                    src="assets/asisten5.jpg"
+                    alt="Foto Asisten 5"
+                >
+
+            </div>
+
+
+            <h2 class="assistant-name">
+                Nama Asdos
+            </h2>
+
+        </article>
+
+
+        <!-- =================================================
+             ASSISTANT 6
+        ================================================== -->
+
+        <article class="assistant-card">
+
+            <div class="assistant-image-wrapper">
+
+                <img
+                    class="assistant-image"
+                    src="assets/asisten6.jpg"
+                    alt="Foto Asisten 6"
+                >
+
+            </div>
+
+
+            <h2 class="assistant-name">
+                Nama Asdos
+            </h2>
+
+        </article>
+
+
+        <!-- =================================================
+             ASSISTANT 7
+        ================================================== -->
+
+        <article class="assistant-card">
+
+            <div class="assistant-image-wrapper">
+
+                <img
+                    class="assistant-image"
+                    src="assets/asisten7.jpg"
+                    alt="Foto Asisten 7"
+                >
+
+            </div>
+
+
+            <h2 class="assistant-name">
+                Nama Asdos
+            </h2>
+
+        </article>
+
+
+        <!-- =================================================
+             ASSISTANT 8
+        ================================================== -->
+
+        <article class="assistant-card">
+
+            <div class="assistant-image-wrapper">
+
+                <img
+                    class="assistant-image"
+                    src="assets/asisten8.jpg"
+                    alt="Foto Asisten 8"
+                >
+
+            </div>
+
+
+            <h2 class="assistant-name">
+                Nama Asdos
+            </h2>
+
+        </article>
+
 
     </section>
 
+
+    <!-- =================================================
+         BACK BUTTON
+    ================================================== -->
+
+    <a
+        href="index.html"
+        class="back-button"
+    >
+        KEMBALI
+    </a>
+
+
 </main>
 
+
+<script>
+
+/* =====================================================
+   MENU ELEMENTS
+===================================================== */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+
+const sideMenu =
+    document.getElementById(
+        "sideMenu"
+    );
+
+
+const overlay =
+    document.getElementById(
+        "overlay"
+    );
+
+
+const scrollProtection =
+    document.getElementById(
+        "scrollProtection"
+    );
+
+
+/* =====================================================
+   OPEN MENU
+===================================================== */
+
+function openMenu() {
+
+    menuButton.classList.add(
+        "active"
+    );
+
+
+    sideMenu.classList.add(
+        "active"
+    );
+
+
+    overlay.classList.add(
+        "active"
+    );
+
+
+    sideMenu.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    menuButton.setAttribute(
+        "aria-expanded",
+        "true"
+    );
+
+
+    menuButton.setAttribute(
+        "aria-label",
+        "Tutup menu"
+    );
+
+
+    document.body.classList.add(
+        "menu-open"
+    );
+
+
+    /*
+     * Hilangkan protection ketika
+     * menu sedang terbuka.
+     */
+
+    scrollProtection.classList.remove(
+        "active"
+    );
+
+}
+
+
+/* =====================================================
+   CLOSE MENU
+===================================================== */
+
+function closeMenu() {
+
+    menuButton.classList.remove(
+        "active"
+    );
+
+
+    sideMenu.classList.remove(
+        "active"
+    );
+
+
+    overlay.classList.remove(
+        "active"
+    );
+
+
+    sideMenu.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    menuButton.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+
+
+    menuButton.setAttribute(
+        "aria-label",
+        "Buka menu"
+    );
+
+
+    document.body.classList.remove(
+        "menu-open"
+    );
+
+
+    checkTopContentCollision();
+
+}
+
+
+/* =====================================================
+   TOGGLE MENU
+===================================================== */
+
+menuButton.addEventListener(
+    "click",
+    function() {
+
+        if (
+            sideMenu.classList.contains(
+                "active"
+            )
+        ) {
+
+            closeMenu();
+
+        }
+
+        else {
+
+            openMenu();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+overlay.addEventListener(
+    "click",
+    closeMenu
+);
+
+
+/* =====================================================
+   MENU LINKS
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".menu-link"
+    )
+    .forEach(
+        function(link) {
+
+            link.addEventListener(
+                "click",
+                closeMenu
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   ESCAPE
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeMenu();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   TOP CONTENT COLLISION
+===================================================== */
+
+function checkTopContentCollision() {
+
+
+    /*
+     * Jangan tampilkan protection
+     * ketika menu terbuka.
+     */
+
+    if (
+        document.body.classList.contains(
+            "menu-open"
+        )
+    ) {
+
+        scrollProtection.classList.remove(
+            "active"
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Pada posisi paling atas,
+     * protection tidak diperlukan.
+     */
+
+    if (
+        window.scrollY <= 10
+    ) {
+
+        scrollProtection.classList.remove(
+            "active"
+        );
+
+        return;
+
+    }
+
+
+    const protectionHeight =
+        window.innerWidth <= 700
+            ? 105
+            : 115;
+
+
+    /*
+     * Elemen yang dilindungi
+     * oleh gradient atas.
+     */
+
+    const elements =
+        document.querySelectorAll(
+            ".page-title, " +
+            ".assistant-description, " +
+            ".assistant-card, " +
+            ".back-button"
+        );
+
+
+    let collision =
+        false;
+
+
+    elements.forEach(
+        function(element) {
+
+            const rect =
+                element.getBoundingClientRect();
+
+
+            if (
+                rect.top <
+                    protectionHeight
+                &&
+                rect.bottom >
+                    0
+            ) {
+
+                collision =
+                    true;
+
+            }
+
+        }
+    );
+
+
+    if (
+        collision
+    ) {
+
+        scrollProtection.classList.add(
+            "active"
+        );
+
+    }
+
+    else {
+
+        scrollProtection.classList.remove(
+            "active"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   SCROLL
+===================================================== */
+
+window.addEventListener(
+    "scroll",
+    checkTopContentCollision,
+    {
+        passive: true
+    }
+);
+
+
+/* =====================================================
+   RESIZE
+===================================================== */
+
+window.addEventListener(
+    "resize",
+    checkTopContentCollision
+);
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+checkTopContentCollision();
+
+</script>
+
+
 </body>
+
 </html>
