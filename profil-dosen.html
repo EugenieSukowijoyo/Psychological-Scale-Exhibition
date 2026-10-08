@@ -1,586 +1,3169 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
 <title>Profil Dosen | Psychological Scale Exhibition</title>
 
+
+<!-- =====================================================
+     GOOGLE FONTS
+===================================================== -->
+
+<link
+    href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet"
+>
+
+
 <style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+
+html {
+    scroll-behavior: smooth;
+}
+
+
 body {
+
     width: 100%;
     min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
-    background-image: url("assets/background.png");
+
+    font-family:
+        'Montserrat',
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: #111111;
+
+    background:
+        url("assets/background.png");
+
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    color: white;
+
     overflow-x: hidden;
     overflow-y: auto;
+
 }
+
+
+/* =====================================================
+   COLOR VARIABLES
+===================================================== */
+
+:root {
+
+    --blue: #1464c4;
+
+    --blue-dark: #07578d;
+
+    --blue-deep: #075487;
+
+    --light-blue: #b9d3ef;
+
+    --very-light-blue: #eef6fc;
+
+    --white: #ffffff;
+
+    --black: #111111;
+
+}
+
+
+/* =====================================================
+   TOP SCROLL PROTECTION
+   SOLID → TRANSPARENT
+===================================================== */
+
+.top-scroll-protection {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 115px;
+
+    background:
+        linear-gradient(
+            to bottom,
+
+            rgba(238, 246, 252, 1) 0%,
+            rgba(238, 246, 252, 1) 42%,
+
+            rgba(238, 246, 252, 0.96) 52%,
+            rgba(238, 246, 252, 0.78) 65%,
+
+            rgba(238, 246, 252, 0.45) 80%,
+            rgba(238, 246, 252, 0.18) 91%,
+
+            rgba(238, 246, 252, 0) 100%
+        );
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    z-index: 1100;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+
+}
+
+
+.top-scroll-protection.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+
+body.menu-open
+.top-scroll-protection {
+
+    opacity: 0;
+
+    visibility: hidden;
+
+}
+
+
+/* =====================================================
+   HAMBURGER BUTTON
+===================================================== */
+
+.menu-button {
+
+    position: fixed;
+
+    top: 38px;
+    left: 30px;
+
+    width: 64px;
+    height: 48px;
+
+    padding: 4px 0;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    z-index: 1300;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+}
+
+
+.menu-button span {
+
+    display: block;
+
+    width: 64px;
+    height: 5px;
+
+    background:
+        var(--blue-deep);
+
+    border-radius: 0;
+
+    transition:
+        transform 0.35s ease,
+        opacity 0.25s ease,
+        background 0.25s ease;
+
+}
+
+
+/* =====================================================
+   HAMBURGER → X
+===================================================== */
+
+.menu-button.active
+span:nth-child(1) {
+
+    transform:
+        translateY(17px)
+        rotate(45deg);
+
+    background: white;
+
+}
+
+
+.menu-button.active
+span:nth-child(2) {
+
+    opacity: 0;
+
+}
+
+
+.menu-button.active
+span:nth-child(3) {
+
+    transform:
+        translateY(-17px)
+        rotate(-45deg);
+
+    background: white;
+
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(
+            0,
+            38,
+            66,
+            0.38
+        );
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+
+    z-index: 1150;
+
+}
+
+
+.overlay.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+
+/* =====================================================
+   SIDE MENU
+===================================================== */
+
+.side-menu {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 365px;
+
+    max-width: 40vw;
+
+    height: 100vh;
+
+    background:
+        var(--blue-deep);
+
+    z-index: 1200;
+
+    transform:
+        translateX(-100%);
+
+    transition:
+        transform 0.4s ease;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    box-shadow:
+        8px 0 30px
+        rgba(
+            0,
+            0,
+            0,
+            0.12
+        );
+
+}
+
+
+.side-menu.active {
+
+    transform:
+        translateX(0);
+
+}
+
+
+.side-menu-inner {
+
+    width: 100%;
+
+    min-height: 100%;
+
+    padding:
+        118px 43px 55px;
+
+}
+
+
+/* =====================================================
+   MENU LABEL
+===================================================== */
+
+.menu-label {
+
+    margin-bottom:
+        22px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.55
+        );
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        3px;
+
+}
+
+
+/* =====================================================
+   MENU LINKS
+===================================================== */
+
+.menu-link {
+
+    display: block;
+
+    width: 100%;
+
+    padding:
+        16px 0;
+
+    border-bottom:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.20
+        );
+
+    color:
+        white;
+
+    text-decoration:
+        none;
+
+    font-size:
+        20px;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.2;
+
+    transition:
+        color 0.25s ease,
+        padding-left 0.25s ease;
+
+}
+
+
+.menu-link:hover {
+
+    color:
+        #dcecff;
+
+    padding-left:
+        7px;
+
+}
+
+
+/* =====================================================
+   MENU SECTION
+===================================================== */
+
+.menu-section {
+
+    margin-top:
+        34px;
+
+}
+
+
+.menu-section-title {
+
+    margin-bottom:
+        3px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.55
+        );
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        3px;
+
+}
+
+
+/* =====================================================
+   MAIN PAGE
+===================================================== */
 
 .lecturer-page {
+
     width: 100%;
+
     min-height: 100vh;
-    height: auto;
-    position: relative;
-    padding: 5vh 5vw 5vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+    padding:
+        35px 4vw 70px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
 }
+
+
+/* =====================================================
+   PAGE TITLE
+===================================================== */
 
 .page-title {
-    margin-top: 2vh;
-    margin-bottom: 4vh;
-    font-size: clamp(42px, 5vw, 82px);
-    line-height: 1;
-    font-weight: 900;
-    letter-spacing: -3px;
-    text-align: center;
-    color: #fff;
-}
 
-.lecturer-container {
-    width: min(100%, 1115px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2vw;
-}
+    margin-top:
+        0;
 
-.lecturer-card {
-    width: 31.5%;
-    height: clamp(430px, 55vh, 570px);
-    min-height: 430px;
-    max-height: 570px;
-    perspective: 1200px;
-    cursor: pointer;
-    transition: transform 0.3s ease, filter 0.3s ease;
-}
+    margin-bottom:
+        28px;
 
-.lecturer-card:hover {
-    transform: translateY(-8px) scale(1.015);
-}
+    font-family:
+        'League Spartan',
+        sans-serif;
 
-.card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.75s cubic-bezier(.4,.2,.2,1);
-    border-radius: 42px;
-    box-shadow: 0 12px 30px rgba(0,0,0,.16);
-}
+    font-size:
+        clamp(
+            58px,
+            6.2vw,
+            104px
+        );
 
-.lecturer-card:hover .card-inner {
-    box-shadow: 0 20px 40px rgba(0,0,0,.25);
-}
+    line-height:
+        0.92;
 
-.lecturer-card.flipped .card-inner {
-    transform: rotateY(180deg);
-}
+    font-weight:
+        800;
 
-.card-front,
-.card-back {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 42px;
-    overflow: hidden;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-}
+    letter-spacing:
+        -3px;
 
-.card-front {
-    background: #fff;
-}
+    text-align:
+        center;
 
-.card-front img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    object-position: center;
-}
+    color:
+        var(--blue);
 
-/* Bagian belakang kartu */
-.card-back {
-    transform: rotateY(180deg);
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #07578d;
-}
+    text-transform:
+        uppercase;
 
-.card-back::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: var(--lecturer-image);
-    background-size: cover;
-    background-position: center;
-    z-index: 0;
-}
-
-.card-back::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(7, 87, 141, .84);
-    z-index: 1;
-}
-
-.lecturer-info {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    height: 100%;
-    padding: 42px 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    color: white;
-    text-align: left;
-}
-
-.lecturer-name {
-    width: 100%;
-    font-size: clamp(24px, 2.3vw, 38px);
-    line-height: 1.05;
-    font-weight: 800;
-    text-align: center;
-    margin-bottom: 24px;
-}
-
-.lecturer-description {
-    width: 100%;
-    font-size: clamp(14px, 1.15vw, 19px);
-    line-height: 1.55;
-    text-align: justify;
-}
-
-/* Indikator klik disembunyikan */
-.click-indicator {
-    display: none;
 }
 
 
 /* =====================================================
-   DESKRIPSI TIM DOSEN
-   ===================================================== */
+   TEAM DESCRIPTION
+===================================================== */
 
 .team-description {
-    width: min(100%, 1115px);
-    margin: 0 auto 5vh;
-    padding: clamp(28px, 3vw, 48px) clamp(30px, 5vw, 72px);
-    background: #07578d;
-    color: white;
-    text-align: center;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, .12);
+
+    width:
+        min(
+            100%,
+            1520px
+        );
+
+    margin:
+        0 auto 55px;
+
+    padding:
+        42px 75px;
+
+    background:
+        var(--blue-deep);
+
+    color:
+        white;
+
+    text-align:
+        center;
+
 }
+
 
 .team-description h2 {
-    margin-bottom: 18px;
-    font-size: clamp(28px, 3vw, 46px);
-    line-height: 1.1;
-    font-weight: 900;
-    text-transform: uppercase;
+
+    margin-bottom:
+        18px;
+
+    font-family:
+        'League Spartan',
+        sans-serif;
+
+    font-size:
+        clamp(
+            28px,
+            3vw,
+            46px
+        );
+
+    line-height:
+        1.05;
+
+    font-weight:
+        800;
+
+    text-transform:
+        uppercase;
+
 }
+
 
 .team-description p {
-    margin: 0 auto;
-    max-width: 1000px;
-    font-size: clamp(15px, 1.35vw, 21px);
-    line-height: 1.65;
-    text-align: justify;
+
+    max-width:
+        1380px;
+
+    margin:
+        0 auto;
+
+    font-family:
+        'Montserrat',
+        sans-serif;
+
+    font-size:
+        clamp(
+            15px,
+            1.5vw,
+            24px
+        );
+
+    line-height:
+        1.55;
+
+    text-align:
+        left;
+
 }
+
 
 /* =====================================================
-   TOMBOL KEMBALI
-   Tidak lagi menggunakan position: fixed,
-   sehingga tidak akan menimpa kartu profil.
-   ===================================================== */
+   PROFILE AREA
+===================================================== */
 
- .back-button {
-     align-self: center;
-     margin: 48px auto 18px;
+.profile-area {
 
-     min-width: 235px;
-     padding: 17px 38px;
+    position:
+        relative;
 
-     color: white;
-     font-size: clamp(18px, 1.6vw, 26px);
-     font-weight: 700;
-     letter-spacing: 1px;
-     text-align: center;
+    width:
+        min(
+            100%,
+            1450px
+        );
 
-     text-decoration: none;
-     text-transform: uppercase;
+    min-height:
+        620px;
 
-     border: 1px solid rgba(255, 255, 255, .8);
-     background: rgba(7, 87, 141, .18);
-     backdrop-filter: blur(3px);
+    display:
+        flex;
 
-     z-index: 10;
+    align-items:
+        center;
 
-     transition:
-         transform .3s ease,
-         background .3s ease,
-         letter-spacing .3s ease,
-         opacity .3s ease;
+    justify-content:
+        center;
+
 }
 
- .back-button:hover {
-     transform: translateY(-4px);
-     background: rgba(7, 87, 141, .75);
-     opacity: .95;
-     letter-spacing: 2px;
+
+/* =====================================================
+   PROFILE DISPLAY
+===================================================== */
+
+.profile-display {
+
+    width:
+        520px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    text-align:
+        center;
+
+    overflow:
+        visible;
+
+}
+
+
+/* =====================================================
+   PROFILE SLIDE GROUP
+
+   FOTO + FRAME + NAMA
+   BERGERAK SEBAGAI SATU KELOMPOK
+===================================================== */
+
+.profile-slide-group {
+
+    width:
+        100%;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    transform:
+        translateX(0);
+
+    opacity:
+        1;
+
+}
+
+
+/* =====================================================
+   PROFILE IMAGE FRAME
+===================================================== */
+
+.profile-image-wrapper {
+
+    position:
+        relative;
+
+    width:
+        clamp(
+            300px,
+            27vw,
+            450px
+        );
+
+    height:
+        clamp(
+            300px,
+            27vw,
+            450px
+        );
+
+    border:
+        8px solid
+        var(--blue-deep);
+
+    border-radius:
+        50%;
+
+    overflow:
+        hidden;
+
+    background:
+        #dcecf7;
+
+    flex-shrink:
+        0;
+
+    box-shadow:
+        0 8px 20px
+        rgba(
+            7,
+            84,
+            135,
+            0.08
+        );
+
+}
+
+
+/* =====================================================
+   PROFILE IMAGE
+===================================================== */
+
+.profile-image {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    display:
+        block;
+
+    object-fit:
+        cover;
+
+    object-position:
+        center;
+
+}
+
+
+/* =====================================================
+   PROFILE NAME
+===================================================== */
+
+.profile-name {
+
+    margin-top:
+        30px;
+
+    font-family:
+        'Montserrat',
+        sans-serif;
+
+    font-size:
+        clamp(
+            25px,
+            2.2vw,
+            40px
+        );
+
+    line-height:
+        1.15;
+
+    font-weight:
+        800;
+
+    color:
+        var(--black);
+
+    text-align:
+        center;
+
+}
+
+
+/* =====================================================
+   PROFILE DESCRIPTION
+===================================================== */
+
+.profile-description {
+
+    display:
+        none;
+
+}
+
+
+/* =====================================================
+   SLIDE ANIMATION
+===================================================== */
+
+/*
+ * NEXT
+ *
+ * Current profile:
+ * bergerak ke kiri
+ */
+
+.profile-slide-group.slide-out-left {
+
+    animation:
+        profileOutLeft
+        0.42s
+        cubic-bezier(
+            0.55,
+            0.085,
+            0.68,
+            0.53
+        )
+        forwards;
+
+}
+
+
+/*
+ * PREVIOUS
+ *
+ * Current profile:
+ * bergerak ke kanan
+ */
+
+.profile-slide-group.slide-out-right {
+
+    animation:
+        profileOutRight
+        0.42s
+        cubic-bezier(
+            0.55,
+            0.085,
+            0.68,
+            0.53
+        )
+        forwards;
+
+}
+
+
+/*
+ * NEXT
+ *
+ * Profile baru masuk dari kanan.
+ */
+
+.profile-slide-group.slide-in-right {
+
+    animation:
+        profileInRight
+        0.55s
+        cubic-bezier(
+            0.22,
+            0.61,
+            0.36,
+            1
+        )
+        forwards;
+
+}
+
+
+/*
+ * PREVIOUS
+ *
+ * Profile baru masuk dari kiri.
+ */
+
+.profile-slide-group.slide-in-left {
+
+    animation:
+        profileInLeft
+        0.55s
+        cubic-bezier(
+            0.22,
+            0.61,
+            0.36,
+            1
+        )
+        forwards;
+
+}
+
+
+/* =====================================================
+   KEYFRAMES
+===================================================== */
+
+@keyframes profileOutLeft {
+
+    0% {
+
+        transform:
+            translateX(0);
+
+        opacity:
+            1;
+
+    }
+
+    100% {
+
+        transform:
+            translateX(-85px);
+
+        opacity:
+            0;
+
+    }
+
+}
+
+
+@keyframes profileOutRight {
+
+    0% {
+
+        transform:
+            translateX(0);
+
+        opacity:
+            1;
+
+    }
+
+    100% {
+
+        transform:
+            translateX(85px);
+
+        opacity:
+            0;
+
+    }
+
+}
+
+
+@keyframes profileInRight {
+
+    0% {
+
+        transform:
+            translateX(85px);
+
+        opacity:
+            0;
+
+    }
+
+    100% {
+
+        transform:
+            translateX(0);
+
+        opacity:
+            1;
+
+    }
+
+}
+
+
+@keyframes profileInLeft {
+
+    0% {
+
+        transform:
+            translateX(-85px);
+
+        opacity:
+            0;
+
+    }
+
+    100% {
+
+        transform:
+            translateX(0);
+
+        opacity:
+            1;
+
+    }
+
+}
+
+
+/* =====================================================
+   DOT INDICATOR
+===================================================== */
+
+.profile-indicator {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+    margin-top:
+        24px;
+
+}
+
+
+.profile-dot {
+
+    width:
+        9px;
+
+    height:
+        9px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(
+            7,
+            84,
+            135,
+            0.25
+        );
+
+    transition:
+        width 0.25s ease,
+        background 0.25s ease;
+
+}
+
+
+.profile-dot.active {
+
+    width:
+        28px;
+
+    border-radius:
+        20px;
+
+    background:
+        var(--blue-deep);
+
+}
+
+
+/* =====================================================
+   PROFILE ARROWS
+===================================================== */
+
+.profile-arrow {
+
+    position:
+        absolute;
+
+    top:
+        50%;
+
+    transform:
+        translateY(-50%);
+
+    width:
+        105px;
+
+    height:
+        130px;
+
+    border:
+        none;
+
+    background:
+        transparent;
+
+    color:
+        var(--blue-deep);
+
+    cursor:
+        pointer;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        120px;
+
+    font-weight:
+        900;
+
+    line-height:
+        0.7;
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+
+    z-index:
+        20;
+
+}
+
+
+.profile-arrow:hover {
+
+    opacity:
+        0.82;
+
+}
+
+
+.profile-arrow.left {
+
+    left:
+        0;
+
+}
+
+
+.profile-arrow.right {
+
+    right:
+        0;
+
+}
+
+
+.profile-arrow.left:hover {
+
+    transform:
+        translateY(-50%)
+        translateX(-6px);
+
+}
+
+
+.profile-arrow.right:hover {
+
+    transform:
+        translateY(-50%)
+        translateX(6px);
+
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.back-button {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-width:
+        280px;
+
+    margin:
+        25px auto 0;
+
+    padding:
+        15px 42px;
+
+    border:
+        3px solid
+        var(--blue-deep);
+
+    border-radius:
+        50px;
+
+    background:
+        transparent;
+
+    color:
+        var(--blue-deep);
+
+    font-family:
+        'Montserrat',
+        sans-serif;
+
+    font-size:
+        clamp(
+            18px,
+            1.5vw,
+            25px
+        );
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        6px;
+
+    text-align:
+        center;
+
+    text-decoration:
+        none;
+
+    text-transform:
+        uppercase;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+
+}
+
+
+.back-button:hover {
+
+    background:
+        var(--blue-deep);
+
+    color:
+        white;
+
+    transform:
+        translateY(-3px);
+
 }
 
 
 /* =====================================================
    TABLET
-   ===================================================== */
+===================================================== */
 
 @media (max-width: 1100px) {
 
+    .lecturer-page {
+
+        padding:
+            35px 4vw 60px;
+
+    }
+
+
     .page-title {
-        margin-bottom: 5vh;
+
+        margin-bottom:
+            25px;
+
     }
 
-    .lecturer-container {
-        width: 90%;
-        gap: 2vw;
-    }
-
-    .lecturer-card {
-        height: 58vh;
-        min-height: 400px;
-    }
-
-    .card-front,
-    .card-back,
-    .card-inner {
-        border-radius: 34px;
-    }
 
     .team-description {
-        width: 90%;
-        margin-bottom: 5vh;
+
+        width:
+            94%;
+
+        padding:
+            35px 50px;
+
+        margin-bottom:
+            35px;
+
     }
 
-    .back-button {
-        margin: 40px auto 15px;
+
+    .profile-area {
+
+        min-height:
+            560px;
+
     }
+
+
+    .profile-display {
+
+        width:
+            460px;
+
+    }
+
+
+    .profile-image-wrapper {
+
+        width:
+            350px;
+
+        height:
+            350px;
+
+    }
+
+
+    .profile-arrow {
+
+        width:
+            75px;
+
+        font-size:
+            90px;
+
+    }
+
 }
 
 
 /* =====================================================
    MOBILE
-   ===================================================== */
+===================================================== */
 
 @media (max-width: 700px) {
 
-    body {
-        overflow: auto;
+
+    /* -------------------------------------------------
+       TOP PROTECTION
+    ------------------------------------------------- */
+
+    .top-scroll-protection {
+
+        height:
+            105px;
+
+        background:
+            linear-gradient(
+                to bottom,
+
+                rgba(238, 246, 252, 1) 0%,
+                rgba(238, 246, 252, 1) 45%,
+
+                rgba(238, 246, 252, 0.96) 55%,
+                rgba(238, 246, 252, 0.76) 68%,
+
+                rgba(238, 246, 252, 0.40) 83%,
+                rgba(238, 246, 252, 0.14) 93%,
+
+                rgba(238, 246, 252, 0) 100%
+            );
+
     }
+
+
+    /* -------------------------------------------------
+       HAMBURGER
+    ------------------------------------------------- */
+
+    .menu-button {
+
+        top:
+            28px;
+
+        left:
+            24px;
+
+        width:
+            54px;
+
+        height:
+            42px;
+
+    }
+
+
+    .menu-button span {
+
+        width:
+            54px;
+
+        height:
+            4px;
+
+    }
+
+
+    .menu-button.active
+    span:nth-child(1) {
+
+        transform:
+            translateY(15px)
+            rotate(45deg);
+
+    }
+
+
+    .menu-button.active
+    span:nth-child(3) {
+
+        transform:
+            translateY(-15px)
+            rotate(-45deg);
+
+    }
+
+
+    /* -------------------------------------------------
+       SIDE MENU
+    ------------------------------------------------- */
+
+    .side-menu {
+
+        width:
+            min(
+                350px,
+                88vw
+            );
+
+        max-width:
+            88vw;
+
+    }
+
+
+    .side-menu-inner {
+
+        padding:
+            105px 35px 50px;
+
+    }
+
+
+    .menu-link {
+
+        font-size:
+            18px;
+
+    }
+
+
+    /* -------------------------------------------------
+       MAIN
+    ------------------------------------------------- */
 
     .lecturer-page {
-        min-height: 100vh;
-        height: auto;
-        padding: 35px 20px 100px;
+
+        padding:
+            105px 20px 55px;
+
     }
+
+
+    /* -------------------------------------------------
+       TITLE
+    ------------------------------------------------- */
 
     .page-title {
-        margin-top: 10px;
-        margin-bottom: 35px;
-        font-size: 42px;
-        letter-spacing: -2px;
+
+        margin-top:
+            0;
+
+        margin-bottom:
+            28px;
+
+        font-size:
+            48px;
+
+        letter-spacing:
+            -2px;
+
     }
+
+
+    /* -------------------------------------------------
+       TEAM DESCRIPTION
+    ------------------------------------------------- */
 
     .team-description {
-        width: 100%;
-        margin-bottom: 35px;
-        padding: 28px 24px;
+
+        width:
+            100%;
+
+        margin-bottom:
+            35px;
+
+        padding:
+            28px 25px;
+
     }
+
 
     .team-description h2 {
-        font-size: 28px;
+
+        font-size:
+            27px;
+
+        margin-bottom:
+            15px;
+
     }
+
 
     .team-description p {
-        font-size: 15px;
-        line-height: 1.6;
-        text-align: left;
+
+        font-size:
+            14px;
+
+        line-height:
+            1.6;
+
+        text-align:
+            left;
+
     }
 
-    .lecturer-container {
-        width: 100%;
-        flex-direction: column;
-        gap: 28px;
+
+    /* -------------------------------------------------
+       PROFILE AREA
+    ------------------------------------------------- */
+
+    .profile-area {
+
+        width:
+            100%;
+
+        min-height:
+            auto;
+
+        padding:
+            0 28px;
+
+        flex-direction:
+            column;
+
     }
 
-    .lecturer-card {
-        width: min(82vw, 360px);
-        height: 500px;
-        min-height: 0;
-        max-height: none;
+
+    .profile-display {
+
+        width:
+            100%;
+
+        overflow:
+            visible;
+
     }
 
-    .card-front,
-    .card-back,
-    .card-inner {
-        border-radius: 32px;
+
+    .profile-slide-group {
+
+        width:
+            100%;
+
     }
 
-    /* Tombol tetap berada di tengah setelah seluruh kartu */
+
+    /* -------------------------------------------------
+       PROFILE IMAGE
+    ------------------------------------------------- */
+
+    .profile-image-wrapper {
+
+        width:
+            min(
+                72vw,
+                320px
+            );
+
+        height:
+            min(
+                72vw,
+                320px
+            );
+
+        border-width:
+            7px;
+
+    }
+
+
+    /* -------------------------------------------------
+       MOBILE SLIDE DISTANCE
+    ------------------------------------------------- */
+
+    @keyframes profileOutLeft {
+
+        0% {
+
+            transform:
+                translateX(0);
+
+            opacity:
+                1;
+
+        }
+
+        100% {
+
+            transform:
+                translateX(-45px);
+
+            opacity:
+                0;
+
+        }
+
+    }
+
+
+    @keyframes profileOutRight {
+
+        0% {
+
+            transform:
+                translateX(0);
+
+            opacity:
+                1;
+
+        }
+
+        100% {
+
+            transform:
+                translateX(45px);
+
+            opacity:
+                0;
+
+        }
+
+    }
+
+
+    @keyframes profileInRight {
+
+        0% {
+
+            transform:
+                translateX(45px);
+
+            opacity:
+                0;
+
+        }
+
+        100% {
+
+            transform:
+                translateX(0);
+
+            opacity:
+                1;
+
+        }
+
+    }
+
+
+    @keyframes profileInLeft {
+
+        0% {
+
+            transform:
+                translateX(-45px);
+
+            opacity:
+                0;
+
+        }
+
+        100% {
+
+            transform:
+                translateX(0);
+
+            opacity:
+                1;
+
+        }
+
+    }
+
+
+    /* -------------------------------------------------
+       PROFILE NAME
+    ------------------------------------------------- */
+
+    .profile-name {
+
+        margin-top:
+            22px;
+
+        font-size:
+            25px;
+
+        max-width:
+            90%;
+
+    }
+
+
+    /* -------------------------------------------------
+       ARROWS
+    ------------------------------------------------- */
+
+    .profile-arrow {
+
+        position:
+            absolute;
+
+        top:
+            145px;
+
+        width:
+            48px;
+
+        height:
+            70px;
+
+        font-size:
+            65px;
+
+    }
+
+
+    .profile-arrow.left {
+
+        left:
+            -2px;
+
+    }
+
+
+    .profile-arrow.right {
+
+        right:
+            -2px;
+
+    }
+
+
+    .profile-arrow.left:hover,
+    .profile-arrow.right:hover {
+
+        transform:
+            translateY(-50%);
+
+    }
+
+
+    /* -------------------------------------------------
+       INDICATOR
+    ------------------------------------------------- */
+
+    .profile-indicator {
+
+        margin-top:
+            17px;
+
+    }
+
+
+    /* -------------------------------------------------
+       BACK BUTTON
+    ------------------------------------------------- */
+
     .back-button {
-        align-self: center;
-        margin: 35px auto 10px;
-        min-width: 190px;
-        padding: 14px 28px;
-        font-size: 18px;
+
+        min-width:
+            210px;
+
+        margin-top:
+            38px;
+
+        padding:
+            13px 28px;
+
+        font-size:
+            17px;
+
+        letter-spacing:
+            5px;
+
     }
+
 }
 
 
 /* =====================================================
-   MOBILE KECIL
-   ===================================================== */
+   SMALL MOBILE
+===================================================== */
 
 @media (max-width: 400px) {
 
-    .page-title {
-        font-size: 36px;
+
+    .lecturer-page {
+
+        padding-left:
+            16px;
+
+        padding-right:
+            16px;
+
     }
 
-    .lecturer-card {
-        width: 85vw;
-        height: 480px;
+
+    .page-title {
+
+        font-size:
+            42px;
+
     }
+
+
+    .team-description {
+
+        padding:
+            25px 20px;
+
+    }
+
+
+    .team-description h2 {
+
+        font-size:
+            25px;
+
+    }
+
+
+    .team-description p {
+
+        font-size:
+            13px;
+
+    }
+
+
+    .profile-image-wrapper {
+
+        width:
+            70vw;
+
+        height:
+            70vw;
+
+        max-width:
+            285px;
+
+        max-height:
+            285px;
+
+    }
+
+
+    .profile-arrow {
+
+        top:
+            130px;
+
+        font-size:
+            58px;
+
+    }
+
+
+    .profile-arrow.left {
+
+        left:
+            -7px;
+
+    }
+
+
+    .profile-arrow.right {
+
+        right:
+            -7px;
+
+    }
+
+
+    .profile-name {
+
+        font-size:
+            23px;
+
+    }
+
 
     .back-button {
-        min-width: 175px;
-        padding: 13px 24px;
-        font-size: 17px;
-        margin-top: 28px;
+
+        min-width:
+            190px;
+
+        padding:
+            12px 24px;
+
+        font-size:
+            16px;
+
     }
+
 }
 
 </style>
+
 </head>
 
 
 <body>
 
+
+<!-- =====================================================
+     TOP GRADIENT PROTECTION
+===================================================== -->
+
+<div
+    class="top-scroll-protection"
+    id="scrollProtection"
+></div>
+
+
+<!-- =====================================================
+     OVERLAY
+===================================================== -->
+
+<div
+    class="overlay"
+    id="overlay"
+></div>
+
+
+<!-- =====================================================
+     HAMBURGER
+===================================================== -->
+
+<button
+    class="menu-button"
+    id="menuButton"
+    type="button"
+    aria-label="Buka menu"
+    aria-expanded="false"
+>
+
+    <span></span>
+    <span></span>
+    <span></span>
+
+</button>
+
+
+<!-- =====================================================
+     SIDE MENU
+===================================================== -->
+
+<aside
+    class="side-menu"
+    id="sideMenu"
+>
+
+    <div class="side-menu-inner">
+
+
+        <div class="menu-label">
+            EXPLORE
+        </div>
+
+        <a
+            href="index.html"
+            class="menu-link"
+        >
+            Home
+        </a>
+
+
+        <a
+            href="tentang.html"
+            class="menu-link"
+        >
+            Tentang Exhibition
+        </a>
+
+
+        <a
+            href="profil-dosen.html"
+            class="menu-link"
+        >
+            Profil Dosen
+        </a>
+
+
+        <a
+            href="profil-asisten.html"
+            class="menu-link"
+        >
+            Profil Asisten
+        </a>
+
+
+        <!-- =============================================
+             TEMA
+        ============================================== -->
+
+        <div class="menu-section">
+
+            <div class="menu-section-title">
+                TEMA
+            </div>
+
+
+            <a
+                href="tema1.html"
+                class="menu-link"
+            >
+                Tema 1
+            </a>
+
+
+            <a
+                href="tema2.html"
+                class="menu-link"
+            >
+                Tema 2
+            </a>
+
+
+            <a
+                href="tema3.html"
+                class="menu-link"
+            >
+                Tema 3
+            </a>
+
+        </div>
+
+
+        <!-- =============================================
+             PARTICIPATE
+        ============================================== -->
+
+        <div class="menu-section">
+
+            <div class="menu-section-title">
+                PARTICIPATE
+            </div>
+
+
+            <a
+                href="voting.html"
+                class="menu-link"
+            >
+                Vote
+            </a>
+
+        </div>
+
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN PAGE
+===================================================== -->
+
 <main class="lecturer-page">
 
-    <h1 class="page-title">PROFIL DOSEN</h1>
 
-    <!-- ==========================================
-         DESKRIPSI SINGKAT TIM DOSEN
-         ========================================== -->
+    <!-- =================================================
+         TITLE
+    ================================================== -->
+
+    <h1 class="page-title">
+        PROFIL DOSEN
+    </h1>
+
+
+    <!-- =================================================
+         TEAM DESCRIPTION
+    ================================================== -->
+
     <section class="team-description">
-        <h2>TIM DOSEN</h2>
+
+        <h2>
+            TIM DOSEN
+        </h2>
+
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat. Duis aute irure dolor in reprehenderit
+            in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident,
+            sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
+
     </section>
 
-    <section class="lecturer-container">
 
-        <!-- ==========================================
-             DOSEN 1
-             ========================================== -->
+    <!-- =================================================
+         PROFILE CAROUSEL
+    ================================================== -->
 
-        <div class="lecturer-card"
-             style="--lecturer-image: url('assets/dosen1.jpeg');">
+    <section
+        class="profile-area"
+        aria-label="Profil dosen"
+    >
 
-            <div class="card-inner">
 
-                <!-- DEPAN -->
-                <div class="card-front">
+        <!-- =============================================
+             PREVIOUS BUTTON
+        ============================================== -->
+
+        <button
+            class="profile-arrow left"
+            id="prevButton"
+            type="button"
+            aria-label="Dosen sebelumnya"
+        >
+            ‹
+        </button>
+
+
+        <!-- =============================================
+             PROFILE DISPLAY
+        ============================================== -->
+
+        <div class="profile-display">
+
+
+            <!-- =========================================
+                 SLIDING GROUP
+
+                 FOTO
+                 FRAME
+                 NAMA
+
+                 SEMUANYA BERGERAK BERSAMA
+            ========================================== -->
+
+            <div
+                class="profile-slide-group"
+                id="profileSlideGroup"
+            >
+
+
+                <!-- =====================================
+                     PHOTO + FRAME
+                ====================================== -->
+
+                <div class="profile-image-wrapper">
 
                     <img
+                        id="profileImage"
+                        class="profile-image"
                         src="assets/dosen1.jpeg"
-                        alt="Foto Dosen 1"
+                        alt="Foto Dosen"
                     >
 
-                    <div class="click-indicator">
-                        KLIK UNTUK INFO
-                    </div>
-
                 </div>
 
 
-                <!-- BELAKANG -->
-                <div class="card-back">
+                <!-- =====================================
+                     NAME
+                ====================================== -->
 
-                    <div class="lecturer-info">
+                <h2
+                    class="profile-name"
+                    id="profileName"
+                >
+                    Nama Dosen
+                </h2>
 
-                        <h2 class="lecturer-name">
-                            Nama Dosen
-                        </h2>
 
-                        <p class="lecturer-description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                            nisi ut aliquip ex ea commodo consequat.
-                        </p>
+                <!-- =====================================
+                     DESCRIPTION
+                ====================================== -->
 
-                    </div>
+                <p
+                    class="profile-description"
+                    id="profileDescription"
+                >
+                    Lorem ipsum dolor sit amet.
+                </p>
 
-                </div>
 
             </div>
+
+
+            <!-- =========================================
+                 INDICATOR
+
+                 TIDAK IKUT SLIDE
+            ========================================== -->
+
+            <div
+                class="profile-indicator"
+                id="profileIndicator"
+            >
+
+                <span
+                    class="profile-dot active"
+                ></span>
+
+                <span
+                    class="profile-dot"
+                ></span>
+
+                <span
+                    class="profile-dot"
+                ></span>
+
+            </div>
+
 
         </div>
 
 
+        <!-- =============================================
+             NEXT BUTTON
+        ============================================== -->
 
-        <!-- ==========================================
-             DOSEN 2
-             ========================================== -->
+        <button
+            class="profile-arrow right"
+            id="nextButton"
+            type="button"
+            aria-label="Dosen berikutnya"
+        >
+            ›
+        </button>
 
-        <div class="lecturer-card"
-             style="--lecturer-image: url('assets/dosen2.jpg');">
-
-            <div class="card-inner">
-
-                <!-- DEPAN -->
-                <div class="card-front">
-
-                    <img
-                        src="assets/dosen2.jpg"
-                        alt="Foto Dosen 2"
-                    >
-
-                    <div class="click-indicator">
-                        KLIK UNTUK INFO
-                    </div>
-
-                </div>
-
-
-                <!-- BELAKANG -->
-                <div class="card-back">
-
-                    <div class="lecturer-info">
-
-                        <h2 class="lecturer-name">
-                            Nama Dosen
-                        </h2>
-
-                        <p class="lecturer-description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                            nisi ut aliquip ex ea commodo consequat.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- ==========================================
-             DOSEN 3
-             ========================================== -->
-
-        <div class="lecturer-card"
-             style="--lecturer-image: url('assets/dosen3.jpeg');">
-
-            <div class="card-inner">
-
-                <!-- DEPAN -->
-                <div class="card-front">
-
-                    <img
-                        src="assets/dosen3.jpeg"
-                        alt="Foto Dosen 3"
-                    >
-
-                    <div class="click-indicator">
-                        KLIK UNTUK INFO
-                    </div>
-
-                </div>
-
-
-                <!-- BELAKANG -->
-                <div class="card-back">
-
-                    <div class="lecturer-info">
-
-                        <h2 class="lecturer-name">
-                            Nama Dosen
-                        </h2>
-
-                        <p class="lecturer-description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                            nisi ut aliquip ex ea commodo consequat.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
 
     </section>
 
 
-    <!-- ==========================================
-         TOMBOL KEMBALI
-         Sekarang berada di luar lecturer-container,
-         sehingga tidak menimpa kartu.
-         ========================================== -->
+    <!-- =================================================
+         BACK BUTTON
+    ================================================== -->
 
-    <a href="index.html" class="back-button">
-        Kembali
+    <a
+        href="index.html"
+        class="back-button"
+    >
+        KEMBALI
     </a>
+
 
 </main>
 
 
 <script>
 
-const lecturerCards =
-    document.querySelectorAll(".lecturer-card");
+/* =====================================================
+   DATA DOSEN
+
+   Ganti nama dan foto sesuai data sebenarnya.
+===================================================== */
+
+const lecturers = [
+
+    {
+        name:
+            "Nama Dosen",
+
+        image:
+            "assets/dosen1.jpeg",
+
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
 
 
-lecturerCards.forEach(function(card) {
+    {
+        name:
+            "Nama Dosen",
 
-    card.addEventListener("click", function() {
+        image:
+            "assets/dosen2.jpg",
 
-        card.classList.toggle("flipped");
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
 
-    });
 
-});
+    {
+        name:
+            "Nama Dosen",
+
+        image:
+            "assets/dosen3.jpeg",
+
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    }
+
+];
+
+
+let currentLecturer = 0;
+
+
+/*
+ * Mencegah perpindahan baru ketika
+ * animasi sebelumnya belum selesai.
+ */
+
+let isAnimating = false;
+
+
+/* =====================================================
+   DOM ELEMENTS
+===================================================== */
+
+const profileSlideGroup =
+    document.getElementById(
+        "profileSlideGroup"
+    );
+
+
+const profileImage =
+    document.getElementById(
+        "profileImage"
+    );
+
+
+const profileName =
+    document.getElementById(
+        "profileName"
+    );
+
+
+const profileDescription =
+    document.getElementById(
+        "profileDescription"
+    );
+
+
+const profileDots =
+    document.querySelectorAll(
+        ".profile-dot"
+    );
+
+
+const prevButton =
+    document.getElementById(
+        "prevButton"
+    );
+
+
+const nextButton =
+    document.getElementById(
+        "nextButton"
+    );
+
+
+/* =====================================================
+   UPDATE DOTS
+===================================================== */
+
+function updateDots() {
+
+    profileDots.forEach(
+        function(dot, index) {
+
+            dot.classList.toggle(
+                "active",
+                index === currentLecturer
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   UPDATE PROFILE
+===================================================== */
+
+function updateProfile(
+    direction = 1
+) {
+
+    /*
+     * Jika sedang animasi,
+     * jangan menjalankan animasi kedua.
+     */
+
+    if (
+        isAnimating
+    ) {
+
+        return;
+
+    }
+
+
+    isAnimating = true;
+
+
+    const lecturer =
+        lecturers[currentLecturer];
+
+
+    /*
+     * NEXT:
+     *
+     * group lama → kiri
+     * group baru ← kanan
+     *
+     *
+     * PREVIOUS:
+     *
+     * group lama → kanan
+     * group baru ← kiri
+     */
+
+    const slideOutClass =
+        direction === 1
+            ? "slide-out-left"
+            : "slide-out-right";
+
+
+    const slideInClass =
+        direction === 1
+            ? "slide-in-right"
+            : "slide-in-left";
+
+
+    /* =================================================
+       1. GROUP LAMA KELUAR
+       
+       Foto + frame + nama
+       bergerak bersama.
+    ================================================== */
+
+    profileSlideGroup.classList.remove(
+        "slide-in-left",
+        "slide-in-right"
+    );
+
+
+    profileSlideGroup.classList.add(
+        slideOutClass
+    );
+
+
+    /* =================================================
+       2. SETELAH GROUP LAMA KELUAR
+    ================================================== */
+
+    setTimeout(
+        function() {
+
+
+            /* =========================================
+               UPDATE DATA
+            ========================================== */
+
+            profileImage.src =
+                lecturer.image;
+
+
+            profileImage.alt =
+                "Foto " +
+                lecturer.name;
+
+
+            profileName.textContent =
+                lecturer.name;
+
+
+            profileDescription.textContent =
+                lecturer.description;
+
+
+            /* =========================================
+               RESET ANIMATION
+            ========================================== */
+
+            profileSlideGroup.classList.remove(
+                slideOutClass
+            );
+
+
+            /*
+             * Letakkan group baru
+             * pada posisi awal.
+             */
+
+            profileSlideGroup.classList.add(
+                slideInClass
+            );
+
+
+            /*
+             * Force browser reflow.
+             */
+
+            void profileSlideGroup.offsetWidth;
+
+
+            /* =========================================
+               3. GROUP BARU MASUK
+            ========================================== */
+
+            requestAnimationFrame(
+                function() {
+
+                    profileSlideGroup.classList.remove(
+                        slideInClass
+                    );
+
+
+                    updateDots();
+
+
+                    /*
+                     * Tunggu sampai animasi
+                     * benar-benar selesai.
+                     */
+
+                    setTimeout(
+                        function() {
+
+                            isAnimating =
+                                false;
+
+                        },
+                        550
+                    );
+
+                }
+            );
+
+
+        },
+        420
+    );
+
+}
+
+
+/* =====================================================
+   NEXT LECTURER
+===================================================== */
+
+function nextLecturer() {
+
+    if (
+        isAnimating
+    ) {
+
+        return;
+
+    }
+
+
+    currentLecturer++;
+
+
+    if (
+        currentLecturer >=
+        lecturers.length
+    ) {
+
+        currentLecturer = 0;
+
+    }
+
+
+    updateProfile(1);
+
+}
+
+
+/* =====================================================
+   PREVIOUS LECTURER
+===================================================== */
+
+function previousLecturer() {
+
+    if (
+        isAnimating
+    ) {
+
+        return;
+
+    }
+
+
+    currentLecturer--;
+
+
+    if (
+        currentLecturer < 0
+    ) {
+
+        currentLecturer =
+            lecturers.length - 1;
+
+    }
+
+
+    updateProfile(-1);
+
+}
+
+
+/* =====================================================
+   BUTTON EVENTS
+===================================================== */
+
+nextButton.addEventListener(
+    "click",
+    nextLecturer
+);
+
+
+prevButton.addEventListener(
+    "click",
+    previousLecturer
+);
+
+
+/* =====================================================
+   KEYBOARD NAVIGATION
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        /*
+         * Panah kanan
+         */
+
+        if (
+            event.key === "ArrowRight"
+        ) {
+
+            nextLecturer();
+
+        }
+
+
+        /*
+         * Panah kiri
+         */
+
+        if (
+            event.key === "ArrowLeft"
+        ) {
+
+            previousLecturer();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   TOUCH / SWIPE
+===================================================== */
+
+let touchStartX = 0;
+
+let touchEndX = 0;
+
+
+const profileArea =
+    document.querySelector(
+        ".profile-area"
+    );
+
+
+profileArea.addEventListener(
+    "touchstart",
+    function(event) {
+
+        touchStartX =
+            event.changedTouches[0]
+                .screenX;
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+profileArea.addEventListener(
+    "touchend",
+    function(event) {
+
+        touchEndX =
+            event.changedTouches[0]
+                .screenX;
+
+
+        const difference =
+            touchEndX -
+            touchStartX;
+
+
+        /*
+         * Minimal swipe:
+         * 50px
+         */
+
+        if (
+            Math.abs(difference) > 50
+        ) {
+
+
+            /*
+             * Swipe kiri
+             * → next
+             */
+
+            if (
+                difference < 0
+            ) {
+
+                nextLecturer();
+
+            }
+
+
+            /*
+             * Swipe kanan
+             * → previous
+             */
+
+            else {
+
+                previousLecturer();
+
+            }
+
+        }
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+/* =====================================================
+   HAMBURGER MENU
+===================================================== */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+
+const sideMenu =
+    document.getElementById(
+        "sideMenu"
+    );
+
+
+const overlay =
+    document.getElementById(
+        "overlay"
+    );
+
+
+const scrollProtection =
+    document.getElementById(
+        "scrollProtection"
+    );
+
+
+/* =====================================================
+   OPEN MENU
+===================================================== */
+
+function openMenu() {
+
+    menuButton.classList.add(
+        "active"
+    );
+
+
+    sideMenu.classList.add(
+        "active"
+    );
+
+
+    overlay.classList.add(
+        "active"
+    );
+
+
+    sideMenu.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    menuButton.setAttribute(
+        "aria-expanded",
+        "true"
+    );
+
+
+    menuButton.setAttribute(
+        "aria-label",
+        "Tutup menu"
+    );
+
+
+    document.body.classList.add(
+        "menu-open"
+    );
+
+
+    /*
+     * Gradient protection hilang
+     * ketika menu terbuka.
+     */
+
+    scrollProtection.classList.remove(
+        "active"
+    );
+
+}
+
+
+/* =====================================================
+   CLOSE MENU
+===================================================== */
+
+function closeMenu() {
+
+    menuButton.classList.remove(
+        "active"
+    );
+
+
+    sideMenu.classList.remove(
+        "active"
+    );
+
+
+    overlay.classList.remove(
+        "active"
+    );
+
+
+    sideMenu.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    menuButton.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+
+
+    menuButton.setAttribute(
+        "aria-label",
+        "Buka menu"
+    );
+
+
+    document.body.classList.remove(
+        "menu-open"
+    );
+
+
+    checkTopContentCollision();
+
+}
+
+
+/* =====================================================
+   TOGGLE MENU
+===================================================== */
+
+menuButton.addEventListener(
+    "click",
+    function() {
+
+        if (
+            sideMenu.classList.contains(
+                "active"
+            )
+        ) {
+
+            closeMenu();
+
+        }
+
+        else {
+
+            openMenu();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   OVERLAY CLICK
+===================================================== */
+
+overlay.addEventListener(
+    "click",
+    closeMenu
+);
+
+
+/* =====================================================
+   MENU LINKS
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".menu-link"
+    )
+    .forEach(
+        function(link) {
+
+            link.addEventListener(
+                "click",
+                closeMenu
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   ESCAPE
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeMenu();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   TOP CONTENT COLLISION
+===================================================== */
+
+function checkTopContentCollision() {
+
+
+    /*
+     * Menu terbuka:
+     * protection dimatikan.
+     */
+
+    if (
+        document.body.classList.contains(
+            "menu-open"
+        )
+    ) {
+
+        scrollProtection.classList.remove(
+            "active"
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Jika berada di paling atas,
+     * protection tidak diperlukan.
+     */
+
+    if (
+        window.scrollY <= 10
+    ) {
+
+        scrollProtection.classList.remove(
+            "active"
+        );
+
+        return;
+
+    }
+
+
+    const protectionHeight =
+        window.innerWidth <= 700
+            ? 105
+            : 115;
+
+
+    /*
+     * Content yang perlu dilindungi.
+     */
+
+    const elements =
+        document.querySelectorAll(
+            ".page-title, " +
+            ".team-description, " +
+            ".profile-area, " +
+            ".back-button"
+        );
+
+
+    let collision =
+        false;
+
+
+    elements.forEach(
+        function(element) {
+
+            const rect =
+                element.getBoundingClientRect();
+
+
+            if (
+                rect.top <
+                    protectionHeight
+                &&
+                rect.bottom >
+                    0
+            ) {
+
+                collision =
+                    true;
+
+            }
+
+        }
+    );
+
+
+    if (
+        collision
+    ) {
+
+        scrollProtection.classList.add(
+            "active"
+        );
+
+    }
+
+    else {
+
+        scrollProtection.classList.remove(
+            "active"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   SCROLL EVENT
+===================================================== */
+
+window.addEventListener(
+    "scroll",
+    checkTopContentCollision,
+    {
+        passive: true
+    }
+);
+
+
+/* =====================================================
+   RESIZE EVENT
+===================================================== */
+
+window.addEventListener(
+    "resize",
+    checkTopContentCollision
+);
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+updateDots();
+
+checkTopContentCollision();
 
 </script>
 
+
 </body>
+
 </html>
