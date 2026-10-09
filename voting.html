@@ -4,7 +4,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Voting | Psychological Scale Exhibition</title>
 
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -25,9 +24,7 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
     width: 100%;
@@ -40,13 +37,12 @@ body {
     overflow-x: hidden;
 }
 
-button, input {
-    font: inherit;
-}
+button, input { font: inherit; }
 
 .top-scroll-protection {
     position: fixed;
-    inset: 0 0 auto;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 115px;
     background: linear-gradient(
@@ -83,7 +79,7 @@ body.menu-open .top-scroll-protection {
     width: 64px;
     height: 48px;
     padding: 4px 0;
-    border: 0;
+    border: none;
     background: transparent;
     cursor: pointer;
     z-index: 1300;
@@ -105,9 +101,7 @@ body.menu-open .top-scroll-protection {
     background: var(--white);
 }
 
-.menu-button.active span:nth-child(2) {
-    opacity: 0;
-}
+.menu-button.active span:nth-child(2) { opacity: 0; }
 
 .menu-button.active span:nth-child(3) {
     transform: translateY(-17px) rotate(-45deg);
@@ -131,24 +125,23 @@ body.menu-open .top-scroll-protection {
 
 .side-menu {
     position: fixed;
-    inset: 0 auto 0 0;
+    top: 0;
+    left: 0;
     width: 365px;
     max-width: 88vw;
+    height: 100vh;
     background: var(--blue-deep);
     z-index: 1200;
     transform: translateX(-100%);
     transition: transform .4s;
     overflow-y: auto;
+    overflow-x: hidden;
     box-shadow: 8px 0 30px rgba(0,0,0,.12);
 }
 
-.side-menu.active {
-    transform: translateX(0);
-}
+.side-menu.active { transform: translateX(0); }
 
-.side-menu-inner {
-    padding: 118px 43px 55px;
-}
+.side-menu-inner { padding: 118px 43px 55px; }
 
 .menu-label, .menu-section-title {
     margin-bottom: 22px;
@@ -158,13 +151,8 @@ body.menu-open .top-scroll-protection {
     letter-spacing: 3px;
 }
 
-.menu-section {
-    margin-top: 34px;
-}
-
-.menu-section-title {
-    margin-bottom: 3px;
-}
+.menu-section { margin-top: 34px; }
+.menu-section-title { margin-bottom: 3px; }
 
 .menu-link {
     display: block;
@@ -234,19 +222,14 @@ body.menu-open .top-scroll-protection {
     transition: transform .3s, box-shadow .3s;
 }
 
-.name-input::placeholder {
-    color: var(--black);
-    opacity: 1;
-}
+.name-input::placeholder { color: var(--black); opacity: 1; }
 
 .name-input:focus {
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(7,84,135,.14);
 }
 
-.name-input:focus-visible {
-    border-color: var(--blue);
-}
+.name-input:focus-visible { border-color: var(--blue); }
 
 .instruction {
     max-width: 800px;
@@ -256,9 +239,7 @@ body.menu-open .top-scroll-protection {
     line-height: 1.55;
 }
 
-.instruction strong {
-    font-weight: 800;
-}
+.instruction strong { font-weight: 800; }
 
 .poster-grid {
     width: 100%;
@@ -283,7 +264,7 @@ body.menu-open .top-scroll-protection {
     width: 100%;
     max-width: 280px;
     padding: 0;
-    border: 0;
+    border: none;
     background: transparent;
     cursor: pointer;
     transition: transform .3s;
@@ -299,9 +280,7 @@ body.menu-open .top-scroll-protection {
     transition: transform .3s, box-shadow .3s, filter .3s;
 }
 
-.poster-select:hover {
-    transform: translateY(-7px);
-}
+.poster-select:hover { transform: translateY(-7px); }
 
 .poster-select:hover img {
     transform: scale(1.02);
@@ -398,8 +377,7 @@ body.menu-open .top-scroll-protection {
     cursor: not-allowed;
 }
 
-.submit-button:focus-visible,
-.bottom-back a:focus-visible {
+.submit-button:focus-visible, .bottom-back a:focus-visible {
     outline: 3px solid var(--blue);
     outline-offset: 5px;
 }
@@ -414,13 +392,8 @@ body.menu-open .top-scroll-protection {
     overflow-wrap: anywhere;
 }
 
-.form-message.error {
-    color: #b42318;
-}
-
-.form-message.success {
-    color: #167447;
-}
+.form-message.error { color: #b42318; }
+.form-message.success { color: #167447; }
 
 .bottom-back {
     display: flex;
@@ -451,9 +424,7 @@ body.menu-open .top-scroll-protection {
 }
 
 @media (max-width: 700px) {
-    .top-scroll-protection {
-        height: 105px;
-    }
+    .top-scroll-protection { height: 105px; }
 
     .menu-button {
         top: 28px;
@@ -462,10 +433,7 @@ body.menu-open .top-scroll-protection {
         height: 42px;
     }
 
-    .menu-button span {
-        width: 54px;
-        height: 4px;
-    }
+    .menu-button span { width: 54px; height: 4px; }
 
     .menu-button.active span:nth-child(1) {
         transform: translateY(15px) rotate(45deg);
@@ -475,59 +443,29 @@ body.menu-open .top-scroll-protection {
         transform: translateY(-15px) rotate(-45deg);
     }
 
-    .side-menu-inner {
-        padding: 105px 35px 50px;
-    }
+    .side-menu-inner { padding: 105px 35px 50px; }
+    .menu-link { font-size: 18px; }
 
-    .menu-link {
-        font-size: 18px;
-    }
-
-    .voting-page {
-        padding: 115px 25px 70px;
-    }
-
-    .header {
-        margin-bottom: 25px;
-    }
-
-    .exhibition-title {
-        font-size: 12px;
-    }
+    .voting-page { padding: 115px 25px 70px; }
+    .header { margin-bottom: 25px; }
+    .exhibition-title { font-size: 12px; }
 
     .header h1 {
         font-size: 54px;
         letter-spacing: -2px;
     }
 
-    .name-wrapper {
-        width: 100%;
-        margin: 25px auto 40px;
-    }
-
-    .name-input {
-        padding: 16px 20px;
-        font-size: 17px;
-    }
-
-    .instruction {
-        margin-bottom: 30px;
-        font-size: 13px;
-    }
+    .name-wrapper { width: 100%; margin: 25px auto 40px; }
+    .name-input { padding: 16px 20px; font-size: 17px; }
+    .instruction { margin-bottom: 30px; font-size: 13px; }
 
     .poster-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 40px 8%;
     }
 
-    .poster-select {
-        max-width: 230px;
-    }
-
-    .poster-title {
-        font-size: 12px;
-        letter-spacing: 2px;
-    }
+    .poster-select { max-width: 230px; }
+    .poster-title { font-size: 12px; letter-spacing: 2px; }
 
     .selection-number {
         width: 35px;
@@ -545,27 +483,16 @@ body.menu-open .top-scroll-protection {
 }
 
 @media (max-width: 450px) {
-    .voting-page {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    .header h1 {
-        font-size: 48px;
-    }
+    .voting-page { padding-left: 20px; padding-right: 20px; }
+    .header h1 { font-size: 48px; }
 
     .poster-grid {
         grid-template-columns: 1fr;
         gap: 50px;
     }
 
-    .poster-select {
-        max-width: 280px;
-    }
-
-    .poster-title {
-        font-size: 14px;
-    }
+    .poster-select { max-width: 280px; }
+    .poster-title { font-size: 14px; }
 }
 </style>
 </head>
@@ -575,22 +502,15 @@ body.menu-open .top-scroll-protection {
 <div class="top-scroll-protection" id="scrollProtection"></div>
 <div class="overlay" id="overlay"></div>
 
-<button
-    class="menu-button"
-    id="menuButton"
-    type="button"
-    aria-label="Buka menu"
-    aria-expanded="false"
->
-    <span></span>
-    <span></span>
-    <span></span>
+<button class="menu-button" id="menuButton" type="button"
+        aria-label="Buka menu" aria-expanded="false">
+    <span></span><span></span><span></span>
 </button>
 
 <aside class="side-menu" id="sideMenu">
     <div class="side-menu-inner">
         <div class="menu-label">EXPLORE</div>
-
+        <a href="index.html" class="menu-link">Home</a>
         <a href="tentang.html" class="menu-link">Tentang Exhibition</a>
         <a href="profil-dosen.html" class="menu-link">Profil Dosen</a>
         <a href="profil-asisten.html" class="menu-link">Profil Asisten</a>
@@ -610,25 +530,15 @@ body.menu-open .top-scroll-protection {
 </aside>
 
 <main class="voting-page">
-
     <header class="header">
-        <div class="exhibition-title">
-            Psychological Scale Exhibition
-        </div>
-
+        <div class="exhibition-title">Psychological Scale Exhibition</div>
         <h1>PICK YOUR<br>FAVOURITE</h1>
     </header>
 
     <div class="name-wrapper">
-        <input
-            type="text"
-            id="voterName"
-            class="name-input"
-            placeholder="Tuliskan nama Anda"
-            autocomplete="name"
-            maxlength="100"
-            aria-label="Nama pemilih"
-        >
+        <input type="text" id="voterName" class="name-input"
+               placeholder="Tuliskan nama Anda" autocomplete="name"
+               maxlength="100" aria-label="Nama pemilih">
     </div>
 
     <p class="instruction">
@@ -638,118 +548,14 @@ body.menu-open .top-scroll-protection {
         <strong>1, 2, dan 3.</strong>
     </p>
 
-    <section class="poster-grid" id="posterGrid">
-
-        <!-- Nama poster dapat diubah sesuai judul sebenarnya. -->
-        <div class="poster-item">
-            <button class="poster-select" type="button" data-poster="1" aria-pressed="false">
-                <img src="poster/1.jpg" alt="Poster 1">
-                <span class="selection-number"></span>
-            </button>
-            <div class="poster-title">LOREM IPSUM</div>
-        </div>
-
-        <div class="poster-item">
-            <button class="poster-select" type="button" data-poster="2" aria-pressed="false">
-                <img src="poster/2.jpg" alt="Poster 2">
-                <span class="selection-number"></span>
-            </button>
-            <div class="poster-title">LOREM IPSUM</div>
-        </div>
-
-        <div class="poster-item">
-            <button class="poster-select" type="button" data-poster="3" aria-pressed="false">
-                <img src="poster/3.jpg" alt="Poster 3">
-                <span class="selection-number"></span>
-            </button>
-            <div class="poster-title">LOREM IPSUM</div>
-        </div>
-
-        <div class="poster-item">
-            <button class="poster-select" type="button" data-poster="4" aria-pressed="false">
-                <img src="poster/4.jpg" alt="Poster 4">
-                <span class="selection-number"></span>
-            </button>
-            <div class="poster-title">LOREM IPSUM</div>
-        </div>
-
-        <div class="poster-item">
-            <button class="poster-select" type="button" data-poster="5" aria-pressed="false">
-                <img src="poster/5.jpg" alt="Poster 5">
-                <span class="selection-number"></span>
-            </button>
-            <div class="poster-title">LOREM IPSUM</div>
-        </div>
-
-        <div class="poster-item">
-            <button class="poster-select" type="button" data-poster="6" aria-pressed="false">
-                <img src="poster/6.jpg" alt="Poster 6">
-                <span class="selection-number"></span>
-            </button>
-            <div class="poster-title">LOREM IPSUM</div>
-        </div>
-
-        <div class="poster-item">
-            <button class="poster-select" type="button" data-poster="7" aria-pressed="false">
-                <img src="poster/7.jpg" alt="Poster 7">
-                <span class="selection-number"></span>
-            </button>
-            <div class="poster-title">LOREM IPSUM</div>
-        </div>
-
-        <div class="poster-item">
-            <button class="poster-select" type="button" data-poster="8" aria-pressed="false">
-                <img src="poster/8.jpg" alt="Poster 8">
-                <span class="selection-number"></span>
-            </button>
-            <div class="poster-title">LOREM IPSUM</div>
-        </div>
-
-        <div class="poster-item">
-            <button class="poster-select" type="button" data-poster="9" aria-pressed="false">
-                <img src="poster/9.jpg" alt="Poster 9">
-                <span class="selection-number"></span>
-            </button>
-            <div class="poster-title">LOREM IPSUM</div>
-        </div>
-
-        <div class="poster-item">
-            <button class="poster-select" type="button" data-poster="10" aria-pressed="false">
-                <img src="poster/10.jpg" alt="Poster 10">
-                <span class="selection-number"></span>
-            </button>
-            <div class="poster-title">LOREM IPSUM</div>
-        </div>
-
-        <div class="poster-item">
-            <button class="poster-select" type="button" data-poster="11" aria-pressed="false">
-                <img src="poster/11.jpg" alt="Poster 11">
-                <span class="selection-number"></span>
-            </button>
-            <div class="poster-title">LOREM IPSUM</div>
-        </div>
-
-        <div class="poster-item">
-            <button class="poster-select" type="button" data-poster="12" aria-pressed="false">
-                <img src="poster/12.jpg" alt="Poster 12">
-                <span class="selection-number"></span>
-            </button>
-            <div class="poster-title">LOREM IPSUM</div>
-        </div>
-
-    </section>
+    <section class="poster-grid" id="posterGrid"></section>
 
     <div class="voting-status" id="votingStatus" aria-live="polite">
         0 / 3 poster dipilih
     </div>
 
     <div class="submit-wrapper">
-        <button
-            type="button"
-            id="submitButton"
-            class="submit-button"
-            disabled
-        >
+        <button type="button" id="submitButton" class="submit-button" disabled>
             KIRIM
         </button>
     </div>
@@ -759,43 +565,72 @@ body.menu-open .top-scroll-protection {
     <div class="bottom-back">
         <a href="index.html">KEMBALI</a>
     </div>
-
 </main>
+
+<!-- Iframe tersembunyi untuk mengirim POST tanpa fetch/CORS -->
+<iframe name="votingTarget" id="votingTarget"
+        title="Pengiriman voting" style="display:none"></iframe>
 
 <script>
 "use strict";
 
 /*
- * GOOGLE APPS SCRIPT WEB APP URL
- * Gunakan URL deployment aktif yang berakhiran /exec.
+ * GUNAKAN URL DEPLOYMENT WEB APP AKTIF.
+ * Jika membuat deployment baru, periksa URL-nya kembali.
  */
 const GOOGLE_SCRIPT_URL =
     "https://script.google.com/a/macros/student.ubaya.ac.id/s/AKfycbxIEltL6DfkOV2ryc4gNzRkCXf9lSmeIsfP4CrPWEbCL-7ORWS2gPRSRqHkIV8dRJ3X/exec";
 
-let selectedPosters = [];
-let isSubmitting = false;
-
-const menuButton = document.getElementById("menuButton");
-const sideMenu = document.getElementById("sideMenu");
-const overlay = document.getElementById("overlay");
-const scrollProtection = document.getElementById("scrollProtection");
+const posterGrid = document.getElementById("posterGrid");
 const nameInput = document.getElementById("voterName");
 const submitButton = document.getElementById("submitButton");
 const votingStatus = document.getElementById("votingStatus");
 const formMessage = document.getElementById("formMessage");
+const menuButton = document.getElementById("menuButton");
+const sideMenu = document.getElementById("sideMenu");
+const overlay = document.getElementById("overlay");
+const scrollProtection = document.getElementById("scrollProtection");
 
-/* =========================
-   MENU
-========================= */
+let selectedPosters = [];
+let isSubmitting = false;
 
+/* Buat 12 poster */
+for (let number = 1; number <= 12; number++) {
+    const item = document.createElement("div");
+    item.className = "poster-item";
+
+    const button = document.createElement("button");
+    button.className = "poster-select";
+    button.type = "button";
+    button.dataset.poster = String(number);
+    button.setAttribute("aria-pressed", "false");
+
+    const img = document.createElement("img");
+    img.src = `poster/${number}.jpg`;
+    img.alt = `Poster ${number}`;
+    img.loading = number > 4 ? "lazy" : "eager";
+
+    const badge = document.createElement("span");
+    badge.className = "selection-number";
+
+    button.append(img, badge);
+    button.addEventListener("click", () => selectPoster(button));
+
+    const title = document.createElement("div");
+    title.className = "poster-title";
+    title.textContent = "LOREM IPSUM";
+
+    item.append(button, title);
+    posterGrid.appendChild(item);
+}
+
+/* Menu */
 function openMenu() {
     menuButton.classList.add("active");
     sideMenu.classList.add("active");
     overlay.classList.add("active");
-
     menuButton.setAttribute("aria-expanded", "true");
     menuButton.setAttribute("aria-label", "Tutup menu");
-
     document.body.classList.add("menu-open");
     scrollProtection.classList.remove("active");
 }
@@ -804,20 +639,14 @@ function closeMenu() {
     menuButton.classList.remove("active");
     sideMenu.classList.remove("active");
     overlay.classList.remove("active");
-
     menuButton.setAttribute("aria-expanded", "false");
     menuButton.setAttribute("aria-label", "Buka menu");
-
     document.body.classList.remove("menu-open");
     checkTopContentCollision();
 }
 
 menuButton.addEventListener("click", () => {
-    if (sideMenu.classList.contains("active")) {
-        closeMenu();
-    } else {
-        openMenu();
-    }
+    sideMenu.classList.contains("active") ? closeMenu() : openMenu();
 });
 
 overlay.addEventListener("click", closeMenu);
@@ -830,21 +659,14 @@ document.addEventListener("keydown", event => {
     if (event.key === "Escape") closeMenu();
 });
 
-/* =========================
-   TOP SCROLL PROTECTION
-========================= */
-
+/* Gradient saat konten melewati bagian atas */
 function checkTopContentCollision() {
-    if (
-        document.body.classList.contains("menu-open") ||
-        window.scrollY <= 10
-    ) {
+    if (document.body.classList.contains("menu-open") || window.scrollY <= 10) {
         scrollProtection.classList.remove("active");
         return;
     }
 
-    const protectionHeight = window.innerWidth <= 700 ? 105 : 115;
-
+    const height = window.innerWidth <= 700 ? 105 : 115;
     const elements = document.querySelectorAll(
         ".header, .name-wrapper, .instruction, .poster-item, " +
         ".voting-status, .submit-wrapper, .form-message, .bottom-back"
@@ -854,37 +676,41 @@ function checkTopContentCollision() {
 
     elements.forEach(element => {
         const rect = element.getBoundingClientRect();
-
-        if (rect.top < protectionHeight && rect.bottom > 0) {
-            collision = true;
-        }
+        if (rect.top < height && rect.bottom > 0) collision = true;
     });
 
     scrollProtection.classList.toggle("active", collision);
 }
 
-window.addEventListener("scroll", checkTopContentCollision, {
-    passive: true
-});
-
+window.addEventListener("scroll", checkTopContentCollision, { passive: true });
 window.addEventListener("resize", checkTopContentCollision);
 
-/* =========================
-   POSTER SELECTION
-========================= */
+/* Status dan pesan */
+function showMessage(message, type = "") {
+    formMessage.textContent = message;
+    formMessage.className = "form-message";
+    if (type) formMessage.classList.add(type);
+}
 
-document.querySelectorAll(".poster-select").forEach(button => {
-    button.addEventListener("click", () => selectPoster(button));
-});
+function clearMessage() {
+    formMessage.textContent = "";
+    formMessage.className = "form-message";
+}
 
+function updateVotingStatus() {
+    votingStatus.textContent = `${selectedPosters.length} / 3 poster dipilih`;
+    submitButton.disabled = isSubmitting || selectedPosters.length !== 3;
+}
+
+/* Pilih tepat 3 poster */
 function selectPoster(button) {
     if (isSubmitting) return;
 
-    const posterNumber = Number(button.dataset.poster);
-    const existingIndex = selectedPosters.indexOf(posterNumber);
+    const number = Number(button.dataset.poster);
+    const index = selectedPosters.indexOf(number);
 
-    if (existingIndex !== -1) {
-        selectedPosters.splice(existingIndex, 1);
+    if (index !== -1) {
+        selectedPosters.splice(index, 1);
         clearMessage();
     } else {
         if (selectedPosters.length >= 3) {
@@ -895,7 +721,7 @@ function selectPoster(button) {
             return;
         }
 
-        selectedPosters.push(posterNumber);
+        selectedPosters.push(number);
         clearMessage();
     }
 
@@ -911,39 +737,18 @@ function updatePosterDisplay() {
 
         button.classList.toggle("selected", selected);
         button.setAttribute("aria-pressed", String(selected));
-
         button.querySelector(".selection-number").textContent =
             selected ? String(index + 1) : "";
     });
 }
 
-function updateVotingStatus() {
-    votingStatus.textContent = `${selectedPosters.length} / 3 poster dipilih`;
-    submitButton.disabled =
-        isSubmitting || selectedPosters.length !== 3;
-}
-
-function showMessage(message, type = "") {
-    formMessage.textContent = message;
-    formMessage.className = "form-message";
-
-    if (type) {
-        formMessage.classList.add(type);
-    }
-}
-
-function clearMessage() {
-    formMessage.textContent = "";
-    formMessage.className = "form-message";
-}
-
-/* =========================
-   SUBMIT VOTE
-========================= */
-
+/*
+ * SUBMIT VIA FORM POST.
+ * Browser tidak dapat memastikan hasil penyimpanan dari iframe lintas domain.
+ */
 submitButton.addEventListener("click", submitVote);
 
-async function submitVote() {
+function submitVote() {
     if (isSubmitting) return;
 
     const name = nameInput.value.trim();
@@ -971,71 +776,62 @@ async function submitVote() {
         pilihan3: selectedPosters[2]
     };
 
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = GOOGLE_SCRIPT_URL;
+    form.target = "votingTarget";
+    form.acceptCharset = "UTF-8";
+    form.style.display = "none";
+
+    Object.entries(voteData).forEach(([key, value]) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = String(value);
+        form.appendChild(input);
+    });
+
     isSubmitting = true;
     submitButton.textContent = "MENGIRIM...";
     updateVotingStatus();
-    showMessage("Mengirim pilihan...", "");
+    showMessage("Mengirim permintaan voting...", "");
+
+    document.body.appendChild(form);
 
     try {
-        const response = await fetch(GOOGLE_SCRIPT_URL, {
-            method: "POST",
-            mode: "cors",
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8"
-            },
-            body: JSON.stringify(voteData)
-        });
+        form.submit();
 
-        const responseText = await response.text();
-
-        let result;
-
-        try {
-            result = JSON.parse(responseText);
-        } catch (error) {
-            throw new Error(
-                "Respons server tidak terbaca. Periksa deployment Apps Script. " +
-                responseText.slice(0, 150)
-            );
-        }
-
-        if (!response.ok) {
-            throw new Error(`HTTP error ${response.status}`);
-        }
-
-        if (!result.success) {
-            throw new Error(result.message || "Voting gagal disimpan.");
-        }
-
+        /*
+         * Ini BUKAN konfirmasi bahwa data tersimpan.
+         * Jangan reset pilihan sebelum memverifikasi spreadsheet.
+         */
         showMessage(
-            "Voting berhasil dikirim. Terima kasih!",
-            "success"
+            "Permintaan telah dikirim. Mohon tunggu konfirmasi panitia sebelum mengirim ulang.",
+            ""
         );
-
-        nameInput.value = "";
-        selectedPosters = [];
-
-        updatePosterDisplay();
-
     } catch (error) {
-        console.error("Voting error:", error);
-
-        showMessage(
-            "Voting gagal dikonfirmasi: " + error.message,
-            "error"
-        );
-
-    } finally {
+        console.error("Gagal mengirim form:", error);
+        showMessage("Form gagal dikirim. Silakan coba lagi.", "error");
         isSubmitting = false;
         submitButton.textContent = "KIRIM";
         updateVotingStatus();
+        form.remove();
+        return;
     }
+
+    /*
+     * Tahan tombol agar tidak mudah terkirim berulang.
+     * Ini bukan deteksi keberhasilan server.
+     */
+    window.setTimeout(() => {
+        form.remove();
+        isSubmitting = false;
+        submitButton.textContent = "KIRIM";
+        updateVotingStatus();
+    }, 5000);
 }
 
-/* =========================
-   INITIALIZE
-========================= */
-
+/* Inisialisasi */
 updatePosterDisplay();
 updateVotingStatus();
 checkTopContentCollision();
