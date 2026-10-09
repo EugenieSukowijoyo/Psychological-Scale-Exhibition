@@ -1,3203 +1,1045 @@
+
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Voting | Psychological Scale Exhibition</title>
-
-
-    <!-- =====================================================
-         GOOGLE FONTS
-    ====================================================== -->
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet"
-    >
-
-
-    <style>
-
-        /* =====================================================
-           RESET
-        ===================================================== */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-
-        body {
-
-            width: 100%;
-            min-height: 100vh;
-
-            font-family:
-                'Montserrat',
-                Arial,
-                Helvetica,
-                sans-serif;
-
-            color: #111111;
-
-            background:
-                linear-gradient(
-                    rgba(244, 249, 253, 0.40),
-                    rgba(244, 249, 253, 0.40)
-                ),
-                url("assets/background.png");
-
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-
-            overflow-x: hidden;
-
-        }
-
-
-        /* =====================================================
-           COLOR VARIABLES
-        ===================================================== */
-
-        :root {
-
-            --blue: #1464c4;
-
-            --blue-dark: #07578d;
-
-            --blue-deep: #075487;
-
-            --light-blue: #b9d3ef;
-
-            --very-light-blue: #eef6fc;
-
-            --white: #ffffff;
-
-            --black: #111111;
-
-        }
-
-
-        /* =====================================================
-           TOP SCROLL PROTECTION
-
-           SOLID ATAS
-           ↓
-           SEMI-TRANSPARENT
-           ↓
-           TRANSPARENT BAWAH
-
-           TIDAK ADA BLUR
-        ===================================================== */
-
-        .top-scroll-protection {
-
-            position: fixed;
-
-            top: 0;
-            left: 0;
-
-            width: 100%;
-
-            /*
-             * Tinggi area protection.
-             */
-            height: 115px;
-
-            /*
-             * GRADASI SOLID → TRANSPARAN
-             *
-             * Bagian atas benar-benar solid
-             * agar hamburger tidak bertabrakan
-             * dengan content yang sedang discroll.
-             */
-            background:
-                linear-gradient(
-                    to bottom,
-
-                    /* SOLID */
-                    rgba(238, 246, 252, 1) 0%,
-                    rgba(238, 246, 252, 1) 42%,
-
-                    /* MULAI FADE */
-                    rgba(238, 246, 252, 0.96) 52%,
-                    rgba(238, 246, 252, 0.78) 65%,
-
-                    /* SEMAKIN TRANSPARAN */
-                    rgba(238, 246, 252, 0.45) 80%,
-                    rgba(238, 246, 252, 0.18) 91%,
-
-                    /* HILANG */
-                    rgba(238, 246, 252, 0) 100%
-                );
-
-            /*
-             * PENTING:
-             * Tidak ada backdrop-filter.
-             * Poster di belakang tetap tajam.
-             */
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
-
-            border: none;
-
-            box-shadow: none;
-
-            opacity: 0;
-
-            visibility: hidden;
-
-            pointer-events: none;
-
-            z-index: 1100;
-
-            transition:
-                opacity 0.25s ease,
-                visibility 0.25s ease;
-
-        }
-
-
-        /* =====================================================
-           PROTECTION ACTIVE
-        ===================================================== */
-
-        .top-scroll-protection.active {
-
-            opacity: 1;
-
-            visibility: visible;
-
-        }
-
-
-        /* =====================================================
-           HIDE WHEN MENU OPEN
-        ===================================================== */
-
-        body.menu-open
-        .top-scroll-protection {
-
-            opacity: 0;
-
-            visibility: hidden;
-
-        }
-
-
-        /* =====================================================
-           HIDE WHEN POSTER OPEN
-        ===================================================== */
-
-        body.poster-open
-        .top-scroll-protection {
-
-            opacity: 0;
-
-            visibility: hidden;
-
-        }
-
-
-        /* =====================================================
-           HAMBURGER BUTTON
-        ===================================================== */
-
-        .menu-button {
-
-            position: fixed;
-
-            top: 38px;
-            left: 30px;
-
-            width: 64px;
-            height: 48px;
-
-            padding: 4px 0;
-
-            border: none;
-
-            background: transparent;
-
-            cursor: pointer;
-
-            z-index: 1300;
-
-            display: flex;
-
-            flex-direction: column;
-
-            justify-content: space-between;
-
-            transition:
-                opacity 0.25s ease;
-
-        }
-
-
-        .menu-button span {
-
-            display: block;
-
-            width: 64px;
-            height: 5px;
-
-            background:
-                var(--blue-deep);
-
-            border-radius: 0;
-
-            transition:
-                transform 0.35s ease,
-                opacity 0.25s ease,
-                background 0.25s ease;
-
-        }
-
-
-        /* =====================================================
-           HAMBURGER → X
-        ===================================================== */
-
-        .menu-button.active
-        span:nth-child(1) {
-
-            transform:
-                translateY(17px)
-                rotate(45deg);
-
-            background:
-                var(--white);
-
-        }
-
-
-        .menu-button.active
-        span:nth-child(2) {
-
-            opacity: 0;
-
-        }
-
-
-        .menu-button.active
-        span:nth-child(3) {
-
-            transform:
-                translateY(-17px)
-                rotate(-45deg);
-
-            background:
-                var(--white);
-
-        }
-
-
-        /* =====================================================
-           HIDE HAMBURGER WHEN POSTER OPEN
-        ===================================================== */
-
-        body.poster-open
-        .menu-button {
-
-            opacity: 0;
-
-            visibility: hidden;
-
-            pointer-events: none;
-
-        }
-
-
-        /* =====================================================
-           OVERLAY
-        ===================================================== */
-
-        .overlay {
-
-            position: fixed;
-
-            inset: 0;
-
-            background:
-                rgba(
-                    0,
-                    38,
-                    66,
-                    0.38
-                );
-
-            opacity: 0;
-
-            visibility: hidden;
-
-            transition:
-                opacity 0.35s ease,
-                visibility 0.35s ease;
-
-            z-index: 1150;
-
-        }
-
-
-        .overlay.active {
-
-            opacity: 1;
-
-            visibility: visible;
-
-        }
-
-
-        /* =====================================================
-           SIDE MENU
-        ===================================================== */
-
-        .side-menu {
-
-            position: fixed;
-
-            top: 0;
-            left: 0;
-
-            width: 365px;
-
-            max-width: 40vw;
-
-            height: 100vh;
-
-            background:
-                var(--blue-deep);
-
-            z-index: 1200;
-
-            transform:
-                translateX(-100%);
-
-            transition:
-                transform 0.4s ease;
-
-            overflow-y: auto;
-
-            overflow-x: hidden;
-
-            box-shadow:
-                8px 0 30px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.12
-                );
-
-        }
-
-
-        .side-menu.active {
-
-            transform:
-                translateX(0);
-
-        }
-
-
-        .side-menu-inner {
-
-            width: 100%;
-
-            min-height: 100%;
-
-            padding:
-                118px 43px 55px;
-
-        }
-
-
-        /* =====================================================
-           MENU LABEL
-        ===================================================== */
-
-        .menu-label {
-
-            margin-bottom:
-                22px;
-
-            color:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.55
-                );
-
-            font-family:
-                'Montserrat',
-                sans-serif;
-
-            font-size:
-                12px;
-
-            font-weight:
-                700;
-
-            letter-spacing:
-                3px;
-
-        }
-
-
-        /* =====================================================
-           MENU LINKS
-        ===================================================== */
-
-        .menu-link {
-
-            display: block;
-
-            width: 100%;
-
-            padding:
-                16px 0;
-
-            border-bottom:
-                1px solid
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.20
-                );
-
-            color:
-                var(--white);
-
-            text-decoration:
-                none;
-
-            font-family:
-                'Montserrat',
-                sans-serif;
-
-            font-size:
-                20px;
-
-            font-weight:
-                700;
-
-            line-height:
-                1.2;
-
-            transition:
-                color 0.25s ease,
-                padding-left 0.25s ease;
-
-        }
-
-
-        .menu-link:hover {
-
-            color:
-                #dcecff;
-
-            padding-left:
-                7px;
-
-        }
-
-
-        /* =====================================================
-           MENU SECTION
-        ===================================================== */
-
-        .menu-section {
-
-            margin-top:
-                34px;
-
-        }
-
-
-        .menu-section-title {
-
-            margin-bottom:
-                3px;
-
-            color:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.55
-                );
-
-            font-family:
-                'Montserrat',
-                sans-serif;
-
-            font-size:
-                12px;
-
-            font-weight:
-                700;
-
-            letter-spacing:
-                3px;
-
-        }
-
-
-        /* =====================================================
-           MAIN PAGE
-        ===================================================== */
-
-        .voting-page {
-
-            width: 100%;
-
-            min-height: 100vh;
-
-            padding:
-                55px 6% 80px;
-
-        }
-
-
-        /* =====================================================
-           HEADER
-        ===================================================== */
-
-        .header {
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            align-items:
-                center;
-
-            text-align:
-                center;
-
-            margin-bottom:
-                30px;
-
-        }
-
-
-        .exhibition-title {
-
-            margin-bottom:
-                10px;
-
-            font-family:
-                'Montserrat',
-                sans-serif;
-
-            font-size:
-                clamp(
-                    14px,
-                    1.5vw,
-                    20px
-                );
-
-            font-weight:
-                500;
-
-            color:
-                var(--black);
-
-        }
-
-
-        .header h1 {
-
-            max-width:
-                1000px;
-
-            font-family:
-                'League Spartan',
-                sans-serif;
-
-            font-size:
-                clamp(
-                    58px,
-                    7vw,
-                    108px
-                );
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                -3px;
-
-            line-height:
-                0.90;
-
-            color:
-                var(--blue);
-
-            text-transform:
-                uppercase;
-
-        }
-
-
-        /* =====================================================
-           NAME INPUT
-        ===================================================== */
-
-        .name-wrapper {
-
-            width:
-                min(
-                    660px,
-                    90%
-                );
-
-            margin:
-                30px auto 50px;
-
-        }
-
-
-        .name-input {
-
-            width: 100%;
-
-            padding:
-                18px 30px;
-
-            border:
-                none;
-
-            border-radius:
-                50px;
-
-            background:
-                rgba(
-                    185,
-                    211,
-                    239,
-                    0.96
-                );
-
-            color:
-                var(--black);
-
-            font-family:
-                'Montserrat',
-                sans-serif;
-
-            font-size:
-                21px;
-
-            font-weight:
-                500;
-
-            text-align:
-                center;
-
-            outline:
-                none;
-
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease;
-
-        }
-
-
-        .name-input::placeholder {
-
-            color:
-                var(--black);
-
-            opacity:
-                1;
-
-        }
-
-
-        .name-input:focus {
-
-            transform:
-                translateY(-2px);
-
-            box-shadow:
-                0 10px 25px
-                rgba(
-                    7,
-                    84,
-                    135,
-                    0.14
-                );
-
-        }
-
-
-        /* =====================================================
-           INSTRUCTION
-        ===================================================== */
-
-        .instruction {
-
-            max-width:
-                800px;
-
-            margin:
-                0 auto 40px;
-
-            text-align:
-                center;
-
-            color:
-                var(--black);
-
-            font-family:
-                'Montserrat',
-                sans-serif;
-
-            font-size:
-                clamp(
-                    14px,
-                    1.2vw,
-                    18px
-                );
-
-            line-height:
-                1.55;
-
-        }
-
-
-        .instruction strong {
-
-            font-weight:
-                800;
-
-        }
-
-
-        .mobile-break {
-
-            display:
-                none;
-
-        }
-
-
-        /* =====================================================
-           POSTER GRID
-        ===================================================== */
-
-        .poster-grid {
-
-            width: 100%;
-
-            max-width:
-                1500px;
-
-            margin:
-                0 auto;
-
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(
-                    4,
-                    1fr
-                );
-
-            gap:
-                55px 5%;
-
-            align-items:
-                start;
-
-        }
-
-
-        /* =====================================================
-           POSTER ITEM
-        ===================================================== */
-
-        .poster-item {
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            align-items:
-                center;
-
-            text-align:
-                center;
-
-        }
-
-
-        /* =====================================================
-           POSTER SELECT
-        ===================================================== */
-
-        .poster-select {
-
-            position:
-                relative;
-
-            width:
-                100%;
-
-            max-width:
-                280px;
-
-            padding:
-                0;
-
-            border:
-                none;
-
-            background:
-                transparent;
-
-            cursor:
-                pointer;
-
-            transition:
-                transform 0.3s ease;
-
-        }
-
-
-        .poster-select img {
-
-            display:
-                block;
-
-            width:
-                100%;
-
-            height:
-                auto;
-
-            aspect-ratio:
-                0.75 / 1;
-
-            object-fit:
-                cover;
-
-            box-shadow:
-                0 8px 20px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.14
-                );
-
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease,
-                filter 0.3s ease;
-
-        }
-
-
-        .poster-select:hover {
-
-            transform:
-                translateY(-7px);
-
-        }
-
-
-        .poster-select:hover img {
-
-            transform:
-                scale(1.02);
-
-            box-shadow:
-                0 18px 35px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.26
-                );
-
-            filter:
-                brightness(1.04);
-
-        }
-
-
-        /* =====================================================
-           SELECTED POSTER
-        ===================================================== */
-
-        .poster-select.selected img {
-
-            box-shadow:
-                0 0 0 5px
-                var(--blue),
-
-                0 15px 35px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.30
-                );
-
-            filter:
-                brightness(0.78);
-
-        }
-
-
-        .selection-number {
-
-            position:
-                absolute;
-
-            top:
-                12px;
-
-            right:
-                12px;
-
-            width:
-                43px;
-
-            height:
-                43px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            border-radius:
-                50%;
-
-            background:
-                var(--blue);
-
-            color:
-                var(--white);
-
-            font-family:
-                'League Spartan',
-                sans-serif;
-
-            font-size:
-                21px;
-
-            font-weight:
-                800;
-
-            opacity:
-                0;
-
-            transform:
-                scale(0.5);
-
-            transition:
-                opacity 0.25s ease,
-                transform 0.25s ease;
-
-        }
-
-
-        .poster-select.selected
-        .selection-number {
-
-            opacity:
-                1;
-
-            transform:
-                scale(1);
-
-        }
-
-
-        /* =====================================================
-           POSTER TITLE
-        ===================================================== */
-
-        .poster-title {
-
-            margin-top:
-                20px;
-
-            color:
-                var(--black);
-
-            font-family:
-                'Montserrat',
-                sans-serif;
-
-            font-size:
-                clamp(
-                    14px,
-                    1.3vw,
-                    20px
-                );
-
-            font-weight:
-                700;
-
-            letter-spacing:
-                4px;
-
-            text-decoration:
-                underline;
-
-            text-underline-offset:
-                6px;
-
-        }
-
-
-        /* =====================================================
-           VOTING STATUS
-        ===================================================== */
-
-        .voting-status {
-
-            min-height:
-                28px;
-
-            margin-top:
-                35px;
-
-            text-align:
-                center;
-
-            color:
-                var(--black);
-
-            font-family:
-                'Montserrat',
-                sans-serif;
-
-            font-size:
-                15px;
-
-            font-weight:
-                600;
-
-            letter-spacing:
-                1px;
-
-        }
-
-
-        /* =====================================================
-           SUBMIT BUTTON
-        ===================================================== */
-
-        .submit-wrapper {
-
-            display:
-                flex;
-
-            justify-content:
-                center;
-
-            margin-top:
-                30px;
-
-        }
-
-
-        .submit-button {
-
-            min-width:
-                290px;
-
-            padding:
-                17px 45px;
-
-            border:
-                3px solid
-                var(--blue-deep);
-
-            border-radius:
-                50px;
-
-            background:
-                var(--blue-deep);
-
-            color:
-                var(--white);
-
-            font-family:
-                'Montserrat',
-                sans-serif;
-
-            font-size:
-                18px;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                5px;
-
-            cursor:
-                pointer;
-
-            transition:
-                background 0.3s ease,
-                color 0.3s ease,
-                transform 0.3s ease,
-                opacity 0.3s ease;
-
-        }
-
-
-        .submit-button:hover:not(:disabled) {
-
-            background:
-                transparent;
-
-            color:
-                var(--blue-deep);
-
-            transform:
-                translateY(-3px);
-
-        }
-
-
-        .submit-button:disabled {
-
-            opacity:
-                0.45;
-
-            cursor:
-                not-allowed;
-
-        }
-
-
-        /* =====================================================
-           MESSAGE
-        ===================================================== */
-
-        .form-message {
-
-            min-height:
-                25px;
-
-            margin-top:
-                22px;
-
-            text-align:
-                center;
-
-            color:
-                var(--blue-deep);
-
-            font-family:
-                'Montserrat',
-                sans-serif;
-
-            font-size:
-                15px;
-
-            font-weight:
-                600;
-
-        }
-
-
-        /* =====================================================
-           BACK BUTTON
-        ===================================================== */
-
-        .bottom-back {
-
-            display:
-                flex;
-
-            justify-content:
-                center;
-
-            margin-top:
-                55px;
-
-        }
-
-
-        .bottom-back a {
-
-            display:
-                inline-flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            min-width:
-                280px;
-
-            padding:
-                15px 40px;
-
-            border:
-                3px solid
-                var(--blue-deep);
-
-            border-radius:
-                50px;
-
-            background:
-                transparent;
-
-            color:
-                var(--blue-deep);
-
-            text-decoration:
-                none;
-
-            font-family:
-                'Montserrat',
-                sans-serif;
-
-            font-size:
-                18px;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                5px;
-
-            transition:
-                background 0.3s ease,
-                color 0.3s ease,
-                transform 0.3s ease;
-
-        }
-
-
-        .bottom-back a:hover {
-
-            background:
-                var(--blue-deep);
-
-            color:
-                var(--white);
-
-            transform:
-                translateY(-3px);
-
-        }
-
-
-        /* =====================================================
-           TABLET
-        ===================================================== */
-
-        @media (max-width: 1100px) {
-
-            .poster-grid {
-
-                grid-template-columns:
-                    repeat(
-                        3,
-                        1fr
-                    );
-
-                gap:
-                    45px 5%;
-
-            }
-
-        }
-
-
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
-        @media (max-width: 700px) {
-
-
-            /* -----------------------------------------------
-               TOP GRADIENT PROTECTION
-            ----------------------------------------------- */
-
-            .top-scroll-protection {
-
-                height:
-                    105px;
-
-                background:
-                    linear-gradient(
-                        to bottom,
-
-                        /* SOLID */
-                        rgba(238, 246, 252, 1) 0%,
-                        rgba(238, 246, 252, 1) 45%,
-
-                        /* FADE */
-                        rgba(238, 246, 252, 0.96) 55%,
-                        rgba(238, 246, 252, 0.76) 68%,
-
-                        rgba(238, 246, 252, 0.40) 83%,
-                        rgba(238, 246, 252, 0.14) 93%,
-
-                        /* TRANSPARENT */
-                        rgba(238, 246, 252, 0) 100%
-                    );
-
-                backdrop-filter:
-                    none;
-
-                -webkit-backdrop-filter:
-                    none;
-
-                border:
-                    none;
-
-                box-shadow:
-                    none;
-
-            }
-
-
-            /* -----------------------------------------------
-               HAMBURGER
-            ----------------------------------------------- */
-
-            .menu-button {
-
-                top:
-                    28px;
-
-                left:
-                    24px;
-
-                width:
-                    54px;
-
-                height:
-                    42px;
-
-            }
-
-
-            .menu-button span {
-
-                width:
-                    54px;
-
-                height:
-                    4px;
-
-            }
-
-
-            .menu-button.active
-            span:nth-child(1) {
-
-                transform:
-                    translateY(15px)
-                    rotate(45deg);
-
-            }
-
-
-            .menu-button.active
-            span:nth-child(3) {
-
-                transform:
-                    translateY(-15px)
-                    rotate(-45deg);
-
-            }
-
-
-            /* -----------------------------------------------
-               SIDE MENU
-            ----------------------------------------------- */
-
-            .side-menu {
-
-                width:
-                    min(
-                        350px,
-                        88vw
-                    );
-
-                max-width:
-                    88vw;
-
-            }
-
-
-            .side-menu-inner {
-
-                padding:
-                    105px 35px 50px;
-
-            }
-
-
-            .menu-link {
-
-                font-size:
-                    18px;
-
-            }
-
-
-            /* -----------------------------------------------
-               MAIN PAGE
-            ----------------------------------------------- */
-
-            .voting-page {
-
-                padding:
-                    115px 25px 70px;
-
-            }
-
-
-            .header {
-
-                margin-bottom:
-                    25px;
-
-            }
-
-
-            .exhibition-title {
-
-                font-size:
-                    12px;
-
-            }
-
-
-            .header h1 {
-
-                font-size:
-                    54px;
-
-                letter-spacing:
-                    -2px;
-
-            }
-
-
-            /* -----------------------------------------------
-               NAME
-            ----------------------------------------------- */
-
-            .name-wrapper {
-
-                width:
-                    100%;
-
-                margin:
-                    25px auto 40px;
-
-            }
-
-
-            .name-input {
-
-                padding:
-                    16px 20px;
-
-                font-size:
-                    17px;
-
-            }
-
-
-            /* -----------------------------------------------
-               INSTRUCTION
-            ----------------------------------------------- */
-
-            .instruction {
-
-                margin-bottom:
-                    30px;
-
-                font-size:
-                    13px;
-
-            }
-
-
-            .mobile-break {
-
-                display:
-                    inline;
-
-            }
-
-
-            /* -----------------------------------------------
-               POSTER GRID
-            ----------------------------------------------- */
-
-            .poster-grid {
-
-                grid-template-columns:
-                    repeat(
-                        2,
-                        1fr
-                    );
-
-                gap:
-                    40px 8%;
-
-            }
-
-
-            .poster-select {
-
-                max-width:
-                    230px;
-
-            }
-
-
-            .poster-title {
-
-                font-size:
-                    12px;
-
-                letter-spacing:
-                    2px;
-
-            }
-
-
-            .selection-number {
-
-                width:
-                    35px;
-
-                height:
-                    35px;
-
-                top:
-                    8px;
-
-                right:
-                    8px;
-
-                font-size:
-                    17px;
-
-            }
-
-
-            /* -----------------------------------------------
-               SUBMIT
-            ----------------------------------------------- */
-
-            .submit-button {
-
-                min-width:
-                    240px;
-
-                padding:
-                    15px 35px;
-
-                font-size:
-                    16px;
-
-            }
-
-
-            /* -----------------------------------------------
-               BACK
-            ----------------------------------------------- */
-
-            .bottom-back a {
-
-                min-width:
-                    240px;
-
-                padding:
-                    13px 30px;
-
-                font-size:
-                    16px;
-
-            }
-
-        }
-
-
-        /* =====================================================
-           SMALL MOBILE
-        ===================================================== */
-
-        @media (max-width: 450px) {
-
-            .voting-page {
-
-                padding-left:
-                    20px;
-
-                padding-right:
-                    20px;
-
-            }
-
-
-            .header h1 {
-
-                font-size:
-                    48px;
-
-            }
-
-
-            .poster-grid {
-
-                grid-template-columns:
-                    1fr;
-
-                gap:
-                    50px;
-
-            }
-
-
-            .poster-select {
-
-                max-width:
-                    280px;
-
-            }
-
-
-            .poster-title {
-
-                font-size:
-                    14px;
-
-            }
-
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Voting | Psychological Scale Exhibition</title>
+
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --blue: #1464c4;
+    --blue-deep: #075487;
+    --light-blue: #b9d3ef;
+    --very-light-blue: #eef6fc;
+    --white: #fff;
+    --black: #111;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Montserrat', Arial, sans-serif;
+    color: var(--black);
+    background:
+        linear-gradient(rgba(244,249,253,.4), rgba(244,249,253,.4)),
+        url("assets/background.png") center / cover fixed no-repeat;
+    overflow-x: hidden;
+}
+
+button, input {
+    font: inherit;
+}
+
+.top-scroll-protection {
+    position: fixed;
+    inset: 0 0 auto;
+    width: 100%;
+    height: 115px;
+    background: linear-gradient(
+        to bottom,
+        rgba(238,246,252,1) 0%,
+        rgba(238,246,252,1) 42%,
+        rgba(238,246,252,.96) 52%,
+        rgba(238,246,252,.78) 65%,
+        rgba(238,246,252,.45) 80%,
+        rgba(238,246,252,.18) 91%,
+        transparent 100%
+    );
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 1100;
+    transition: opacity .25s, visibility .25s;
+}
+
+.top-scroll-protection.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+body.menu-open .top-scroll-protection {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.menu-button {
+    position: fixed;
+    top: 38px;
+    left: 30px;
+    width: 64px;
+    height: 48px;
+    padding: 4px 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    z-index: 1300;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-button span {
+    display: block;
+    width: 64px;
+    height: 5px;
+    background: var(--blue-deep);
+    transition: transform .35s, opacity .25s, background .25s;
+}
+
+.menu-button.active span:nth-child(1) {
+    transform: translateY(17px) rotate(45deg);
+    background: var(--white);
+}
+
+.menu-button.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-button.active span:nth-child(3) {
+    transform: translateY(-17px) rotate(-45deg);
+    background: var(--white);
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,38,66,.38);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .35s, visibility .35s;
+    z-index: 1150;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.side-menu {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 365px;
+    max-width: 88vw;
+    background: var(--blue-deep);
+    z-index: 1200;
+    transform: translateX(-100%);
+    transition: transform .4s;
+    overflow-y: auto;
+    box-shadow: 8px 0 30px rgba(0,0,0,.12);
+}
+
+.side-menu.active {
+    transform: translateX(0);
+}
+
+.side-menu-inner {
+    padding: 118px 43px 55px;
+}
+
+.menu-label, .menu-section-title {
+    margin-bottom: 22px;
+    color: rgba(255,255,255,.55);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.menu-section {
+    margin-top: 34px;
+}
+
+.menu-section-title {
+    margin-bottom: 3px;
+}
+
+.menu-link {
+    display: block;
+    width: 100%;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,.2);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    transition: color .25s, padding-left .25s;
+}
+
+.menu-link:hover {
+    color: #dcecff;
+    padding-left: 7px;
+}
+
+.voting-page {
+    width: 100%;
+    min-height: 100vh;
+    padding: 55px 6% 80px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.exhibition-title {
+    margin-bottom: 10px;
+    font-size: clamp(14px, 1.5vw, 20px);
+    font-weight: 500;
+}
+
+.header h1 {
+    max-width: 1000px;
+    font-family: 'League Spartan', sans-serif;
+    font-size: clamp(58px, 7vw, 108px);
+    font-weight: 800;
+    letter-spacing: -3px;
+    line-height: .9;
+    color: var(--blue);
+    text-transform: uppercase;
+}
+
+.name-wrapper {
+    width: min(660px, 90%);
+    margin: 30px auto 50px;
+}
+
+.name-input {
+    width: 100%;
+    padding: 18px 30px;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    background: rgba(185,211,239,.96);
+    color: var(--black);
+    font-size: 21px;
+    font-weight: 500;
+    text-align: center;
+    outline: none;
+    transition: transform .3s, box-shadow .3s;
+}
+
+.name-input::placeholder {
+    color: var(--black);
+    opacity: 1;
+}
+
+.name-input:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(7,84,135,.14);
+}
+
+.name-input:focus-visible {
+    border-color: var(--blue);
+}
+
+.instruction {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    text-align: center;
+    font-size: clamp(14px, 1.2vw, 18px);
+    line-height: 1.55;
+}
+
+.instruction strong {
+    font-weight: 800;
+}
+
+.poster-grid {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 55px 5%;
+    align-items: start;
+}
+
+.poster-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 0;
+}
+
+.poster-select {
+    position: relative;
+    width: 100%;
+    max-width: 280px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    transition: transform .3s;
+}
+
+.poster-select img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: .75 / 1;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0,0,0,.14);
+    transition: transform .3s, box-shadow .3s, filter .3s;
+}
+
+.poster-select:hover {
+    transform: translateY(-7px);
+}
+
+.poster-select:hover img {
+    transform: scale(1.02);
+    box-shadow: 0 18px 35px rgba(0,0,0,.26);
+    filter: brightness(1.04);
+}
+
+.poster-select.selected img {
+    box-shadow: 0 0 0 5px var(--blue), 0 15px 35px rgba(0,0,0,.3);
+    filter: brightness(.78);
+}
+
+.poster-select:focus-visible {
+    outline: 3px solid var(--blue-deep);
+    outline-offset: 7px;
+}
+
+.selection-number {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 43px;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--blue);
+    color: var(--white);
+    font-family: 'League Spartan', sans-serif;
+    font-size: 21px;
+    font-weight: 800;
+    opacity: 0;
+    transform: scale(.5);
+    transition: opacity .25s, transform .25s;
+}
+
+.poster-select.selected .selection-number {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.poster-title {
+    margin-top: 20px;
+    color: var(--black);
+    font-size: clamp(14px, 1.3vw, 20px);
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+}
+
+.voting-status {
+    min-height: 28px;
+    margin-top: 35px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.submit-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.submit-button, .bottom-back a {
+    min-width: 290px;
+    padding: 17px 35px;
+    border: 3px solid var(--blue-deep);
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-align: center;
+    transition: background .3s, color .3s, transform .3s, opacity .3s;
+}
+
+.submit-button {
+    background: var(--blue-deep);
+    color: var(--white);
+    cursor: pointer;
+}
+
+.submit-button:hover:not(:disabled) {
+    background: transparent;
+    color: var(--blue-deep);
+    transform: translateY(-3px);
+}
+
+.submit-button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.submit-button:focus-visible,
+.bottom-back a:focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 5px;
+}
+
+.form-message {
+    min-height: 25px;
+    margin-top: 22px;
+    text-align: center;
+    color: var(--blue-deep);
+    font-size: 15px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.form-message.error {
+    color: #b42318;
+}
+
+.form-message.success {
+    color: #167447;
+}
+
+.bottom-back {
+    display: flex;
+    justify-content: center;
+    margin-top: 55px;
+}
+
+.bottom-back a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--blue-deep);
+    text-decoration: none;
+}
+
+.bottom-back a:hover {
+    background: var(--blue-deep);
+    color: var(--white);
+    transform: translateY(-3px);
+}
+
+@media (max-width: 1100px) {
+    .poster-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 45px 5%;
+    }
+}
+
+@media (max-width: 700px) {
+    .top-scroll-protection {
+        height: 105px;
+    }
+
+    .menu-button {
+        top: 28px;
+        left: 24px;
+        width: 54px;
+        height: 42px;
+    }
+
+    .menu-button span {
+        width: 54px;
+        height: 4px;
+    }
+
+    .menu-button.active span:nth-child(1) {
+        transform: translateY(15px) rotate(45deg);
+    }
+
+    .menu-button.active span:nth-child(3) {
+        transform: translateY(-15px) rotate(-45deg);
+    }
+
+    .side-menu-inner {
+        padding: 105px 35px 50px;
+    }
+
+    .menu-link {
+        font-size: 18px;
+    }
+
+    .voting-page {
+        padding: 115px 25px 70px;
+    }
+
+    .header {
+        margin-bottom: 25px;
+    }
+
+    .exhibition-title {
+        font-size: 12px;
+    }
+
+    .header h1 {
+        font-size: 54px;
+        letter-spacing: -2px;
+    }
+
+    .name-wrapper {
+        width: 100%;
+        margin: 25px auto 40px;
+    }
+
+    .name-input {
+        padding: 16px 20px;
+        font-size: 17px;
+    }
+
+    .instruction {
+        margin-bottom: 30px;
+        font-size: 13px;
+    }
+
+    .poster-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 40px 8%;
+    }
+
+    .poster-select {
+        max-width: 230px;
+    }
+
+    .poster-title {
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
+
+    .selection-number {
+        width: 35px;
+        height: 35px;
+        top: 8px;
+        right: 8px;
+        font-size: 17px;
+    }
+
+    .submit-button, .bottom-back a {
+        min-width: 240px;
+        padding: 15px 25px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 450px) {
+    .voting-page {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .header h1 {
+        font-size: 48px;
+    }
+
+    .poster-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .poster-select {
+        max-width: 280px;
+    }
+
+    .poster-title {
+        font-size: 14px;
+    }
+}
+</style>
 </head>
-
 
 <body>
 
+<div class="top-scroll-protection" id="scrollProtection"></div>
+<div class="overlay" id="overlay"></div>
 
-    <!-- =====================================================
-         TOP GRADIENT PROTECTION
-    ====================================================== -->
+<button
+    class="menu-button"
+    id="menuButton"
+    type="button"
+    aria-label="Buka menu"
+    aria-expanded="false"
+>
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
 
-    <div
-        class="top-scroll-protection"
-        id="scrollProtection"
-    ></div>
+<aside class="side-menu" id="sideMenu">
+    <div class="side-menu-inner">
+        <div class="menu-label">EXPLORE</div>
 
+        <a href="tentang.html" class="menu-link">Tentang Exhibition</a>
+        <a href="profil-dosen.html" class="menu-link">Profil Dosen</a>
+        <a href="profil-asisten.html" class="menu-link">Profil Asisten</a>
 
-    <!-- =====================================================
-         OVERLAY
-    ====================================================== -->
-
-    <div
-        class="overlay"
-        id="overlay"
-    ></div>
-
-
-    <!-- =====================================================
-         HAMBURGER
-    ====================================================== -->
-
-    <button
-        class="menu-button"
-        id="menuButton"
-        type="button"
-        aria-label="Buka menu"
-        aria-expanded="false"
-    >
-
-        <span></span>
-        <span></span>
-        <span></span>
-
-    </button>
-
-
-    <!-- =====================================================
-         SIDE MENU
-    ====================================================== -->
-
-    <aside
-        class="side-menu"
-        id="sideMenu"
-    >
-
-        <div class="side-menu-inner">
-
-
-            <div class="menu-label">
-                EXPLORE
-            </div>
-
-
-            <a
-                href="tentang.html"
-                class="menu-link"
-            >
-                Tentang Exhibition
-            </a>
-
-
-            <a
-                href="profil-dosen.html"
-                class="menu-link"
-            >
-                Profil Dosen
-            </a>
-
-
-            <a
-                href="profil-asisten.html"
-                class="menu-link"
-            >
-                Profil Asisten
-            </a>
-
-
-            <!-- =============================================
-                 TEMA
-            ============================================== -->
-
-            <div class="menu-section">
-
-                <div class="menu-section-title">
-                    TEMA
-                </div>
-
-
-                <a
-                    href="tema1.html"
-                    class="menu-link"
-                >
-                    Tema 1
-                </a>
-
-
-                <a
-                    href="tema2.html"
-                    class="menu-link"
-                >
-                    Tema 2
-                </a>
-
-
-                <a
-                    href="tema3.html"
-                    class="menu-link"
-                >
-                    Tema 3
-                </a>
-
-            </div>
-
-
-            <!-- =============================================
-                 PARTICIPATE
-            ============================================== -->
-
-            <div class="menu-section">
-
-                <div class="menu-section-title">
-                    PARTICIPATE
-                </div>
-
-
-                <a
-                    href="voting.html"
-                    class="menu-link"
-                >
-                    Vote
-                </a>
-
-            </div>
-
-
+        <div class="menu-section">
+            <div class="menu-section-title">TEMA</div>
+            <a href="tema1.html" class="menu-link">Tema 1</a>
+            <a href="tema2.html" class="menu-link">Tema 2</a>
+            <a href="tema3.html" class="menu-link">Tema 3</a>
         </div>
 
-    </aside>
+        <div class="menu-section">
+            <div class="menu-section-title">PARTICIPATE</div>
+            <a href="voting.html" class="menu-link">Vote</a>
+        </div>
+    </div>
+</aside>
 
+<main class="voting-page">
 
-    <!-- =====================================================
-         MAIN CONTENT
-    ====================================================== -->
-
-    <main class="voting-page">
-
-
-        <!-- =================================================
-             HEADER
-        ================================================== -->
-
-        <header class="header">
-
-            <div class="exhibition-title">
-                Psychological Scale Exhibition
-            </div>
-
-
-            <h1>
-                PICK YOUR<br>
-                FAVOURITE
-            </h1>
-
-        </header>
-
-
-        <!-- =================================================
-             NAME INPUT
-        ================================================== -->
-
-        <div class="name-wrapper">
-
-            <input
-                type="text"
-                id="voterName"
-                class="name-input"
-                placeholder="Tuliskan nama Anda"
-                autocomplete="name"
-                maxlength="100"
-            >
-
+    <header class="header">
+        <div class="exhibition-title">
+            Psychological Scale Exhibition
         </div>
 
+        <h1>PICK YOUR<br>FAVOURITE</h1>
+    </header>
 
-        <!-- =================================================
-             INSTRUCTION
-        ================================================== -->
-
-        <p class="instruction">
-
-            Pilih
-            <strong>3 poster</strong>
-            yang ingin Anda pilih.
-
-            <br>
-
-            Poster yang dipilih akan diberi nomor urutan
-            <strong>1, 2, dan 3.</strong>
-
-        </p>
-
-
-        <!-- =================================================
-             POSTER GRID
-        ================================================== -->
-
-        <section
-            class="poster-grid"
-            id="posterGrid"
+    <div class="name-wrapper">
+        <input
+            type="text"
+            id="voterName"
+            class="name-input"
+            placeholder="Tuliskan nama Anda"
+            autocomplete="name"
+            maxlength="100"
+            aria-label="Nama pemilih"
         >
-
-
-            <!-- POSTER 1 -->
-
-            <div class="poster-item">
-
-                <button
-                    class="poster-select"
-                    type="button"
-                    data-poster="1"
-                    onclick="selectPoster(this)"
-                >
-
-                    <img
-                        src="poster/1.jpg"
-                        alt="Poster 1"
-                    >
-
-                    <span
-                        class="selection-number"
-                    ></span>
-
-                </button>
-
-
-                <div class="poster-title">
-                    LOREM IPSUM
-                </div>
-
-            </div>
-
-
-            <!-- POSTER 2 -->
-
-            <div class="poster-item">
-
-                <button
-                    class="poster-select"
-                    type="button"
-                    data-poster="2"
-                    onclick="selectPoster(this)"
-                >
-
-                    <img
-                        src="poster/2.jpg"
-                        alt="Poster 2"
-                    >
-
-                    <span
-                        class="selection-number"
-                    ></span>
-
-                </button>
-
-
-                <div class="poster-title">
-                    LOREM IPSUM
-                </div>
-
-            </div>
-
-
-            <!-- POSTER 3 -->
-
-            <div class="poster-item">
-
-                <button
-                    class="poster-select"
-                    type="button"
-                    data-poster="3"
-                    onclick="selectPoster(this)"
-                >
-
-                    <img
-                        src="poster/3.jpg"
-                        alt="Poster 3"
-                    >
-
-                    <span
-                        class="selection-number"
-                    ></span>
-
-                </button>
-
-
-                <div class="poster-title">
-                    LOREM IPSUM
-                </div>
-
-            </div>
-
-
-            <!-- POSTER 4 -->
-
-            <div class="poster-item">
-
-                <button
-                    class="poster-select"
-                    type="button"
-                    data-poster="4"
-                    onclick="selectPoster(this)"
-                >
-
-                    <img
-                        src="poster/4.jpg"
-                        alt="Poster 4"
-                    >
-
-                    <span
-                        class="selection-number"
-                    ></span>
-
-                </button>
-
-
-                <div class="poster-title">
-                    LOREM IPSUM
-                </div>
-
-            </div>
-
-
-            <!-- POSTER 5 -->
-
-            <div class="poster-item">
-
-                <button
-                    class="poster-select"
-                    type="button"
-                    data-poster="5"
-                    onclick="selectPoster(this)"
-                >
-
-                    <img
-                        src="poster/5.jpg"
-                        alt="Poster 5"
-                    >
-
-                    <span
-                        class="selection-number"
-                    ></span>
-
-                </button>
-
-
-                <div class="poster-title">
-                    LOREM IPSUM
-                </div>
-
-            </div>
-
-
-            <!-- POSTER 6 -->
-
-            <div class="poster-item">
-
-                <button
-                    class="poster-select"
-                    type="button"
-                    data-poster="6"
-                    onclick="selectPoster(this)"
-                >
-
-                    <img
-                        src="poster/6.jpg"
-                        alt="Poster 6"
-                    >
-
-                    <span
-                        class="selection-number"
-                    ></span>
-
-                </button>
-
-
-                <div class="poster-title">
-                    LOREM IPSUM
-                </div>
-
-            </div>
-
-
-            <!-- POSTER 7 -->
-
-            <div class="poster-item">
-
-                <button
-                    class="poster-select"
-                    type="button"
-                    data-poster="7"
-                    onclick="selectPoster(this)"
-                >
-
-                    <img
-                        src="poster/7.jpg"
-                        alt="Poster 7"
-                    >
-
-                    <span
-                        class="selection-number"
-                    ></span>
-
-                </button>
-
-
-                <div class="poster-title">
-                    LOREM IPSUM
-                </div>
-
-            </div>
-
-
-            <!-- POSTER 8 -->
-
-            <div class="poster-item">
-
-                <button
-                    class="poster-select"
-                    type="button"
-                    data-poster="8"
-                    onclick="selectPoster(this)"
-                >
-
-                    <img
-                        src="poster/8.jpg"
-                        alt="Poster 8"
-                    >
-
-                    <span
-                        class="selection-number"
-                    ></span>
-
-                </button>
-
-
-                <div class="poster-title">
-                    LOREM IPSUM
-                </div>
-
-            </div>
-
-
-            <!-- POSTER 9 -->
-
-            <div class="poster-item">
-
-                <button
-                    class="poster-select"
-                    type="button"
-                    data-poster="9"
-                    onclick="selectPoster(this)"
-                >
-
-                    <img
-                        src="poster/9.jpg"
-                        alt="Poster 9"
-                    >
-
-                    <span
-                        class="selection-number"
-                    ></span>
-
-                </button>
-
-
-                <div class="poster-title">
-                    LOREM IPSUM
-                </div>
-
-            </div>
-
-
-            <!-- POSTER 10 -->
-
-            <div class="poster-item">
-
-                <button
-                    class="poster-select"
-                    type="button"
-                    data-poster="10"
-                    onclick="selectPoster(this)"
-                >
-
-                    <img
-                        src="poster/10.jpg"
-                        alt="Poster 10"
-                    >
-
-                    <span
-                        class="selection-number"
-                    ></span>
-
-                </button>
-
-
-                <div class="poster-title">
-                    LOREM IPSUM
-                </div>
-
-            </div>
-
-
-            <!-- POSTER 11 -->
-
-            <div class="poster-item">
-
-                <button
-                    class="poster-select"
-                    type="button"
-                    data-poster="11"
-                    onclick="selectPoster(this)"
-                >
-
-                    <img
-                        src="poster/11.jpg"
-                        alt="Poster 11"
-                    >
-
-                    <span
-                        class="selection-number"
-                    ></span>
-
-                </button>
-
-
-                <div class="poster-title">
-                    LOREM IPSUM
-                </div>
-
-            </div>
-
-
-            <!-- POSTER 12 -->
-
-            <div class="poster-item">
-
-                <button
-                    class="poster-select"
-                    type="button"
-                    data-poster="12"
-                    onclick="selectPoster(this)"
-                >
-
-                    <img
-                        src="poster/12.jpg"
-                        alt="Poster 12"
-                    >
-
-                    <span
-                        class="selection-number"
-                    ></span>
-
-                </button>
-
-
-                <div class="poster-title">
-                    LOREM IPSUM
-                </div>
-
-            </div>
-
-
-        </section>
-
-
-        <!-- =================================================
-             STATUS
-        ================================================== -->
-
-        <div
-            class="voting-status"
-            id="votingStatus"
-        >
-            0 / 3 poster dipilih
-        </div>
-
-
-        <!-- =================================================
-             SUBMIT
-        ================================================== -->
-
-        <div class="submit-wrapper">
-
-            <button
-                type="button"
-                id="submitButton"
-                class="submit-button"
-                onclick="submitVote()"
-                disabled
-            >
-                KIRIM
+    </div>
+
+    <p class="instruction">
+        Pilih <strong>3 poster</strong> yang ingin Anda pilih.
+        <br>
+        Poster yang dipilih akan diberi nomor urutan
+        <strong>1, 2, dan 3.</strong>
+    </p>
+
+    <section class="poster-grid" id="posterGrid">
+
+        <!-- Nama poster dapat diubah sesuai judul sebenarnya. -->
+        <div class="poster-item">
+            <button class="poster-select" type="button" data-poster="1" aria-pressed="false">
+                <img src="poster/1.jpg" alt="Poster 1">
+                <span class="selection-number"></span>
             </button>
-
+            <div class="poster-title">LOREM IPSUM</div>
         </div>
 
-
-        <!-- =================================================
-             MESSAGE
-        ================================================== -->
-
-        <div
-            class="form-message"
-            id="formMessage"
-        ></div>
-
-
-        <!-- =================================================
-             BACK
-        ================================================== -->
-
-        <div class="bottom-back">
-
-            <a href="index.html">
-                KEMBALI
-            </a>
-
+        <div class="poster-item">
+            <button class="poster-select" type="button" data-poster="2" aria-pressed="false">
+                <img src="poster/2.jpg" alt="Poster 2">
+                <span class="selection-number"></span>
+            </button>
+            <div class="poster-title">LOREM IPSUM</div>
         </div>
 
+        <div class="poster-item">
+            <button class="poster-select" type="button" data-poster="3" aria-pressed="false">
+                <img src="poster/3.jpg" alt="Poster 3">
+                <span class="selection-number"></span>
+            </button>
+            <div class="poster-title">LOREM IPSUM</div>
+        </div>
 
-    </main>
+        <div class="poster-item">
+            <button class="poster-select" type="button" data-poster="4" aria-pressed="false">
+                <img src="poster/4.jpg" alt="Poster 4">
+                <span class="selection-number"></span>
+            </button>
+            <div class="poster-title">LOREM IPSUM</div>
+        </div>
 
+        <div class="poster-item">
+            <button class="poster-select" type="button" data-poster="5" aria-pressed="false">
+                <img src="poster/5.jpg" alt="Poster 5">
+                <span class="selection-number"></span>
+            </button>
+            <div class="poster-title">LOREM IPSUM</div>
+        </div>
 
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
+        <div class="poster-item">
+            <button class="poster-select" type="button" data-poster="6" aria-pressed="false">
+                <img src="poster/6.jpg" alt="Poster 6">
+                <span class="selection-number"></span>
+            </button>
+            <div class="poster-title">LOREM IPSUM</div>
+        </div>
 
-    <script>
+        <div class="poster-item">
+            <button class="poster-select" type="button" data-poster="7" aria-pressed="false">
+                <img src="poster/7.jpg" alt="Poster 7">
+                <span class="selection-number"></span>
+            </button>
+            <div class="poster-title">LOREM IPSUM</div>
+        </div>
 
+        <div class="poster-item">
+            <button class="poster-select" type="button" data-poster="8" aria-pressed="false">
+                <img src="poster/8.jpg" alt="Poster 8">
+                <span class="selection-number"></span>
+            </button>
+            <div class="poster-title">LOREM IPSUM</div>
+        </div>
 
-        /* ==================================================
-           GOOGLE APPS SCRIPT WEB APP URL
+        <div class="poster-item">
+            <button class="poster-select" type="button" data-poster="9" aria-pressed="false">
+                <img src="poster/9.jpg" alt="Poster 9">
+                <span class="selection-number"></span>
+            </button>
+            <div class="poster-title">LOREM IPSUM</div>
+        </div>
 
-           GANTI BAGIAN INI DENGAN URL APPS SCRIPT KAMU
-        ================================================== */
+        <div class="poster-item">
+            <button class="poster-select" type="button" data-poster="10" aria-pressed="false">
+                <img src="poster/10.jpg" alt="Poster 10">
+                <span class="selection-number"></span>
+            </button>
+            <div class="poster-title">LOREM IPSUM</div>
+        </div>
 
-        const GOOGLE_SCRIPT_URL =
-            "https://script.google.com/macros/s/AKfycbx8-AhPNo9mny3FFKVwUsBUOS2x0gggw0kTSa5MnELIh-ghAtnIee0_cagEXNWbCfFP/exec";
+        <div class="poster-item">
+            <button class="poster-select" type="button" data-poster="11" aria-pressed="false">
+                <img src="poster/11.jpg" alt="Poster 11">
+                <span class="selection-number"></span>
+            </button>
+            <div class="poster-title">LOREM IPSUM</div>
+        </div>
 
+        <div class="poster-item">
+            <button class="poster-select" type="button" data-poster="12" aria-pressed="false">
+                <img src="poster/12.jpg" alt="Poster 12">
+                <span class="selection-number"></span>
+            </button>
+            <div class="poster-title">LOREM IPSUM</div>
+        </div>
 
-        /* ==================================================
-           VOTING STATE
-        ================================================== */
+    </section>
 
-        let selectedPosters = [];
+    <div class="voting-status" id="votingStatus" aria-live="polite">
+        0 / 3 poster dipilih
+    </div>
 
+    <div class="submit-wrapper">
+        <button
+            type="button"
+            id="submitButton"
+            class="submit-button"
+            disabled
+        >
+            KIRIM
+        </button>
+    </div>
 
-        /* ==================================================
-           DOM ELEMENTS
-        ================================================== */
+    <div class="form-message" id="formMessage" role="status" aria-live="polite"></div>
 
-        const menuButton =
-            document.getElementById(
-                "menuButton"
-            );
+    <div class="bottom-back">
+        <a href="index.html">KEMBALI</a>
+    </div>
 
+</main>
 
-        const sideMenu =
-            document.getElementById(
-                "sideMenu"
-            );
+<script>
+"use strict";
 
+/*
+ * GOOGLE APPS SCRIPT WEB APP URL
+ * Gunakan URL deployment aktif yang berakhiran /exec.
+ */
+const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbx8-AhPNo9mny3FFKVwUsBUOS2x0gggw0kTSa5MnELIh-ghAtnIee0_cagEXNWbCfFP/exec";
 
-        const overlay =
-            document.getElementById(
-                "overlay"
-            );
+let selectedPosters = [];
+let isSubmitting = false;
 
+const menuButton = document.getElementById("menuButton");
+const sideMenu = document.getElementById("sideMenu");
+const overlay = document.getElementById("overlay");
+const scrollProtection = document.getElementById("scrollProtection");
+const nameInput = document.getElementById("voterName");
+const submitButton = document.getElementById("submitButton");
+const votingStatus = document.getElementById("votingStatus");
+const formMessage = document.getElementById("formMessage");
 
-        const scrollProtection =
-            document.getElementById(
-                "scrollProtection"
-            );
+/* =========================
+   MENU
+========================= */
 
+function openMenu() {
+    menuButton.classList.add("active");
+    sideMenu.classList.add("active");
+    overlay.classList.add("active");
 
-        /* ==================================================
-           OPEN MENU
-        ================================================== */
+    menuButton.setAttribute("aria-expanded", "true");
+    menuButton.setAttribute("aria-label", "Tutup menu");
 
-        function openMenu() {
+    document.body.classList.add("menu-open");
+    scrollProtection.classList.remove("active");
+}
 
-            menuButton.classList.add(
-                "active"
-            );
+function closeMenu() {
+    menuButton.classList.remove("active");
+    sideMenu.classList.remove("active");
+    overlay.classList.remove("active");
 
-            sideMenu.classList.add(
-                "active"
-            );
+    menuButton.setAttribute("aria-expanded", "false");
+    menuButton.setAttribute("aria-label", "Buka menu");
 
-            overlay.classList.add(
-                "active"
-            );
+    document.body.classList.remove("menu-open");
+    checkTopContentCollision();
+}
 
+menuButton.addEventListener("click", () => {
+    if (sideMenu.classList.contains("active")) {
+        closeMenu();
+    } else {
+        openMenu();
+    }
+});
 
-            menuButton.setAttribute(
-                "aria-expanded",
-                "true"
-            );
+overlay.addEventListener("click", closeMenu);
 
+document.querySelectorAll(".menu-link").forEach(link => {
+    link.addEventListener("click", closeMenu);
+});
 
-            menuButton.setAttribute(
-                "aria-label",
-                "Tutup menu"
-            );
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeMenu();
+});
 
+/* =========================
+   TOP SCROLL PROTECTION
+========================= */
 
-            document.body.classList.add(
-                "menu-open"
-            );
+function checkTopContentCollision() {
+    if (
+        document.body.classList.contains("menu-open") ||
+        window.scrollY <= 10
+    ) {
+        scrollProtection.classList.remove("active");
+        return;
+    }
 
+    const protectionHeight = window.innerWidth <= 700 ? 105 : 115;
 
-            /*
-             * Hilangkan protection saat menu dibuka.
-             */
+    const elements = document.querySelectorAll(
+        ".header, .name-wrapper, .instruction, .poster-item, " +
+        ".voting-status, .submit-wrapper, .form-message, .bottom-back"
+    );
 
-            scrollProtection.classList.remove(
-                "active"
-            );
+    let collision = false;
 
+    elements.forEach(element => {
+        const rect = element.getBoundingClientRect();
+
+        if (rect.top < protectionHeight && rect.bottom > 0) {
+            collision = true;
         }
+    });
 
+    scrollProtection.classList.toggle("active", collision);
+}
 
-        /* ==================================================
-           CLOSE MENU
-        ================================================== */
+window.addEventListener("scroll", checkTopContentCollision, {
+    passive: true
+});
 
-        function closeMenu() {
+window.addEventListener("resize", checkTopContentCollision);
 
-            menuButton.classList.remove(
-                "active"
-            );
+/* =========================
+   POSTER SELECTION
+========================= */
 
-            sideMenu.classList.remove(
-                "active"
-            );
+document.querySelectorAll(".poster-select").forEach(button => {
+    button.addEventListener("click", () => selectPoster(button));
+});
 
-            overlay.classList.remove(
-                "active"
-            );
+function selectPoster(button) {
+    if (isSubmitting) return;
 
+    const posterNumber = Number(button.dataset.poster);
+    const existingIndex = selectedPosters.indexOf(posterNumber);
 
-            menuButton.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-
-            menuButton.setAttribute(
-                "aria-label",
-                "Buka menu"
-            );
-
-
-            document.body.classList.remove(
-                "menu-open"
-            );
-
-
-            checkTopContentCollision();
-
-        }
-
-
-        /* ==================================================
-           TOGGLE MENU
-        ================================================== */
-
-        menuButton.addEventListener(
-            "click",
-            function() {
-
-                if (
-                    sideMenu.classList.contains(
-                        "active"
-                    )
-                ) {
-
-                    closeMenu();
-
-                }
-
-                else {
-
-                    openMenu();
-
-                }
-
-            }
-        );
-
-
-        /* ==================================================
-           OVERLAY CLICK
-        ================================================== */
-
-        overlay.addEventListener(
-            "click",
-            closeMenu
-        );
-
-
-        /* ==================================================
-           MENU LINKS
-        ================================================== */
-
-        document
-            .querySelectorAll(
-                ".menu-link"
-            )
-            .forEach(
-                function(link) {
-
-                    link.addEventListener(
-                        "click",
-                        closeMenu
-                    );
-
-                }
-            );
-
-
-        /* ==================================================
-           ESCAPE
-        ================================================== */
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (
-                    event.key === "Escape"
-                ) {
-
-                    closeMenu();
-
-                }
-
-            }
-        );
-
-
-        /* ==================================================
-           TOP CONTENT COLLISION
-
-           Protection hanya aktif ketika:
-           - halaman sudah discroll
-           - content benar-benar masuk
-             ke area atas
-        ================================================== */
-
-        function checkTopContentCollision() {
-
-            /*
-             * Jangan aktif ketika menu dibuka.
-             */
-
-            if (
-                document.body.classList.contains(
-                    "menu-open"
-                )
-            ) {
-
-                scrollProtection.classList.remove(
-                    "active"
-                );
-
-                return;
-
-            }
-
-
-            /*
-             * Jangan aktif ketika poster/modal dibuka.
-             */
-
-            if (
-                document.body.classList.contains(
-                    "poster-open"
-                )
-            ) {
-
-                scrollProtection.classList.remove(
-                    "active"
-                );
-
-                return;
-
-            }
-
-
-            /*
-             * Pada posisi paling atas,
-             * protection tidak dibutuhkan.
-             */
-
-            if (
-                window.scrollY <= 10
-            ) {
-
-                scrollProtection.classList.remove(
-                    "active"
-                );
-
-                return;
-
-            }
-
-
-            /*
-             * Tinggi protection.
-             */
-
-            const protectionHeight =
-                window.innerWidth <= 700
-                    ? 105
-                    : 115;
-
-
-            /*
-             * Ambil seluruh content
-             * yang mungkin bertabrakan.
-             */
-
-            const elements =
-                document.querySelectorAll(
-                    ".header, " +
-                    ".name-wrapper, " +
-                    ".instruction, " +
-                    ".poster-item, " +
-                    ".voting-status, " +
-                    ".submit-wrapper, " +
-                    ".form-message, " +
-                    ".bottom-back"
-                );
-
-
-            let contentCollision =
-                false;
-
-
-            /*
-             * Cek posisi setiap elemen.
-             */
-
-            elements.forEach(
-                function(element) {
-
-                    const rect =
-                        element.getBoundingClientRect();
-
-
-                    if (
-                        rect.top <
-                            protectionHeight
-                        &&
-                        rect.bottom >
-                            0
-                    ) {
-
-                        contentCollision =
-                            true;
-
-                    }
-
-                }
-            );
-
-
-            /*
-             * Aktifkan gradient protection
-             * hanya jika memang diperlukan.
-             */
-
-            if (
-                contentCollision
-            ) {
-
-                scrollProtection.classList.add(
-                    "active"
-                );
-
-            }
-
-            else {
-
-                scrollProtection.classList.remove(
-                    "active"
-                );
-
-            }
-
-        }
-
-
-        /* ==================================================
-           SCROLL EVENT
-        ================================================== */
-
-        window.addEventListener(
-            "scroll",
-            checkTopContentCollision,
-            {
-                passive: true
-            }
-        );
-
-
-        /* ==================================================
-           RESIZE EVENT
-        ================================================== */
-
-        window.addEventListener(
-            "resize",
-            checkTopContentCollision
-        );
-
-
-        /*
-         * Initial check.
-         */
-
-        checkTopContentCollision();
-
-
-        /* ==================================================
-           SELECT POSTER
-        ================================================== */
-
-        function selectPoster(button) {
-
-            const posterNumber =
-                Number(
-                    button.dataset.poster
-                );
-
-
-            const existingIndex =
-                selectedPosters.indexOf(
-                    posterNumber
-                );
-
-
-            /*
-             * Jika sudah dipilih,
-             * klik lagi untuk membatalkan.
-             */
-
-            if (
-                existingIndex !== -1
-            ) {
-
-                selectedPosters.splice(
-                    existingIndex,
-                    1
-                );
-
-            }
-
-
-            /*
-             * Jika belum dipilih,
-             * tambahkan pilihan.
-             */
-
-            else {
-
-                if (
-                    selectedPosters.length >= 3
-                ) {
-
-                    showMessage(
-                        "Anda sudah memilih 3 poster. Klik poster yang dipilih untuk mengganti pilihan.",
-                        "warning"
-                    );
-
-                    return;
-
-                }
-
-
-                selectedPosters.push(
-                    posterNumber
-                );
-
-            }
-
-
-            updatePosterDisplay();
-
-            updateVotingStatus();
-
-        }
-
-
-        /* ==================================================
-           UPDATE POSTER DISPLAY
-        ================================================== */
-
-        function updatePosterDisplay() {
-
-            document
-                .querySelectorAll(
-                    ".poster-select"
-                )
-                .forEach(
-                    function(button) {
-
-                        const posterNumber =
-                            Number(
-                                button.dataset.poster
-                            );
-
-
-                        const selectedIndex =
-                            selectedPosters.indexOf(
-                                posterNumber
-                            );
-
-
-                        if (
-                            selectedIndex !== -1
-                        ) {
-
-                            button.classList.add(
-                                "selected"
-                            );
-
-
-                            button
-                                .querySelector(
-                                    ".selection-number"
-                                )
-                                .textContent =
-                                    selectedIndex + 1;
-
-                        }
-
-                        else {
-
-                            button.classList.remove(
-                                "selected"
-                            );
-
-
-                            button
-                                .querySelector(
-                                    ".selection-number"
-                                )
-                                .textContent =
-                                    "";
-
-                        }
-
-                    }
-                );
-
-        }
-
-
-        /* ==================================================
-           UPDATE VOTING STATUS
-        ================================================== */
-
-        function updateVotingStatus() {
-
-            const status =
-                document.getElementById(
-                    "votingStatus"
-                );
-
-
-            const submitButton =
-                document.getElementById(
-                    "submitButton"
-                );
-
-
-            status.textContent =
-                selectedPosters.length +
-                " / 3 poster dipilih";
-
-
-            /*
-             * Aktif hanya jika tepat 3 poster.
-             */
-
-            submitButton.disabled =
-                selectedPosters.length !== 3;
-
-        }
-
-
-        /* ==================================================
-           SUBMIT VOTE
-        ================================================== */
-
-        async function submitVote() {
-
-            const nameInput =
-                document.getElementById(
-                    "voterName"
-                );
-
-
-            const submitButton =
-                document.getElementById(
-                    "submitButton"
-                );
-
-
-            const name =
-                nameInput.value.trim();
-
-
-            /* ----------------------------------------------
-               VALIDASI NAMA
-            ---------------------------------------------- */
-
-            if (!name) {
-
-                showMessage(
-                    "Silakan tuliskan nama Anda terlebih dahulu.",
-                    "error"
-                );
-
-                nameInput.focus();
-
-                return;
-
-            }
-
-
-            /* ----------------------------------------------
-               VALIDASI JUMLAH PILIHAN
-            ---------------------------------------------- */
-
-            if (
-                selectedPosters.length !== 3
-            ) {
-
-                showMessage(
-                    "Silakan pilih tepat 3 poster.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            /* ----------------------------------------------
-               VALIDASI URL
-            ---------------------------------------------- */
-
-            if (
-                GOOGLE_SCRIPT_URL ===
-                "MASUKKAN_URL_GOOGLE_APPS_SCRIPT_DI_SINI"
-            ) {
-
-                showMessage(
-                    "URL Google Apps Script belum dimasukkan ke dalam kode.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            /* ----------------------------------------------
-               DATA VOTING
-            ---------------------------------------------- */
-
-            const voteData = {
-
-                name:
-                    name,
-
-                pilihan1:
-                    selectedPosters[0],
-
-                pilihan2:
-                    selectedPosters[1],
-
-                pilihan3:
-                    selectedPosters[2]
-
-            };
-
-
-            /* ----------------------------------------------
-               LOADING
-            ---------------------------------------------- */
-
-            submitButton.disabled =
-                true;
-
-            submitButton.textContent =
-                "MENGIRIM...";
-
-
+    if (existingIndex !== -1) {
+        selectedPosters.splice(existingIndex, 1);
+        clearMessage();
+    } else {
+        if (selectedPosters.length >= 3) {
             showMessage(
-                "Mengirim pilihan...",
-                "loading"
+                "Anda sudah memilih 3 poster. Batalkan salah satu pilihan untuk menggantinya.",
+                "error"
             );
-
-
-            /* ----------------------------------------------
-               SEND TO GOOGLE APPS SCRIPT
-            ---------------------------------------------- */
-
-            try {
-
-                const response =
-                    await fetch(
-                        GOOGLE_SCRIPT_URL,
-                        {
-
-                            method:
-                                "POST",
-
-                            mode:
-                                "cors",
-
-                            headers: {
-
-                                "Content-Type":
-                                    "text/plain;charset=utf-8"
-
-                            },
-
-                            body:
-                                JSON.stringify(
-                                    voteData
-                                )
-
-                        }
-                    );
-
-
-                const result =
-                    await response.json();
-
-
-                /* ------------------------------------------
-                   SUCCESS
-                ------------------------------------------ */
-
-                if (
-                    result.success
-                ) {
-
-                    showMessage(
-                        "Voting berhasil dikirim. Terima kasih!",
-                        "success"
-                    );
-
-
-                    /*
-                     * Reset nama.
-                     */
-
-                    nameInput.value =
-                        "";
-
-
-                    /*
-                     * Reset pilihan.
-                     */
-
-                    selectedPosters =
-                        [];
-
-
-                    updatePosterDisplay();
-
-                    updateVotingStatus();
-
-                }
-
-
-                /* ------------------------------------------
-                   SERVER ERROR
-                ------------------------------------------ */
-
-                else {
-
-                    throw new Error(
-                        result.message ||
-                        "Data tidak berhasil disimpan."
-                    );
-
-                }
-
-            }
-
-
-            /* ----------------------------------------------
-               FETCH ERROR
-            ---------------------------------------------- */
-
-            catch (error) {
-
-                console.error(
-                    error
-                );
-
-
-                showMessage(
-                    "Voting gagal dikirim. Silakan coba lagi.",
-                    "error"
-                );
-
-
-                updateVotingStatus();
-
-            }
-
-
-            submitButton.textContent =
-                "KIRIM";
-
+            return;
         }
 
+        selectedPosters.push(posterNumber);
+        clearMessage();
+    }
 
-        /* ==================================================
-           MESSAGE
-        ================================================== */
+    updatePosterDisplay();
+    updateVotingStatus();
+}
 
-        function showMessage(
-            message,
-            type
-        ) {
+function updatePosterDisplay() {
+    document.querySelectorAll(".poster-select").forEach(button => {
+        const number = Number(button.dataset.poster);
+        const index = selectedPosters.indexOf(number);
+        const selected = index !== -1;
 
-            const messageBox =
-                document.getElementById(
-                    "formMessage"
-                );
+        button.classList.toggle("selected", selected);
+        button.setAttribute("aria-pressed", String(selected));
 
+        button.querySelector(".selection-number").textContent =
+            selected ? String(index + 1) : "";
+    });
+}
 
-            messageBox.textContent =
-                message;
+function updateVotingStatus() {
+    votingStatus.textContent = `${selectedPosters.length} / 3 poster dipilih`;
+    submitButton.disabled =
+        isSubmitting || selectedPosters.length !== 3;
+}
 
+function showMessage(message, type = "") {
+    formMessage.textContent = message;
+    formMessage.className = "form-message";
 
-            messageBox.style.color =
-                "#075487";
+    if (type) {
+        formMessage.classList.add(type);
+    }
+}
 
+function clearMessage() {
+    formMessage.textContent = "";
+    formMessage.className = "form-message";
+}
+
+/* =========================
+   SUBMIT VOTE
+========================= */
+
+submitButton.addEventListener("click", submitVote);
+
+async function submitVote() {
+    if (isSubmitting) return;
+
+    const name = nameInput.value.trim();
+
+    if (!name) {
+        showMessage("Silakan tuliskan nama Anda terlebih dahulu.", "error");
+        nameInput.focus();
+        return;
+    }
+
+    if (selectedPosters.length !== 3) {
+        showMessage("Silakan pilih tepat 3 poster.", "error");
+        return;
+    }
+
+    if (!GOOGLE_SCRIPT_URL.endsWith("/exec")) {
+        showMessage("URL Google Apps Script tidak valid.", "error");
+        return;
+    }
+
+    const voteData = {
+        name: name,
+        pilihan1: selectedPosters[0],
+        pilihan2: selectedPosters[1],
+        pilihan3: selectedPosters[2]
+    };
+
+    isSubmitting = true;
+    submitButton.textContent = "MENGIRIM...";
+    updateVotingStatus();
+    showMessage("Mengirim pilihan...", "");
+
+    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(voteData)
+        });
+
+        const responseText = await response.text();
+
+        let result;
+
+        try {
+            result = JSON.parse(responseText);
+        } catch (error) {
+            throw new Error(
+                "Respons server tidak terbaca. Periksa deployment Apps Script. " +
+                responseText.slice(0, 150)
+            );
         }
 
+        if (!response.ok) {
+            throw new Error(`HTTP error ${response.status}`);
+        }
 
-        /* ==================================================
-           INITIALIZE
-        ================================================== */
+        if (!result.success) {
+            throw new Error(result.message || "Voting gagal disimpan.");
+        }
 
+        showMessage(
+            "Voting berhasil dikirim. Terima kasih!",
+            "success"
+        );
+
+        nameInput.value = "";
+        selectedPosters = [];
+
+        updatePosterDisplay();
+
+    } catch (error) {
+        console.error("Voting error:", error);
+
+        showMessage(
+            "Voting gagal dikonfirmasi: " + error.message,
+            "error"
+        );
+
+    } finally {
+        isSubmitting = false;
+        submitButton.textContent = "KIRIM";
         updateVotingStatus();
+    }
+}
 
-    </script>
+/* =========================
+   INITIALIZE
+========================= */
 
+updatePosterDisplay();
+updateVotingStatus();
+checkTopContentCollision();
+</script>
 
 </body>
-
 </html>
