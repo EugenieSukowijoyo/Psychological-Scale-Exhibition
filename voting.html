@@ -231,6 +231,11 @@ body.menu-open .top-scroll-protection {
 
 .name-input:focus-visible { border-color: var(--blue); }
 
+.name-input:disabled {
+    opacity: .65;
+    cursor: not-allowed;
+}
+
 .instruction {
     max-width: 800px;
     margin: 0 auto 40px;
@@ -280,9 +285,11 @@ body.menu-open .top-scroll-protection {
     transition: transform .3s, box-shadow .3s, filter .3s;
 }
 
-.poster-select:hover { transform: translateY(-7px); }
+.poster-select:hover:not(:disabled) {
+    transform: translateY(-7px);
+}
 
-.poster-select:hover img {
+.poster-select:hover:not(:disabled) img {
     transform: scale(1.02);
     box-shadow: 0 18px 35px rgba(0,0,0,.26);
     filter: brightness(1.04);
@@ -291,6 +298,10 @@ body.menu-open .top-scroll-protection {
 .poster-select.selected img {
     box-shadow: 0 0 0 5px var(--blue), 0 15px 35px rgba(0,0,0,.3);
     filter: brightness(.78);
+}
+
+.poster-select:disabled {
+    cursor: not-allowed;
 }
 
 .poster-select:focus-visible {
@@ -483,7 +494,11 @@ body.menu-open .top-scroll-protection {
 }
 
 @media (max-width: 450px) {
-    .voting-page { padding-left: 20px; padding-right: 20px; }
+    .voting-page {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
     .header h1 { font-size: 48px; }
 
     .poster-grid {
@@ -594,6 +609,10 @@ const scrollProtection = document.getElementById("scrollProtection");
 let selectedPosters = [];
 let isSubmitting = false;
 
+// Pembatas voting sederhana pada browser yang sama.
+const VOTING_STORAGE_KEY = "pse_voting_submitted_v1";
+let hasVoted = localStorage.getItem(VOTING_STORAGE_KEY) === "true";
+
 /* Buat 12 poster */
 for (let number = 1; number <= 12; number++) {
     const item = document.createElement("div");
@@ -689,7 +708,10 @@ window.addEventListener("resize", checkTopContentCollision);
 function showMessage(message, type = "") {
     formMessage.textContent = message;
     formMessage.className = "form-message";
-    if (type) formMessage.classList.add(type);
+
+    if (type) {
+        formMessage.classList.add(type);
+    }
 }
 
 function clearMessage() {
@@ -698,13 +720,31 @@ function clearMessage() {
 }
 
 function updateVotingStatus() {
-    votingStatus.textContent = `${selectedPosters.length} / 3 poster dipilih`;
-    submitButton.disabled = isSubmitting || selectedPosters.length !== 3;
+    votingStatus.textContent = hasVoted
+        ? "Voting telah dilakukan"
+        : `${selectedPosters.length} / 3 poster dipilih`;
+
+    /*
+     * Tombol tetap dapat diklik setelah voting agar jika peserta
+     * mencoba submit ulang, pesan khusus dapat ditampilkan.
+     */
+    submitButton.disabled =
+        isSubmitting || (!hasVoted && selectedPosters.length !== 3);
+
+    submitButton.textContent = hasVoted
+        ? "SUDAH VOTING"
+        : (isSubmitting ? "MENGIRIM..." : "KIRIM");
+
+    nameInput.disabled = hasVoted || isSubmitting;
+
+    document.querySelectorAll(".poster-select").forEach(button => {
+        button.disabled = hasVoted || isSubmitting;
+    });
 }
 
 /* Pilih tepat 3 poster */
 function selectPoster(button) {
-    if (isSubmitting) return;
+    if (isSubmitting || hasVoted) return;
 
     const number = Number(button.dataset.poster);
     const index = selectedPosters.indexOf(number);
@@ -749,23 +789,41 @@ function updatePosterDisplay() {
 submitButton.addEventListener("click", submitVote);
 
 function submitVote() {
+    // Jika sudah voting, jangan kirim data lagi.
+    if (hasVoted) {
+        showMessage(
+            "Suara Anda sudah tercatat, terima kasih atas partisipasi Anda.",
+            "success"
+        );
+        return;
+    }
+
     if (isSubmitting) return;
 
     const name = nameInput.value.trim();
 
     if (!name) {
-        showMessage("Silakan tuliskan nama Anda terlebih dahulu.", "error");
+        showMessage(
+            "Silakan tuliskan nama Anda terlebih dahulu.",
+            "error"
+        );
         nameInput.focus();
         return;
     }
 
     if (selectedPosters.length !== 3) {
-        showMessage("Silakan pilih tepat 3 poster.", "error");
+        showMessage(
+            "Silakan pilih tepat 3 poster.",
+            "error"
+        );
         return;
     }
 
     if (!GOOGLE_SCRIPT_URL.endsWith("/exec")) {
-        showMessage("URL Google Apps Script tidak valid.", "error");
+        showMessage(
+            "URL Google Apps Script tidak valid.",
+            "error"
+        );
         return;
     }
 
@@ -794,6 +852,7 @@ function submitVote() {
     isSubmitting = true;
     submitButton.textContent = "MENGIRIM...";
     updateVotingStatus();
+
     showMessage("Mengirim permintaan voting...", "");
 
     document.body.appendChild(form);
@@ -802,31 +861,39 @@ function submitVote() {
         form.submit();
 
         /*
-         * Ini BUKAN konfirmasi bahwa data tersimpan.
-         * Jangan reset pilihan sebelum memverifikasi spreadsheet.
+         * Status disimpan pada browser setelah perintah pengiriman dijalankan.
+         * Ini bukan konfirmasi bahwa data berhasil tersimpan di Google Sheets.
          */
+        localStorage.setItem(VOTING_STORAGE_KEY, "true");
+        hasVoted = true;
+
+        updateVotingStatus();
+
         showMessage(
-            "Suara Anda telah dikirim. Terima kasih telah berpartisipasi dalam Psychological Scale Exhibition.",
-            ""
+            "Terima kasih sudah berpartisipasi dalam Psychological Scale Exhibition!",
+            "success"
         );
     } catch (error) {
         console.error("Gagal mengirim form:", error);
-        showMessage("Form gagal dikirim. Silakan coba lagi.", "error");
+
+        showMessage(
+            "Form gagal dikirim. Silakan coba lagi.",
+            "error"
+        );
+
         isSubmitting = false;
-        submitButton.textContent = "KIRIM";
         updateVotingStatus();
         form.remove();
         return;
     }
 
     /*
-     * Tahan tombol agar tidak mudah terkirim berulang.
-     * Ini bukan deteksi keberhasilan server.
+     * Bersihkan elemen form sementara.
+     * Status voting tetap tersimpan dan tombol tidak kembali menjadi KIRIM.
      */
     window.setTimeout(() => {
         form.remove();
         isSubmitting = false;
-        submitButton.textContent = "KIRIM";
         updateVotingStatus();
     }, 5000);
 }
@@ -834,6 +901,14 @@ function submitVote() {
 /* Inisialisasi */
 updatePosterDisplay();
 updateVotingStatus();
+
+if (hasVoted) {
+    showMessage(
+        "Anda sudah melakukan voting melalui browser ini. Terima kasih!",
+        "success"
+    );
+}
+
 checkTopContentCollision();
 </script>
 
