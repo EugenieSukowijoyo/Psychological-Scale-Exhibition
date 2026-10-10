@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -13,7 +13,6 @@
     --blue: #1464c4;
     --blue-deep: #075487;
     --light-blue: #b9d3ef;
-    --very-light-blue: #eef6fc;
     --white: #fff;
     --black: #111;
 }
@@ -24,7 +23,9 @@
     box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+}
 
 body {
     width: 100%;
@@ -37,7 +38,9 @@ body {
     overflow-x: hidden;
 }
 
-button, input { font: inherit; }
+button, input {
+    font: inherit;
+}
 
 .top-scroll-protection {
     position: fixed;
@@ -101,7 +104,9 @@ body.menu-open .top-scroll-protection {
     background: var(--white);
 }
 
-.menu-button.active span:nth-child(2) { opacity: 0; }
+.menu-button.active span:nth-child(2) {
+    opacity: 0;
+}
 
 .menu-button.active span:nth-child(3) {
     transform: translateY(-17px) rotate(-45deg);
@@ -139,11 +144,16 @@ body.menu-open .top-scroll-protection {
     box-shadow: 8px 0 30px rgba(0,0,0,.12);
 }
 
-.side-menu.active { transform: translateX(0); }
+.side-menu.active {
+    transform: translateX(0);
+}
 
-.side-menu-inner { padding: 118px 43px 55px; }
+.side-menu-inner {
+    padding: 118px 43px 55px;
+}
 
-.menu-label, .menu-section-title {
+.menu-label,
+.menu-section-title {
     margin-bottom: 22px;
     color: rgba(255,255,255,.55);
     font-size: 12px;
@@ -151,8 +161,13 @@ body.menu-open .top-scroll-protection {
     letter-spacing: 3px;
 }
 
-.menu-section { margin-top: 34px; }
-.menu-section-title { margin-bottom: 3px; }
+.menu-section {
+    margin-top: 34px;
+}
+
+.menu-section-title {
+    margin-bottom: 3px;
+}
 
 .menu-link {
     display: block;
@@ -203,6 +218,30 @@ body.menu-open .top-scroll-protection {
     text-transform: uppercase;
 }
 
+.mode-banner {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 24px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.mode-banner.testing {
+    color: #7a4b00;
+    background: #fff1c2;
+    border: 1px solid #e8bd4a;
+}
+
+.mode-banner.official {
+    color: #14532d;
+    background: #dcfce7;
+    border: 1px solid #86d6a1;
+}
+
 .name-wrapper {
     width: min(660px, 90%);
     margin: 30px auto 50px;
@@ -222,18 +261,18 @@ body.menu-open .top-scroll-protection {
     transition: transform .3s, box-shadow .3s;
 }
 
-.name-input::placeholder { color: var(--black); opacity: 1; }
+.name-input::placeholder {
+    color: var(--black);
+    opacity: 1;
+}
 
 .name-input:focus {
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(7,84,135,.14);
 }
 
-.name-input:focus-visible { border-color: var(--blue); }
-
-.name-input:disabled {
-    opacity: .65;
-    cursor: not-allowed;
+.name-input:focus-visible {
+    border-color: var(--blue);
 }
 
 .instruction {
@@ -244,7 +283,9 @@ body.menu-open .top-scroll-protection {
     line-height: 1.55;
 }
 
-.instruction strong { font-weight: 800; }
+.instruction strong {
+    font-weight: 800;
+}
 
 .poster-grid {
     width: 100%;
@@ -300,13 +341,13 @@ body.menu-open .top-scroll-protection {
     filter: brightness(.78);
 }
 
-.poster-select:disabled {
-    cursor: not-allowed;
-}
-
 .poster-select:focus-visible {
     outline: 3px solid var(--blue-deep);
     outline-offset: 7px;
+}
+
+.poster-select:disabled {
+    cursor: not-allowed;
 }
 
 .selection-number {
@@ -359,7 +400,8 @@ body.menu-open .top-scroll-protection {
     margin-top: 30px;
 }
 
-.submit-button, .bottom-back a {
+.submit-button,
+.bottom-back a {
     min-width: 290px;
     padding: 17px 35px;
     border: 3px solid var(--blue-deep);
@@ -388,7 +430,8 @@ body.menu-open .top-scroll-protection {
     cursor: not-allowed;
 }
 
-.submit-button:focus-visible, .bottom-back a:focus-visible {
+.submit-button:focus-visible,
+.bottom-back a:focus-visible {
     outline: 3px solid var(--blue);
     outline-offset: 5px;
 }
@@ -403,8 +446,13 @@ body.menu-open .top-scroll-protection {
     overflow-wrap: anywhere;
 }
 
-.form-message.error { color: #b42318; }
-.form-message.success { color: #167447; }
+.form-message.error {
+    color: #b42318;
+}
+
+.form-message.success {
+    color: #167447;
+}
 
 .bottom-back {
     display: flex;
@@ -435,7 +483,9 @@ body.menu-open .top-scroll-protection {
 }
 
 @media (max-width: 700px) {
-    .top-scroll-protection { height: 105px; }
+    .top-scroll-protection {
+        height: 105px;
+    }
 
     .menu-button {
         top: 28px;
@@ -444,7 +494,10 @@ body.menu-open .top-scroll-protection {
         height: 42px;
     }
 
-    .menu-button span { width: 54px; height: 4px; }
+    .menu-button span {
+        width: 54px;
+        height: 4px;
+    }
 
     .menu-button.active span:nth-child(1) {
         transform: translateY(15px) rotate(45deg);
@@ -454,29 +507,59 @@ body.menu-open .top-scroll-protection {
         transform: translateY(-15px) rotate(-45deg);
     }
 
-    .side-menu-inner { padding: 105px 35px 50px; }
-    .menu-link { font-size: 18px; }
+    .side-menu-inner {
+        padding: 105px 35px 50px;
+    }
 
-    .voting-page { padding: 115px 25px 70px; }
-    .header { margin-bottom: 25px; }
-    .exhibition-title { font-size: 12px; }
+    .menu-link {
+        font-size: 18px;
+    }
+
+    .voting-page {
+        padding: 115px 25px 70px;
+    }
+
+    .header {
+        margin-bottom: 25px;
+    }
+
+    .exhibition-title {
+        font-size: 12px;
+    }
 
     .header h1 {
         font-size: 54px;
         letter-spacing: -2px;
     }
 
-    .name-wrapper { width: 100%; margin: 25px auto 40px; }
-    .name-input { padding: 16px 20px; font-size: 17px; }
-    .instruction { margin-bottom: 30px; font-size: 13px; }
+    .name-wrapper {
+        width: 100%;
+        margin: 25px auto 40px;
+    }
+
+    .name-input {
+        padding: 16px 20px;
+        font-size: 17px;
+    }
+
+    .instruction {
+        margin-bottom: 30px;
+        font-size: 13px;
+    }
 
     .poster-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 40px 8%;
     }
 
-    .poster-select { max-width: 230px; }
-    .poster-title { font-size: 12px; letter-spacing: 2px; }
+    .poster-select {
+        max-width: 230px;
+    }
+
+    .poster-title {
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
 
     .selection-number {
         width: 35px;
@@ -486,7 +569,8 @@ body.menu-open .top-scroll-protection {
         font-size: 17px;
     }
 
-    .submit-button, .bottom-back a {
+    .submit-button,
+    .bottom-back a {
         min-width: 240px;
         padding: 15px 25px;
         font-size: 16px;
@@ -499,15 +583,22 @@ body.menu-open .top-scroll-protection {
         padding-right: 20px;
     }
 
-    .header h1 { font-size: 48px; }
+    .header h1 {
+        font-size: 48px;
+    }
 
     .poster-grid {
         grid-template-columns: 1fr;
         gap: 50px;
     }
 
-    .poster-select { max-width: 280px; }
-    .poster-title { font-size: 14px; }
+    .poster-select {
+        max-width: 280px;
+    }
+
+    .poster-title {
+        font-size: 14px;
+    }
 }
 </style>
 </head>
@@ -550,10 +641,13 @@ body.menu-open .top-scroll-protection {
         <h1>PICK YOUR<br>FAVOURITE</h1>
     </header>
 
+    <div class="mode-banner" id="modeBanner" aria-live="polite"></div>
+
     <div class="name-wrapper">
         <input type="text" id="voterName" class="name-input"
-               placeholder="Tuliskan nama Anda" autocomplete="name"
-               maxlength="100" aria-label="Nama pemilih">
+               placeholder="Tuliskan nama Anda"
+               autocomplete="name" maxlength="100"
+               aria-label="Nama pemilih">
     </div>
 
     <p class="instruction">
@@ -570,29 +664,48 @@ body.menu-open .top-scroll-protection {
     </div>
 
     <div class="submit-wrapper">
-        <button type="button" id="submitButton" class="submit-button" disabled>
+        <button type="button" id="submitButton"
+                class="submit-button" disabled>
             KIRIM
         </button>
     </div>
 
-    <div class="form-message" id="formMessage" role="status" aria-live="polite"></div>
+    <div class="form-message" id="formMessage"
+         role="status" aria-live="polite"></div>
 
     <div class="bottom-back">
         <a href="index.html">KEMBALI</a>
     </div>
 </main>
 
-<!-- Iframe tersembunyi untuk mengirim POST tanpa fetch/CORS -->
+<!-- Iframe tersembunyi untuk mengirim POST -->
 <iframe name="votingTarget" id="votingTarget"
         title="Pengiriman voting" style="display:none"></iframe>
 
 <script>
 "use strict";
 
-/*
- * GUNAKAN URL DEPLOYMENT WEB APP AKTIF.
- * Jika membuat deployment baru, periksa URL-nya kembali.
- */
+/* =====================================================
+   KONFIGURASI MODE VOTING
+
+   TESTING_MODE = true:
+   - Status localStorage lama diabaikan.
+   - SEND_TEST_VOTES_TO_SHEETS = false:
+     voting hanya disimulasikan dan tidak dikirim.
+   - SEND_TEST_VOTES_TO_SHEETS = true:
+     voting dikirim ke Google Sheets.
+
+   TESTING_MODE = false:
+   - Mode voting resmi.
+   - localStorage membatasi voting ulang di browser sama.
+   - Voting dikirim ke Google Sheets.
+===================================================== */
+
+const TESTING_MODE = true;
+const SEND_TEST_VOTES_TO_SHEETS = true;
+
+const VOTING_STORAGE_KEY = "pse_voting_submitted_v1";
+
 const GOOGLE_SCRIPT_URL =
     "https://script.google.com/a/macros/student.ubaya.ac.id/s/AKfycbxIEltL6DfkOV2ryc4gNzRkCXf9lSmeIsfP4CrPWEbCL-7ORWS2gPRSRqHkIV8dRJ3X/exec";
 
@@ -601,6 +714,7 @@ const nameInput = document.getElementById("voterName");
 const submitButton = document.getElementById("submitButton");
 const votingStatus = document.getElementById("votingStatus");
 const formMessage = document.getElementById("formMessage");
+const modeBanner = document.getElementById("modeBanner");
 const menuButton = document.getElementById("menuButton");
 const sideMenu = document.getElementById("sideMenu");
 const overlay = document.getElementById("overlay");
@@ -609,11 +723,23 @@ const scrollProtection = document.getElementById("scrollProtection");
 let selectedPosters = [];
 let isSubmitting = false;
 
-// Pembatas voting sederhana pada browser yang sama.
-const VOTING_STORAGE_KEY = "pse_voting_submitted_v1";
-let hasVoted = localStorage.getItem(VOTING_STORAGE_KEY) === "true";
+// Mode pengujian mengabaikan status voting lama.
+let hasVoted = !TESTING_MODE &&
+    localStorage.getItem(VOTING_STORAGE_KEY) === "true";
 
-/* Buat 12 poster */
+/* Tampilkan mode yang sedang aktif */
+if (TESTING_MODE) {
+    modeBanner.textContent = SEND_TEST_VOTES_TO_SHEETS
+        ? "MODE PENGUJIAN — DATA AKAN MASUK KE GOOGLE SHEETS"
+        : "MODE PENGUJIAN — DATA TIDAK DISIMPAN";
+
+    modeBanner.classList.add("testing");
+} else {
+    modeBanner.textContent = "MODE VOTING RESMI";
+    modeBanner.classList.add("official");
+}
+
+/* Buat 12 poster secara otomatis */
 for (let number = 1; number <= 12; number++) {
     const item = document.createElement("div");
     item.className = "poster-item";
@@ -643,13 +769,18 @@ for (let number = 1; number <= 12; number++) {
     posterGrid.appendChild(item);
 }
 
-/* Menu */
+/* =====================================================
+   MENU NAVIGASI
+===================================================== */
+
 function openMenu() {
     menuButton.classList.add("active");
     sideMenu.classList.add("active");
     overlay.classList.add("active");
+
     menuButton.setAttribute("aria-expanded", "true");
     menuButton.setAttribute("aria-label", "Tutup menu");
+
     document.body.classList.add("menu-open");
     scrollProtection.classList.remove("active");
 }
@@ -658,14 +789,18 @@ function closeMenu() {
     menuButton.classList.remove("active");
     sideMenu.classList.remove("active");
     overlay.classList.remove("active");
+
     menuButton.setAttribute("aria-expanded", "false");
     menuButton.setAttribute("aria-label", "Buka menu");
+
     document.body.classList.remove("menu-open");
     checkTopContentCollision();
 }
 
 menuButton.addEventListener("click", () => {
-    sideMenu.classList.contains("active") ? closeMenu() : openMenu();
+    sideMenu.classList.contains("active")
+        ? closeMenu()
+        : openMenu();
 });
 
 overlay.addEventListener("click", closeMenu);
@@ -678,33 +813,49 @@ document.addEventListener("keydown", event => {
     if (event.key === "Escape") closeMenu();
 });
 
-/* Gradient saat konten melewati bagian atas */
+/* Efek gradient saat konten melewati bagian atas */
 function checkTopContentCollision() {
-    if (document.body.classList.contains("menu-open") || window.scrollY <= 10) {
+    if (
+        document.body.classList.contains("menu-open") ||
+        window.scrollY <= 10
+    ) {
         scrollProtection.classList.remove("active");
         return;
     }
 
     const height = window.innerWidth <= 700 ? 105 : 115;
+
     const elements = document.querySelectorAll(
-        ".header, .name-wrapper, .instruction, .poster-item, " +
-        ".voting-status, .submit-wrapper, .form-message, .bottom-back"
+        ".header, .mode-banner, .name-wrapper, .instruction, " +
+        ".poster-item, .voting-status, .submit-wrapper, " +
+        ".form-message, .bottom-back"
     );
 
     let collision = false;
 
     elements.forEach(element => {
         const rect = element.getBoundingClientRect();
-        if (rect.top < height && rect.bottom > 0) collision = true;
+
+        if (rect.top < height && rect.bottom > 0) {
+            collision = true;
+        }
     });
 
     scrollProtection.classList.toggle("active", collision);
 }
 
-window.addEventListener("scroll", checkTopContentCollision, { passive: true });
+window.addEventListener(
+    "scroll",
+    checkTopContentCollision,
+    { passive: true }
+);
+
 window.addEventListener("resize", checkTopContentCollision);
 
-/* Status dan pesan */
+/* =====================================================
+   PESAN DAN STATUS
+===================================================== */
+
 function showMessage(message, type = "") {
     formMessage.textContent = message;
     formMessage.className = "form-message";
@@ -725,11 +876,12 @@ function updateVotingStatus() {
         : `${selectedPosters.length} / 3 poster dipilih`;
 
     /*
-     * Tombol tetap dapat diklik setelah voting agar jika peserta
-     * mencoba submit ulang, pesan khusus dapat ditampilkan.
+     * Tombol tetap bisa diklik setelah voting resmi agar pesan
+     * ketika mencoba submit ulang tetap dapat ditampilkan.
      */
     submitButton.disabled =
-        isSubmitting || (!hasVoted && selectedPosters.length !== 3);
+        isSubmitting ||
+        (!hasVoted && selectedPosters.length !== 3);
 
     submitButton.textContent = hasVoted
         ? "SUDAH VOTING"
@@ -742,7 +894,10 @@ function updateVotingStatus() {
     });
 }
 
-/* Pilih tepat 3 poster */
+/* =====================================================
+   PEMILIHAN POSTER
+===================================================== */
+
 function selectPoster(button) {
     if (isSubmitting || hasVoted) return;
 
@@ -777,19 +932,20 @@ function updatePosterDisplay() {
 
         button.classList.toggle("selected", selected);
         button.setAttribute("aria-pressed", String(selected));
+
         button.querySelector(".selection-number").textContent =
             selected ? String(index + 1) : "";
     });
 }
 
-/*
- * SUBMIT VIA FORM POST.
- * Browser tidak dapat memastikan hasil penyimpanan dari iframe lintas domain.
- */
+/* =====================================================
+   PENGIRIMAN VOTING
+===================================================== */
+
 submitButton.addEventListener("click", submitVote);
 
 function submitVote() {
-    // Jika sudah voting, jangan kirim data lagi.
+    // Mode resmi: cegah pengiriman ulang dari browser yang sama.
     if (hasVoted) {
         showMessage(
             "Suara Anda sudah tercatat, terima kasih atas partisipasi Anda.",
@@ -807,6 +963,7 @@ function submitVote() {
             "Silakan tuliskan nama Anda terlebih dahulu.",
             "error"
         );
+
         nameInput.focus();
         return;
     }
@@ -827,6 +984,22 @@ function submitVote() {
         return;
     }
 
+    /*
+     * MODE SIMULASI
+     * Validasi tetap berjalan, tetapi data tidak dikirim.
+     */
+    if (TESTING_MODE && !SEND_TEST_VOTES_TO_SHEETS) {
+        showMessage(
+            "Simulasi berhasil! Pilihan poster dan validasi berfungsi. Data tidak dikirim ke Google Sheets.",
+            "success"
+        );
+        return;
+    }
+
+    /*
+     * Data yang dikirim harus sesuai dengan nama field
+     * yang diterima Google Apps Script.
+     */
     const voteData = {
         name: name,
         pilihan1: selectedPosters[0],
@@ -843,13 +1016,16 @@ function submitVote() {
 
     Object.entries(voteData).forEach(([key, value]) => {
         const input = document.createElement("input");
+
         input.type = "hidden";
         input.name = key;
         input.value = String(value);
+
         form.appendChild(input);
     });
 
     isSubmitting = true;
+
     submitButton.textContent = "MENGIRIM...";
     updateVotingStatus();
 
@@ -858,21 +1034,28 @@ function submitVote() {
     document.body.appendChild(form);
 
     try {
+        // Kirim data ke Google Apps Script melalui iframe.
         form.submit();
 
         /*
-         * Status disimpan pada browser setelah perintah pengiriman dijalankan.
-         * Ini bukan konfirmasi bahwa data berhasil tersimpan di Google Sheets.
+         * Kunci voting hanya dalam mode resmi.
+         * Browser tidak dapat memastikan bahwa Google Sheets
+         * benar-benar menyimpan data dari iframe lintas domain.
          */
-        localStorage.setItem(VOTING_STORAGE_KEY, "true");
-        hasVoted = true;
+        if (!TESTING_MODE) {
+            localStorage.setItem(VOTING_STORAGE_KEY, "true");
+            hasVoted = true;
+        }
 
         updateVotingStatus();
 
         showMessage(
-            "Terima kasih sudah berpartisipasi dalam Psychological Scale Exhibition!",
+            TESTING_MODE
+                ? "Permintaan uji coba telah dikirim. Periksa spreadsheet pengujian jika pengiriman diaktifkan."
+                : "Terima kasih sudah berpartisipasi dalam Psychological Scale Exhibition!",
             "success"
         );
+
     } catch (error) {
         console.error("Gagal mengirim form:", error);
 
@@ -882,14 +1065,18 @@ function submitVote() {
         );
 
         isSubmitting = false;
+        submitButton.textContent = "KIRIM";
+
         updateVotingStatus();
         form.remove();
+
         return;
     }
 
     /*
-     * Bersihkan elemen form sementara.
-     * Status voting tetap tersimpan dan tombol tidak kembali menjadi KIRIM.
+     * Menahan tombol sementara agar tidak mudah dikirim
+     * berulang kali saat proses pengiriman berlangsung.
+     * Ini bukan konfirmasi keberhasilan server.
      */
     window.setTimeout(() => {
         form.remove();
@@ -898,11 +1085,14 @@ function submitVote() {
     }, 5000);
 }
 
-/* Inisialisasi */
+/* =====================================================
+   INISIALISASI
+===================================================== */
+
 updatePosterDisplay();
 updateVotingStatus();
 
-if (hasVoted) {
+if (!TESTING_MODE && hasVoted) {
     showMessage(
         "Anda sudah melakukan voting melalui browser ini. Terima kasih!",
         "success"
@@ -914,3 +1104,4 @@ checkTopContentCollision();
 
 </body>
 </html>
+```
