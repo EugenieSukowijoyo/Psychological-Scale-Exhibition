@@ -589,7 +589,7 @@ const GOOGLE_SCRIPT_URL =
    TESTING_MODE = false:
    - Mode resmi, voting dibatasi satu kali per browser menggunakan localStorage.
    =========================================================== */
-const TESTING_MODE = false;
+const TESTING_MODE = true;
 const SEND_TEST_VOTES_TO_SHEETS = true;
 const VOTING_STORAGE_KEY = "pse_voting_submitted_v1";
 
@@ -719,7 +719,7 @@ function clearMessage() {
 
 function updateVotingStatus() {
     if (hasVoted && !TESTING_MODE) {
-        votingStatus.textContent = "Anda sudah memberikan suara dari browser ini.";
+        votingStatus.textContent = "Anda sudah memberikan suara.";
         submitButton.disabled = true;
         return;
     }
@@ -778,7 +778,7 @@ function submitVote() {
     if (isSubmitting) return;
 
     if (hasVoted && !TESTING_MODE) {
-        showMessage("Anda sudah memberikan suara dari browser ini.", "error");
+        showMessage("Anda sudah memberikan suara.", "error");
         updateVotingStatus();
         return;
     }
