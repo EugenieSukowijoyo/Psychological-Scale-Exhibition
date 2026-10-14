@@ -1,3169 +1,1819 @@
+
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
-
-<meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<title>Profil Dosen | Psychological Scale Exhibition</title>
-
-
-<!-- =====================================================
-     GOOGLE FONTS
-===================================================== -->
-
-<link
-    href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
-    rel="stylesheet"
->
-
-
-<style>
-
-/* =====================================================
-   RESET
-===================================================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
-html {
-    scroll-behavior: smooth;
-}
-
-
-body {
-
-    width: 100%;
-    min-height: 100vh;
-
-    font-family:
-        'Montserrat',
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    color: #111111;
-
-    background:
-        url("assets/background.png");
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-
-    overflow-x: hidden;
-    overflow-y: auto;
-
-}
-
-
-/* =====================================================
-   COLOR VARIABLES
-===================================================== */
-
-:root {
-
-    --blue: #1464c4;
-
-    --blue-dark: #07578d;
-
-    --blue-deep: #075487;
-
-    --light-blue: #b9d3ef;
-
-    --very-light-blue: #eef6fc;
-
-    --white: #ffffff;
-
-    --black: #111111;
-
-}
-
-
-/* =====================================================
-   TOP SCROLL PROTECTION
-   SOLID → TRANSPARENT
-===================================================== */
-
-.top-scroll-protection {
-
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 115px;
-
-    background:
-        linear-gradient(
-            to bottom,
-
-            rgba(238, 246, 252, 1) 0%,
-            rgba(238, 246, 252, 1) 42%,
-
-            rgba(238, 246, 252, 0.96) 52%,
-            rgba(238, 246, 252, 0.78) 65%,
-
-            rgba(238, 246, 252, 0.45) 80%,
-            rgba(238, 246, 252, 0.18) 91%,
-
-            rgba(238, 246, 252, 0) 100%
-        );
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
-
-    z-index: 1100;
-
-    transition:
-        opacity 0.25s ease,
-        visibility 0.25s ease;
-
-}
-
-
-.top-scroll-protection.active {
-
-    opacity: 1;
-
-    visibility: visible;
-
-}
-
-
-body.menu-open
-.top-scroll-protection {
-
-    opacity: 0;
-
-    visibility: hidden;
-
-}
-
-
-/* =====================================================
-   HAMBURGER BUTTON
-===================================================== */
-
-.menu-button {
-
-    position: fixed;
-
-    top: 38px;
-    left: 30px;
-
-    width: 64px;
-    height: 48px;
-
-    padding: 4px 0;
-
-    border: none;
-
-    background: transparent;
-
-    cursor: pointer;
-
-    z-index: 1300;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: space-between;
-
-}
-
-
-.menu-button span {
-
-    display: block;
-
-    width: 64px;
-    height: 5px;
-
-    background:
-        var(--blue-deep);
-
-    border-radius: 0;
-
-    transition:
-        transform 0.35s ease,
-        opacity 0.25s ease,
-        background 0.25s ease;
-
-}
-
-
-/* =====================================================
-   HAMBURGER → X
-===================================================== */
-
-.menu-button.active
-span:nth-child(1) {
-
-    transform:
-        translateY(17px)
-        rotate(45deg);
-
-    background: white;
-
-}
-
-
-.menu-button.active
-span:nth-child(2) {
-
-    opacity: 0;
-
-}
-
-
-.menu-button.active
-span:nth-child(3) {
-
-    transform:
-        translateY(-17px)
-        rotate(-45deg);
-
-    background: white;
-
-}
-
-
-/* =====================================================
-   OVERLAY
-===================================================== */
-
-.overlay {
-
-    position: fixed;
-
-    inset: 0;
-
-    background:
-        rgba(
-            0,
-            38,
-            66,
-            0.38
-        );
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transition:
-        opacity 0.35s ease,
-        visibility 0.35s ease;
-
-    z-index: 1150;
-
-}
-
-
-.overlay.active {
-
-    opacity: 1;
-
-    visibility: visible;
-
-}
-
-
-/* =====================================================
-   SIDE MENU
-===================================================== */
-
-.side-menu {
-
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
-    width: 365px;
-
-    max-width: 40vw;
-
-    height: 100vh;
-
-    background:
-        var(--blue-deep);
-
-    z-index: 1200;
-
-    transform:
-        translateX(-100%);
-
-    transition:
-        transform 0.4s ease;
-
-    overflow-y: auto;
-
-    overflow-x: hidden;
-
-    box-shadow:
-        8px 0 30px
-        rgba(
-            0,
-            0,
-            0,
-            0.12
-        );
-
-}
-
-
-.side-menu.active {
-
-    transform:
-        translateX(0);
-
-}
-
-
-.side-menu-inner {
-
-    width: 100%;
-
-    min-height: 100%;
-
-    padding:
-        118px 43px 55px;
-
-}
-
-
-/* =====================================================
-   MENU LABEL
-===================================================== */
-
-.menu-label {
-
-    margin-bottom:
-        22px;
-
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.55
-        );
-
-    font-size:
-        12px;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        3px;
-
-}
-
-
-/* =====================================================
-   MENU LINKS
-===================================================== */
-
-.menu-link {
-
-    display: block;
-
-    width: 100%;
-
-    padding:
-        16px 0;
-
-    border-bottom:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.20
-        );
-
-    color:
-        white;
-
-    text-decoration:
-        none;
-
-    font-size:
-        20px;
-
-    font-weight:
-        700;
-
-    line-height:
-        1.2;
-
-    transition:
-        color 0.25s ease,
-        padding-left 0.25s ease;
-
-}
-
-
-.menu-link:hover {
-
-    color:
-        #dcecff;
-
-    padding-left:
-        7px;
-
-}
-
-
-/* =====================================================
-   MENU SECTION
-===================================================== */
-
-.menu-section {
-
-    margin-top:
-        34px;
-
-}
-
-
-.menu-section-title {
-
-    margin-bottom:
-        3px;
-
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.55
-        );
-
-    font-size:
-        12px;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        3px;
-
-}
-
-
-/* =====================================================
-   MAIN PAGE
-===================================================== */
-
-.lecturer-page {
-
-    width: 100%;
-
-    min-height: 100vh;
-
-    padding:
-        35px 4vw 70px;
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
-}
-
-
-/* =====================================================
-   PAGE TITLE
-===================================================== */
-
-.page-title {
-
-    margin-top:
-        0;
-
-    margin-bottom:
-        28px;
-
-    font-family:
-        'League Spartan',
-        sans-serif;
-
-    font-size:
-        clamp(
-            58px,
-            6.2vw,
-            104px
-        );
-
-    line-height:
-        0.92;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        -3px;
-
-    text-align:
-        center;
-
-    color:
-        var(--blue);
-
-    text-transform:
-        uppercase;
-
-}
-
-
-/* =====================================================
-   TEAM DESCRIPTION
-===================================================== */
-
-.team-description {
-
-    width:
-        min(
-            100%,
-            1520px
-        );
-
-    margin:
-        0 auto 55px;
-
-    padding:
-        42px 75px;
-
-    background:
-        var(--blue-deep);
-
-    color:
-        white;
-
-    text-align:
-        center;
-
-}
-
-
-.team-description h2 {
-
-    margin-bottom:
-        18px;
-
-    font-family:
-        'League Spartan',
-        sans-serif;
-
-    font-size:
-        clamp(
-            28px,
-            3vw,
-            46px
-        );
-
-    line-height:
-        1.05;
-
-    font-weight:
-        800;
-
-    text-transform:
-        uppercase;
-
-}
-
-
-.team-description p {
-
-    max-width:
-        1380px;
-
-    margin:
-        0 auto;
-
-    font-family:
-        'Montserrat',
-        sans-serif;
-
-    font-size:
-        clamp(
-            15px,
-            1.5vw,
-            24px
-        );
-
-    line-height:
-        1.55;
-
-    text-align:
-        left;
-
-}
-
-
-/* =====================================================
-   PROFILE AREA
-===================================================== */
-
-.profile-area {
-
-    position:
-        relative;
-
-    width:
-        min(
-            100%,
-            1450px
-        );
-
-    min-height:
-        620px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-}
-
-
-/* =====================================================
-   PROFILE DISPLAY
-===================================================== */
-
-.profile-display {
-
-    width:
-        520px;
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    text-align:
-        center;
-
-    overflow:
-        visible;
-
-}
-
-
-/* =====================================================
-   PROFILE SLIDE GROUP
-
-   FOTO + FRAME + NAMA
-   BERGERAK SEBAGAI SATU KELOMPOK
-===================================================== */
-
-.profile-slide-group {
-
-    width:
-        100%;
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    transform:
-        translateX(0);
-
-    opacity:
-        1;
-
-}
-
-
-/* =====================================================
-   PROFILE IMAGE FRAME
-===================================================== */
-
-.profile-image-wrapper {
-
-    position:
-        relative;
-
-    width:
-        clamp(
-            300px,
-            27vw,
-            450px
-        );
-
-    height:
-        clamp(
-            300px,
-            27vw,
-            450px
-        );
-
-    border:
-        8px solid
-        var(--blue-deep);
-
-    border-radius:
-        50%;
-
-    overflow:
-        hidden;
-
-    background:
-        #dcecf7;
-
-    flex-shrink:
-        0;
-
-    box-shadow:
-        0 8px 20px
-        rgba(
-            7,
-            84,
-            135,
-            0.08
-        );
-
-}
-
-
-/* =====================================================
-   PROFILE IMAGE
-===================================================== */
-
-.profile-image {
-
-    width:
-        100%;
-
-    height:
-        100%;
-
-    display:
-        block;
-
-    object-fit:
-        cover;
-
-    object-position:
-        center;
-
-}
-
-
-/* =====================================================
-   PROFILE NAME
-===================================================== */
-
-.profile-name {
-
-    margin-top:
-        30px;
-
-    font-family:
-        'Montserrat',
-        sans-serif;
-
-    font-size:
-        clamp(
-            25px,
-            2.2vw,
-            40px
-        );
-
-    line-height:
-        1.15;
-
-    font-weight:
-        800;
-
-    color:
-        var(--black);
-
-    text-align:
-        center;
-
-}
-
-
-/* =====================================================
-   PROFILE DESCRIPTION
-===================================================== */
-
-.profile-description {
-
-    display:
-        none;
-
-}
-
-
-/* =====================================================
-   SLIDE ANIMATION
-===================================================== */
-
-/*
- * NEXT
- *
- * Current profile:
- * bergerak ke kiri
- */
-
-.profile-slide-group.slide-out-left {
-
-    animation:
-        profileOutLeft
-        0.42s
-        cubic-bezier(
-            0.55,
-            0.085,
-            0.68,
-            0.53
-        )
-        forwards;
-
-}
-
-
-/*
- * PREVIOUS
- *
- * Current profile:
- * bergerak ke kanan
- */
-
-.profile-slide-group.slide-out-right {
-
-    animation:
-        profileOutRight
-        0.42s
-        cubic-bezier(
-            0.55,
-            0.085,
-            0.68,
-            0.53
-        )
-        forwards;
-
-}
-
-
-/*
- * NEXT
- *
- * Profile baru masuk dari kanan.
- */
-
-.profile-slide-group.slide-in-right {
-
-    animation:
-        profileInRight
-        0.55s
-        cubic-bezier(
-            0.22,
-            0.61,
-            0.36,
-            1
-        )
-        forwards;
-
-}
-
-
-/*
- * PREVIOUS
- *
- * Profile baru masuk dari kiri.
- */
-
-.profile-slide-group.slide-in-left {
-
-    animation:
-        profileInLeft
-        0.55s
-        cubic-bezier(
-            0.22,
-            0.61,
-            0.36,
-            1
-        )
-        forwards;
-
-}
-
-
-/* =====================================================
-   KEYFRAMES
-===================================================== */
-
-@keyframes profileOutLeft {
-
-    0% {
-
-        transform:
-            translateX(0);
-
-        opacity:
-            1;
-
-    }
-
-    100% {
-
-        transform:
-            translateX(-85px);
-
-        opacity:
-            0;
-
-    }
-
-}
-
-
-@keyframes profileOutRight {
-
-    0% {
-
-        transform:
-            translateX(0);
-
-        opacity:
-            1;
-
-    }
-
-    100% {
-
-        transform:
-            translateX(85px);
-
-        opacity:
-            0;
-
-    }
-
-}
-
-
-@keyframes profileInRight {
-
-    0% {
-
-        transform:
-            translateX(85px);
-
-        opacity:
-            0;
-
-    }
-
-    100% {
-
-        transform:
-            translateX(0);
-
-        opacity:
-            1;
-
-    }
-
-}
-
-
-@keyframes profileInLeft {
-
-    0% {
-
-        transform:
-            translateX(-85px);
-
-        opacity:
-            0;
-
-    }
-
-    100% {
-
-        transform:
-            translateX(0);
-
-        opacity:
-            1;
-
-    }
-
-}
-
-
-/* =====================================================
-   DOT INDICATOR
-===================================================== */
-
-.profile-indicator {
-
-    display:
-        flex;
-
-    justify-content:
-        center;
-
-    align-items:
-        center;
-
-    gap:
-        9px;
-
-    margin-top:
-        24px;
-
-}
-
-
-.profile-dot {
-
-    width:
-        9px;
-
-    height:
-        9px;
-
-    border-radius:
-        50%;
-
-    background:
-        rgba(
-            7,
-            84,
-            135,
-            0.25
-        );
-
-    transition:
-        width 0.25s ease,
-        background 0.25s ease;
-
-}
-
-
-.profile-dot.active {
-
-    width:
-        28px;
-
-    border-radius:
-        20px;
-
-    background:
-        var(--blue-deep);
-
-}
-
-
-/* =====================================================
-   PROFILE ARROWS
-===================================================== */
-
-.profile-arrow {
-
-    position:
-        absolute;
-
-    top:
-        50%;
-
-    transform:
-        translateY(-50%);
-
-    width:
-        105px;
-
-    height:
-        130px;
-
-    border:
-        none;
-
-    background:
-        transparent;
-
-    color:
-        var(--blue-deep);
-
-    cursor:
-        pointer;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    font-family:
-        Arial,
-        sans-serif;
-
-    font-size:
-        120px;
-
-    font-weight:
-        900;
-
-    line-height:
-        0.7;
-
-    transition:
-        transform 0.25s ease,
-        opacity 0.25s ease;
-
-    z-index:
-        20;
-
-}
-
-
-.profile-arrow:hover {
-
-    opacity:
-        0.82;
-
-}
-
-
-.profile-arrow.left {
-
-    left:
-        0;
-
-}
-
-
-.profile-arrow.right {
-
-    right:
-        0;
-
-}
-
-
-.profile-arrow.left:hover {
-
-    transform:
-        translateY(-50%)
-        translateX(-6px);
-
-}
-
-
-.profile-arrow.right:hover {
-
-    transform:
-        translateY(-50%)
-        translateX(6px);
-
-}
-
-
-/* =====================================================
-   BACK BUTTON
-===================================================== */
-
-.back-button {
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    min-width:
-        280px;
-
-    margin:
-        25px auto 0;
-
-    padding:
-        15px 42px;
-
-    border:
-        3px solid
-        var(--blue-deep);
-
-    border-radius:
-        50px;
-
-    background:
-        transparent;
-
-    color:
-        var(--blue-deep);
-
-    font-family:
-        'Montserrat',
-        sans-serif;
-
-    font-size:
-        clamp(
-            18px,
-            1.5vw,
-            25px
-        );
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        6px;
-
-    text-align:
-        center;
-
-    text-decoration:
-        none;
-
-    text-transform:
-        uppercase;
-
-    transition:
-        background 0.3s ease,
-        color 0.3s ease,
-        transform 0.3s ease;
-
-}
-
-
-.back-button:hover {
-
-    background:
-        var(--blue-deep);
-
-    color:
-        white;
-
-    transform:
-        translateY(-3px);
-
-}
-
-
-/* =====================================================
-   TABLET
-===================================================== */
-
-@media (max-width: 1100px) {
-
-    .lecturer-page {
-
-        padding:
-            35px 4vw 60px;
-
-    }
-
-
-    .page-title {
-
-        margin-bottom:
-            25px;
-
-    }
-
-
-    .team-description {
-
-        width:
-            94%;
-
-        padding:
-            35px 50px;
-
-        margin-bottom:
-            35px;
-
-    }
-
-
-    .profile-area {
-
-        min-height:
-            560px;
-
-    }
-
-
-    .profile-display {
-
-        width:
-            460px;
-
-    }
-
-
-    .profile-image-wrapper {
-
-        width:
-            350px;
-
-        height:
-            350px;
-
-    }
-
-
-    .profile-arrow {
-
-        width:
-            75px;
-
-        font-size:
-            90px;
-
-    }
-
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 700px) {
-
-
-    /* -------------------------------------------------
-       TOP PROTECTION
-    ------------------------------------------------- */
-
-    .top-scroll-protection {
-
-        height:
-            105px;
-
-        background:
-            linear-gradient(
+    <!-- =====================================================
+         PENGATURAN DASAR HALAMAN
+         ===================================================== -->
+
+    <!-- Menentukan encoding karakter agar teks terbaca dengan benar -->
+    <meta charset="UTF-8">
+
+    <!-- Membuat tampilan menyesuaikan ukuran layar perangkat -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Judul yang muncul pada tab browser -->
+    <title>Profil Dosen | Psychological Scale Exhibition</title>
+
+    <!-- =====================================================
+         GOOGLE FONTS
+         ===================================================== -->
+
+    <!--
+        League Spartan : judul utama dan heading.
+        Montserrat     : teks isi, menu, dan nama dosen.
+        Oswald         : disediakan untuk kebutuhan tipografi tambahan.
+    -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        /* =====================================================
+           1. RESET DAN PENGATURAN GLOBAL
+           ===================================================== */
+
+        /*
+            Menghilangkan margin dan padding bawaan browser.
+            box-sizing:border-box membuat ukuran elemen lebih
+            mudah dihitung karena padding dan border ikut dihitung.
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Mengaktifkan scrolling halus ketika berpindah bagian */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* =====================================================
+           2. VARIABEL WARNA DAN PENGATURAN BODY
+           ===================================================== */
+
+        :root {
+            --blue: #1464c4;
+            --blue-dark: #07578d;
+            --blue-deep: #075487;
+            --light-blue: #b9d3ef;
+            --very-light-blue: #eef6fc;
+            --white: #ffffff;
+            --black: #111111;
+        }
+
+        /*
+            Mengatur latar belakang utama, font, dan warna teks.
+            Gambar background diambil dari folder assets.
+        */
+        body {
+            width: 100%;
+            min-height: 100vh;
+
+            font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+            color: var(--black);
+
+            background: url("assets/background.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* =====================================================
+           3. TOP SCROLL PROTECTION
+           ===================================================== */
+
+        /*
+            Lapisan gradasi di bagian atas halaman.
+            Digunakan ketika konten halaman bergulir melewati
+            area atas agar transisi visual tetap halus.
+        */
+        .top-scroll-protection {
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 115px;
+
+            background: linear-gradient(
                 to bottom,
-
                 rgba(238, 246, 252, 1) 0%,
-                rgba(238, 246, 252, 1) 45%,
-
-                rgba(238, 246, 252, 0.96) 55%,
-                rgba(238, 246, 252, 0.76) 68%,
-
-                rgba(238, 246, 252, 0.40) 83%,
-                rgba(238, 246, 252, 0.14) 93%,
-
+                rgba(238, 246, 252, 1) 42%,
+                rgba(238, 246, 252, 0.96) 52%,
+                rgba(238, 246, 252, 0.78) 65%,
+                rgba(238, 246, 252, 0.45) 80%,
+                rgba(238, 246, 252, 0.18) 91%,
                 rgba(238, 246, 252, 0) 100%
             );
 
-    }
-
-
-    /* -------------------------------------------------
-       HAMBURGER
-    ------------------------------------------------- */
-
-    .menu-button {
-
-        top:
-            28px;
-
-        left:
-            24px;
-
-        width:
-            54px;
-
-        height:
-            42px;
-
-    }
-
-
-    .menu-button span {
-
-        width:
-            54px;
-
-        height:
-            4px;
-
-    }
-
-
-    .menu-button.active
-    span:nth-child(1) {
-
-        transform:
-            translateY(15px)
-            rotate(45deg);
-
-    }
-
-
-    .menu-button.active
-    span:nth-child(3) {
-
-        transform:
-            translateY(-15px)
-            rotate(-45deg);
-
-    }
-
-
-    /* -------------------------------------------------
-       SIDE MENU
-    ------------------------------------------------- */
-
-    .side-menu {
-
-        width:
-            min(
-                350px,
-                88vw
-            );
-
-        max-width:
-            88vw;
-
-    }
-
-
-    .side-menu-inner {
-
-        padding:
-            105px 35px 50px;
-
-    }
-
-
-    .menu-link {
-
-        font-size:
-            18px;
-
-    }
-
-
-    /* -------------------------------------------------
-       MAIN
-    ------------------------------------------------- */
-
-    .lecturer-page {
-
-        padding:
-            105px 20px 55px;
-
-    }
-
-
-    /* -------------------------------------------------
-       TITLE
-    ------------------------------------------------- */
-
-    .page-title {
-
-        margin-top:
-            0;
-
-        margin-bottom:
-            28px;
-
-        font-size:
-            48px;
-
-        letter-spacing:
-            -2px;
-
-    }
-
-
-    /* -------------------------------------------------
-       TEAM DESCRIPTION
-    ------------------------------------------------- */
-
-    .team-description {
-
-        width:
-            100%;
-
-        margin-bottom:
-            35px;
-
-        padding:
-            28px 25px;
-
-    }
-
-
-    .team-description h2 {
-
-        font-size:
-            27px;
-
-        margin-bottom:
-            15px;
-
-    }
-
-
-    .team-description p {
-
-        font-size:
-            14px;
-
-        line-height:
-            1.6;
-
-        text-align:
-            left;
-
-    }
-
-
-    /* -------------------------------------------------
-       PROFILE AREA
-    ------------------------------------------------- */
-
-    .profile-area {
-
-        width:
-            100%;
-
-        min-height:
-            auto;
-
-        padding:
-            0 28px;
-
-        flex-direction:
-            column;
-
-    }
-
-
-    .profile-display {
-
-        width:
-            100%;
-
-        overflow:
-            visible;
-
-    }
-
-
-    .profile-slide-group {
-
-        width:
-            100%;
-
-    }
-
-
-    /* -------------------------------------------------
-       PROFILE IMAGE
-    ------------------------------------------------- */
-
-    .profile-image-wrapper {
-
-        width:
-            min(
-                72vw,
-                320px
-            );
-
-        height:
-            min(
-                72vw,
-                320px
-            );
-
-        border-width:
-            7px;
-
-    }
-
-
-    /* -------------------------------------------------
-       MOBILE SLIDE DISTANCE
-    ------------------------------------------------- */
-
-    @keyframes profileOutLeft {
-
-        0% {
-
-            transform:
-                translateX(0);
-
-            opacity:
-                1;
-
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+
+            z-index: 1100;
+
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease;
         }
 
-        100% {
-
-            transform:
-                translateX(-45px);
-
-            opacity:
-                0;
-
+        /* Menampilkan gradasi ketika class active ditambahkan */
+        .top-scroll-protection.active {
+            opacity: 1;
+            visibility: visible;
         }
 
-    }
-
-
-    @keyframes profileOutRight {
-
-        0% {
-
-            transform:
-                translateX(0);
-
-            opacity:
-                1;
-
+        /*
+            Gradasi disembunyikan ketika hamburger menu terbuka
+            agar tidak menutupi panel navigasi.
+        */
+        body.menu-open .top-scroll-protection {
+            opacity: 0;
+            visibility: hidden;
         }
 
-        100% {
+        /* =====================================================
+           4. HAMBURGER BUTTON
+           TAMPILAN DISESUAIKAN DENGAN INDEX.HTML
+           ===================================================== */
 
-            transform:
-                translateX(45px);
+        /*
+            Tombol hamburger diposisikan tetap di kiri atas.
+            Tiga elemen span menjadi tiga garis horizontal.
+        */
+        .menu-button {
+            position: fixed;
+            top: 38px;
+            left: 30px;
 
-            opacity:
-                0;
+            width: 64px;
+            height: 48px;
+            padding: 4px 0;
 
+            border: none;
+            background: transparent;
+            cursor: pointer;
+
+            z-index: 1200;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-    }
+        /* Pengaturan bentuk setiap garis hamburger */
+        .menu-button span {
+            display: block;
 
+            width: 64px;
+            height: 5px;
 
-    @keyframes profileInRight {
+            background: var(--blue-deep);
+            border-radius: 0;
 
-        0% {
-
-            transform:
-                translateX(45px);
-
-            opacity:
-                0;
-
+            transition:
+                transform 0.35s ease,
+                opacity 0.25s ease,
+                background 0.25s ease;
         }
 
-        100% {
-
-            transform:
-                translateX(0);
-
-            opacity:
-                1;
-
+        /* Garis pertama berputar membentuk bagian atas X */
+        .menu-button.active span:nth-child(1) {
+            transform: translateY(17px) rotate(45deg);
+            background: var(--white);
         }
 
-    }
-
-
-    @keyframes profileInLeft {
-
-        0% {
-
-            transform:
-                translateX(-45px);
-
-            opacity:
-                0;
-
+        /* Garis kedua menghilang ketika menu dibuka */
+        .menu-button.active span:nth-child(2) {
+            opacity: 0;
         }
 
-        100% {
-
-            transform:
-                translateX(0);
-
-            opacity:
-                1;
-
+        /* Garis ketiga berputar membentuk bagian bawah X */
+        .menu-button.active span:nth-child(3) {
+            transform: translateY(-17px) rotate(-45deg);
+            background: var(--white);
         }
 
-    }
+        /* =====================================================
+           5. OVERLAY
+           ===================================================== */
+
+        /*
+            Lapisan transparan yang menutupi halaman saat menu
+            terbuka. Overlay juga dapat diklik untuk menutup menu.
+        */
+        .overlay {
+            position: fixed;
+            inset: 0;
+
+            background: rgba(0, 38, 66, 0.35);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition:
+                opacity 0.4s ease,
+                visibility 0.4s ease;
+
+            z-index: 900;
+        }
+
+        /* Menampilkan overlay ketika menu dibuka */
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* =====================================================
+           6. SIDE MENU / HAMBURGER NAVIGATION
+           ===================================================== */
+
+        /*
+            Panel navigasi berada di sisi kiri layar.
+            Pada kondisi awal, panel digeser ke luar layar.
+        */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 365px;
+            max-width: 40vw;
+
+            height: 100vh;
+            height: 100dvh;
+
+            background: var(--blue-deep);
+            z-index: 1000;
+
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
+
+            box-shadow: 8px 0 28px rgba(0, 0, 0, 0.1);
+        }
+
+        /*
+            Ketika class active ditambahkan, panel bergeser
+            masuk ke layar dari arah kiri.
+        */
+        .side-menu.active {
+            transform: translateX(0);
+        }
+
+        /*
+            Area isi menu.
+            Konten dapat digulir apabila jumlah tautan melebihi
+            tinggi layar.
+        */
+        .side-menu-inner {
+            width: 78%;
+            max-height: 100%;
+
+            overflow-y: auto;
+
+            padding-top: 125px;
+            padding-bottom: 50px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
+        }
+
+        /* Scrollbar untuk browser berbasis WebKit */
+        .side-menu-inner::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .side-menu-inner::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .side-menu-inner::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.35);
+            border-radius: 10px;
+        }
+
+        /* Judul bagian EXPLORE */
+        .menu-label {
+            color: rgba(255, 255, 255, 0.55);
+
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
 
+            margin-top: 20px;
+            margin-bottom: -5px;
+        }
 
-    /* -------------------------------------------------
-       PROFILE NAME
-    ------------------------------------------------- */
+        /* Pengaturan tautan navigasi */
+        .menu-link {
+            display: block;
+            width: 100%;
 
-    .profile-name {
+            padding: 13px 0;
 
-        margin-top:
-            22px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 
-        font-size:
-            25px;
+            color: var(--white);
+            text-decoration: none;
 
-        max-width:
-            90%;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: 1px;
 
-    }
+            transition:
+                padding-left 0.3s ease,
+                opacity 0.3s ease;
+        }
 
+        /* Efek hover pada tautan menu */
+        .menu-link:hover {
+            padding-left: 10px;
+            opacity: 0.75;
+        }
 
-    /* -------------------------------------------------
-       ARROWS
-    ------------------------------------------------- */
+        /* Bagian TEMA dan PARTICIPATE */
+        .menu-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
 
-    .profile-arrow {
+            margin-top: 20px;
+        }
 
-        position:
-            absolute;
+        /* Judul kategori navigasi */
+        .menu-section-title {
+            color: rgba(255, 255, 255, 0.55);
 
-        top:
-            145px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
 
-        width:
-            48px;
+            margin-bottom: -5px;
+        }
 
-        height:
-            70px;
+        /* =====================================================
+           7. MAIN PAGE
+           ===================================================== */
 
-        font-size:
-            65px;
+        /*
+            Mengatur keseluruhan area halaman profil dosen,
+            termasuk jarak dari tepi layar.
+        */
+        .lecturer-page {
+            width: 100%;
+            min-height: 100vh;
 
-    }
+            padding: 35px 4vw 70px;
 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* =====================================================
+           8. JUDUL HALAMAN
+           ===================================================== */
+
+        .page-title {
+            margin-top: 0;
+            margin-bottom: 28px;
+
+            font-family: 'League Spartan', sans-serif;
+            font-size: clamp(58px, 6.2vw, 104px);
+
+            line-height: 0.92;
+            font-weight: 800;
+            letter-spacing: -3px;
+
+            text-align: center;
+            color: var(--blue);
+
+            text-transform: uppercase;
+        }
+
+        /* =====================================================
+           9. DESKRIPSI TIM DOSEN
+           ===================================================== */
+
+        .team-description {
+            width: min(100%, 1520px);
+
+            margin: 0 auto 55px;
+            padding: 42px 75px;
+
+            background: var(--blue-deep);
+            color: var(--white);
 
-    .profile-arrow.left {
+            text-align: center;
+        }
 
-        left:
-            -2px;
+        /* Subjudul TIM DOSEN */
+        .team-description h2 {
+            margin-bottom: 18px;
 
-    }
+            font-family: 'League Spartan', sans-serif;
+            font-size: clamp(28px, 3vw, 46px);
 
+            line-height: 1.05;
+            font-weight: 800;
 
-    .profile-arrow.right {
+            text-transform: uppercase;
+        }
 
-        right:
-            -2px;
+        /* Paragraf deskripsi tim */
+        .team-description p {
+            max-width: 1380px;
+            margin: 0 auto;
 
-    }
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(15px, 1.5vw, 24px);
 
+            line-height: 1.55;
+            text-align: left;
+        }
 
-    .profile-arrow.left:hover,
-    .profile-arrow.right:hover {
+        /* =====================================================
+           10. AREA CAROUSEL PROFIL DOSEN
+           ===================================================== */
 
-        transform:
-            translateY(-50%);
+        /*
+            Area yang menampung foto dosen dan tombol panah.
+            Posisi tombol panah menggunakan area ini sebagai acuan.
+        */
+        .profile-area {
+            position: relative;
 
-    }
+            width: min(100%, 1450px);
+            min-height: 620px;
 
-
-    /* -------------------------------------------------
-       INDICATOR
-    ------------------------------------------------- */
-
-    .profile-indicator {
-
-        margin-top:
-            17px;
-
-    }
-
-
-    /* -------------------------------------------------
-       BACK BUTTON
-    ------------------------------------------------- */
-
-    .back-button {
-
-        min-width:
-            210px;
-
-        margin-top:
-            38px;
-
-        padding:
-            13px 28px;
-
-        font-size:
-            17px;
-
-        letter-spacing:
-            5px;
-
-    }
-
-}
-
-
-/* =====================================================
-   SMALL MOBILE
-===================================================== */
-
-@media (max-width: 400px) {
-
-
-    .lecturer-page {
-
-        padding-left:
-            16px;
-
-        padding-right:
-            16px;
-
-    }
-
-
-    .page-title {
-
-        font-size:
-            42px;
-
-    }
-
-
-    .team-description {
-
-        padding:
-            25px 20px;
-
-    }
-
-
-    .team-description h2 {
-
-        font-size:
-            25px;
-
-    }
-
-
-    .team-description p {
-
-        font-size:
-            13px;
-
-    }
-
-
-    .profile-image-wrapper {
-
-        width:
-            70vw;
-
-        height:
-            70vw;
-
-        max-width:
-            285px;
-
-        max-height:
-            285px;
-
-    }
-
-
-    .profile-arrow {
-
-        top:
-            130px;
-
-        font-size:
-            58px;
-
-    }
-
-
-    .profile-arrow.left {
-
-        left:
-            -7px;
-
-    }
-
-
-    .profile-arrow.right {
-
-        right:
-            -7px;
-
-    }
-
-
-    .profile-name {
-
-        font-size:
-            23px;
-
-    }
-
-
-    .back-button {
-
-        min-width:
-            190px;
-
-        padding:
-            12px 24px;
-
-        font-size:
-            16px;
-
-    }
-
-}
-
-</style>
-
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Area tampilan foto, nama, dan indikator */
+        .profile-display {
+            width: 520px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+            overflow: visible;
+        }
+
+        /*
+            Kelompok foto dan nama yang bergerak bersama
+            saat pengguna berpindah profil.
+        */
+        .profile-slide-group {
+            width: 100%;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* =====================================================
+           11. FRAME FOTO DOSEN
+           ===================================================== */
+
+        /*
+            Foto berbentuk lingkaran dengan bingkai biru.
+            Ukuran menyesuaikan lebar layar.
+        */
+        .profile-image-wrapper {
+            position: relative;
+
+            width: clamp(300px, 27vw, 450px);
+            height: clamp(300px, 27vw, 450px);
+
+            border: 8px solid var(--blue-deep);
+            border-radius: 50%;
+
+            overflow: hidden;
+            background: #dcecf7;
+
+            flex-shrink: 0;
+
+            box-shadow: 0 8px 20px rgba(7, 84, 135, 0.08);
+        }
+
+        /* Memastikan gambar mengisi frame tanpa terdistorsi */
+        .profile-image {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* =====================================================
+           12. NAMA DAN DESKRIPSI DOSEN
+           ===================================================== */
+
+        .profile-name {
+            margin-top: 30px;
+
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(25px, 2.2vw, 40px);
+
+            line-height: 1.15;
+            font-weight: 800;
+
+            color: var(--black);
+            text-align: center;
+        }
+
+        /*
+            Deskripsi disimpan pada HTML dan diperbarui oleh
+            JavaScript, tetapi tidak ditampilkan pada desain ini.
+        */
+        .profile-description {
+            display: none;
+        }
+
+        /* =====================================================
+           13. ANIMASI PERPINDAHAN PROFIL
+           ===================================================== */
+
+        /* Profil lama bergerak ke kiri ketika memilih berikutnya */
+        .profile-slide-group.slide-out-left {
+            animation: profileOutLeft 0.42s
+                cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+        }
+
+        /* Profil lama bergerak ke kanan ketika memilih sebelumnya */
+        .profile-slide-group.slide-out-right {
+            animation: profileOutRight 0.42s
+                cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+        }
+
+        /* Profil baru masuk dari kanan */
+        .profile-slide-group.slide-in-right {
+            animation: profileInRight 0.55s
+                cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        /* Profil baru masuk dari kiri */
+        .profile-slide-group.slide-in-left {
+            animation: profileInLeft 0.55s
+                cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        @keyframes profileOutLeft {
+            0% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(-85px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes profileOutRight {
+            0% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(85px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes profileInRight {
+            0% {
+                transform: translateX(85px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes profileInLeft {
+            0% {
+                transform: translateX(-85px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* =====================================================
+           14. INDIKATOR PROFIL
+           ===================================================== */
+
+        /*
+            Titik menunjukkan posisi dosen yang sedang tampil.
+            Titik aktif memanjang menjadi garis kecil.
+        */
+        .profile-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            gap: 9px;
+            margin-top: 24px;
+        }
+
+        .profile-dot {
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+            background: rgba(7, 84, 135, 0.25);
+
+            transition:
+                width 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .profile-dot.active {
+            width: 28px;
+
+            border-radius: 20px;
+            background: var(--blue-deep);
+        }
+
+        /* =====================================================
+           15. TOMBOL PANAH CAROUSEL
+           ===================================================== */
+
+        .profile-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: 105px;
+            height: 130px;
+
+            border: none;
+            background: transparent;
+            color: var(--blue-deep);
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family: Arial, sans-serif;
+            font-size: 120px;
+            font-weight: 900;
+            line-height: 0.7;
+
+            transition:
+                transform 0.25s ease,
+                opacity 0.25s ease;
+
+            z-index: 20;
+        }
+
+        .profile-arrow:hover {
+            opacity: 0.82;
+        }
+
+        .profile-arrow.left {
+            left: 0;
+        }
+
+        .profile-arrow.right {
+            right: 0;
+        }
+
+        .profile-arrow.left:hover {
+            transform: translateY(-50%) translateX(-6px);
+        }
+
+        .profile-arrow.right:hover {
+            transform: translateY(-50%) translateX(6px);
+        }
+
+        /* =====================================================
+           16. TOMBOL KEMBALI
+           ===================================================== */
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 280px;
+            margin: 25px auto 0;
+            padding: 15px 42px;
+
+            border: 3px solid var(--blue-deep);
+            border-radius: 50px;
+
+            background: transparent;
+            color: var(--blue-deep);
+
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(18px, 1.5vw, 25px);
+            font-weight: 800;
+            letter-spacing: 6px;
+
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+
+            transition:
+                background 0.3s ease,
+                color 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: var(--blue-deep);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        /* =====================================================
+           17. RESPONSIVE TABLET
+           ===================================================== */
+
+        @media (max-width: 1100px) {
+            .lecturer-page {
+                padding: 35px 4vw 60px;
+            }
+
+            .page-title {
+                margin-bottom: 25px;
+            }
+
+            .team-description {
+                width: 94%;
+                padding: 35px 50px;
+                margin-bottom: 35px;
+            }
+
+            .profile-area {
+                min-height: 560px;
+            }
+
+            .profile-display {
+                width: 460px;
+            }
+
+            .profile-image-wrapper {
+                width: 350px;
+                height: 350px;
+            }
+
+            .profile-arrow {
+                width: 75px;
+                font-size: 90px;
+            }
+        }
+
+        /* =====================================================
+           18. RESPONSIVE MOBILE
+           ===================================================== */
+
+        @media (max-width: 700px) {
+
+            /* Gradasi bagian atas diperkecil untuk HP */
+            .top-scroll-protection {
+                height: 105px;
+
+                background: linear-gradient(
+                    to bottom,
+                    rgba(238, 246, 252, 1) 0%,
+                    rgba(238, 246, 252, 1) 45%,
+                    rgba(238, 246, 252, 0.96) 55%,
+                    rgba(238, 246, 252, 0.76) 68%,
+                    rgba(238, 246, 252, 0.40) 83%,
+                    rgba(238, 246, 252, 0.14) 93%,
+                    rgba(238, 246, 252, 0) 100%
+                );
+            }
+
+            /* Ukuran hamburger pada HP */
+            .menu-button {
+                top: 28px;
+                left: 24px;
+
+                width: 54px;
+                height: 42px;
+            }
+
+            .menu-button span {
+                width: 54px;
+                height: 4px;
+            }
+
+            .menu-button.active span:nth-child(1) {
+                transform: translateY(15px) rotate(45deg);
+            }
+
+            .menu-button.active span:nth-child(3) {
+                transform: translateY(-15px) rotate(-45deg);
+            }
+
+            /* Panel menu mengikuti lebar layar HP */
+            .side-menu {
+                width: min(320px, 82vw);
+                max-width: 82vw;
+            }
+
+            .side-menu-inner {
+                width: 78%;
+                max-height: 100%;
+                padding: 105px 0 35px;
+            }
+
+            .menu-link {
+                font-size: 16px;
+                padding: 11px 0 12px;
+            }
+
+            .menu-label,
+            .menu-section-title {
+                font-size: 10px;
+                letter-spacing: 2.5px;
+            }
+
+            .menu-label {
+                margin-top: 15px;
+            }
+
+            .menu-section {
+                margin-top: 15px;
+            }
+
+            /* Jarak halaman dari bagian atas */
+            .lecturer-page {
+                padding: 105px 20px 55px;
+            }
+
+            .page-title {
+                margin-top: 0;
+                margin-bottom: 28px;
+
+                font-size: 48px;
+                letter-spacing: -2px;
+            }
+
+            .team-description {
+                width: 100%;
+                margin-bottom: 35px;
+                padding: 28px 25px;
+            }
+
+            .team-description h2 {
+                font-size: 27px;
+                margin-bottom: 15px;
+            }
+
+            .team-description p {
+                font-size: 14px;
+                line-height: 1.6;
+                text-align: left;
+            }
+
+            /* Foto dan carousel menyesuaikan lebar HP */
+            .profile-area {
+                width: 100%;
+                min-height: auto;
+
+                padding: 0 28px;
+                flex-direction: column;
+            }
+
+            .profile-display {
+                width: 100%;
+                overflow: visible;
+            }
+
+            .profile-slide-group {
+                width: 100%;
+            }
+
+            .profile-image-wrapper {
+                width: min(72vw, 320px);
+                height: min(72vw, 320px);
+                border-width: 7px;
+            }
+
+            /* Jarak animasi diperkecil untuk layar HP */
+            @keyframes profileOutLeft {
+                0% {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: translateX(-45px);
+                    opacity: 0;
+                }
+            }
+
+            @keyframes profileOutRight {
+                0% {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: translateX(45px);
+                    opacity: 0;
+                }
+            }
+
+            @keyframes profileInRight {
+                0% {
+                    transform: translateX(45px);
+                    opacity: 0;
+                }
+
+                100% {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes profileInLeft {
+                0% {
+                    transform: translateX(-45px);
+                    opacity: 0;
+                }
+
+                100% {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+
+            .profile-name {
+                margin-top: 22px;
+                font-size: 25px;
+                max-width: 90%;
+            }
+
+            .profile-arrow {
+                position: absolute;
+                top: 145px;
+
+                width: 48px;
+                height: 70px;
+
+                font-size: 65px;
+            }
+
+            .profile-arrow.left {
+                left: -2px;
+            }
+
+            .profile-arrow.right {
+                right: -2px;
+            }
+
+            .profile-arrow.left:hover,
+            .profile-arrow.right:hover {
+                transform: translateY(-50%);
+            }
+
+            .profile-indicator {
+                margin-top: 17px;
+            }
+
+            .back-button {
+                min-width: 210px;
+                margin-top: 38px;
+                padding: 13px 28px;
+
+                font-size: 17px;
+                letter-spacing: 5px;
+            }
+        }
+
+        /* =====================================================
+           19. RESPONSIVE SMALL MOBILE
+           ===================================================== */
+
+        @media (max-width: 400px) {
+            .lecturer-page {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .page-title {
+                font-size: 42px;
+            }
+
+            .team-description {
+                padding: 25px 20px;
+            }
+
+            .team-description h2 {
+                font-size: 25px;
+            }
+
+            .team-description p {
+                font-size: 13px;
+            }
+
+            .profile-image-wrapper {
+                width: 70vw;
+                height: 70vw;
+                max-width: 285px;
+                max-height: 285px;
+            }
+
+            .profile-arrow {
+                top: 130px;
+                font-size: 58px;
+            }
+
+            .profile-arrow.left {
+                left: -7px;
+            }
+
+            .profile-arrow.right {
+                right: -7px;
+            }
+
+            .profile-name {
+                font-size: 23px;
+            }
+
+            .back-button {
+                min-width: 190px;
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
-
 
 <body>
 
+    <!-- =====================================================
+         20. LAPISAN GRADASI BAGIAN ATAS
+         ===================================================== -->
 
-<!-- =====================================================
-     TOP GRADIENT PROTECTION
-===================================================== -->
+    <div
+        class="top-scroll-protection"
+        id="scrollProtection"
+    ></div>
 
-<div
-    class="top-scroll-protection"
-    id="scrollProtection"
-></div>
+    <!-- =====================================================
+         21. OVERLAY HAMBURGER MENU
+         ===================================================== -->
 
+    <div
+        class="overlay"
+        id="overlay"
+    ></div>
 
-<!-- =====================================================
-     OVERLAY
-===================================================== -->
+    <!-- =====================================================
+         22. TOMBOL HAMBURGER
+         ===================================================== -->
 
-<div
-    class="overlay"
-    id="overlay"
-></div>
-
-
-<!-- =====================================================
-     HAMBURGER
-===================================================== -->
-
-<button
-    class="menu-button"
-    id="menuButton"
-    type="button"
-    aria-label="Buka menu"
-    aria-expanded="false"
->
-
-    <span></span>
-    <span></span>
-    <span></span>
-
-</button>
-
-
-<!-- =====================================================
-     SIDE MENU
-===================================================== -->
-
-<aside
-    class="side-menu"
-    id="sideMenu"
->
-
-    <div class="side-menu-inner">
-
-
-        <div class="menu-label">
-            EXPLORE
-        </div>
-
-        <a
-            href="index.html"
-            class="menu-link"
-        >
-            Home
-        </a>
-
-
-        <a
-            href="tentang.html"
-            class="menu-link"
-        >
-            Tentang Exhibition
-        </a>
-
-
-        <a
-            href="profil-dosen.html"
-            class="menu-link"
-        >
-            Profil Dosen
-        </a>
-
-
-        <a
-            href="profil-asisten.html"
-            class="menu-link"
-        >
-            Profil Asisten
-        </a>
-
-
-        <!-- =============================================
-             TEMA
-        ============================================== -->
-
-        <div class="menu-section">
-
-            <div class="menu-section-title">
-                TEMA
-            </div>
-
-
-            <a
-                href="tema1.html"
-                class="menu-link"
-            >
-                Tema 1
-            </a>
-
-
-            <a
-                href="tema2.html"
-                class="menu-link"
-            >
-                Tema 2
-            </a>
-
-
-            <a
-                href="tema3.html"
-                class="menu-link"
-            >
-                Tema 3
-            </a>
-
-        </div>
-
-
-        <!-- =============================================
-             PARTICIPATE
-        ============================================== -->
-
-        <div class="menu-section">
-
-            <div class="menu-section-title">
-                PARTICIPATE
-            </div>
-
-
-            <a
-                href="voting.html"
-                class="menu-link"
-            >
-                Vote
-            </a>
-
-        </div>
-
-
-    </div>
-
-</aside>
-
-
-<!-- =====================================================
-     MAIN PAGE
-===================================================== -->
-
-<main class="lecturer-page">
-
-
-    <!-- =================================================
-         TITLE
-    ================================================== -->
-
-    <h1 class="page-title">
-        PROFIL DOSEN
-    </h1>
-
-
-    <!-- =================================================
-         TEAM DESCRIPTION
-    ================================================== -->
-
-    <section class="team-description">
-
-        <h2>
-            TIM DOSEN
-        </h2>
-
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo consequat. Duis aute irure dolor in reprehenderit
-            in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident,
-            sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-
-    </section>
-
-
-    <!-- =================================================
-         PROFILE CAROUSEL
-    ================================================== -->
-
-    <section
-        class="profile-area"
-        aria-label="Profil dosen"
+    <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="Buka menu"
+        aria-expanded="false"
+        aria-controls="sideMenu"
     >
+        <!-- Tiga garis pembentuk hamburger -->
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
 
+    <!-- =====================================================
+         23. ISI HAMBURGER MENU
+         ===================================================== -->
 
-        <!-- =============================================
-             PREVIOUS BUTTON
-        ============================================== -->
+    <aside
+        class="side-menu"
+        id="sideMenu"
+        aria-hidden="true"
+    >
+        <nav class="side-menu-inner">
 
-        <button
-            class="profile-arrow left"
-            id="prevButton"
-            type="button"
-            aria-label="Dosen sebelumnya"
+            <!-- BAGIAN EXPLORE -->
+            <div class="menu-label">
+                EXPLORE
+            </div>
+
+            <a href="index.html" class="menu-link">
+                Home
+            </a>
+
+            <a href="tentang.html" class="menu-link">
+                Tentang Exhibition
+            </a>
+
+            <a href="profil-dosen.html" class="menu-link">
+                Profil Dosen
+            </a>
+
+            <a href="profil-asisten.html" class="menu-link">
+                Profil Asisten
+            </a>
+
+            <a href="menu.html" class="menu-link">
+                Our Theme
+            </a>
+
+            <!-- BAGIAN TEMA -->
+            <div class="menu-section">
+                <div class="menu-section-title">
+                    TEMA
+                </div>
+
+                <a href="tema1.html" class="menu-link">
+                    Tema 1
+                </a>
+
+                <a href="tema2.html" class="menu-link">
+                    Tema 2
+                </a>
+
+                <a href="tema3.html" class="menu-link">
+                    Tema 3
+                </a>
+            </div>
+
+            <!-- BAGIAN PARTISIPASI -->
+            <div class="menu-section">
+                <div class="menu-section-title">
+                    PARTICIPATE
+                </div>
+
+                <a href="voting.html" class="menu-link">
+                    Vote
+                </a>
+            </div>
+
+        </nav>
+    </aside>
+
+    <!-- =====================================================
+         24. KONTEN UTAMA HALAMAN PROFIL DOSEN
+         ===================================================== -->
+
+    <main class="lecturer-page">
+
+        <!-- JUDUL HALAMAN -->
+        <h1 class="page-title">
+            PROFIL DOSEN
+        </h1>
+
+        <!-- DESKRIPSI TIM DOSEN -->
+        <section class="team-description">
+
+            <h2>
+                TIM DOSEN
+            </h2>
+
+            <!-- Ganti teks contoh berikut dengan deskripsi asli -->
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore
+                magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea
+                commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+
+        </section>
+
+        <!-- =================================================
+             25. CAROUSEL PROFIL DOSEN
+             ================================================= -->
+
+        <section
+            class="profile-area"
+            aria-label="Profil dosen"
         >
-            ‹
-        </button>
 
-
-        <!-- =============================================
-             PROFILE DISPLAY
-        ============================================== -->
-
-        <div class="profile-display">
-
-
-            <!-- =========================================
-                 SLIDING GROUP
-
-                 FOTO
-                 FRAME
-                 NAMA
-
-                 SEMUANYA BERGERAK BERSAMA
-            ========================================== -->
-
-            <div
-                class="profile-slide-group"
-                id="profileSlideGroup"
+            <!-- Tombol menuju dosen sebelumnya -->
+            <button
+                class="profile-arrow left"
+                id="prevButton"
+                type="button"
+                aria-label="Dosen sebelumnya"
             >
+                ‹
+            </button>
 
+            <!-- Tampilan profil yang sedang aktif -->
+            <div class="profile-display">
 
-                <!-- =====================================
-                     PHOTO + FRAME
-                ====================================== -->
+                <!-- Kelompok foto dan nama yang dianimasikan -->
+                <div
+                    class="profile-slide-group"
+                    id="profileSlideGroup"
+                >
 
-                <div class="profile-image-wrapper">
+                    <!-- Foto dosen dalam bingkai lingkaran -->
+                    <div class="profile-image-wrapper">
+                        <img
+                            id="profileImage"
+                            class="profile-image"
+                            src="assets/dosen1.jpeg"
+                            alt="Foto Dosen"
+                        >
+                    </div>
 
-                    <img
-                        id="profileImage"
-                        class="profile-image"
-                        src="assets/dosen1.jpeg"
-                        alt="Foto Dosen"
+                    <!-- Nama dosen yang diperbarui melalui JavaScript -->
+                    <h2
+                        class="profile-name"
+                        id="profileName"
                     >
+                        Nama Dosen
+                    </h2>
+
+                    <!-- Deskripsi disimpan untuk data setiap dosen -->
+                    <p
+                        class="profile-description"
+                        id="profileDescription"
+                    >
+                        Lorem ipsum dolor sit amet.
+                    </p>
 
                 </div>
 
-
-                <!-- =====================================
-                     NAME
-                ====================================== -->
-
-                <h2
-                    class="profile-name"
-                    id="profileName"
+                <!-- Indikator jumlah dan posisi profil -->
+                <div
+                    class="profile-indicator"
+                    id="profileIndicator"
                 >
-                    Nama Dosen
-                </h2>
-
-
-                <!-- =====================================
-                     DESCRIPTION
-                ====================================== -->
-
-                <p
-                    class="profile-description"
-                    id="profileDescription"
-                >
-                    Lorem ipsum dolor sit amet.
-                </p>
-
+                    <span class="profile-dot active"></span>
+                    <span class="profile-dot"></span>
+                    <span class="profile-dot"></span>
+                </div>
 
             </div>
 
-
-            <!-- =========================================
-                 INDICATOR
-
-                 TIDAK IKUT SLIDE
-            ========================================== -->
-
-            <div
-                class="profile-indicator"
-                id="profileIndicator"
+            <!-- Tombol menuju dosen berikutnya -->
+            <button
+                class="profile-arrow right"
+                id="nextButton"
+                type="button"
+                aria-label="Dosen berikutnya"
             >
+                ›
+            </button>
 
-                <span
-                    class="profile-dot active"
-                ></span>
+        </section>
 
-                <span
-                    class="profile-dot"
-                ></span>
-
-                <span
-                    class="profile-dot"
-                ></span>
-
-            </div>
-
-
-        </div>
-
-
-        <!-- =============================================
-             NEXT BUTTON
-        ============================================== -->
-
-        <button
-            class="profile-arrow right"
-            id="nextButton"
-            type="button"
-            aria-label="Dosen berikutnya"
+        <!-- Tombol kembali ke halaman utama -->
+        <a
+            href="index.html"
+            class="back-button"
         >
-            ›
-        </button>
+            KEMBALI
+        </a>
 
+    </main>
 
-    </section>
+    <script>
+        /* =====================================================
+           26. DATA DOSEN
+           ===================================================== */
 
+        /*
+            Setiap objek berisi:
+            name        = nama dosen.
+            image       = lokasi foto dosen.
+            description = deskripsi dosen.
 
-    <!-- =================================================
-         BACK BUTTON
-    ================================================== -->
+            Ganti data contoh dengan informasi sebenarnya.
+        */
+        const lecturers = [
+            {
+                name: "Nama Dosen",
+                image: "assets/dosen1.jpeg",
+                description:
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            },
+            {
+                name: "Nama Dosen",
+                image: "assets/dosen2.jpg",
+                description:
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            },
+            {
+                name: "Nama Dosen",
+                image: "assets/dosen3.jpeg",
+                description:
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }
+        ];
 
-    <a
-        href="index.html"
-        class="back-button"
-    >
-        KEMBALI
-    </a>
+        /* Menentukan indeks dosen yang sedang ditampilkan */
+        let currentLecturer = 0;
 
+        /*
+            Mencegah perpindahan profil baru sebelum animasi
+            profil sebelumnya selesai dijalankan.
+        */
+        let isAnimating = false;
 
-</main>
+        /* =====================================================
+           27. MENGAMBIL ELEMEN HTML CAROUSEL
+           ===================================================== */
 
+        const profileSlideGroup =
+            document.getElementById("profileSlideGroup");
 
-<script>
+        const profileImage =
+            document.getElementById("profileImage");
 
-/* =====================================================
-   DATA DOSEN
+        const profileName =
+            document.getElementById("profileName");
 
-   Ganti nama dan foto sesuai data sebenarnya.
-===================================================== */
+        const profileDescription =
+            document.getElementById("profileDescription");
 
-const lecturers = [
+        const profileDots =
+            document.querySelectorAll(".profile-dot");
 
-    {
-        name:
-            "Nama Dosen",
+        const prevButton =
+            document.getElementById("prevButton");
 
-        image:
-            "assets/dosen1.jpeg",
+        const nextButton =
+            document.getElementById("nextButton");
 
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
+        /* =====================================================
+           28. MEMPERBARUI INDIKATOR PROFIL
+           ===================================================== */
 
-
-    {
-        name:
-            "Nama Dosen",
-
-        image:
-            "assets/dosen2.jpg",
-
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-
-
-    {
-        name:
-            "Nama Dosen",
-
-        image:
-            "assets/dosen3.jpeg",
-
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    }
-
-];
-
-
-let currentLecturer = 0;
-
-
-/*
- * Mencegah perpindahan baru ketika
- * animasi sebelumnya belum selesai.
- */
-
-let isAnimating = false;
-
-
-/* =====================================================
-   DOM ELEMENTS
-===================================================== */
-
-const profileSlideGroup =
-    document.getElementById(
-        "profileSlideGroup"
-    );
-
-
-const profileImage =
-    document.getElementById(
-        "profileImage"
-    );
-
-
-const profileName =
-    document.getElementById(
-        "profileName"
-    );
-
-
-const profileDescription =
-    document.getElementById(
-        "profileDescription"
-    );
-
-
-const profileDots =
-    document.querySelectorAll(
-        ".profile-dot"
-    );
-
-
-const prevButton =
-    document.getElementById(
-        "prevButton"
-    );
-
-
-const nextButton =
-    document.getElementById(
-        "nextButton"
-    );
-
-
-/* =====================================================
-   UPDATE DOTS
-===================================================== */
-
-function updateDots() {
-
-    profileDots.forEach(
-        function(dot, index) {
-
-            dot.classList.toggle(
-                "active",
-                index === currentLecturer
-            );
-
+        /*
+            Titik yang sesuai dengan indeks dosen aktif akan
+            diberi class active.
+        */
+        function updateDots() {
+            profileDots.forEach(function(dot, index) {
+                dot.classList.toggle(
+                    "active",
+                    index === currentLecturer
+                );
+            });
         }
-    );
 
-}
+        /* =====================================================
+           29. MEMPERBARUI PROFIL DAN MENJALANKAN ANIMASI
+           ===================================================== */
 
+        function updateProfile(direction = 1) {
 
-/* =====================================================
-   UPDATE PROFILE
-===================================================== */
+            /* Hentikan proses jika animasi masih berjalan */
+            if (isAnimating) {
+                return;
+            }
 
-function updateProfile(
-    direction = 1
-) {
+            isAnimating = true;
 
-    /*
-     * Jika sedang animasi,
-     * jangan menjalankan animasi kedua.
-     */
+            /* Mengambil data dosen sesuai indeks aktif */
+            const lecturer = lecturers[currentLecturer];
 
-    if (
-        isAnimating
-    ) {
+            /*
+                NEXT:
+                profil lama keluar ke kiri,
+                profil baru masuk dari kanan.
 
-        return;
+                PREVIOUS:
+                profil lama keluar ke kanan,
+                profil baru masuk dari kiri.
+            */
+            const slideOutClass =
+                direction === 1
+                    ? "slide-out-left"
+                    : "slide-out-right";
 
-    }
+            const slideInClass =
+                direction === 1
+                    ? "slide-in-right"
+                    : "slide-in-left";
 
-
-    isAnimating = true;
-
-
-    const lecturer =
-        lecturers[currentLecturer];
-
-
-    /*
-     * NEXT:
-     *
-     * group lama → kiri
-     * group baru ← kanan
-     *
-     *
-     * PREVIOUS:
-     *
-     * group lama → kanan
-     * group baru ← kiri
-     */
-
-    const slideOutClass =
-        direction === 1
-            ? "slide-out-left"
-            : "slide-out-right";
-
-
-    const slideInClass =
-        direction === 1
-            ? "slide-in-right"
-            : "slide-in-left";
-
-
-    /* =================================================
-       1. GROUP LAMA KELUAR
-       
-       Foto + frame + nama
-       bergerak bersama.
-    ================================================== */
-
-    profileSlideGroup.classList.remove(
-        "slide-in-left",
-        "slide-in-right"
-    );
-
-
-    profileSlideGroup.classList.add(
-        slideOutClass
-    );
-
-
-    /* =================================================
-       2. SETELAH GROUP LAMA KELUAR
-    ================================================== */
-
-    setTimeout(
-        function() {
-
-
-            /* =========================================
-               UPDATE DATA
-            ========================================== */
-
-            profileImage.src =
-                lecturer.image;
-
-
-            profileImage.alt =
-                "Foto " +
-                lecturer.name;
-
-
-            profileName.textContent =
-                lecturer.name;
-
-
-            profileDescription.textContent =
-                lecturer.description;
-
-
-            /* =========================================
-               RESET ANIMATION
-            ========================================== */
-
+            /* Menjalankan animasi keluarnya profil lama */
             profileSlideGroup.classList.remove(
-                slideOutClass
+                "slide-in-left",
+                "slide-in-right"
             );
 
+            profileSlideGroup.classList.add(slideOutClass);
 
             /*
-             * Letakkan group baru
-             * pada posisi awal.
-             */
+                Setelah 420 ms, data foto dan nama diganti
+                lalu animasi masuk dijalankan.
+            */
+            setTimeout(function() {
 
-            profileSlideGroup.classList.add(
-                slideInClass
-            );
+                profileImage.src = lecturer.image;
+                profileImage.alt = "Foto " + lecturer.name;
 
+                profileName.textContent = lecturer.name;
+                profileDescription.textContent =
+                    lecturer.description;
 
-            /*
-             * Force browser reflow.
-             */
+                profileSlideGroup.classList.remove(slideOutClass);
+                profileSlideGroup.classList.add(slideInClass);
 
-            void profileSlideGroup.offsetWidth;
+                /* Memastikan browser menghitung ulang layout */
+                void profileSlideGroup.offsetWidth;
 
+                requestAnimationFrame(function() {
 
-            /* =========================================
-               3. GROUP BARU MASUK
-            ========================================== */
+                    profileSlideGroup.classList.remove(slideInClass);
 
-            requestAnimationFrame(
-                function() {
-
-                    profileSlideGroup.classList.remove(
-                        slideInClass
-                    );
-
-
+                    /* Perbarui indikator dosen */
                     updateDots();
 
+                    /* Kunci animasi dilepas setelah transisi selesai */
+                    setTimeout(function() {
+                        isAnimating = false;
+                    }, 550);
 
-                    /*
-                     * Tunggu sampai animasi
-                     * benar-benar selesai.
-                     */
+                });
 
-                    setTimeout(
-                        function() {
-
-                            isAnimating =
-                                false;
-
-                        },
-                        550
-                    );
-
-                }
-            );
-
-
-        },
-        420
-    );
-
-}
-
-
-/* =====================================================
-   NEXT LECTURER
-===================================================== */
-
-function nextLecturer() {
-
-    if (
-        isAnimating
-    ) {
-
-        return;
-
-    }
-
-
-    currentLecturer++;
-
-
-    if (
-        currentLecturer >=
-        lecturers.length
-    ) {
-
-        currentLecturer = 0;
-
-    }
-
-
-    updateProfile(1);
-
-}
-
-
-/* =====================================================
-   PREVIOUS LECTURER
-===================================================== */
-
-function previousLecturer() {
-
-    if (
-        isAnimating
-    ) {
-
-        return;
-
-    }
-
-
-    currentLecturer--;
-
-
-    if (
-        currentLecturer < 0
-    ) {
-
-        currentLecturer =
-            lecturers.length - 1;
-
-    }
-
-
-    updateProfile(-1);
-
-}
-
-
-/* =====================================================
-   BUTTON EVENTS
-===================================================== */
-
-nextButton.addEventListener(
-    "click",
-    nextLecturer
-);
-
-
-prevButton.addEventListener(
-    "click",
-    previousLecturer
-);
-
-
-/* =====================================================
-   KEYBOARD NAVIGATION
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        /*
-         * Panah kanan
-         */
-
-        if (
-            event.key === "ArrowRight"
-        ) {
-
-            nextLecturer();
-
+            }, 420);
         }
 
+        /* =====================================================
+           30. BERPINDAH KE DOSEN BERIKUTNYA
+           ===================================================== */
 
-        /*
-         * Panah kiri
-         */
+        function nextLecturer() {
 
-        if (
-            event.key === "ArrowLeft"
-        ) {
+            if (isAnimating) {
+                return;
+            }
 
-            previousLecturer();
+            currentLecturer++;
 
+            /* Kembali ke dosen pertama setelah dosen terakhir */
+            if (currentLecturer >= lecturers.length) {
+                currentLecturer = 0;
+            }
+
+            updateProfile(1);
         }
 
-    }
-);
+        /* =====================================================
+           31. BERPINDAH KE DOSEN SEBELUMNYA
+           ===================================================== */
 
+        function previousLecturer() {
 
-/* =====================================================
-   TOUCH / SWIPE
-===================================================== */
+            if (isAnimating) {
+                return;
+            }
 
-let touchStartX = 0;
+            currentLecturer--;
 
-let touchEndX = 0;
+            /* Kembali ke dosen terakhir jika melewati indeks 0 */
+            if (currentLecturer < 0) {
+                currentLecturer = lecturers.length - 1;
+            }
 
+            updateProfile(-1);
+        }
 
-const profileArea =
-    document.querySelector(
-        ".profile-area"
-    );
+        /* =====================================================
+           32. EVENT TOMBOL PANAH
+           ===================================================== */
 
+        /* Klik panah kanan untuk dosen berikutnya */
+        nextButton.addEventListener(
+            "click",
+            nextLecturer
+        );
 
-profileArea.addEventListener(
-    "touchstart",
-    function(event) {
+        /* Klik panah kiri untuk dosen sebelumnya */
+        prevButton.addEventListener(
+            "click",
+            previousLecturer
+        );
 
-        touchStartX =
-            event.changedTouches[0]
-                .screenX;
-
-    },
-    {
-        passive: true
-    }
-);
-
-
-profileArea.addEventListener(
-    "touchend",
-    function(event) {
-
-        touchEndX =
-            event.changedTouches[0]
-                .screenX;
-
-
-        const difference =
-            touchEndX -
-            touchStartX;
-
+        /* =====================================================
+           33. NAVIGASI MENGGUNAKAN KEYBOARD
+           ===================================================== */
 
         /*
-         * Minimal swipe:
-         * 50px
-         */
+            Panah kanan keyboard = dosen berikutnya.
+            Panah kiri keyboard  = dosen sebelumnya.
+        */
+        document.addEventListener("keydown", function(event) {
 
-        if (
-            Math.abs(difference) > 50
-        ) {
-
-
-            /*
-             * Swipe kiri
-             * → next
-             */
-
-            if (
-                difference < 0
-            ) {
-
+            if (event.key === "ArrowRight") {
                 nextLecturer();
-
             }
 
-
-            /*
-             * Swipe kanan
-             * → previous
-             */
-
-            else {
-
+            if (event.key === "ArrowLeft") {
                 previousLecturer();
+            }
+
+        });
+
+        /* =====================================================
+           34. NAVIGASI SWIPE PADA LAYAR SENTUH
+           ===================================================== */
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        const profileArea =
+            document.querySelector(".profile-area");
+
+        /* Mencatat posisi awal sentuhan */
+        profileArea.addEventListener("touchstart", function(event) {
+
+            touchStartX =
+                event.changedTouches[0].screenX;
+
+        }, {
+            passive: true
+        });
+
+        /* Memeriksa arah dan jarak gerakan jari */
+        profileArea.addEventListener("touchend", function(event) {
+
+            touchEndX =
+                event.changedTouches[0].screenX;
+
+            const difference = touchEndX - touchStartX;
+
+            /* Gerakan minimal 50 px dianggap sebagai swipe */
+            if (Math.abs(difference) > 50) {
+
+                /* Geser ke kiri = dosen berikutnya */
+                if (difference < 0) {
+                    nextLecturer();
+                }
+
+                /* Geser ke kanan = dosen sebelumnya */
+                else {
+                    previousLecturer();
+                }
 
             }
 
+        }, {
+            passive: true
+        });
+
+        /* =====================================================
+           35. HAMBURGER MENU
+           ===================================================== */
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+        const sideMenu =
+            document.getElementById("sideMenu");
+
+        const overlay =
+            document.getElementById("overlay");
+
+        const scrollProtection =
+            document.getElementById("scrollProtection");
+
+        /* =====================================================
+           36. MEMBUKA HAMBURGER MENU
+           ===================================================== */
+
+        function openMenu() {
+
+            /* Mengubah ikon hamburger menjadi X */
+            menuButton.classList.add("active");
+
+            /* Menampilkan panel navigasi dan overlay */
+            sideMenu.classList.add("active");
+            overlay.classList.add("active");
+
+            /* Memperbarui atribut aksesibilitas */
+            sideMenu.setAttribute("aria-hidden", "false");
+
+            menuButton.setAttribute("aria-expanded", "true");
+            menuButton.setAttribute("aria-label", "Tutup menu");
+
+            /* Menonaktifkan gradasi pelindung bagian atas */
+            document.body.classList.add("menu-open");
+
+            scrollProtection.classList.remove("active");
         }
 
-    },
-    {
-        passive: true
-    }
-);
+        /* =====================================================
+           37. MENUTUP HAMBURGER MENU
+           ===================================================== */
 
+        function closeMenu() {
 
-/* =====================================================
-   HAMBURGER MENU
-===================================================== */
+            /* Mengembalikan ikon ke bentuk hamburger */
+            menuButton.classList.remove("active");
 
-const menuButton =
-    document.getElementById(
-        "menuButton"
-    );
+            /* Menyembunyikan panel dan overlay */
+            sideMenu.classList.remove("active");
+            overlay.classList.remove("active");
 
+            /* Memperbarui atribut aksesibilitas */
+            sideMenu.setAttribute("aria-hidden", "true");
 
-const sideMenu =
-    document.getElementById(
-        "sideMenu"
-    );
+            menuButton.setAttribute("aria-expanded", "false");
+            menuButton.setAttribute("aria-label", "Buka menu");
 
+            /* Mengaktifkan kembali pemeriksaan gradasi */
+            document.body.classList.remove("menu-open");
 
-const overlay =
-    document.getElementById(
-        "overlay"
-    );
-
-
-const scrollProtection =
-    document.getElementById(
-        "scrollProtection"
-    );
-
-
-/* =====================================================
-   OPEN MENU
-===================================================== */
-
-function openMenu() {
-
-    menuButton.classList.add(
-        "active"
-    );
-
-
-    sideMenu.classList.add(
-        "active"
-    );
-
-
-    overlay.classList.add(
-        "active"
-    );
-
-
-    sideMenu.setAttribute(
-        "aria-hidden",
-        "false"
-    );
-
-
-    menuButton.setAttribute(
-        "aria-expanded",
-        "true"
-    );
-
-
-    menuButton.setAttribute(
-        "aria-label",
-        "Tutup menu"
-    );
-
-
-    document.body.classList.add(
-        "menu-open"
-    );
-
-
-    /*
-     * Gradient protection hilang
-     * ketika menu terbuka.
-     */
-
-    scrollProtection.classList.remove(
-        "active"
-    );
-
-}
-
-
-/* =====================================================
-   CLOSE MENU
-===================================================== */
-
-function closeMenu() {
-
-    menuButton.classList.remove(
-        "active"
-    );
-
-
-    sideMenu.classList.remove(
-        "active"
-    );
-
-
-    overlay.classList.remove(
-        "active"
-    );
-
-
-    sideMenu.setAttribute(
-        "aria-hidden",
-        "true"
-    );
-
-
-    menuButton.setAttribute(
-        "aria-expanded",
-        "false"
-    );
-
-
-    menuButton.setAttribute(
-        "aria-label",
-        "Buka menu"
-    );
-
-
-    document.body.classList.remove(
-        "menu-open"
-    );
-
-
-    checkTopContentCollision();
-
-}
-
-
-/* =====================================================
-   TOGGLE MENU
-===================================================== */
-
-menuButton.addEventListener(
-    "click",
-    function() {
-
-        if (
-            sideMenu.classList.contains(
-                "active"
-            )
-        ) {
-
-            closeMenu();
-
+            checkTopContentCollision();
         }
 
-        else {
+        /* =====================================================
+           38. TOGGLE HAMBURGER MENU
+           ===================================================== */
 
-            openMenu();
+        /*
+            Satu tombol mengatur dua kondisi:
+            jika tertutup, buka menu;
+            jika terbuka, tutup menu.
+        */
+        menuButton.addEventListener("click", function() {
 
-        }
+            if (sideMenu.classList.contains("active")) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
 
-    }
-);
+        });
 
+        /* =====================================================
+           39. MENUTUP MENU MELALUI OVERLAY
+           ===================================================== */
 
-/* =====================================================
-   OVERLAY CLICK
-===================================================== */
+        /* Klik area gelap di luar panel untuk menutup menu */
+        overlay.addEventListener("click", closeMenu);
 
-overlay.addEventListener(
-    "click",
-    closeMenu
-);
+        /* =====================================================
+           40. MENUTUP MENU SETELAH MEMILIH TAUTAN
+           ===================================================== */
 
+        /*
+            Semua tautan di panel menutup menu ketika diklik.
+            Browser kemudian melanjutkan navigasi ke halaman tujuan.
+        */
+        document.querySelectorAll(".side-menu a").forEach(
+            function(link) {
 
-/* =====================================================
-   MENU LINKS
-===================================================== */
+                link.addEventListener("click", closeMenu);
 
-document
-    .querySelectorAll(
-        ".menu-link"
-    )
-    .forEach(
-        function(link) {
-
-            link.addEventListener(
-                "click",
-                closeMenu
-            );
-
-        }
-    );
-
-
-/* =====================================================
-   ESCAPE
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.key === "Escape"
-        ) {
-
-            closeMenu();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   TOP CONTENT COLLISION
-===================================================== */
-
-function checkTopContentCollision() {
-
-
-    /*
-     * Menu terbuka:
-     * protection dimatikan.
-     */
-
-    if (
-        document.body.classList.contains(
-            "menu-open"
-        )
-    ) {
-
-        scrollProtection.classList.remove(
-            "active"
+            }
         );
 
-        return;
+        /* =====================================================
+           41. MENUTUP MENU DENGAN TOMBOL ESCAPE
+           ===================================================== */
 
-    }
-
-
-    /*
-     * Jika berada di paling atas,
-     * protection tidak diperlukan.
-     */
-
-    if (
-        window.scrollY <= 10
-    ) {
-
-        scrollProtection.classList.remove(
-            "active"
-        );
-
-        return;
-
-    }
-
-
-    const protectionHeight =
-        window.innerWidth <= 700
-            ? 105
-            : 115;
-
-
-    /*
-     * Content yang perlu dilindungi.
-     */
-
-    const elements =
-        document.querySelectorAll(
-            ".page-title, " +
-            ".team-description, " +
-            ".profile-area, " +
-            ".back-button"
-        );
-
-
-    let collision =
-        false;
-
-
-    elements.forEach(
-        function(element) {
-
-            const rect =
-                element.getBoundingClientRect();
-
+        document.addEventListener("keydown", function(event) {
 
             if (
-                rect.top <
-                    protectionHeight
-                &&
-                rect.bottom >
-                    0
+                event.key === "Escape" &&
+                sideMenu.classList.contains("active")
             ) {
+                closeMenu();
+            }
 
-                collision =
-                    true;
+        });
+
+        /* =====================================================
+           42. PEMERIKSAAN BENTURAN KONTEN DENGAN AREA ATAS
+           ===================================================== */
+
+        /*
+            Ketika halaman digulir, periksa apakah judul,
+            deskripsi, carousel, atau tombol kembali masuk
+            ke area atas yang perlu diberi gradasi.
+        */
+        function checkTopContentCollision() {
+
+            /* Menu terbuka: gradasi tidak diperlukan */
+            if (document.body.classList.contains("menu-open")) {
+
+                scrollProtection.classList.remove("active");
+                return;
 
             }
 
+            /* Di posisi paling atas, sembunyikan gradasi */
+            if (window.scrollY <= 10) {
+
+                scrollProtection.classList.remove("active");
+                return;
+
+            }
+
+            /* Tinggi area gradasi berbeda untuk HP dan desktop */
+            const protectionHeight =
+                window.innerWidth <= 700 ? 105 : 115;
+
+            /* Elemen yang diperiksa posisinya */
+            const elements = document.querySelectorAll(
+                ".page-title, " +
+                ".team-description, " +
+                ".profile-area, " +
+                ".back-button"
+            );
+
+            let collision = false;
+
+            elements.forEach(function(element) {
+
+                const rect = element.getBoundingClientRect();
+
+                /* Periksa apakah elemen memasuki area gradasi */
+                if (
+                    rect.top < protectionHeight &&
+                    rect.bottom > 0
+                ) {
+                    collision = true;
+                }
+
+            });
+
+            /* Tampilkan atau sembunyikan gradasi */
+            if (collision) {
+                scrollProtection.classList.add("active");
+            } else {
+                scrollProtection.classList.remove("active");
+            }
         }
-    );
 
+        /* =====================================================
+           43. EVENT SCROLL DAN RESIZE
+           ===================================================== */
 
-    if (
-        collision
-    ) {
-
-        scrollProtection.classList.add(
-            "active"
+        /* Periksa posisi konten setiap kali halaman digulir */
+        window.addEventListener(
+            "scroll",
+            checkTopContentCollision,
+            { passive: true }
         );
 
-    }
-
-    else {
-
-        scrollProtection.classList.remove(
-            "active"
+        /* Periksa ulang ketika ukuran jendela berubah */
+        window.addEventListener(
+            "resize",
+            checkTopContentCollision
         );
 
-    }
+        /* =====================================================
+           44. INISIALISASI HALAMAN
+           ===================================================== */
 
-}
+        /* Memastikan indikator profil awal sesuai dengan data */
+        updateDots();
 
+        /* Memeriksa kondisi awal gradasi */
+        checkTopContentCollision();
 
-/* =====================================================
-   SCROLL EVENT
-===================================================== */
-
-window.addEventListener(
-    "scroll",
-    checkTopContentCollision,
-    {
-        passive: true
-    }
-);
-
-
-/* =====================================================
-   RESIZE EVENT
-===================================================== */
-
-window.addEventListener(
-    "resize",
-    checkTopContentCollision
-);
-
-
-/* =====================================================
-   INITIALIZE
-===================================================== */
-
-updateDots();
-
-checkTopContentCollision();
-
-</script>
-
+    </script>
 
 </body>
-
 </html>
