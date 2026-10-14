@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -23,7 +24,9 @@
     box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+}
 
 body {
     width: 100%;
@@ -36,40 +39,13 @@ body {
     overflow-x: hidden;
 }
 
-button, input { font: inherit; }
-
-.top-scroll-protection {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 115px;
-    background: linear-gradient(
-        to bottom,
-        rgba(238,246,252,1) 0%,
-        rgba(238,246,252,1) 42%,
-        rgba(238,246,252,.96) 52%,
-        rgba(238,246,252,.78) 65%,
-        rgba(238,246,252,.45) 80%,
-        rgba(238,246,252,.18) 91%,
-        transparent 100%
-    );
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    z-index: 1100;
-    transition: opacity .25s, visibility .25s;
+button, input {
+    font: inherit;
 }
 
-.top-scroll-protection.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-body.menu-open .top-scroll-protection {
-    opacity: 0;
-    visibility: hidden;
-}
+/* ==================================================
+   HAMBURGER BUTTON — MASTER REFERENCE INDEX.HTML
+================================================== */
 
 .menu-button {
     position: fixed;
@@ -81,95 +57,272 @@ body.menu-open .top-scroll-protection {
     border: none;
     background: transparent;
     cursor: pointer;
-    z-index: 1300;
+    z-index: 1200;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: flex-start;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity .3s ease;
 }
 
+/* FULL-WIDTH PROTECTED AREA */
+.menu-button::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 105px;
+    background: #eef6fc;
+    opacity: 0;
+    visibility: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: -1;
+    pointer-events: none;
+    transition:
+        opacity .25s ease,
+        visibility .25s ease;
+}
+
+/* GRADIENT DI BAWAH PROTECTED AREA */
+.menu-button::after {
+    content: "";
+    position: fixed;
+    top: 105px;
+    left: 0;
+    width: 100vw;
+    height: 35px;
+    background: linear-gradient(
+        to bottom,
+        #eef6fc,
+        rgba(238,246,252,0)
+    );
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+    pointer-events: none;
+    transition:
+        opacity .25s ease,
+        visibility .25s ease;
+}
+
+/* AKTIF SAAT KONTEN BERTABRAKAN */
+.menu-button.is-obscured::before {
+    opacity: .97;
+    visibility: visible;
+}
+
+.menu-button.is-obscured::after {
+    opacity: .95;
+    visibility: visible;
+}
+
+/* PROTECTED AREA HILANG SAAT MENU TERBUKA */
+.menu-button.active::before,
+.menu-button.active::after {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* TIGA GARIS HAMBURGER */
 .menu-button span {
     display: block;
     width: 64px;
     height: 5px;
+    flex-shrink: 0;
     background: var(--blue-deep);
-    transition: transform .35s, opacity .25s, background .25s;
+    border-radius: 0;
+    transition:
+        transform .35s ease,
+        opacity .25s ease,
+        background .25s ease;
 }
 
+/* HAMBURGER MENJADI X */
 .menu-button.active span:nth-child(1) {
     transform: translateY(17px) rotate(45deg);
     background: var(--white);
 }
 
-.menu-button.active span:nth-child(2) { opacity: 0; }
+.menu-button.active span:nth-child(2) {
+    opacity: 0;
+}
 
 .menu-button.active span:nth-child(3) {
     transform: translateY(-17px) rotate(-45deg);
     background: var(--white);
 }
 
+.menu-button:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 6px;
+}
+
+/* ==================================================
+   OVERLAY
+================================================== */
+
 .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,38,66,.38);
+    background: rgba(0, 38, 66, .35);
     opacity: 0;
     visibility: hidden;
-    transition: opacity .35s, visibility .35s;
-    z-index: 1150;
+    pointer-events: none;
+    transition:
+        opacity .4s ease,
+        visibility .4s ease;
+    z-index: 900;
 }
 
 .overlay.active {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 }
+
+/* ==================================================
+   SIDE MENU
+================================================== */
 
 .side-menu {
     position: fixed;
     top: 0;
     left: 0;
     width: 365px;
-    max-width: 88vw;
+    max-width: 40vw;
     height: 100vh;
+    height: 100dvh;
     background: var(--blue-deep);
-    z-index: 1200;
+    color: var(--white);
+    z-index: 1000;
     transform: translateX(-100%);
-    transition: transform .4s;
-    overflow-y: auto;
-    overflow-x: hidden;
-    box-shadow: 8px 0 30px rgba(0,0,0,.12);
+    transition: transform .4s ease;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-shadow: 8px 0 28px rgba(0, 0, 0, .10);
+    overflow: hidden;
 }
 
-.side-menu.active { transform: translateX(0); }
+.side-menu.active {
+    transform: translateX(0);
+}
 
-.side-menu-inner { padding: 118px 43px 55px; }
+/* PROTECTED AREA SIDE MENU */
+.side-menu::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 125px;
+    background: rgba(7, 84, 135, .96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .08);
+    z-index: 2;
+    pointer-events: none;
+}
 
-.menu-label, .menu-section-title {
-    margin-bottom: 22px;
+/* GRADIENT BLUR SIDE MENU */
+.side-menu::after {
+    content: "";
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    height: 45px;
+    background: linear-gradient(
+        to bottom,
+        rgba(7,84,135,.95),
+        rgba(7,84,135,0)
+    );
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* SIDE MENU CONTENT */
+.side-menu-inner {
+    position: relative;
+    z-index: 1;
+    width: 78%;
+    height: 100%;
+    max-height: 100vh;
+    overflow-y: auto;
+    padding: 135px 0 50px;
+    margin-left: 43px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,.35) transparent;
+}
+
+.side-menu-inner::-webkit-scrollbar {
+    width: 5px;
+}
+
+.side-menu-inner::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.side-menu-inner::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,.35);
+    border-radius: 10px;
+}
+
+.side-menu-inner::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,.55);
+}
+
+/* SECTION TITLE */
+.menu-label,
+.menu-section-title {
     color: rgba(255,255,255,.55);
+    font-family: 'Montserrat', sans-serif;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 3px;
+    margin-top: 20px;
+    margin-bottom: -5px;
+    flex-shrink: 0;
 }
 
-.menu-section { margin-top: 34px; }
-.menu-section-title { margin-bottom: 3px; }
-
+/* NAVIGATION LINKS */
 .menu-link {
     display: block;
+    flex-shrink: 0;
     width: 100%;
-    padding: 16px 0;
-    border-bottom: 1px solid rgba(255,255,255,.2);
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(255,255,255,.25);
     color: var(--white);
     text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
     font-size: 20px;
-    font-weight: 700;
-    line-height: 1.2;
-    transition: color .25s, padding-left .25s;
+    font-weight: 600;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    transition:
+        padding-left .3s ease,
+        opacity .3s ease;
 }
 
 .menu-link:hover {
-    color: #dcecff;
-    padding-left: 7px;
+    padding-left: 10px;
+    opacity: .75;
 }
+
+.menu-link:focus-visible {
+    outline: 2px solid var(--white);
+    outline-offset: 3px;
+}
+
+/* ==================================================
+   VOTING PAGE
+================================================== */
 
 .voting-page {
     width: 100%;
@@ -221,14 +374,19 @@ body.menu-open .top-scroll-protection {
     transition: transform .3s, box-shadow .3s;
 }
 
-.name-input::placeholder { color: var(--black); opacity: 1; }
+.name-input::placeholder {
+    color: var(--black);
+    opacity: 1;
+}
 
 .name-input:focus {
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(7,84,135,.14);
 }
 
-.name-input:focus-visible { border-color: var(--blue); }
+.name-input:focus-visible {
+    border-color: var(--blue);
+}
 
 .instruction {
     max-width: 800px;
@@ -238,7 +396,9 @@ body.menu-open .top-scroll-protection {
     line-height: 1.55;
 }
 
-.instruction strong { font-weight: 800; }
+.instruction strong {
+    font-weight: 800;
+}
 
 .poster-grid {
     width: 100%;
@@ -279,7 +439,9 @@ body.menu-open .top-scroll-protection {
     transition: transform .3s, box-shadow .3s, filter .3s;
 }
 
-.poster-select:hover { transform: translateY(-7px); }
+.poster-select:hover {
+    transform: translateY(-7px);
+}
 
 .poster-select:hover img {
     transform: scale(1.02);
@@ -347,7 +509,8 @@ body.menu-open .top-scroll-protection {
     margin-top: 30px;
 }
 
-.submit-button, .bottom-back a {
+.submit-button,
+.bottom-back a {
     min-width: 290px;
     padding: 17px 35px;
     border: 3px solid var(--blue-deep);
@@ -356,7 +519,11 @@ body.menu-open .top-scroll-protection {
     font-weight: 800;
     letter-spacing: 4px;
     text-align: center;
-    transition: background .3s, color .3s, transform .3s, opacity .3s;
+    transition:
+        background .3s,
+        color .3s,
+        transform .3s,
+        opacity .3s;
 }
 
 .submit-button {
@@ -376,7 +543,8 @@ body.menu-open .top-scroll-protection {
     cursor: not-allowed;
 }
 
-.submit-button:focus-visible, .bottom-back a:focus-visible {
+.submit-button:focus-visible,
+.bottom-back a:focus-visible {
     outline: 3px solid var(--blue);
     outline-offset: 5px;
 }
@@ -391,8 +559,13 @@ body.menu-open .top-scroll-protection {
     overflow-wrap: anywhere;
 }
 
-.form-message.error { color: #b42318; }
-.form-message.success { color: #167447; }
+.form-message.error {
+    color: #b42318;
+}
+
+.form-message.success {
+    color: #167447;
+}
 
 .bottom-back {
     display: flex;
@@ -415,56 +588,146 @@ body.menu-open .top-scroll-protection {
     transform: translateY(-3px);
 }
 
+/* ==================================================
+   TABLET
+================================================== */
+
 @media (max-width: 1100px) {
     .poster-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 45px 5%;
     }
+
+    .header h1 {
+        font-size: clamp(60px, 9vw, 115px);
+    }
 }
 
-@media (max-width: 700px) {
-    .top-scroll-protection { height: 105px; }
+/* ==================================================
+   MOBILE / TABLET
+================================================== */
 
+@media (max-width: 700px) {
+    /* HAMBURGER MOBILE */
     .menu-button {
         top: 28px;
-        left: 24px;
-        width: 54px;
-        height: 42px;
+        left: 22px;
+        width: 52px;
+        height: 40px;
+        padding: 4px 0;
     }
 
-    .menu-button span { width: 54px; height: 4px; }
+    .menu-button::before {
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 82px;
+        background: #eef6fc;
+    }
+
+    .menu-button::after {
+        top: 82px;
+        left: 0;
+        width: 100vw;
+        height: 30px;
+        background: linear-gradient(
+            to bottom,
+            #eef6fc,
+            rgba(238,246,252,0)
+        );
+    }
+
+    .menu-button span {
+        width: 52px;
+        height: 4px;
+    }
 
     .menu-button.active span:nth-child(1) {
-        transform: translateY(15px) rotate(45deg);
+        transform: translateY(13px) rotate(45deg);
     }
 
     .menu-button.active span:nth-child(3) {
-        transform: translateY(-15px) rotate(-45deg);
+        transform: translateY(-13px) rotate(-45deg);
     }
 
-    .side-menu-inner { padding: 105px 35px 50px; }
-    .menu-link { font-size: 18px; }
+    .menu-button.active::before,
+    .menu-button.active::after {
+        opacity: 0;
+        visibility: hidden;
+    }
 
-    .voting-page { padding: 115px 25px 70px; }
-    .header { margin-bottom: 25px; }
-    .exhibition-title { font-size: 12px; }
+    /* SIDE MENU MOBILE */
+    .side-menu {
+        width: 310px;
+        max-width: 82vw;
+    }
+
+    .side-menu::before {
+        height: 110px;
+    }
+
+    .side-menu::after {
+        top: 88px;
+        height: 40px;
+    }
+
+    .side-menu-inner {
+        width: 78%;
+        padding: 120px 0 40px;
+        margin-left: 38px;
+        gap: 18px;
+    }
+
+    .menu-link {
+        font-size: 17px;
+    }
+
+    /* VOTING MOBILE */
+    .voting-page {
+        padding: 115px 25px 70px;
+    }
+
+    .header {
+        margin-bottom: 25px;
+    }
+
+    .exhibition-title {
+        font-size: 12px;
+    }
 
     .header h1 {
         font-size: 54px;
         letter-spacing: -2px;
     }
 
-    .name-wrapper { width: 100%; margin: 25px auto 40px; }
-    .name-input { padding: 16px 20px; font-size: 17px; }
-    .instruction { margin-bottom: 30px; font-size: 13px; }
+    .name-wrapper {
+        width: 100%;
+        margin: 25px auto 40px;
+    }
+
+    .name-input {
+        padding: 16px 20px;
+        font-size: 17px;
+    }
+
+    .instruction {
+        margin-bottom: 30px;
+        font-size: 13px;
+    }
 
     .poster-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 40px 8%;
     }
 
-    .poster-select { max-width: 230px; }
-    .poster-title { font-size: 12px; letter-spacing: 2px; }
+    .poster-select {
+        max-width: 230px;
+    }
+
+    .poster-title {
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
 
     .selection-number {
         width: 35px;
@@ -474,60 +737,163 @@ body.menu-open .top-scroll-protection {
         font-size: 17px;
     }
 
-    .submit-button, .bottom-back a {
+    .submit-button,
+    .bottom-back a {
         min-width: 240px;
         padding: 15px 25px;
         font-size: 16px;
     }
 }
 
+/* ==================================================
+   SMALL MOBILE
+================================================== */
+
+@media (max-width: 400px) {
+    .menu-button {
+        top: 23px;
+        left: 18px;
+        width: 44px;
+        height: 34px;
+    }
+
+    .menu-button span {
+        width: 44px;
+        height: 4px;
+    }
+
+    .menu-button.active span:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+    }
+
+    .menu-button.active span:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+    }
+
+    .side-menu-inner {
+        padding-top: 110px;
+        padding-bottom: 35px;
+        margin-left: 30px;
+    }
+
+    .menu-link {
+        font-size: 16px;
+    }
+
+    .menu-label,
+    .menu-section-title {
+        font-size: 11px;
+    }
+}
+
+/* ==================================================
+   MOBILE LANDSCAPE
+================================================== */
+
+@media (max-width: 768px) and (orientation: landscape) {
+    .side-menu-inner {
+        padding-top: 100px;
+        padding-bottom: 20px;
+        gap: 6px;
+    }
+
+    .menu-link {
+        padding: 8px 0;
+        font-size: 15px;
+    }
+
+    .menu-label,
+    .menu-section-title {
+        margin-top: 10px;
+    }
+}
+
+/* ==================================================
+   SMALL POSTER LAYOUT
+================================================== */
+
 @media (max-width: 450px) {
-    .voting-page { padding-left: 20px; padding-right: 20px; }
-    .header h1 { font-size: 48px; }
+    .voting-page {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .header h1 {
+        font-size: 48px;
+    }
 
     .poster-grid {
         grid-template-columns: 1fr;
         gap: 50px;
     }
 
-    .poster-select { max-width: 280px; }
-    .poster-title { font-size: 14px; }
+    .poster-select {
+        max-width: 280px;
+    }
+
+    .poster-title {
+        font-size: 14px;
+    }
+}
+
+/* ==================================================
+   REDUCED MOTION
+================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="top-scroll-protection" id="scrollProtection"></div>
-<div class="overlay" id="overlay"></div>
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" aria-hidden="true"></div>
 
-<button class="menu-button" id="menuButton" type="button"
-        aria-label="Buka menu" aria-expanded="false">
-    <span></span><span></span><span></span>
+<!-- HAMBURGER BUTTON -->
+<button
+    class="menu-button"
+    id="menuButton"
+    type="button"
+    aria-label="Buka menu"
+    aria-expanded="false"
+    aria-controls="sideMenu"
+>
+    <span></span>
+    <span></span>
+    <span></span>
 </button>
 
-<aside class="side-menu" id="sideMenu">
-    <div class="side-menu-inner">
+<!-- SIDE MENU -->
+<aside class="side-menu" id="sideMenu" aria-hidden="true" inert>
+    <nav class="side-menu-inner" aria-label="Navigasi utama">
         <div class="menu-label">EXPLORE</div>
+
         <a href="index.html" class="menu-link">Home</a>
         <a href="tentang.html" class="menu-link">Tentang Exhibition</a>
         <a href="profil-dosen.html" class="menu-link">Profil Dosen</a>
         <a href="profil-asisten.html" class="menu-link">Profil Asisten</a>
+        <a href="menu.html" class="menu-link">Our Theme</a>
 
-        <div class="menu-section">
-            <div class="menu-section-title">TEMA</div>
-            <a href="tema1.html" class="menu-link">Tema 1</a>
-            <a href="tema2.html" class="menu-link">Tema 2</a>
-            <a href="tema3.html" class="menu-link">Tema 3</a>
-        </div>
+        <div class="menu-section-title">TEMA</div>
 
-        <div class="menu-section">
-            <div class="menu-section-title">PARTICIPATE</div>
-            <a href="voting.html" class="menu-link">Vote</a>
-        </div>
-    </div>
+        <a href="tema1.html" class="menu-link">Tema 1</a>
+        <a href="tema2.html" class="menu-link">Tema 2</a>
+        <a href="tema3.html" class="menu-link">Tema 3</a>
+
+        <div class="menu-section-title">PARTICIPATE</div>
+
+        <a href="voting.html" class="menu-link">Vote</a>
+    </nav>
 </aside>
 
+<!-- VOTING PAGE -->
 <main class="voting-page">
     <header class="header">
         <div class="exhibition-title">Psychological Scale Exhibition</div>
@@ -535,9 +901,15 @@ body.menu-open .top-scroll-protection {
     </header>
 
     <div class="name-wrapper">
-        <input type="text" id="voterName" class="name-input"
-               placeholder="Tuliskan nama Anda" autocomplete="name"
-               maxlength="100" aria-label="Nama pemilih">
+        <input
+            type="text"
+            id="voterName"
+            class="name-input"
+            placeholder="Tuliskan nama Anda"
+            autocomplete="name"
+            maxlength="100"
+            aria-label="Nama pemilih"
+        >
     </div>
 
     <p class="instruction">
@@ -554,12 +926,22 @@ body.menu-open .top-scroll-protection {
     </div>
 
     <div class="submit-wrapper">
-        <button type="button" id="submitButton" class="submit-button" disabled>
+        <button
+            type="button"
+            id="submitButton"
+            class="submit-button"
+            disabled
+        >
             KIRIM
         </button>
     </div>
 
-    <div class="form-message" id="formMessage" role="status" aria-live="polite"></div>
+    <div
+        class="form-message"
+        id="formMessage"
+        role="status"
+        aria-live="polite"
+    ></div>
 
     <div class="bottom-back">
         <a href="index.html">KEMBALI</a>
@@ -567,8 +949,12 @@ body.menu-open .top-scroll-protection {
 </main>
 
 <!-- Iframe tersembunyi untuk mengirim POST tanpa fetch/CORS -->
-<iframe name="votingTarget" id="votingTarget"
-        title="Pengiriman voting" style="display:none"></iframe>
+<iframe
+    name="votingTarget"
+    id="votingTarget"
+    title="Pengiriman voting"
+    style="display:none"
+></iframe>
 
 <script>
 "use strict";
@@ -589,7 +975,8 @@ const GOOGLE_SCRIPT_URL =
    TESTING_MODE = false:
    - Mode resmi, voting dibatasi satu kali per browser menggunakan localStorage.
    =========================================================== */
-const TESTING_MODE = false;
+
+const TESTING_MODE = true;
 const SEND_TEST_VOTES_TO_SHEETS = true;
 const VOTING_STORAGE_KEY = "pse_voting_submitted_v1";
 
@@ -609,12 +996,14 @@ const formMessage = document.getElementById("formMessage");
 const menuButton = document.getElementById("menuButton");
 const sideMenu = document.getElementById("sideMenu");
 const overlay = document.getElementById("overlay");
-const scrollProtection = document.getElementById("scrollProtection");
 
 let selectedPosters = [];
 let isSubmitting = false;
 
-/* Buat 12 poster */
+/* ==================================================
+   BUAT 12 POSTER
+================================================== */
+
 for (let number = 1; number <= 12; number++) {
     const item = document.createElement("div");
     item.className = "poster-item";
@@ -644,49 +1033,99 @@ for (let number = 1; number <= 12; number++) {
     posterGrid.appendChild(item);
 }
 
-/* Menu */
+/* ==================================================
+   HAMBURGER MENU
+================================================== */
+
 function openMenu() {
     menuButton.classList.add("active");
+    menuButton.classList.remove("is-obscured");
+
     sideMenu.classList.add("active");
     overlay.classList.add("active");
+
+    sideMenu.setAttribute("aria-hidden", "false");
+    sideMenu.removeAttribute("inert");
+
+    overlay.setAttribute("aria-hidden", "false");
+
     menuButton.setAttribute("aria-expanded", "true");
     menuButton.setAttribute("aria-label", "Tutup menu");
+
     document.body.classList.add("menu-open");
-    scrollProtection.classList.remove("active");
+
+    const firstLink = sideMenu.querySelector("a");
+
+    if (firstLink) {
+        firstLink.focus({ preventScroll: true });
+    }
 }
 
-function closeMenu() {
+function closeMenu(restoreFocus = false) {
     menuButton.classList.remove("active");
     sideMenu.classList.remove("active");
     overlay.classList.remove("active");
+
+    sideMenu.setAttribute("aria-hidden", "true");
+    sideMenu.setAttribute("inert", "");
+
+    overlay.setAttribute("aria-hidden", "true");
+
     menuButton.setAttribute("aria-expanded", "false");
     menuButton.setAttribute("aria-label", "Buka menu");
+
     document.body.classList.remove("menu-open");
-    checkTopContentCollision();
+
+    if (restoreFocus) {
+        menuButton.focus({ preventScroll: true });
+    }
+
+    window.setTimeout(checkTopContentCollision, 50);
 }
 
+/* TOGGLE HAMBURGER */
 menuButton.addEventListener("click", () => {
-    sideMenu.classList.contains("active") ? closeMenu() : openMenu();
+    if (sideMenu.classList.contains("active")) {
+        closeMenu(true);
+    } else {
+        openMenu();
+    }
 });
 
-overlay.addEventListener("click", closeMenu);
-
-document.querySelectorAll(".menu-link").forEach(link => {
-    link.addEventListener("click", closeMenu);
+/* TUTUP MENU MELALUI OVERLAY */
+overlay.addEventListener("click", () => {
+    closeMenu(true);
 });
 
-document.addEventListener("keydown", event => {
-    if (event.key === "Escape") closeMenu();
+/* TUTUP MENU SETELAH MEMILIH TAUTAN */
+sideMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+        closeMenu(false);
+    });
 });
 
-/* Gradient saat konten melewati bagian atas */
+/* ==================================================
+   DETEKSI PROTECTED AREA
+================================================== */
+
 function checkTopContentCollision() {
-    if (document.body.classList.contains("menu-open") || window.scrollY <= 10) {
-        scrollProtection.classList.remove("active");
+    if (sideMenu.classList.contains("active")) {
+        menuButton.classList.remove("is-obscured");
         return;
     }
 
-    const height = window.innerWidth <= 700 ? 105 : 115;
+    const pageIsScrolled =
+        window.scrollY > 5 ||
+        document.documentElement.scrollTop > 5;
+
+    if (!pageIsScrolled) {
+        menuButton.classList.remove("is-obscured");
+        return;
+    }
+
+    const protectedBottom =
+        window.innerWidth <= 700 ? 82 : 105;
+
     const elements = document.querySelectorAll(
         ".header, .name-wrapper, .instruction, .poster-item, " +
         ".voting-status, .submit-wrapper, .form-message, .bottom-back"
@@ -696,20 +1135,45 @@ function checkTopContentCollision() {
 
     elements.forEach(element => {
         const rect = element.getBoundingClientRect();
-        if (rect.top < height && rect.bottom > 0) collision = true;
+
+        if (
+            rect.top < protectedBottom &&
+            rect.bottom > 0
+        ) {
+            collision = true;
+        }
     });
 
-    scrollProtection.classList.toggle("active", collision);
+    menuButton.classList.toggle("is-obscured", collision);
 }
 
-window.addEventListener("scroll", checkTopContentCollision, { passive: true });
+window.addEventListener(
+    "scroll",
+    checkTopContentCollision,
+    { passive: true }
+);
+
 window.addEventListener("resize", checkTopContentCollision);
 
-/* Status dan pesan */
+/* TUTUP MENU DENGAN ESCAPE */
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" &&
+        sideMenu.classList.contains("active")) {
+        closeMenu(true);
+    }
+});
+
+/* ==================================================
+   STATUS DAN PESAN VOTING
+================================================== */
+
 function showMessage(message, type = "") {
     formMessage.textContent = message;
     formMessage.className = "form-message";
-    if (type) formMessage.classList.add(type);
+
+    if (type) {
+        formMessage.classList.add(type);
+    }
 }
 
 function clearMessage() {
@@ -724,13 +1188,21 @@ function updateVotingStatus() {
         return;
     }
 
-    votingStatus.textContent = `${selectedPosters.length} / 3 poster dipilih`;
-    submitButton.disabled = isSubmitting || selectedPosters.length !== 3;
+    votingStatus.textContent =
+        `${selectedPosters.length} / 3 poster dipilih`;
+
+    submitButton.disabled =
+        isSubmitting || selectedPosters.length !== 3;
 }
 
-/* Pilih tepat 3 poster */
+/* ==================================================
+   PILIH TEPAT 3 POSTER
+================================================== */
+
 function selectPoster(button) {
-    if (isSubmitting || (hasVoted && !TESTING_MODE)) return;
+    if (isSubmitting || (hasVoted && !TESTING_MODE)) {
+        return;
+    }
 
     const number = Number(button.dataset.poster);
     const index = selectedPosters.indexOf(number);
@@ -763,19 +1235,24 @@ function updatePosterDisplay() {
 
         button.classList.toggle("selected", selected);
         button.setAttribute("aria-pressed", String(selected));
+
         button.querySelector(".selection-number").textContent =
             selected ? String(index + 1) : "";
     });
 }
 
-/*
- * SUBMIT VIA FORM POST.
- * Browser tidak dapat memastikan hasil penyimpanan dari iframe lintas domain.
- */
+/* ==================================================
+   SUBMIT VIA FORM POST
+   Browser tidak dapat memastikan hasil penyimpanan
+   dari iframe lintas domain.
+================================================== */
+
 submitButton.addEventListener("click", submitVote);
 
 function submitVote() {
-    if (isSubmitting) return;
+    if (isSubmitting) {
+        return;
+    }
 
     if (hasVoted && !TESTING_MODE) {
         showMessage("Anda sudah memberikan suara.", "error");
@@ -808,11 +1285,13 @@ function submitVote() {
         pilihan3: selectedPosters[2]
     };
 
-    /* Dalam testing, pilihan default hanya simulasi dan tidak dikirim ke Sheets. */
+    /* Dalam testing, pilihan default hanya simulasi
+       dan tidak dikirim ke Sheets. */
     if (TESTING_MODE && !SEND_TEST_VOTES_TO_SHEETS) {
         isSubmitting = true;
         submitButton.textContent = "MODE TESTING...";
         updateVotingStatus();
+
         showMessage(
             `SIMULASI BERHASIL — Nama: ${voteData.name}; pilihan: ${voteData.pilihan1}, ${voteData.pilihan2}, ${voteData.pilihan3}. Data tidak dikirim ke Google Sheets.`,
             ""
@@ -823,6 +1302,7 @@ function submitVote() {
             submitButton.textContent = "KIRIM";
             updateVotingStatus();
         }, 1800);
+
         return;
     }
 
@@ -844,6 +1324,7 @@ function submitVote() {
     isSubmitting = true;
     submitButton.textContent = "MENGIRIM...";
     updateVotingStatus();
+
     showMessage("Mengirim permintaan voting...", "");
 
     document.body.appendChild(form);
@@ -852,9 +1333,10 @@ function submitVote() {
         form.submit();
 
         /*
-         * Mode resmi: simpan kunci lokal setelah form.submit() dipanggil.
+         * Mode resmi: simpan kunci lokal setelah form.submit()
+         * dipanggil.
          * Mode testing yang dikirim ke Sheets tidak mengunci browser.
-         * Catatan: ini bukan konfirmasi bahwa server benar-benar menyimpan data.
+         * Ini bukan konfirmasi bahwa server benar-benar menyimpan data.
          */
         if (!TESTING_MODE) {
             localStorage.setItem(VOTING_STORAGE_KEY, "true");
@@ -869,7 +1351,12 @@ function submitVote() {
         );
     } catch (error) {
         console.error("Gagal mengirim form:", error);
-        showMessage("Form gagal dikirim. Silakan coba lagi.", "error");
+
+        showMessage(
+            "Form gagal dikirim. Silakan coba lagi.",
+            "error"
+        );
+
         isSubmitting = false;
         submitButton.textContent = "KIRIM";
         updateVotingStatus();
@@ -889,7 +1376,10 @@ function submitVote() {
     }, 5000);
 }
 
-/* Inisialisasi */
+/* ==================================================
+   INISIALISASI
+================================================== */
+
 updatePosterDisplay();
 updateVotingStatus();
 checkTopContentCollision();
