@@ -1,2321 +1,1211 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Psychological Scale Exhibition</title>
-
-<link
-href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
-rel="stylesheet"
->
-
-<style>
-
-/* =====================================================
-   ROOT
-===================================================== */
-
-:root {
-    --blue: #1464c4;
-    --blue-dark: #07578d;
-    --blue-deep: #075487;
-
-    --ink: #111111;
-    --white: #ffffff;
-}
-
-
-/* =====================================================
-   RESET
-===================================================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
-html,
-body {
-    width: 100%;
-    min-height: 100%;
-}
-
-
-body {
-    font-family: 'Montserrat', sans-serif;
-
-    overflow: hidden;
-
-    background: #eef6fc;
-
-    color: var(--ink);
-}
-
-
-button,
-a {
-    font-family: inherit;
-}
-
-
-/* =====================================================
-   HERO
-===================================================== */
-
-.hero {
-    position: relative;
-
-    width: 100%;
-    height: 100vh;
-
-    min-height: 620px;
-
-    padding: 0 40px;
-
-    overflow: hidden;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    background:
-        linear-gradient(
-            rgba(244, 249, 253, 0.42),
-            rgba(244, 249, 253, 0.42)
-        ),
-        url("assets/background.png");
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-
-/* =====================================================
-   LOGO
-===================================================== */
-
-.brand-logo {
-    position: absolute;
-
-    top: 30px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: min(390px, 32vw);
-
-    max-height: 100px;
-
-    object-fit: contain;
-
-    z-index: 850;
-
-    transition: opacity 0.3s ease;
-}
-
-
-/* =====================================================
-   MAIN TITLE
-===================================================== */
-
-.title {
-    position: absolute;
-
-    top: 21%;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: 98%;
-
-    text-align: center;
-
-    color: var(--blue);
-
-    font-family: 'League Spartan', sans-serif;
-
-    font-size: clamp(
-        70px,
-        8.6vw,
-        145px
-    );
-
-    line-height: 0.88;
-
-    font-weight: 800;
-
-    letter-spacing: -5px;
-
-    white-space: nowrap;
-}
-
-
-/* =====================================================
-   TAGLINE
-===================================================== */
-
-.title span {
-    display: block;
-
-    margin-top: 10px;
-
-    font-family: 'Oswald', sans-serif;
-
-    font-size: 0.50em;
-
-    line-height: 0.95;
-
-    font-weight: 700;
-
-    font-style: italic;
-
-    letter-spacing: -1.5px;
-
-    text-transform: uppercase;
-}
-
-
-/* =====================================================
-   SUBTITLE
-===================================================== */
-
-.subtitle {
-    position: absolute;
-
-    top: 50.5%;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: max-content;
-
-    max-width: 90%;
-
-    font-family: 'Montserrat', sans-serif;
-
-    font-size: clamp(
-        18px,
-        2vw,
-        31px
-    );
-
-    font-weight: 400;
-
-    line-height: 1.2;
-
-    text-align: center;
-
-    color: var(--ink);
-}
-
-
-/* =====================================================
-   HAMBURGER
-===================================================== */
-
-.menu-button {
-    position: fixed;
-
-    top: 38px;
-    left: 30px;
-
-    width: 64px;
-    height: 48px;
-
-    padding: 4px 0;
-
-    border: none;
-
-    background: transparent;
-
-    cursor: pointer;
-
-    z-index: 1200;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-
-.menu-button span {
-    display: block;
-
-    width: 64px;
-    height: 5px;
-
-    background: var(--blue-deep);
-
-    border-radius: 0;
-
-    transition:
-        transform 0.35s ease,
-        opacity 0.25s ease,
-        background 0.25s ease;
-}
-
-
-/* =====================================================
-   HAMBURGER → X
-===================================================== */
-
-.menu-button.active span:nth-child(1) {
-    transform:
-        translateY(17px)
-        rotate(45deg);
-
-    background: var(--white);
-}
-
-
-.menu-button.active span:nth-child(2) {
-    opacity: 0;
-}
-
-
-.menu-button.active span:nth-child(3) {
-    transform:
-        translateY(-17px)
-        rotate(-45deg);
-
-    background: var(--white);
-}
-
-
-/* =====================================================
-   THEME NAVIGATION
-===================================================== */
-
-.theme-navigation {
-    position: absolute;
-
-    bottom: 27%;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: min(52%, 820px);
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: flex-start;
-}
-
-
-/* =====================================================
-   THEME BUTTON
-===================================================== */
-
-.theme-button {
-    position: relative;
-
-    color: var(--ink);
-
-    text-decoration: none;
-
-    font-family: 'Montserrat', sans-serif;
-
-    font-size: clamp(
-        17px,
-        1.55vw,
-        26px
-    );
-
-    font-weight: 700;
-
-    letter-spacing: 7px;
-
-    padding:
-        8px
-        12px
-        9px;
-
-    transition:
-        transform 0.3s ease,
-        opacity 0.3s ease;
-}
-
-
-.theme-button::after {
-    content: "";
-
-    position: absolute;
-
-    left: 10px;
-    right: 10px;
-
-    bottom: 0;
-
-    height: 2px;
-
-    background: var(--ink);
-
-    transition:
-        height 0.3s ease;
-}
-
-
-.theme-button:hover {
-    transform:
-        translateY(-4px);
-}
-
-
-.theme-button:hover::after {
-    height: 3px;
-}
-
-
-/* =====================================================
-   VOTE
-===================================================== */
-
-.voting-area {
-    position: absolute;
-
-    bottom: 10.5%;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-}
-
-
-.vote-button {
-    min-width: 280px;
-
-    min-height: 72px;
-
-    padding:
-        13px
-        45px;
-
-    color: var(--blue-deep);
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.18
-        );
-
-    border:
-        3px solid
-        var(--blue-deep);
-
-    border-radius: 42px;
-
-    text-decoration: none;
-
-    font-family:
-        'Montserrat',
-        sans-serif;
-
-    font-size: 18px;
-
-    font-weight: 800;
-
-    letter-spacing: 7px;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    transition:
-        background 0.3s ease,
-        color 0.3s ease,
-        transform 0.3s ease;
-}
-
-
-.vote-button:hover {
-    background:
-        var(--blue-deep);
-
-    color:
-        var(--white);
-
-    transform:
-        translateY(-4px);
-}
-
-
-/* =====================================================
-   OVERLAY
-===================================================== */
-
-.overlay {
-    position: fixed;
-
-    inset: 0;
-
-    background:
-        rgba(
-            0,
-            38,
-            66,
-            0.35
-        );
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transition:
-        opacity 0.4s ease,
-        visibility 0.4s ease;
-
-    z-index: 900;
-}
-
-
-.overlay.active {
-    opacity: 1;
-
-    visibility: visible;
-}
-
-
-/* =====================================================
-   SIDE MENU
-===================================================== */
-
-.side-menu {
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
-    width: 365px;
-
-    max-width: 40vw;
-
-    height: 100vh;
-
-    background:
-        var(--blue-deep);
-
-    z-index: 1000;
-
-    transform:
-        translateX(-100%);
-
-    transition:
-        transform 0.4s ease;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    box-shadow:
-        8px 0 28px
-        rgba(
-            0,
-            0,
-            0,
-            0.10
-        );
-}
-
-
-.side-menu.active {
-    transform:
-        translateX(0);
-}
-
-
-/* =====================================================
-   SIDE MENU CONTENT
-===================================================== */
-
-.side-menu-content {
-    width: 78%;
-
-    max-height: 100vh;
-
-    overflow-y: auto;
-
-    padding-top: 125px;
-
-    padding-bottom: 50px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 18px;
-
-    scrollbar-width: thin;
-
-    scrollbar-color:
-        rgba(
-            255,
-            255,
-            255,
-            0.35
-        )
-        transparent;
-}
-
-
-.side-menu-content::-webkit-scrollbar {
-    width: 5px;
-}
-
-
-.side-menu-content::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-
-.side-menu-content::-webkit-scrollbar-thumb {
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.35
-        );
-
-    border-radius: 10px;
-}
-
-
-/* =====================================================
-   MENU SECTION TITLE
-===================================================== */
-
-.menu-section-title {
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.55
-        );
-
-    font-family:
-        'Montserrat',
-        sans-serif;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    letter-spacing: 3px;
-
-    margin-top: 20px;
-
-    margin-bottom: -5px;
-}
-
-
-/* =====================================================
-   SIDE MENU LINKS
-===================================================== */
-
-.side-menu-content a {
-    color:
-        var(--white);
-
-    text-decoration: none;
-
-    font-family:
-        'Montserrat',
-        sans-serif;
-
-    font-size: 20px;
-
-    font-weight: 600;
-
-    letter-spacing: 1px;
-
-    padding:
-        13px 0;
-
-    border-bottom:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.25
-        );
-
-    transition:
-        padding-left 0.3s ease,
-        opacity 0.3s ease;
-}
-
-
-.side-menu-content a:hover {
-    padding-left: 10px;
-
-    opacity: 0.75;
-}
-
-
-/* =====================================================
-   VIDEO POPUP
-===================================================== */
-
-.video-popup {
-    position: fixed;
-
-    inset: 0;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    padding: 30px;
-
-    background:
-        rgba(
-            0,
-            25,
-            45,
-            0.78
-        );
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transition:
-        opacity 0.35s ease,
-        visibility 0.35s ease;
-
-    z-index: 2000;
-}
-
-
-.video-popup.active {
-    opacity: 1;
-
-    visibility: visible;
-}
-
-
-.video-popup-content {
-    position: relative;
-
-    width:
-        min(
-            1000px,
-            90vw
-        );
-
-    background:
-        var(--white);
-
-    border-radius:
-        18px;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 25px 70px
-        rgba(
-            0,
-            0,
-            0,
-            0.35
-        );
-
-    transform:
-        scale(0.92);
-
-    transition:
-        transform 0.35s ease;
-}
-
-
-.video-popup.active
-.video-popup-content {
-    transform:
-        scale(1);
-}
-
-
-.video-popup video {
-    display: block;
-
-    width: 100%;
-
-    max-height: 80vh;
-
-    background: #000;
-}
-
-
-/* =====================================================
-   VIDEO CLOSE
-===================================================== */
-
-.video-close {
-    position: absolute;
-
-    top: 15px;
-    right: 15px;
-
-    width: 44px;
-    height: 44px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background:
-        rgba(
-            0,
-            0,
-            0,
-            0.65
-        );
-
-    color:
-        var(--white);
-
-    font-size: 28px;
-
-    cursor: pointer;
-
-    z-index: 10;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    transition:
-        background 0.25s ease,
-        transform 0.25s ease;
-}
-
-
-.video-close:hover {
-    background:
-        rgba(
-            0,
-            0,
-            0,
-            0.85
-        );
-
-    transform:
-        rotate(90deg);
-}
-
-
-/* =====================================================
-   TABLET
-===================================================== */
-
-@media (max-width: 1100px) {
-
-    .title {
-        font-size:
-            clamp(
-                60px,
-                9vw,
-                115px
-            );
-    }
-
-
-    .theme-navigation {
-        width: 65%;
-    }
-
-
-    .brand-logo {
-        width:
-            min(
-                320px,
-                34vw
-            );
-    }
-}
-
-
-/* =====================================================
-   MOBILE
-   COMPACT + CENTERED
-===================================================== */
-
-@media (max-width: 768px) {
-
-    body {
-        overflow-x: hidden;
-
-        overflow-y: auto;
-    }
-
-
-    /* =================================================
-       HERO MOBILE
-    ================================================= */
-
-    .hero {
-        width: 100%;
-
-        min-height:
-            100svh;
-
-        height:
-            auto;
-
-        padding:
-            0
-            clamp(
-                16px,
-                4vw,
-                24px
-            )
-            35px;
-
-        display:
-            flex;
-
-        flex-direction:
-            column;
-
-        align-items:
-            center;
-
-        justify-content:
-            flex-start;
-
-        overflow:
-            hidden;
-    }
-
-
-    /* =================================================
-       LOGO
-    ================================================= */
-
-    .brand-logo {
-
-        position:
-            relative;
-
-        top:
-            auto;
-
-        left:
-            auto;
-
-        transform:
-            none;
-
-        order:
-            1;
-
-        width:
-            clamp(
-                190px,
-                52vw,
-                230px
-            );
-
-        max-height:
-            70px;
-
-        margin-top:
-            clamp(
-                48px,
-                7vh,
-                72px
-            );
-
-        margin-bottom:
-            clamp(
-                26px,
-                4vh,
-                38px
-            );
-    }
-
-
-    /* =================================================
-       HAMBURGER
-    ================================================= */
-
-    .menu-button {
-
-        position:
-            fixed;
-
-        top:
-            clamp(
-                24px,
-                4vh,
-                38px
-            );
-
-        left:
-            clamp(
-                20px,
-                5vw,
-                30px
-            );
-
-        width:
-            48px;
-
-        height:
-            37px;
-
-        padding:
-            3px 0;
-
-        z-index:
-            1200;
-    }
-
-
-    .menu-button span {
-
-        width:
-            48px;
-
-        height:
-            4px;
-    }
-
-
-    .menu-button.active span:nth-child(1) {
-
-        transform:
-            translateY(13px)
-            rotate(45deg);
-    }
-
-
-    .menu-button.active span:nth-child(3) {
-
-        transform:
-            translateY(-13px)
-            rotate(-45deg);
-    }
-
-
-    /* =================================================
-       TITLE
-    ================================================= */
-
-    .title {
-
-        position:
-            relative;
-
-        top:
-            auto;
-
-        left:
-            auto;
-
-        transform:
-            none;
-
-        order:
-            2;
-
-        width:
-            100%;
-
-        max-width:
-            410px;
-
-        margin:
-            0 auto;
-
-        padding:
-            0
-            clamp(
-                3px,
-                1vw,
-                8px
-            );
-
-        text-align:
-            center;
-
-        font-size:
-            clamp(
-                42px,
-                11vw,
-                62px
-            );
-
-        line-height:
-            0.91;
-
-        letter-spacing:
-            clamp(
-                -2.8px,
-                -0.65vw,
-                -2px
-            );
-    }
-
-
-    /* =================================================
-       TAGLINE
-    ================================================= */
-
-    .title span {
-
-        margin-top:
-            clamp(
-                7px,
-                1.5vw,
-                11px
-            );
-
-        font-size:
-            clamp(
-                19px,
-                5.1vw,
-                28px
-            );
-
-        line-height:
-            0.98;
-
-        letter-spacing:
-            clamp(
-                -0.7px,
-                -0.1vw,
-                -0.2px
-            );
-    }
-
-
-    /* =================================================
-       SUBTITLE
-    ================================================= */
-
-    .subtitle {
-
-        position:
-            relative;
-
-        top:
-            auto;
-
-        left:
-            auto;
-
-        transform:
-            none;
-
-        order:
-            3;
-
-        width:
-            100%;
-
-        max-width:
-            360px;
-
-        margin:
-            clamp(
-                27px,
-                4vh,
-                38px
-            )
-            auto
-            0;
-
-        padding:
-            0 8px;
-
-        text-align:
-            center;
-
-        font-size:
-            clamp(
-                15px,
-                4vw,
-                20px
-            );
-
-        line-height:
-            1.25;
-
-        white-space:
-            normal;
-    }
-
-
-    /* =================================================
-       THEMES
-    ================================================= */
-
-    .theme-navigation {
-
-        position:
-            relative;
-
-        top:
-            auto;
-
-        bottom:
-            auto;
-
-        left:
-            auto;
-
-        transform:
-            none;
-
-        order:
-            4;
-
-        width:
-            100%;
-
-        max-width:
-            370px;
-
-        margin:
-            clamp(
-                36px,
-                5vh,
-                48px
-            )
-            auto
-            0;
-
-        padding:
-            0 3px;
-
-        display:
-            grid;
-
-        grid-template-columns:
-            repeat(3, 1fr);
-
-        gap:
-            clamp(
-                4px,
-                2vw,
-                12px
-            );
-    }
-
-
-    .theme-button {
-
-        width:
-            100%;
-
-        min-width:
-            0;
-
-        padding:
-            6px
-            2px
-            10px;
-
-        text-align:
-            center;
-
-        font-size:
-            clamp(
-                10.5px,
-                3.1vw,
-                15px
-            );
-
-        letter-spacing:
-            clamp(
-                1.4px,
-                0.5vw,
-                2.5px
-            );
-
-        white-space:
-            nowrap;
-    }
-
-
-    .theme-button::after {
-
-        left:
-            6px;
-
-        right:
-            6px;
-
-        bottom:
-            0;
-
-        height:
-            2px;
-    }
-
-
-    /* =================================================
-       VOTE
-    ================================================= */
-
-    .voting-area {
-
-        position:
-            relative;
-
-        top:
-            auto;
-
-        bottom:
-            auto;
-
-        left:
-            auto;
-
-        transform:
-            none;
-
-        order:
-            5;
-
-        width:
-            100%;
-
-        margin:
-            clamp(
-                34px,
-                5vh,
-                45px
-            )
-            auto
-            0;
-
-        display:
-            flex;
-
-        justify-content:
-            center;
-
-        align-items:
-            center;
-    }
-
-
-    .vote-button {
-
-        width:
-            clamp(
-                205px,
-                58vw,
-                250px
-            );
-
-        min-width:
-            0;
-
-        min-height:
-            clamp(
-                55px,
-                7vh,
-                65px
-            );
-
-        padding:
-            10px
-            25px;
-
-        font-size:
-            clamp(
-                12.5px,
-                3.3vw,
-                16px
-            );
-
-        letter-spacing:
-            clamp(
-                3px,
-                0.8vw,
-                5px
-            );
-
-        border-width:
-            2.5px;
-    }
-
-
-    /* =================================================
-       SIDE MENU
-    ================================================= */
-
-    .side-menu {
-
-        width:
-            min(
-                320px,
-                82vw
-            );
-
-        max-width:
-            82vw;
-    }
-
-
-    .side-menu-content {
-
-        width:
-            78%;
-
-        max-height:
-            100vh;
-
-        padding-top:
-            105px;
-
-        padding-bottom:
-            35px;
-    }
-
-
-    .side-menu-content a {
-
-        font-size:
-            16px;
-
-        padding:
-            11px 0 12px;
-    }
-
-
-    .menu-section-title {
-
-        font-size:
-            10px;
-
-        letter-spacing:
-            2.5px;
-
-        margin-top:
-            15px;
-    }
-
-
-    /* =================================================
-       VIDEO
-    ================================================= */
-
-    .video-popup {
-
-        padding:
-            15px;
-    }
-
-
-    .video-popup-content {
-
-        width:
-            92vw;
-
-        max-width:
-            390px;
-
-        border-radius:
-            12px;
-    }
-
-
-    .video-close {
-
-        width:
-            38px;
-
-        height:
-            38px;
-
-        top:
-            10px;
-
-        right:
-            10px;
-
-        font-size:
-            24px;
-    }
-}
-
-
-/* =====================================================
-   VERY SMALL MOBILE
-===================================================== */
-
-@media (max-width: 380px) {
-
-    .hero {
-
-        padding-left:
-            14px;
-
-        padding-right:
-            14px;
-    }
-
-
-    .brand-logo {
-
-        width:
-            195px;
-
-        max-width:
-            60vw;
-
-        margin-top:
-            45px;
-
-        margin-bottom:
-            27px;
-    }
-
-
-    .menu-button {
-
-        top:
-            23px;
-
-        left:
-            18px;
-
-        width:
-            44px;
-
-        height:
-            34px;
-    }
-
-
-    .menu-button span {
-
-        width:
-            44px;
-
-        height:
-            4px;
-    }
-
-
-    .menu-button.active span:nth-child(1) {
-
-        transform:
-            translateY(11px)
-            rotate(45deg);
-    }
-
-
-    .menu-button.active span:nth-child(3) {
-
-        transform:
-            translateY(-11px)
-            rotate(-45deg);
-    }
-
-
-    .title {
-
-        max-width:
-            350px;
-
-        font-size:
-            38px;
-
-        letter-spacing:
-            -2px;
-    }
-
-
-    .title span {
-
-        margin-top:
-            7px;
-
-        font-size:
-            17px;
-    }
-
-
-    .subtitle {
-
-        max-width:
-            325px;
-
-        margin-top:
-            29px;
-
-        font-size:
-            14.5px;
-    }
-
-
-    .theme-navigation {
-
-        max-width:
-            325px;
-
-        margin-top:
-            37px;
-
-        gap:
-            4px;
-    }
-
-
-    .theme-button {
-
-        font-size:
-            9.8px;
-
-        letter-spacing:
-            1.3px;
-
-        padding:
-            6px
-            1px
-            8px;
-    }
-
-
-    .theme-button::after {
-
-        left:
-            5px;
-
-        right:
-            5px;
-
-        height:
-            1.5px;
-    }
-
-
-    .voting-area {
-
-        margin-top:
-            34px;
-    }
-
-
-    .vote-button {
-
-        width:
-            200px;
-
-        min-height:
-            54px;
-
-        font-size:
-            12px;
-
-        letter-spacing:
-            3px;
-    }
-}
-
-
-/* =====================================================
-   LANDSCAPE MOBILE
-===================================================== */
-
-@media
-(max-width: 768px)
-and (orientation: landscape) {
-
-    .hero {
-
-        min-height:
-            100vh;
-
-        padding-bottom:
-            25px;
-    }
-
-
-    .brand-logo {
-
-        margin-top:
-            20px;
-
-        margin-bottom:
-            15px;
-
-        width:
-            170px;
-
-        max-height:
-            55px;
-    }
-
-
-    .title {
-
-        font-size:
-            clamp(
-                32px,
-                7vw,
-                48px
-            );
-    }
-
-
-    .title span {
-
-        font-size:
-            clamp(
-                15px,
-                3.4vw,
-                22px
-            );
-    }
-
-
-    .subtitle {
-
-        margin-top:
-            17px;
-
-        font-size:
-            13px;
-    }
-
-
-    .theme-navigation {
-
-        margin-top:
-            22px;
-    }
-
-
-    .voting-area {
-
-        margin-top:
-            20px;
-    }
-
-
-    .vote-button {
-
-        min-height:
-            48px;
-
-        width:
-            180px;
-    }
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychological Scale Exhibition</title>
+
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==================================================
+           RESET
+        ================================================== */
+
+        :root {
+            --blue: #1464c4;
+            --blue-deep: #075487;
+            --ink: #111111;
+            --white: #ffffff;
+            --light-bg: #eef6fc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--light-bg);
+            color: var(--ink);
+            overflow: hidden;
+        }
+
+        button,
+        a {
+            font-family: inherit;
+        }
+
+        /* ==================================================
+           HERO / BACKGROUND
+        ================================================== */
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            height: 100svh;
+            min-height: 620px;
+            padding: 0 40px;
+            overflow: hidden;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    rgba(244, 249, 253, 0.42),
+                    rgba(244, 249, 253, 0.42)
+                ),
+                url("assets/background.png");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* ==================================================
+           LOGO
+        ================================================== */
+
+        .brand-logo {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: min(390px, 32vw);
+            max-height: 100px;
+            object-fit: contain;
+
+            z-index: 850;
+            transition: opacity 0.3s ease;
+        }
+
+        /* ==================================================
+           MAIN TITLE
+        ================================================== */
+
+        .title {
+            position: absolute;
+            top: 21%;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: 98%;
+            text-align: center;
+
+            color: var(--blue);
+            font-family: 'League Spartan', sans-serif;
+            font-size: clamp(70px, 8.6vw, 145px);
+            line-height: 0.88;
+            font-weight: 800;
+            letter-spacing: -5px;
+            white-space: nowrap;
+        }
+
+        .title span {
+            display: block;
+            margin-top: 10px;
+
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.50em;
+            line-height: 0.95;
+            font-weight: 700;
+            font-style: italic;
+            letter-spacing: -1.5px;
+            text-transform: uppercase;
+        }
+
+        /* ==================================================
+           SUBTITLE
+        ================================================== */
+
+        .subtitle {
+            position: absolute;
+            top: 50.5%;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: max-content;
+            max-width: 90%;
+
+            font-size: clamp(18px, 2vw, 31px);
+            font-weight: 400;
+            line-height: 1.2;
+            text-align: center;
+            color: var(--ink);
+        }
+
+        /* ==================================================
+           HAMBURGER BUTTON
+        ================================================== */
+
+        .menu-button {
+            position: fixed;
+            top: 38px;
+            left: 30px;
+
+            width: 64px;
+            height: 48px;
+            padding: 4px 0;
+
+            border: none;
+            background: transparent;
+            cursor: pointer;
+
+            z-index: 1201;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .menu-button span {
+            display: block;
+            width: 64px;
+            height: 5px;
+            flex-shrink: 0;
+
+            background: var(--blue-deep);
+            border-radius: 0;
+
+            transition:
+                transform 0.35s ease,
+                opacity 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .menu-button.active span:nth-child(1) {
+            transform: translateY(17px) rotate(45deg);
+            background: var(--white);
+        }
+
+        .menu-button.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-button.active span:nth-child(3) {
+            transform: translateY(-17px) rotate(-45deg);
+            background: var(--white);
+        }
+
+        .menu-button:focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: 6px;
+        }
+
+        /* ==================================================
+           START EXPLORING BUTTON
+        ================================================== */
+
+        .explore-area {
+            position: absolute;
+            top: 62%;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: min(620px, 80%);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .explore-button {
+            width: 100%;
+            min-height: 86px;
+            padding: 18px 30px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border: 3px solid var(--blue-deep);
+            border-radius: 38px;
+            background: rgba(255, 255, 255, 0.16);
+
+            color: var(--blue-deep);
+            font-size: clamp(19px, 2.2vw, 31px);
+            font-weight: 800;
+            letter-spacing: clamp(3px, 0.55vw, 7px);
+            text-align: center;
+            text-decoration: underline;
+            text-underline-offset: 5px;
+
+            transition:
+                background 0.3s ease,
+                color 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .explore-button:hover {
+            background: var(--blue-deep);
+            color: var(--white);
+            transform: translateY(-4px);
+        }
+
+        /* ==================================================
+           VOTE BUTTON
+        ================================================== */
+
+        .voting-area {
+            position: absolute;
+            bottom: 7.5%;
+            left: 50%;
+            transform: translateX(-50%);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .vote-button {
+            min-width: 280px;
+            min-height: 72px;
+            padding: 13px 45px;
+
+            color: var(--blue-deep);
+            background: rgba(255, 255, 255, 0.18);
+
+            border: 3px solid var(--blue-deep);
+            border-radius: 42px;
+            text-decoration: none;
+
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 7px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            transition:
+                background 0.3s ease,
+                color 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .vote-button:hover {
+            background: var(--blue-deep);
+            color: var(--white);
+            transform: translateY(-4px);
+        }
+
+        /* ==================================================
+           OVERLAY
+        ================================================== */
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+
+            background: rgba(0, 38, 66, 0.40);
+
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+
+            transition:
+                opacity 0.4s ease,
+                visibility 0.4s ease;
+
+            z-index: 1190;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        /* ==================================================
+           SIDE MENU
+        ================================================== */
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 365px;
+            max-width: 40vw;
+            height: 100vh;
+            height: 100dvh;
+
+            background: var(--blue-deep);
+            color: var(--white);
+
+            z-index: 1200;
+
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            box-shadow: 8px 0 28px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .side-menu.active {
+            transform: translateX(0);
+        }
+
+        /* Ruang atas diperbesar agar tidak bertabrakan
+           dengan tombol X di bagian atas menu. */
+
+        .side-menu-content {
+            width: 81%;
+            height: 100%;
+            min-height: 0;
+
+            padding-top: 170px;
+            padding-bottom: 40px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 12px;
+
+            overflow-x: hidden;
+            overflow-y: auto;
+
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.40) transparent;
+        }
+
+        .side-menu-content::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .side-menu-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .side-menu-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.40);
+            border-radius: 10px;
+        }
+
+        /* Section label */
+
+        .menu-section-title {
+            color: rgba(255, 255, 255, 0.60);
+
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 3px;
+
+            margin-top: 18px;
+            margin-bottom: 0;
+            line-height: 1.4;
+        }
+
+        /* Navigation links */
+
+        .side-menu-content a {
+            display: block;
+            flex-shrink: 0;
+
+            color: var(--white);
+            text-decoration: none;
+
+            font-size: 19px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+
+            padding: 12px 0 13px;
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+
+            transition:
+                padding-left 0.3s ease,
+                opacity 0.3s ease,
+                color 0.3s ease;
+        }
+
+        .side-menu-content a:hover {
+            padding-left: 9px;
+            opacity: 0.78;
+        }
+
+        .side-menu-content a:focus-visible {
+            outline: 2px solid var(--white);
+            outline-offset: 3px;
+        }
+
+        .side-menu-content a.current-page {
+            color: #c8e5ff;
+        }
+
+        /* ==================================================
+           VIDEO POPUP
+        ================================================== */
+
+        .video-popup {
+            position: fixed;
+            inset: 0;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px;
+            background: rgba(0, 25, 45, 0.78);
+
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+
+            transition:
+                opacity 0.35s ease,
+                visibility 0.35s ease;
+
+            z-index: 2000;
+        }
+
+        .video-popup.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .video-popup-content {
+            position: relative;
+            width: min(1000px, 90vw);
+
+            background: var(--white);
+            border-radius: 18px;
+            overflow: hidden;
+
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+
+            transform: scale(0.92);
+            transition: transform 0.35s ease;
+        }
+
+        .video-popup.active .video-popup-content {
+            transform: scale(1);
+        }
+
+        .video-popup video {
+            display: block;
+            width: 100%;
+            max-height: 80vh;
+            background: #000;
+        }
+
+        .video-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+
+            width: 44px;
+            height: 44px;
+
+            border: none;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.65);
+
+            color: var(--white);
+            font-size: 28px;
+            cursor: pointer;
+            z-index: 10;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            transition:
+                background 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .video-close:hover {
+            background: rgba(0, 0, 0, 0.85);
+            transform: rotate(90deg);
+        }
+
+        /* ==================================================
+           TABLET
+        ================================================== */
+
+        @media (max-width: 1100px) {
+            .title {
+                font-size: clamp(60px, 9vw, 115px);
+            }
+
+            .explore-area {
+                width: min(560px, 82%);
+            }
+
+            .brand-logo {
+                width: min(320px, 34vw);
+            }
+        }
+
+        /* ==================================================
+           MOBILE
+        ================================================== */
+
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+
+            .hero {
+                width: 100%;
+                min-height: 100svh;
+                height: auto;
+
+                padding: 0 clamp(16px, 4vw, 24px) 35px;
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+
+                overflow: hidden;
+            }
+
+            .brand-logo {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+
+                order: 1;
+
+                width: clamp(190px, 52vw, 230px);
+                max-height: 70px;
+
+                margin-top: clamp(48px, 7vh, 72px);
+                margin-bottom: clamp(26px, 4vh, 38px);
+            }
+
+            .menu-button {
+                top: clamp(24px, 4vh, 38px);
+                left: clamp(20px, 5vw, 30px);
+
+                width: 48px;
+                height: 37px;
+                padding: 3px 0;
+            }
+
+            .menu-button span {
+                width: 48px;
+                height: 4px;
+            }
+
+            .menu-button.active span:nth-child(1) {
+                transform: translateY(13px) rotate(45deg);
+            }
+
+            .menu-button.active span:nth-child(3) {
+                transform: translateY(-13px) rotate(-45deg);
+            }
+
+            .title {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+
+                order: 2;
+
+                width: 100%;
+                max-width: 410px;
+                margin: 0 auto;
+                padding: 0 clamp(3px, 1vw, 8px);
+
+                text-align: center;
+                font-size: clamp(42px, 11vw, 62px);
+                line-height: 0.91;
+                letter-spacing: clamp(-2.8px, -0.65vw, -2px);
+                white-space: normal;
+            }
+
+            .title span {
+                margin-top: clamp(7px, 1.5vw, 11px);
+
+                font-size: clamp(19px, 5.1vw, 28px);
+                line-height: 0.98;
+                letter-spacing: clamp(-0.7px, -0.1vw, -0.2px);
+            }
+
+            .subtitle {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+
+                order: 3;
+
+                width: 100%;
+                max-width: 360px;
+
+                margin: clamp(27px, 4vh, 38px) auto 0;
+                padding: 0 8px;
+
+                text-align: center;
+                font-size: clamp(15px, 4vw, 20px);
+                line-height: 1.25;
+            }
+
+            .explore-area {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+
+                order: 4;
+
+                width: 100%;
+                max-width: 370px;
+
+                margin: clamp(36px, 5vh, 48px) auto 0;
+            }
+
+            .explore-button {
+                min-height: clamp(58px, 8vh, 72px);
+                padding: 13px 15px;
+
+                border-width: 2.5px;
+                border-radius: 32px;
+
+                font-size: clamp(13px, 3.6vw, 18px);
+                letter-spacing: clamp(2px, 0.65vw, 4px);
+            }
+
+            .voting-area {
+                position: relative;
+                top: auto;
+                bottom: auto;
+                left: auto;
+                transform: none;
+
+                order: 5;
+
+                width: 100%;
+                margin: clamp(34px, 5vh, 45px) auto 0;
+            }
+
+            .vote-button {
+                width: clamp(205px, 58vw, 250px);
+                min-width: 0;
+                min-height: clamp(55px, 7vh, 65px);
+
+                padding: 10px 25px;
+
+                font-size: clamp(12.5px, 3.3vw, 16px);
+                letter-spacing: clamp(3px, 0.8vw, 5px);
+
+                border-width: 2.5px;
+            }
+
+            /* Side menu mobile */
+
+            .side-menu {
+                width: min(320px, 82vw);
+                max-width: 82vw;
+            }
+
+            .side-menu-content {
+                width: 80%;
+                padding-top: 135px;
+                padding-bottom: 35px;
+                gap: 10px;
+            }
+
+            .side-menu-content a {
+                font-size: 16px;
+                padding: 11px 0 12px;
+            }
+
+            .menu-section-title {
+                font-size: 10px;
+                letter-spacing: 2.5px;
+                margin-top: 14px;
+            }
+
+            /* Video popup mobile */
+
+            .video-popup {
+                padding: 15px;
+            }
+
+            .video-popup-content {
+                width: 92vw;
+                max-width: 390px;
+                border-radius: 12px;
+            }
+
+            .video-close {
+                width: 38px;
+                height: 38px;
+                top: 10px;
+                right: 10px;
+                font-size: 24px;
+            }
+        }
+
+        /* ==================================================
+           VERY SMALL MOBILE
+        ================================================== */
+
+        @media (max-width: 380px) {
+            .hero {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .brand-logo {
+                width: 195px;
+                max-width: 60vw;
+                margin-top: 45px;
+                margin-bottom: 27px;
+            }
+
+            .menu-button {
+                top: 23px;
+                left: 18px;
+                width: 44px;
+                height: 34px;
+            }
+
+            .menu-button span {
+                width: 44px;
+                height: 4px;
+            }
+
+            .menu-button.active span:nth-child(1) {
+                transform: translateY(11px) rotate(45deg);
+            }
+
+            .menu-button.active span:nth-child(3) {
+                transform: translateY(-11px) rotate(-45deg);
+            }
+
+            .title {
+                max-width: 350px;
+                font-size: 38px;
+                letter-spacing: -2px;
+            }
+
+            .title span {
+                margin-top: 7px;
+                font-size: 17px;
+            }
+
+            .subtitle {
+                max-width: 325px;
+                margin-top: 29px;
+                font-size: 14.5px;
+            }
+
+            .explore-area {
+                max-width: 325px;
+                margin-top: 37px;
+            }
+
+            .explore-button {
+                min-height: 56px;
+                font-size: 12px;
+                letter-spacing: 2px;
+                padding: 10px 12px;
+            }
+
+            .voting-area {
+                margin-top: 34px;
+            }
+
+            .vote-button {
+                width: 200px;
+                min-height: 54px;
+                font-size: 12px;
+                letter-spacing: 3px;
+            }
+
+            .side-menu-content {
+                padding-top: 125px;
+            }
+        }
+
+        /* ==================================================
+           MOBILE LANDSCAPE
+        ================================================== */
+
+        @media (max-width: 768px) and (orientation: landscape) {
+            .hero {
+                min-height: 100vh;
+                padding-bottom: 25px;
+            }
+
+            .brand-logo {
+                margin-top: 20px;
+                margin-bottom: 15px;
+                width: 170px;
+                max-height: 55px;
+            }
+
+            .title {
+                font-size: clamp(32px, 7vw, 48px);
+            }
+
+            .title span {
+                font-size: clamp(15px, 3.4vw, 22px);
+            }
+
+            .subtitle {
+                margin-top: 17px;
+                font-size: 13px;
+            }
+
+            .explore-area {
+                margin-top: 22px;
+            }
+
+            .voting-area {
+                margin-top: 20px;
+            }
+
+            .vote-button {
+                min-height: 48px;
+                width: 180px;
+            }
+
+            .side-menu-content {
+                padding-top: 100px;
+                padding-bottom: 20px;
+                gap: 6px;
+            }
+
+            .side-menu-content a {
+                padding: 8px 0;
+                font-size: 15px;
+            }
+
+            .menu-section-title {
+                margin-top: 10px;
+            }
+        }
+
+        /* ==================================================
+           REDUCED MOTION
+        ================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
 </head>
-
 
 <body>
 
+    <!-- MAIN HERO -->
+    <main class="hero" id="hero">
 
-<!-- =====================================================
-     HERO
-===================================================== -->
-
-<main
-    class="hero"
-    id="hero"
->
-
-
-    <!-- =================================================
-         LOGO
-    ================================================== -->
-
-    <img
-        src="assets/logo.png"
-        alt="Psychological Scale Exhibition Logo"
-        class="brand-logo"
-    >
-
-
-    <!-- =================================================
-         HAMBURGER
-    ================================================== -->
-
-    <button
-        class="menu-button"
-        id="menuButton"
-        aria-label="Buka menu"
-        aria-expanded="false"
-        type="button"
-    >
-
-        <span></span>
-        <span></span>
-        <span></span>
-
-    </button>
-
-
-    <!-- =================================================
-         TITLE
-    ================================================== -->
-
-    <h1 class="title">
-
-        CTRL + MEASURE
-
-        <span>
-            MEASURING WHAT MAKES US, US.
-        </span>
-
-    </h1>
-
-
-    <!-- =================================================
-         SUBTITLE
-    ================================================== -->
-
-    <p class="subtitle">
-        Penyusunan Skala Psikologis 26/27
-    </p>
-
-
-    <!-- =================================================
-         THEMES
-    ================================================== -->
-
-    <nav
-        class="theme-navigation"
-        aria-label="Tema"
-    >
-
-        <a
-            href="tema1.html"
-            class="theme-button"
+        <!-- LOGO -->
+        <img
+            src="assets/logo.png"
+            alt="Psychological Scale Exhibition Logo"
+            class="brand-logo"
         >
-            TEMA 1
-        </a>
 
-
-        <a
-            href="tema2.html"
-            class="theme-button"
-        >
-            TEMA 2
-        </a>
-
-
-        <a
-            href="tema3.html"
-            class="theme-button"
-        >
-            TEMA 3
-        </a>
-
-    </nav>
-
-
-    <!-- =================================================
-         VOTE
-    ================================================== -->
-
-    <div class="voting-area">
-
-        <a
-            href="voting.html"
-            class="vote-button"
-        >
-            VOTE
-        </a>
-
-    </div>
-
-</main>
-
-
-<!-- =====================================================
-     OVERLAY
-===================================================== -->
-
-<div
-    class="overlay"
-    id="overlay"
-></div>
-
-
-<!-- =====================================================
-     SIDE MENU
-===================================================== -->
-
-<aside
-    class="side-menu"
-    id="sideMenu"
-    aria-hidden="true"
->
-
-    <nav class="side-menu-content">
-
-
-        <div class="menu-section-title">
-            EXPLORE
-        </div>
-
-
-        <a href="index.html">
-            Home
-        </a>
-
-
-        <a href="tentang.html">
-            Tentang Exhibition
-        </a>
-
-
-        <a href="profil-dosen.html">
-            Profil Dosen
-        </a>
-
-
-        <a href="profil-asisten.html">
-            Profil Asisten
-        </a>
-
-
-        <div class="menu-section-title">
-            TEMA
-        </div>
-
-
-        <a href="tema1.html">
-            Tema 1
-        </a>
-
-
-        <a href="tema2.html">
-            Tema 2
-        </a>
-
-
-        <a href="tema3.html">
-            Tema 3
-        </a>
-
-
-        <div class="menu-section-title">
-            PARTICIPATE
-        </div>
-
-
-        <a href="voting.html">
-            Vote
-        </a>
-
-
-    </nav>
-
-</aside>
-
-
-<!-- =====================================================
-     VIDEO POPUP
-===================================================== -->
-
-<div
-    class="video-popup"
-    id="videoPopup"
-    aria-hidden="true"
->
-
-    <div
-        class="video-popup-content"
-        id="videoPopupContent"
-    >
-
+        <!-- HAMBURGER BUTTON -->
         <button
-            class="video-close"
-            id="videoClose"
+            class="menu-button"
+            id="menuButton"
+            aria-label="Buka menu"
+            aria-expanded="false"
+            aria-controls="sideMenu"
             type="button"
-            aria-label="Tutup video"
         >
-            ×
+            <span></span>
+            <span></span>
+            <span></span>
         </button>
 
+        <!-- TITLE -->
+        <h1 class="title">
+            CTRL + MEASURE
+            <span>MEASURING WHAT MAKES US, US.</span>
+        </h1>
 
-        <video
-            id="introVideo"
-            controls
-            playsinline
-            preload="metadata"
+        <!-- SUBTITLE -->
+        <p class="subtitle">
+            Penyusunan Skala Psikologis 26/27
+        </p>
+
+        <!-- START EXPLORING -->
+        <div class="explore-area">
+            <a href="menu.html" class="explore-button">
+                START EXPLORING!
+            </a>
+        </div>
+
+        <!-- VOTE -->
+        <div class="voting-area">
+            <a href="voting.html" class="vote-button">
+                VOTE
+            </a>
+        </div>
+
+    </main>
+
+
+    <!-- OVERLAY -->
+    <div
+        class="overlay"
+        id="overlay"
+        aria-hidden="true"
+    ></div>
+
+
+    <!-- SIDE MENU -->
+    <aside
+        class="side-menu"
+        id="sideMenu"
+        aria-hidden="true"
+        inert
+    >
+        <nav
+            class="side-menu-content"
+            aria-label="Navigasi utama"
         >
 
-            <source
-                src="assets/tentang.mp4"
-                type="video/mp4"
+            <div class="menu-section-title">
+                EXPLORE
+            </div>
+
+            <a href="index.html" class="current-page" aria-current="page">
+                Home
+            </a>
+
+            <a href="tentang.html">
+                Tentang Exhibition
+            </a>
+
+            <a href="profil-dosen.html">
+                Profil Dosen
+            </a>
+
+            <a href="profil-asisten.html">
+                Profil Asisten
+            </a>
+
+            <a href="menu.html">
+                Our Theme
+            </a>
+
+            <div class="menu-section-title">
+                PARTICIPATE
+            </div>
+
+            <a href="voting.html">
+                Vote
+            </a>
+
+        </nav>
+    </aside>
+
+
+    <!-- VIDEO POPUP -->
+    <div
+        class="video-popup"
+        id="videoPopup"
+        aria-hidden="true"
+    >
+        <div
+            class="video-popup-content"
+            id="videoPopupContent"
+        >
+            <button
+                class="video-close"
+                id="videoClose"
+                type="button"
+                aria-label="Tutup video"
             >
+                &times;
+            </button>
 
-            Browser Anda tidak mendukung
-            pemutaran video.
-
-        </video>
-
+            <video
+                id="introVideo"
+                controls
+                playsinline
+                preload="metadata"
+            >
+                <source
+                    src="assets/tentang.mp4"
+                    type="video/mp4"
+                >
+                Browser Anda tidak mendukung pemutaran video.
+            </video>
+        </div>
     </div>
 
-</div>
 
+    <script>
+        /* ==================================================
+           VIDEO POPUP
+        ================================================== */
 
-<script>
+        const videoPopup = document.getElementById("videoPopup");
+        const videoClose = document.getElementById("videoClose");
+        const introVideo = document.getElementById("introVideo");
 
-/* =====================================================
-   VIDEO POPUP
-===================================================== */
+        const INTRO_STORAGE_KEY = "psychologicalScaleIntroSeen";
 
-const videoPopup =
-    document.getElementById(
-        "videoPopup"
-    );
+        function showVideoPopup() {
+            videoPopup.classList.add("active");
+            videoPopup.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+        }
 
+        function closeVideoPopup() {
+            videoPopup.classList.remove("active");
+            videoPopup.setAttribute("aria-hidden", "true");
 
-const videoClose =
-    document.getElementById(
-        "videoClose"
-    );
+            if (introVideo) {
+                introVideo.pause();
+                introVideo.currentTime = 0;
+            }
 
+            document.body.style.overflow =
+                window.innerWidth <= 768 ? "auto" : "hidden";
 
-const introVideo =
-    document.getElementById(
-        "introVideo"
-    );
+            localStorage.setItem(INTRO_STORAGE_KEY, "true");
+        }
 
+        /* Tampilkan video saat kunjungan pertama */
+        window.addEventListener("load", function () {
+            const hasSeenIntro = localStorage.getItem(INTRO_STORAGE_KEY);
 
-const INTRO_STORAGE_KEY =
-    "psychologicalScaleIntroSeen";
-
-
-function showVideoPopup() {
-
-    videoPopup.classList.add(
-        "active"
-    );
-
-    videoPopup.setAttribute(
-        "aria-hidden",
-        "false"
-    );
-
-    document.body.style.overflow =
-        "hidden";
-}
-
-
-function closeVideoPopup() {
-
-    videoPopup.classList.remove(
-        "active"
-    );
-
-    videoPopup.setAttribute(
-        "aria-hidden",
-        "true"
-    );
-
-    document.body.style.overflow =
-        "hidden";
-
-    if (introVideo) {
-
-        introVideo.pause();
-
-        introVideo.currentTime = 0;
-    }
-
-    localStorage.setItem(
-        INTRO_STORAGE_KEY,
-        "true"
-    );
-}
-
-
-/* =====================================================
-   FIRST VISIT VIDEO
-===================================================== */
-
-window.addEventListener(
-    "load",
-    function () {
-
-        const hasSeenIntro =
-            localStorage.getItem(
-                INTRO_STORAGE_KEY
-            );
-
-
-        if (!hasSeenIntro) {
-
-            setTimeout(
-                function () {
-
+            if (!hasSeenIntro) {
+                setTimeout(function () {
                     showVideoPopup();
+                }, 300);
+            }
+        });
 
-                },
-                300
-            );
-        }
+        /* Tutup video dengan tombol X */
+        videoClose.addEventListener("click", closeVideoPopup);
 
-    }
-);
-
-
-/* =====================================================
-   CLOSE VIDEO
-===================================================== */
-
-if (videoClose) {
-
-    videoClose.addEventListener(
-        "click",
-        closeVideoPopup
-    );
-}
-
-
-if (videoPopup) {
-
-    videoPopup.addEventListener(
-        "click",
-        function (event) {
-
-            if (
-                event.target ===
-                videoPopup
-            ) {
-
+        /* Tutup video dengan klik di luar konten */
+        videoPopup.addEventListener("click", function (event) {
+            if (event.target === videoPopup) {
                 closeVideoPopup();
             }
+        });
 
+
+        /* ==================================================
+           HAMBURGER MENU
+        ================================================== */
+
+        const menuButton = document.getElementById("menuButton");
+        const sideMenu = document.getElementById("sideMenu");
+        const overlay = document.getElementById("overlay");
+
+        function openMenu() {
+            menuButton.classList.add("active");
+            sideMenu.classList.add("active");
+            overlay.classList.add("active");
+
+            sideMenu.setAttribute("aria-hidden", "false");
+            sideMenu.removeAttribute("inert");
+
+            overlay.setAttribute("aria-hidden", "false");
+
+            menuButton.setAttribute("aria-expanded", "true");
+            menuButton.setAttribute("aria-label", "Tutup menu");
+
+            document.body.classList.add("menu-open");
+
+            const firstLink = sideMenu.querySelector("a");
+
+            if (firstLink) {
+                firstLink.focus({ preventScroll: true });
+            }
         }
-    );
-}
 
+        function closeMenu(restoreFocus = false) {
+            menuButton.classList.remove("active");
+            sideMenu.classList.remove("active");
+            overlay.classList.remove("active");
 
-/* =====================================================
-   MENU
-===================================================== */
+            sideMenu.setAttribute("aria-hidden", "true");
+            sideMenu.setAttribute("inert", "");
 
-const menuButton =
-    document.getElementById(
-        "menuButton"
-    );
+            overlay.setAttribute("aria-hidden", "true");
 
+            menuButton.setAttribute("aria-expanded", "false");
+            menuButton.setAttribute("aria-label", "Buka menu");
 
-const sideMenu =
-    document.getElementById(
-        "sideMenu"
-    );
+            document.body.classList.remove("menu-open");
 
+            if (restoreFocus) {
+                menuButton.focus({ preventScroll: true });
+            }
+        }
 
-const overlay =
-    document.getElementById(
-        "overlay"
-    );
-
-
-function openMenu() {
-
-    menuButton.classList.add(
-        "active"
-    );
-
-    sideMenu.classList.add(
-        "active"
-    );
-
-    overlay.classList.add(
-        "active"
-    );
-
-    sideMenu.setAttribute(
-        "aria-hidden",
-        "false"
-    );
-
-    menuButton.setAttribute(
-        "aria-expanded",
-        "true"
-    );
-
-    menuButton.setAttribute(
-        "aria-label",
-        "Tutup menu"
-    );
-
-    document.body.classList.add(
-        "menu-open"
-    );
-}
-
-
-function closeMenu() {
-
-    menuButton.classList.remove(
-        "active"
-    );
-
-    sideMenu.classList.remove(
-        "active"
-    );
-
-    overlay.classList.remove(
-        "active"
-    );
-
-    sideMenu.setAttribute(
-        "aria-hidden",
-        "true"
-    );
-
-    menuButton.setAttribute(
-        "aria-expanded",
-        "false"
-    );
-
-    menuButton.setAttribute(
-        "aria-label",
-        "Buka menu"
-    );
-
-    document.body.classList.remove(
-        "menu-open"
-    );
-}
-
-
-/* =====================================================
-   TOGGLE MENU
-===================================================== */
-
-if (menuButton) {
-
-    menuButton.addEventListener(
-        "click",
-        function () {
-
-            if (
-                sideMenu.classList.contains(
-                    "active"
-                )
-            ) {
-
-                closeMenu();
-
+        /* Toggle hamburger */
+        menuButton.addEventListener("click", function () {
+            if (sideMenu.classList.contains("active")) {
+                closeMenu(true);
             } else {
-
                 openMenu();
-
             }
+        });
 
-        }
-    );
-}
+        /* Tutup menu melalui overlay */
+        overlay.addEventListener("click", function () {
+            closeMenu(true);
+        });
 
+        /* Tutup menu setelah memilih tautan */
+        sideMenu.querySelectorAll("a").forEach(function (link) {
+            link.addEventListener("click", function () {
+                closeMenu(false);
+            });
+        });
 
-/* =====================================================
-   OVERLAY
-===================================================== */
+        /* Tutup menu atau video dengan tombol Escape */
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                if (sideMenu.classList.contains("active")) {
+                    closeMenu(true);
+                }
 
-if (overlay) {
-
-    overlay.addEventListener(
-        "click",
-        closeMenu
-    );
-}
-
-
-/* =====================================================
-   MENU LINKS
-===================================================== */
-
-const menuLinks =
-    document.querySelectorAll(
-        ".side-menu a"
-    );
-
-
-menuLinks.forEach(
-    function (link) {
-
-        link.addEventListener(
-            "click",
-            function () {
-
-                closeMenu();
-
+                if (videoPopup.classList.contains("active")) {
+                    closeVideoPopup();
+                }
             }
-        );
-
-    }
-);
-
-
-/* =====================================================
-   ESCAPE
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    function (event) {
-
-        if (
-            event.key === "Escape"
-        ) {
-
-            if (
-                sideMenu.classList.contains(
-                    "active"
-                )
-            ) {
-
-                closeMenu();
-            }
-
-
-            if (
-                videoPopup.classList.contains(
-                    "active"
-                )
-            ) {
-
-                closeVideoPopup();
-            }
-
-        }
-
-    }
-);
-
-</script>
+        });
+    </script>
 
 </body>
 </html>
+```
